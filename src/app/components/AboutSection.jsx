@@ -10,45 +10,62 @@ const tab_data = [
         title: "Experience",
         id: "exp",
         content: (
-            <ul>
-                <h6 className="text-xl font-bold">Apple, Inc.</h6>
-                <li>Sales Chat Specialist</li>
-                <li className="text-sm">Full-time · Mar 2022 to Present</li>
-                    <br />
-                <li>EN Apple Support Community Moderator</li>
-                <li className="text-sm">Rotation · Aug 2023 to Feb 2024</li>
-                    <br />
-                <li>Product Zone Specialist, Apple Domain NORTHSIDE</li>
-                <li className="text-sm">Full-time · Sep 2021 to Mar 2022</li>
-                    <br />
-                <li>Knowledge Management Specialist</li>
-                <li className="text-sm">Rotation · Mar 2021 to Aug 2021</li>
-                    <br />
-                <li>Technical Support Advisor</li>
-                <li className="text-sm">Full-time · Jul 2018 to Mar 2021</li>
-                    <br />
-                <h6 className="text-xl font-bold">Ecobyte</h6>
-                <li>Sr. DevOps, Web Lead, Client Relations</li>
-                <li className="text-sm">Project · Oct 2014 to Present</li>
-            </ul>
+            <div>
+                <div>
+                    <h6 className="text-xl font-bold">Apple, Inc.</h6>
+                    <ul>
+                        <li>Sales Chat Specialist</li>
+                        <li className="text-sm">Full-time · Mar 2022 to Present</li>
+                            <br />
+                        <li>EN Apple Support Community Moderator</li>
+                        <li className="text-sm">Rotation · Aug 2023 to Feb 2024</li>
+                            <br />
+                        <li>Product Zone Specialist, Apple Domain NORTHSIDE</li>
+                        <li className="text-sm">Full-time · Sep 2021 to Mar 2022</li>
+                            <br />
+                        <li>Knowledge Management Specialist</li>
+                        <li className="text-sm">Rotation · Mar 2021 to Aug 2021</li>
+                            <br />
+                        <li>Technical Support Advisor</li>
+                        <li className="text-sm">Full-time · Jul 2018 to Mar 2021</li>
+                            <br />
+                    </ul>
+                </div>
+                <div>
+                    <h6 className="text-xl font-bold">Ecobyte</h6>
+                    <ul>
+                        <li>Sr. DevOps, Web Lead, Client Relations</li>
+                        <li className="text-sm">Project · Oct 2014 to Present</li>
+                    </ul>
+                </div>
+            </div>
         )
     },
     {
         title: "Education",
         id: "edu",
         content: (
-            <ul>
-                <h6 className="text-xl font-bold">Degrees</h6>
-                <li>University of Central Florida</li>
-                <li className="text-sm">Bachelor of Arts (B.A.) · Aug 2016 to Dec 2019</li>
-                <br />
-                <li>Seminole State College of Florida</li>
-                <li className="text-sm">Associate of Arts (A.A.) · Aug 2014 to Jun 2016</li>
-                    <br />
-                <h6 className="text-xl font-bold">Licenses & Certifications</h6>
-                <li>University of Central Florida</li>
-                <li className="text-sm">Certificate, SWE / Coding Bootcamp · Issued Jan 2018</li>
-            </ul>
+            <div>
+                <div>
+                    <h6 className="text-xl font-bold">Degrees</h6>
+                    <ul>
+                        <li>University of Central Florida</li>
+                        <li className="text-sm">Bachelor of Arts (B.A.) · Aug 2016 to Dec 2019</li>
+                        <br />
+                        <li>Seminole State College of Florida</li>
+                        <li className="text-sm">Associate of Arts (A.A.) · Aug 2014 to Jun 2016</li>
+                    </ul>
+                </div>
+                <div>
+                    <h6 className="text-xl font-bold">Licenses & Certifications</h6>
+                    <ul>
+                        <ul>
+                            <li>University of Central Florida</li>
+                            <li className="text-sm">Certificate, SWE / Coding Bootcamp · Issued Jan 2018</li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
         )
     },
     {
@@ -183,16 +200,7 @@ const AboutSection = () => {
                     <br />
                 <p className="text-base lg:text-lg">
                     Multifaceted tech and design professional with over seven years of experience crafting user-centric solutions across server administration, front and back-end development, and website design. My expertise lies in cPanel/WHM, open-source CMS, and diverse programming languages, which enable me to tackle complex technical challenges with ease.
-                        <br /><br />
-                    {/* <div className="flex flex-row items-center">
-                        <a
-                            className="underline underline-offset-4"
-                            href="https://www.linkedin.com/in/ryanbealey/"
-                            target="_blank">
-                                Let's Connect
-                        </a>&nbsp;
-                        <ArrowTopRightOnSquareIcon className="w-6 h-6"/>
-                    </div> */}
+                        <br />
                 </p>
                 <div className="flex flex-row mt-8">
                     <TabButton
