@@ -3,24 +3,21 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import NavLink from './NavLink';
-import { Bars3Icon, FaceSmileIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import MenuOverlay from './MenuOverlay';
 import Image from 'next/image';
 
 const navLinks = [
     {
         title: "About",
-        target: "none",
         path: "#about"
     },
     {
         title: "Projects",
-        target: "none",
         path: "#projects"
     },
     {
         title: "Buy Me Coffee",
-        target: "_blank",
         path: "https://donate.stripe.com/aEUcQN2QMbK8eEE7ss"
     }
 ]
@@ -70,7 +67,6 @@ const Navbar = () => {
                                     <NavLink
                                         href={link.path}
                                         title={link.title}
-                                        target={link.target}
                                     />
                                 </li>
                             ))

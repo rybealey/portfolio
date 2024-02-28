@@ -2,7 +2,7 @@
 
 import React, { useTransition, useState } from 'react'
 import Image from 'next/image'
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
+// import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid'
 import TabButton from './about/TabButton';
 
 const tab_data = [
@@ -169,13 +169,13 @@ const AboutSection = () => {
                 width={500}
                 height={500}
             />
-            <div>
+            <div className="sm:py-4">
                 <h2 className="text-4xl">Who's that guy? <span className="font-extrabold">It's Ry</span>.</h2>
                     <br />
                 <p className="text-base lg:text-lg">
                     Multifaceted tech and design professional with over seven years of experience crafting user-centric solutions across server administration, front and back-end development, and website design. My expertise lies in cPanel/WHM, open-source CMS, and diverse programming languages, which enable me to tackle complex technical challenges with ease.
                         <br /><br />
-                    <div className="flex flex-row items-center">
+                    {/* <div className="flex flex-row items-center">
                         <a
                             className="underline underline-offset-4"
                             href="https://www.linkedin.com/in/ryanbealey/"
@@ -183,7 +183,7 @@ const AboutSection = () => {
                                 Let's Connect
                         </a>&nbsp;
                         <ArrowTopRightOnSquareIcon className="w-6 h-6"/>
-                    </div>
+                    </div> */}
                 </p>
                 <div className="flex flex-row mt-8">
                     <TabButton
