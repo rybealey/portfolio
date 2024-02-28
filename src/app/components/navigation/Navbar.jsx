@@ -13,10 +13,6 @@ const navLinks = [
         path: "#about"
     },
     {
-        title: "Projects",
-        path: "#projects"
-    },
-    {
         title: "Buy Me Coffee",
         path: "https://donate.stripe.com/aEUcQN2QMbK8eEE7ss"
     }
@@ -26,7 +22,7 @@ const Navbar = () => {
     const [navbarOpen, setNavbarOpen] = useState();
 
     return (
-        <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
+        <nav className="fixed top-0 left-0 right-0 z-10 bg-[#252525] bg-opacity-100">
             <div className="flex flex-wrap items-center justify-between mx-auto px-16 py-4">
                 <Link href={"/"} className="text-3xl md:text-5xl text-white font-semibold">
                     <Image

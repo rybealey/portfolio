@@ -26,8 +26,8 @@ const HeroSection = () => {
                         1000,
                     "Project Manager",
                         1000,
-                    "...and I also sing a little.",
-                        1500
+                    "Fintech Geek",
+                        1000
                 ]}
                 wrapper="span"
                 style={{fontSize: ".5em", fontWeight: "600"}}
