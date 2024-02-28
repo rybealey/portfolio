@@ -178,7 +178,7 @@ const AboutSection = () => {
                 width={500}
                 height={500}
             />
-            <div className="sm:py-4">
+            <div className="my-4">
                 <h2 className="text-4xl">Who's that guy? <span className="font-extrabold">It's Ry</span>.</h2>
                     <br />
                 <p className="text-base lg:text-lg">
