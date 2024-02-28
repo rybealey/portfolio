@@ -28,7 +28,7 @@ const tab_data = [
                 <li className="text-sm">Full-time · Jul 2018 to Mar 2021</li>
                     <br />
                 <h6 className="text-xl font-bold">Ecobyte</h6>
-                <li>Sr. DevOps, Web Lead, Client Relations0</li>
+                <li>Sr. DevOps, Web Lead, Client Relations</li>
                 <li className="text-sm">Project · Oct 2014 to Present</li>
             </ul>
         )
@@ -46,8 +46,8 @@ const tab_data = [
                 <li className="text-sm">Associate of Arts (A.A.) · Aug 2014 to Jun 2016</li>
                     <br />
                 <h6 className="text-xl font-bold">Licenses & Certifications</h6>
-                <li>Continuing Education Certificate, SWE / Coding Bootcamp</li>
-                <li className="text-sm">Certificate · Issued Jan 2018</li>
+                <li>University of Central Florida</li>
+                <li className="text-sm">Certificate, SWE / Coding Bootcamp · Issued Jan 2018</li>
             </ul>
         )
     },
