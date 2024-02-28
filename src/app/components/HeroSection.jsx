@@ -41,11 +41,15 @@ const HeroSection = () => {
             </p>
             <div>
                 <button className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-200 text-white px-6 py-3 rounded-full mr-4">
-                    Hire Me
+                    <a href="mailto:hello@ryanbealey.com">
+                        Hire Me
+                    </a>
                 </button>
                 <button className="m-4 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 px-1 py-1  text-white rounded-full">
                     <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-                        Download CV
+                        <a href="/docs/ry_bealey.pdf" target="_blank">
+                            Download CV
+                        </a>
                     </span>
                 </button>
             </div>
