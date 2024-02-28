@@ -38,7 +38,16 @@ const tab_data = [
         id: "edu",
         content: (
             <ul>
-                <li>Test, two</li>
+                <h6 className="text-xl font-bold">Degrees</h6>
+                <li>University of Central Florida</li>
+                <li className="text-sm">Bachelor of Arts (B.A.) · Aug 2016 to Dec 2019</li>
+                <br />
+                <li>Seminole State College of Florida</li>
+                <li className="text-sm">Associate of Arts (A.A.) · Aug 2014 to Jun 2016</li>
+                    <br />
+                <h6 className="text-xl font-bold">Licenses & Certifications</h6>
+                <li>Continuing Education Certificate, SWE / Coding Bootcamp</li>
+                <li className="text-sm">Certificate · Issued Jan 2018</li>
             </ul>
         )
     },
