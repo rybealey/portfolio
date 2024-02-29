@@ -39,7 +39,7 @@ const HeroSection = () => {
                 I help to craft visually appealing, user-friendly, accessible websites
                 to help businesses and organizations of all sizes.
             </p>
-            {/* <div>
+            <div>
                 <button className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 hover:bg-slate-200 text-white px-6 py-3 rounded-full mr-4">
                     <a href="mailto:hello@ryanbealey.com">
                         Hire Me
@@ -52,7 +52,7 @@ const HeroSection = () => {
                         </a>
                     </span>
                 </button>
-            </div> */}
+            </div>
         </div>
         <div className="col-span-5 place-self-center mt-4 lg:mt-0">
             <div className="bg-[#181818] lg:w-[370px] lg:h-[370px] w-[250px] h-[250px] rounded-full relative">
