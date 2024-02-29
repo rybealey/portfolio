@@ -10,10 +10,12 @@ import Image from 'next/image';
 const navLinks = [
     {
         title: "About",
+        target: "_self",
         path: "#about"
     },
     {
         title: "Buy Me Coffee",
+        target: "_blank",
         path: "https://donate.stripe.com/aEUcQN2QMbK8eEE7ss"
     }
 ]
