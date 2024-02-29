@@ -3,6 +3,7 @@
 import React, { useTransition, useState } from 'react'
 import Image from 'next/image'
 import TabButton from './about/TabButton';
+import SocialMediaIcons from './SocialMediaIcons';
 
 let interpersonalData = ["De-escalation", "Professional Facilitation", "Cross-team Collaboration", "Technical Support",
     "Phone Etiquette", "Community Engagement", "Community Moderation", "Lead Generation"];
@@ -112,11 +113,12 @@ const AboutSection = () => {
             />
             <div className="my-4">
                 <h2 className="text-4xl">Who's that guy? <span className="font-extrabold">It's Ry</span>.</h2>
-                <br />
+                    <br />
                 <p className="text-base lg:text-lg">
                     Multifaceted tech and design professional with over seven years of experience crafting user-centric solutions across server administration, front and back-end development, and website design. My expertise lies in cPanel/WHM, open-source CMS, and diverse programming languages, which enable me to tackle complex technical challenges with ease.
                 </p>
-                <br />
+                <SocialMediaIcons />
+                    <br />
                 <div className="flex flex-col md:flex-row text-center mt-8">
                     <TabButton
                         selectTab={() => handleTabChange("exp")}

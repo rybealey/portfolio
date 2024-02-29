@@ -7,6 +7,7 @@ const FooterSection = () => {
             <p className="text-sm text-[#cacaca]">
                 Ry Bealey © All rights reserved.
             </p>
+            <br />
         </div>
     </section>
   )
