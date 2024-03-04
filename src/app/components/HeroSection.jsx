@@ -29,7 +29,9 @@ const HeroSection = () => {
                     "Fintech Geek",
                         1000,
                     "Product Owner",
-                        1000
+                        1000,
+                    "Ordained Minister (yes, really)",
+                        1000,
                 ]}
                 wrapper="span"
                 style={{fontSize: ".5em", fontWeight: "600"}}

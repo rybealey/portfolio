@@ -5,7 +5,10 @@ const FooterSection = () => {
     <section className="bg-[#121212]">
         <div className="text-center">
             <p className="text-sm text-[#cacaca]">
-                Ry Bealey © All rights reserved.
+                Built with 🫶 in Austin, TX
+            </p>
+            <p className="text-xs text-gray-500">
+                NextJS, Hero Icons, Tailwind, Vercel Speed Insights, React DOM, React Social Icons, and React Type Animation
             </p>
             <br />
         </div>

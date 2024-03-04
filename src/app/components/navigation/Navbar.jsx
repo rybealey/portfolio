@@ -11,7 +11,12 @@ const navLinks = [
     {
         title: "About",
         target: "_self",
-        path: "#about"
+        path: "/#about"
+    },
+    {
+        title: "Projects",
+        target: "_self",
+        path: "/projects"
     },
     {
         title: "Buy Me Coffee",
