@@ -44,7 +44,7 @@ const ProjectsSection = () => {
                 image={proj.projects_img}
                 client={proj.projects_client}
                 website={proj.projects_website}
-                className="w-full col-span-1"
+                className="mb-4"
               />
             );
           })}
