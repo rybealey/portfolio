@@ -172,7 +172,7 @@ const AboutSection = () => {
             programming languages, which enable me to tackle complex technical
             challenges with ease.
           </p>
-          <SocialMediaIcons />
+          {/* <SocialMediaIcons /> */}
           <br />
           <div className="flex flex-col md:flex-row text-center mt-8">
             <TabButton

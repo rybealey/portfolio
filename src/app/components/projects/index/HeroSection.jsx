@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-12 my-8">
       <div className="col-span-7 place-self-center place-items-center grid lg:place-items-start">
-        <h1 className="text-white max-w-2xl mb-4 lg:text-6xl text-4xl font-extrabold">
+        <h1 className="text-white max-w-2xl mb-4 lg:text-6xl text-4xl font-extrabold text-center md:text-left">
           <span className="text-5xl text-white">
             My projects are…
             <br />
@@ -21,7 +21,7 @@ const HeroSection = () => {
         >
           Current Focus
         </p>
-        <p className="text-[#ADB7BE] mb-6 text-lg lg:text-xl">
+        <p className="text-center md:text-left text-[#ADB7BE] mb-6 text-lg lg:text-xl">
           Exploring web application development utilizng the MERN technology
           stack as well as developing custom web applications that require
           strategic integration of payments services.
