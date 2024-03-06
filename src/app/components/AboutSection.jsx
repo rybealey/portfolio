@@ -156,7 +156,7 @@ const AboutSection = () => {
         <Image
           src="/images/rybealey-workstation.png"
           alt="2D stylized art, showcasing two big displays in a Lo-fi style environment. Ry's ideal workstation."
-          className="rounded-lg"
+          className="hidden md:visible lg:visible xl:visible rounded-lg"
           width={500}
           height={500}
         />
