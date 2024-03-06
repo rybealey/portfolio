@@ -12,9 +12,7 @@ const ProjectsSection = () => {
       .then((res) => res.json())
       .then((data) => {
         setData(data);
-        setTimeout(function () {
-          setLoading(false);
-        }, 1450);
+        setLoading(false);
       });
   }, []);
 
@@ -36,7 +34,7 @@ const ProjectsSection = () => {
       return "There's no projects available at the moment. :/";
     } else {
       return (
-        <section className="flex flex-row gap-10 py-5">
+        <section className="grid grid-flow-row-dense grid-cols-3 gap-5">
           {data.map((proj) => {
             return (
               <ProjectComponent
@@ -46,6 +44,7 @@ const ProjectsSection = () => {
                 image={proj.projects_img}
                 client={proj.projects_client}
                 website={proj.projects_website}
+                className="col-span-1"
               />
             );
           })}

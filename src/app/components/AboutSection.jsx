@@ -152,15 +152,14 @@ const AboutSection = () => {
 
   return (
     <section className="text-white" id="about">
-      <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
+      <div className="md:grid md:grid-cols-1 lg:grid-cols-2 md:gap-8 items-center py-8 px-4 xl:gap-12 sm:py-16 xl:px-12">
         <Image
           src="/images/rybealey-workstation.png"
           alt="2D stylized art, showcasing two big displays in a Lo-fi style environment. Ry's ideal workstation."
-          className="hidden md:visible lg:visible xl:visible rounded-lg"
           width={500}
           height={500}
         />
-        <div className="my-4">
+        <div className="my-4 text-center md:text-left lg:text-left xl:text-left">
           <h2 className="text-4xl">
             Who's that guy? <span className="font-extrabold">It's Ry</span>.
           </h2>
