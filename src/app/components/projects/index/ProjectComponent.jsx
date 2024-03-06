@@ -5,7 +5,7 @@ const ProjectComponent = ({ id, title, desc, image, client, website }) => {
   return (
     <div key={id}>
       <div className="rounded overflow-hidden shadow-lg bg-white text-gray-900 transition hover:-translate-y-3 mt-5">
-        <Image className="w-full" src={image} width="1920" height="1080" />
+        <Image className="w-full" src={image} width={1920} height={1080} />
         <div className="px-6 py-4">
           <div className="font-bold text-2xl mb-2">{title}</div>
           <br />
