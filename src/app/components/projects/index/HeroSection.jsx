@@ -6,12 +6,11 @@ const HeroSection = () => {
     <section className="grid grid-cols-1 lg:grid-cols-12 my-8">
       <div className="col-span-7 place-self-center place-items-center grid lg:place-items-start">
         <h1 className="text-white max-w-2xl mb-4 lg:text-6xl text-4xl font-extrabold text-center md:text-left">
-          <span className="text-5xl text-white">
-            My projects are…
-            <br />
-            kind of all over the place.
-          </span>
+          <span className="text-5xl text-white">My projects are… simple.</span>
         </h1>
+        <p className="text-2xl text-white mb-5">
+          But they're exactly what my clients asked for.
+        </p>
         <p
           className="mb-2 text-xs bg-[#332C0F] border-0 border-thin border-[#F8D84B] text-[#F8D84B] uppercase hover:cursor-pointer"
           style={{

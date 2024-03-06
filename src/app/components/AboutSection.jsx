@@ -6,57 +6,41 @@ import TabButton from "./about/TabButton";
 import SocialMediaIcons from "./SocialMediaIcons";
 
 let interpersonalData = [
-  "De-escalation",
-  "Professional Facilitation",
-  "Cross-team Collaboration",
-  "Technical Support",
-  "Phone Etiquette",
-  "Community Engagement",
-  "Community Moderation",
-  "Lead Generation",
+  "Verbal communication",
+  "Written communication",
+  "Positive attitude",
+  "Self-starter",
+  "Empathetic",
+  "Resourceful",
+  "Active listening",
+  "Receptive to feedback",
+  "Reliable",
+  "Conflict resolution",
+  "Cross-functional collaboration",
+  "Can take a joke (most days)",
 ];
 
 let techStack = [
-  "Stripe",
-  "Stripe Connect",
-  "Quip",
-  "Miro",
-  "Wrike",
-  "iOS",
-  "macOS",
-  "tvOS",
-  "watchOS",
-  "Microsoft Office",
-  "Content Management Systems (CMS)",
-  "Slack",
-  "Git",
-  "React",
-  "Microsoft Azure",
-  "Amazon Web Services (AWS)",
-  "NextJS",
-  "ReactJS",
-  "MySQL",
-  "NoSQL",
-  "MongoDB",
-  "Apache",
-  "Linux",
-  "NodeJS",
-  "SQL",
-  "PHP",
-  "jQuery",
-  "JavaScript",
-  "CSS",
   "HTML",
-  "RESTful APIs",
+  "JavaScript",
+  "jQuery",
+  "PHP",
+  "MySQL",
+  "PostgreSQL",
+  "NoSQL",
+  "ReactDOM",
+  "NextJS",
+  "Node",
+  "Apache",
+  "LiteSpeed Web Server",
+  "Rocky Linux",
+  "RHEL CentOS",
+  "Ubuntu",
   "TypeScript",
-  "Test-driven Development",
-  "Backend Web Development",
-  "Machine Learning",
-  "Ecommerce",
-  "Adobe® Creative Cloud",
-  "cPanel / WHM",
-  "WHMCS",
-  "ClientExec",
+  "JavaScript XML (JSX)",
+  "Express",
+  "Microsoft Azure (Azure)",
+  "Amazon Web Services (AWS)",
 ];
 
 const tab_data = [
@@ -86,10 +70,10 @@ const tab_data = [
           </ul>
         </div>
         <div>
-          <h6 className="text-xl font-bold">Ecobyte</h6>
+          <h6 className="text-xl font-bold">Ecobyte Web Services</h6>
           <ul>
             <li>Sr. DevOps, Web Lead, Client Relations</li>
-            <li className="text-sm">Project · Oct 2014 to Present</li>
+            <li className="text-sm">Passion Project · Oct 2014 to Present</li>
           </ul>
         </div>
       </div>
