@@ -6,10 +6,12 @@ const HeroSection = () => {
     <section className="grid grid-cols-1 lg:grid-cols-12 my-8">
       <div className="col-span-7 place-self-center place-items-center grid lg:place-items-start">
         <h1 className="text-white max-w-2xl mb-4 lg:text-6xl text-4xl font-extrabold text-center md:text-left">
-          <span className="text-5xl text-white">My projects are… simple.</span>
+          <span className="text-5xl text-white">
+            My current showcase of projects may be simple…
+          </span>
         </h1>
-        <p className="text-2xl text-white mb-5">
-          But they're exactly what my clients asked for.
+        <p className="text-center md:text-left text-2xl text-white mb-5">
+          But they're exactly what my clients needed.
         </p>
         <p
           className="mb-2 text-xs bg-[#332C0F] border-0 border-thin border-[#F8D84B] text-[#F8D84B] uppercase hover:cursor-pointer"
@@ -21,7 +23,7 @@ const HeroSection = () => {
           Current Focus
         </p>
         <p className="text-center md:text-left text-[#ADB7BE] mb-6 text-lg lg:text-xl">
-          Exploring web application development utilizng the MERN technology
+          Exploring web application development utilizing the MERN technology
           stack as well as developing custom web applications that require
           strategic integration of payments services.
         </p>

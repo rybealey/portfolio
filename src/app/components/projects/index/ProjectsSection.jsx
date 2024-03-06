@@ -34,19 +34,34 @@ const ProjectsSection = () => {
       return "There's no projects available at the moment. :/";
     } else {
       return (
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-5">
-          {data.map((proj) => {
-            return (
-              <ProjectComponent
-                key={proj.id}
-                title={proj.projects_title}
-                desc={proj.projects_desc}
-                image={proj.projects_img}
-                client={proj.projects_client}
-                website={proj.projects_website}
-              />
-            );
-          })}
+        <section>
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-5">
+            {data.map((proj) => {
+              return (
+                <ProjectComponent
+                  key={proj.id}
+                  title={proj.projects_title}
+                  desc={proj.projects_desc}
+                  image={proj.projects_img}
+                  client={proj.projects_client}
+                  website={proj.projects_website}
+                />
+              );
+            })}
+          </section>
+          <section className="text-center text-white mt-5 text-sm">
+            <p>
+              I'm working on a handful of projects that won't be listed for some
+              time. Chat me up and &nbsp;
+              <a
+                href="mailto:hello@ryanbealey.com"
+                className="underline underline-offset-4"
+              >
+                ask me about my passion projects
+              </a>
+              .
+            </p>
+          </section>
         </section>
       );
     }
