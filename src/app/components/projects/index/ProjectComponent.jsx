@@ -8,6 +8,7 @@ const ProjectComponent = ({ id, title, desc, image, client, website }) => {
         <Image className="w-full" src={image} width={1920} height={1080} />
         <div className="px-6 py-4">
           <div className="font-bold text-2xl mb-2">{title}</div>
+          <br />
           <div className="relative bottom-0 left-0">
             <div className="flex flex-row my-2">
               <p>
