@@ -19,6 +19,11 @@ const navLinks = [
     path: "/projects",
   },
   {
+    title: "Credit",
+    target: "_self",
+    path: "/credit",
+  },
+  {
     title: "Buy Me Coffee",
     target: "_blank",
     path: "https://donate.stripe.com/aEUcQN2QMbK8eEE7ss",

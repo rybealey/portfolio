@@ -34,7 +34,7 @@ const ProjectsSection = () => {
       return "There's no projects available at the moment. :/";
     } else {
       return (
-        <section className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 sm:gap-5">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:gap-5">
           {data.map((proj) => {
             return (
               <ProjectComponent
