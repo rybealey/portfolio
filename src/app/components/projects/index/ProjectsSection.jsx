@@ -49,7 +49,7 @@ const ProjectsSection = () => {
               );
             })}
           </section>
-          <section className="text-center text-white mt-5 text-sm">
+          <section className="my-10 text-center text-white text-sm">
             <p>
               I'm working on a handful of projects that won't be listed for some
               time. Chat me up and &nbsp;
