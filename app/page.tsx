@@ -1,10 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import PageLoader from "@/components/PageLoader";
 
 export default function Home() {
   return (
-    <main id="main-content" className="flex min-h-screen flex-col md:flex-row">
+    <>
+      <PageLoader />
+      <main id="main-content" className="flex min-h-screen flex-col md:flex-row">
       {/* Left side - Full width image with caption */}
       <div className="w-full md:w-1/2 relative h-[50vh] md:h-screen group overflow-hidden">
         <Image
@@ -56,5 +59,6 @@ export default function Home() {
         </nav>
       </div>
     </main>
+    </>
   );
 }
