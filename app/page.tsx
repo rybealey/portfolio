@@ -14,7 +14,7 @@ export default function Home() {
           sizes="(max-width: 768px) 100vw, 50vw"
           className="object-cover"
           priority
-          quality={85}
+          quality={80}
         />
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out pointer-events-none px-2">
           <div className="bg-white dark:bg-gray-900 px-3 py-2 rounded-full shadow-lg max-w-[calc(100vw-2rem)]">

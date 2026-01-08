@@ -3,7 +3,10 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { NavigationMenu } from "@/components/NavigationMenu";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ 
+  subsets: ["latin"],
+  display: "swap", // Optimize font loading for better performance
+});
 
 export const metadata: Metadata = {
   title: "Portfolio",
