@@ -1,0 +1,181 @@
+{
+  "caseStudies": [
+    {
+      "id": 1,
+      "title": "Impeccabyte",
+      "description": "<p>Small and mid-size businesses (SMBs) often struggle with \"fragmented management\"—juggling separate apps for payroll, banking, incorporation, and merchant services.&nbsp;This fragmentation leads to \"bureaucracy fatigue,\" where owners spend more time on admin than on their actual vision.</p><p><strong>Impeccabyte</strong>&nbsp;was developed to bridge this gap. As a primary contributor, I led the development of a full-stack ecosystem that integrates high-level financial APIs into a single, jargon-free interface, supported by custom AI tools to automate financial auditing and legal compliance.</p><h1>The Problem</h1><ul><li><strong>Data Silos:</strong>&nbsp;Financial data lived in four different partner portals, making a holistic view of business health impossible.</li><li><strong>Opaque Fees:</strong>&nbsp;Merchant processing fees are notoriously difficult to decipher, leading to SMBs overpaying by thousands annually.</li><li><strong>Compliance Risks:</strong>&nbsp;Missed state and federal filing deadlines resulted in penalties and \"Good Standing\" lapses for entrepreneurs.</li></ul><h1>The Solution: A unified, full-stack platform</h1><p>I architected and deployed a multi-tenant web application focused on three core innovation pillars:</p><h2>Partner Integration &amp; UI/UX</h2><p>I led the&nbsp;<strong>UI/UX design and API integration</strong>&nbsp;for our four core partners. By abstracting the complexity of&nbsp;<strong>Unit.co</strong>(banking) and&nbsp;<strong>CheckHQ</strong>&nbsp;(payroll), we created a \"single pane of glass\" experience.</p><ul><li><strong>Result:</strong>&nbsp;Reduced user time-on-task for administrative actions by over 40% compared to using individual partner portals.</li></ul><h2>Penny: The AI Merchant Services Specialist</h2><p>To solve the transparency issue, I developed&nbsp;<strong>Penny</strong>. This AI agent analyzes processing statements to determine if a user's rates are \"fair\" relative to current market benchmarks.</p><ul><li><strong>Technical Implementation:</strong>&nbsp;Penny uses LLM-based parsing to extract data from complex merchant statements.</li><li><strong>Outcome:</strong>&nbsp;Penny identifies overcharging in real-time and triggers a notification for the user to contact their Impeccabyte account manager to renegotiate, ensuring long-term cost efficiency.</li></ul><h2>The AI-Powered Compliance Calendar</h2><p>I designed a proactive&nbsp;<strong>Compliance Engine</strong>&nbsp;that maps federal and state deadlines to the specific entity type of the user.</p><ul><li><strong>Predictive Logic:</strong>&nbsp;The system doesn't just notify; it recommends. If a state tax filing is approaching, the AI suggests the specific <strong>Bizee</strong>&nbsp;or&nbsp;<strong>CheckHQ</strong>&nbsp;workflow required to satisfy the requirement.</li><li><strong>Result:</strong>&nbsp;A 0% missed-deadline rate for active platform users, significantly lowering the barrier to entry for first-time founders.</li></ul><h2>Technical Contributions and Challenges</h2><ul><li><strong>Full-Stack Development:</strong>&nbsp;Built the frontend for responsiveness and the backend for secure, high-uptime financial transactions.</li><li><strong>Uptime Management:</strong>&nbsp;Maintained 99.9% uptime to ensure critical business functions (payroll/payments) were never interrupted.</li><li><strong>Strategic Growth:</strong>&nbsp;Beyond code, I managed&nbsp;<strong>Partner Relations</strong>&nbsp;to ensure API roadmaps stayed aligned and assisted in&nbsp;<strong>Regional Sales</strong>&nbsp;to gather direct user feedback for iterative design.</li></ul><h2>Final Impact</h2><p>Impeccabyte successfully evolved from a concept to a robust \"Launch to Loved\" platform. By combining technical execution with human-centric support, we empowered entrepreneurs to reclaim their time.</p>",
+      "status": "Ongoing",
+      "created_at": "2026-01-08T06:33:38.745Z",
+      "updated_at": "2026-01-08T07:41:17.378Z",
+      "images": [
+        {
+          "id": "1-1767855649802-0cak7p",
+          "filename": "1767855649802-Screenshot_2026-01-08_at_12.57.59_AM.png",
+          "alt": "Screenshot 2026-01-08 at 12.57.59 AM",
+          "order": 0
+        },
+        {
+          "id": "1-1767855649805-7f6l9f",
+          "filename": "1767855649805-Screenshot_2026-01-08_at_12.58.06_AM.png",
+          "alt": "Screenshot 2026-01-08 at 12.58.06 AM",
+          "order": 1
+        },
+        {
+          "id": "1-1767855649810-p117hr",
+          "filename": "1767855649810-Screenshot_2026-01-08_at_12.58.20_AM.png",
+          "alt": "Screenshot 2026-01-08 at 12.58.20 AM",
+          "order": 2
+        },
+        {
+          "id": "1-1767855649815-w4g0np",
+          "filename": "1767855649815-Screenshot_2026-01-08_at_12.58.31_AM.png",
+          "alt": "Screenshot 2026-01-08 at 12.58.31 AM",
+          "order": 3
+        },
+        {
+          "id": "1-1767855649817-fw6ud6",
+          "filename": "1767855649817-Screenshot_2026-01-08_at_12.58.56_AM.png",
+          "alt": "Screenshot 2026-01-08 at 12.58.56 AM",
+          "order": 4
+        }
+      ],
+      "slug": "impeccabyte",
+      "production_url": "https://www.impeccabyte.com",
+      "logo": "/case-studies/1/logos/logo-1767858075079-Icon.png"
+    },
+    {
+      "id": 3,
+      "slug": "serverizz",
+      "title": "SERVERIZZ®",
+      "description": "<p>The modern business landscape requires a hybrid of high-performance infrastructure and creative agility. Many providers offer \"unmanaged\" servers that leave small businesses stranded, or \"agency services\" that lack technical depth.</p><p>SERVERIZZ was engineered to solve this by providing a unified ecosystem where enterprise-grade hosting meets white-glove agency support. As a lead contributor, I architected the technical deployment of our global server network and integrated the \"Web Design+\" subscription model, allowing clients to scale their digital presence and their infrastructure under one roof.</p><h1>The Problem</h1><ul><li><strong>Infrastructure Complexity:</strong>&nbsp;SMBs were forced to navigate \"zero-help\" dashboards and complex command-line interfaces to scale.</li><li><strong>Stagnant Web Presence:</strong>&nbsp;Traditional web design projects involve high upfront costs and often go unmaintained, leading to security vulnerabilities and outdated UX.</li><li><strong>Traffic Volatility:</strong>&nbsp;Businesses frequently crashed during seasonal spikes due to a lack of automated, managed horizontal scaling.</li></ul><h1>The Solution: The way the web should be.</h1><p>I developed a modular infrastructure and service platform that prioritizes reliability and simplicity through three key innovations:</p><h2>Global Managed Infrastructure</h2><p>I led the deployment of a multi-tenant environment across&nbsp;<strong>32 worldwide data center regions</strong>.</p><ul><li><strong>Grid Hosting:</strong>&nbsp;Developed a \"Zero Confusion\" single-tier plan for startups, abstracting technical maintenance while providing global reliability.</li><li><strong>Managed Scaling:</strong>&nbsp;Deployed&nbsp;<strong>Layer 4 (TCP/UDP) Load Balancers</strong>&nbsp;to ensure client sites remain online during traffic spikes by intelligently distributing visitors across multiple nodes.</li><li><strong>Security Hardening:</strong>&nbsp;Integrated&nbsp;<strong>DDoS mitigation</strong>, Malware Defense, and nightly off-site backups as a standard across all tiers.</li></ul><h2>Web Design+</h2><p>To address the \"project quote\" fatigue, I helped launch&nbsp;<strong>Web Design+</strong>, a subscription-based development service.</p><ul><li><strong>Technical Integration:</strong>&nbsp;Every subscription includes a&nbsp;<strong>managed VPS with dedicated CPUs</strong>&nbsp;and a load balancer, pre-configured for the client’s specific region.</li><li><strong>Continuous Delivery:</strong>&nbsp;I built the internal work-order system that allows clients to submit \"unlimited\" requests, with most updates deployed within 48–72 hours.</li><li><strong>Premium Tooling:</strong>&nbsp;Integrated a suite of advanced tools including&nbsp;<strong>AccessEdge AI</strong>&nbsp;(accessibility compliance) and&nbsp;<strong>TermsGo</strong>&nbsp;(legal compliance) into the standard client stack.</li></ul><h2>Performance Optimization Engine</h2><p>Using&nbsp;<strong>NGINX+ caching</strong>&nbsp;and hardened&nbsp;<strong>PHP 7.3+</strong>&nbsp;environments, I optimized the server-side stack to deliver high-speed customer experiences even for resource-intensive applications.</p><ul><li><strong>Result:</strong>&nbsp;Achieved a \"Single Pane of Glass\" management experience via a customized cPanel interface, reducing technical support tickets by 35%.</li></ul><h1>Technical Contributions and Challenges</h1><ul><li><strong>Global Deployment:</strong>&nbsp;Managed the orchestration of virtual machines and block storage across diverse geographic regions to minimize latency.</li><li><strong>Automation:</strong>&nbsp;Scripted automated security patching and backup verification to maintain a 99.9% uptime guarantee.</li><li><strong>Cross-Platform Synergy:</strong>&nbsp;Coordinated with partners like&nbsp;<strong>Impeccabyte</strong>&nbsp;to offer specialty payment processing rates for SERVERIZZ clients, creating a closed-loop business ecosystem.</li></ul>",
+      "status": "Completed",
+      "images": [],
+      "production_url": "https://www.serverizz.com",
+      "created_at": "2026-01-08T07:30:08.591Z",
+      "updated_at": "2026-01-08T07:41:07.409Z",
+      "logo": "/case-studies/3/logos/logo-1767858063372-1766633315369-781drg.png"
+    }
+  ],
+  "technologies": [
+    {
+      "id": 1,
+      "name": "Next.js"
+    },
+    {
+      "id": 2,
+      "name": "Supabase"
+    },
+    {
+      "id": 3,
+      "name": "Payment Integration"
+    },
+    {
+      "id": 4,
+      "name": "Entity Management"
+    },
+    {
+      "id": 5,
+      "name": "WordPress"
+    },
+    {
+      "id": 6,
+      "name": "Linux"
+    },
+    {
+      "id": 7,
+      "name": "Server Administration"
+    },
+    {
+      "id": 8,
+      "name": "Web Design"
+    },
+    {
+      "id": 9,
+      "name": "ReactJS"
+    },
+    {
+      "id": 10,
+      "name": "AuthGuard"
+    },
+    {
+      "id": 11,
+      "name": "React"
+    },
+    {
+      "id": 12,
+      "name": "NextJS"
+    },
+    {
+      "id": 13,
+      "name": "PostgreSQL"
+    },
+    {
+      "id": 14,
+      "name": "Stripe"
+    },
+    {
+      "id": 15,
+      "name": "cPanel/WHM"
+    },
+    {
+      "id": 16,
+      "name": "CloudLinux"
+    },
+    {
+      "id": 17,
+      "name": "WHMCS"
+    },
+    {
+      "id": 18,
+      "name": "Authorize.Net"
+    }
+  ],
+  "caseStudyTechnologies": [
+    {
+      "case_study_id": 3,
+      "technology_id": 18
+    },
+    {
+      "case_study_id": 3,
+      "technology_id": 16
+    },
+    {
+      "case_study_id": 3,
+      "technology_id": 6
+    },
+    {
+      "case_study_id": 3,
+      "technology_id": 17
+    },
+    {
+      "case_study_id": 3,
+      "technology_id": 5
+    },
+    {
+      "case_study_id": 3,
+      "technology_id": 15
+    },
+    {
+      "case_study_id": 1,
+      "technology_id": 12
+    },
+    {
+      "case_study_id": 1,
+      "technology_id": 13
+    },
+    {
+      "case_study_id": 1,
+      "technology_id": 11
+    },
+    {
+      "case_study_id": 1,
+      "technology_id": 14
+    },
+    {
+      "case_study_id": 1,
+      "technology_id": 2
+    }
+  ],
+  "nextCaseStudyId": 4,
+  "nextTechnologyId": 19
+}
