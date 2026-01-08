@@ -39,7 +39,17 @@ function getDb(): PassionsDatabase {
 }
 
 function saveDb(db: PassionsDatabase): void {
-  writeFileSync(dbPath, JSON.stringify(db, null, 2));
+  try {
+    writeFileSync(dbPath, JSON.stringify(db, null, 2));
+  } catch (error) {
+    console.error('Error saving passions database:', error);
+    // In production/serverless environments, filesystem writes may fail
+    // This is expected behavior - consider migrating to a database solution
+    throw new Error(
+      'Failed to save database. In production, file-based databases are not supported. ' +
+      'Please migrate to a database solution (PostgreSQL, MongoDB, etc.) or use a platform with persistent storage.'
+    );
+  }
 }
 
 export function getAllPassions(): Passion[] {
