@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 export default function PageLoader() {
   const [isLoading, setIsLoading] = useState(true);
+  const [isFadingOut, setIsFadingOut] = useState(false);
 
   useEffect(() => {
     let mounted = true;
@@ -45,12 +46,24 @@ export default function PageLoader() {
         // Small delay to ensure smooth transition and let Next.js hydration complete
         await new Promise((resolve) => setTimeout(resolve, 400));
         if (mounted) {
-          setIsLoading(false);
+          // Start fade-out animation
+          setIsFadingOut(true);
+          // Remove from DOM after fade-out completes
+          setTimeout(() => {
+            if (mounted) {
+              setIsLoading(false);
+            }
+          }, 500); // Match transition duration
         }
       } catch (error) {
         // Even if there's an error, hide loader after a timeout
         if (mounted) {
-          setTimeout(() => setIsLoading(false), 1000);
+          setIsFadingOut(true);
+          setTimeout(() => {
+            if (mounted) {
+              setIsLoading(false);
+            }
+          }, 500);
         }
       }
     };
@@ -69,7 +82,12 @@ export default function PageLoader() {
     // Fallback timeout to ensure loader doesn't stay forever
     const timeout = setTimeout(() => {
       if (mounted) {
-        setIsLoading(false);
+        setIsFadingOut(true);
+        setTimeout(() => {
+          if (mounted) {
+            setIsLoading(false);
+          }
+        }, 500);
       }
     }, 5000);
 
@@ -83,7 +101,7 @@ export default function PageLoader() {
   if (!isLoading) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-[#0f172a] transition-opacity duration-500 ease-out">
+    <div className={`fixed inset-0 z-[9999] flex items-center justify-center bg-white dark:bg-[#0f172a] transition-opacity duration-500 ease-out ${isFadingOut ? 'opacity-0' : 'opacity-100'}`}>
       {/* Apple-style spinner with gray/silver tones */}
       <div className="relative w-16 h-16">
         {/* Outer ring - lighter gray/silver */}
