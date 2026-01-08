@@ -9,12 +9,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Ry Bealey · Private Grotto",
   description: "My portfolio website",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "Portfolio",
+    title: "Ry Bealey · Private Grotto",
   },
   formatDetection: {
     telephone: false,
