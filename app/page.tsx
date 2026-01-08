@@ -16,9 +16,9 @@ export default function Home() {
           priority
           quality={80}
         />
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out pointer-events-none px-2">
-          <div className="bg-white dark:bg-gray-900 px-3 py-2 rounded-full shadow-lg max-w-[calc(100vw-2rem)]">
-            <p className="text-[8px] md:text-[9px] font-normal text-gray-900 dark:text-gray-100 leading-relaxed whitespace-nowrap">
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 translate-y-full opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 ease-in-out pointer-events-none px-2 sm:px-4">
+          <div className="bg-white dark:bg-gray-900 px-3 py-2 rounded-full shadow-lg max-w-[calc(100vw-2rem)] sm:max-w-none">
+            <p className="text-[8px] md:text-[9px] font-normal text-gray-900 dark:text-gray-100 leading-relaxed whitespace-normal sm:whitespace-nowrap text-center">
               Samuel J. Chapman (left), Ry Bealey, Ahna Quichocho, Whitney Buchanan (right);  Holiday Party at Austin, TX 2024.
             </p>
           </div>
