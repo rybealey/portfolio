@@ -32,7 +32,7 @@ export default function Home() {
       <div className="w-full md:w-1/2 flex flex-col justify-center items-start px-4 sm:px-6 md:px-16 py-8 sm:py-12 md:py-0 bg-background" style={{ paddingBottom: 'max(2rem, env(safe-area-inset-bottom))' }}>
         <div className="mb-6 md:mb-8" style={{ paddingBottom: '0.5rem', overflow: 'visible' }}>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-0 overflow-visible break-words" style={{ lineHeight: '1.4', paddingBottom: '0.75rem', paddingTop: '0.25rem' }}>
-            <span className="bg-gradient-to-r from-[#738678] via-[#a67a5f] to-[#5e6a61] bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]" style={{ fontFamily: "'Two Sugars', sans-serif", display: 'inline-block', paddingBottom: '0.125rem' }}>Howdy, partner! </span><span>🤠</span>
+            <span className="bg-gradient-to-r from-[#738678] via-[#a67a5f] to-[#5e6a61] bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]" style={{ fontFamily: "'Two Sugars', sans-serif", display: 'inline-block', paddingBottom: '0.125rem' }}>Howdy, partner! </span><span> 🤠</span>
           </h1>
         </div>
         <p className="text-sm md:text-base text-muted-foreground leading-relaxed max-w-xl">
