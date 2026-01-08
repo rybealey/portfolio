@@ -130,7 +130,7 @@ export default function CaseStudyImageManager({
               <div className="aspect-video relative bg-muted rounded-lg overflow-hidden border border-border">
                 <Image
                   src={`/case-studies/${caseStudyId}/${image.filename}`}
-                  alt={image.alt || ''}
+                  alt={image.alt || `Case study image ${index + 1}`}
                   fill
                   className="object-cover"
                 />
