@@ -49,7 +49,9 @@ export default function CaseStudiesPage() {
                         src={study.logo}
                         alt={`${study.title} logo`}
                         fill
+                        sizes="64px"
                         className="object-contain"
+                        loading="lazy"
                       />
                     </div>
                   )}

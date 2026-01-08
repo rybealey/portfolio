@@ -43,7 +43,11 @@ export function NavigationMenu() {
       {/* Hamburger Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 right-4 z-50 p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-muted focus-visible-ring transition-colors shadow-sm min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+        className="fixed z-50 p-3 rounded-full bg-background/80 backdrop-blur-sm border border-border hover:bg-muted focus-visible-ring transition-colors shadow-sm min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+        style={{
+          top: 'max(1rem, env(safe-area-inset-top))',
+          right: 'max(1rem, env(safe-area-inset-right))',
+        }}
         aria-label="Toggle menu"
         aria-expanded={isOpen}
         aria-controls="navigation-menu"
@@ -64,11 +68,15 @@ export function NavigationMenu() {
       />
       <nav
         id="navigation-menu"
-        className={`fixed top-16 right-4 md:top-4 md:right-[calc(1rem+2.75rem+0.75rem)] z-50 flex flex-col md:flex-row gap-3 min-w-[140px] transition-all duration-300 ease-out ${
+        className={`fixed z-50 flex flex-col md:flex-row gap-3 min-w-[140px] transition-all duration-300 ease-out ${
           isOpen
             ? 'opacity-100 translate-x-0'
             : 'opacity-0 translate-x-4 pointer-events-none'
         }`}
+        style={{
+          top: `calc(max(1rem, env(safe-area-inset-top)) + 3.5rem)`,
+          right: 'max(1rem, env(safe-area-inset-right))',
+        }}
         aria-label="Main navigation"
       >
         {/* Home */}
@@ -129,7 +137,11 @@ export function NavigationMenu() {
       {mounted && isOpen && (
         <button
           onClick={toggleTheme}
-          className="fixed bottom-4 right-4 z-50 p-2 rounded-md hover:bg-muted/50 focus-visible-ring transition-all opacity-60 hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+          className="fixed z-50 p-2 rounded-md hover:bg-muted/50 focus-visible-ring transition-all opacity-60 hover:opacity-100 min-w-[44px] min-h-[44px] flex items-center justify-center touch-manipulation"
+          style={{
+            bottom: 'max(1rem, env(safe-area-inset-bottom))',
+            right: 'max(1rem, env(safe-area-inset-right))',
+          }}
           aria-label={`Switch to ${isDark ? 'light' : 'dark'} mode`}
         >
           {isDark ? (

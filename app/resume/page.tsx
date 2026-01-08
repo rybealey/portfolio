@@ -105,6 +105,25 @@ export default function ResumePage() {
             </ul>
           </div>
 
+          {/* Impeccabyte */}
+          <div className="pb-6 border-b border-border/50 last:border-b-0">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+              <div className="mb-2 md:mb-0">
+                <h3 className="font-bold text-xl mb-1">Founder</h3>
+                <p className="text-base text-muted-foreground font-medium">Impeccabyte</p>
+              </div>
+              <p className="text-xs text-muted-foreground font-medium md:text-right">Sep 2025 — Present • Austin</p>
+            </div>
+            <ul className="text-xs text-muted-foreground space-y-2 pl-5 list-disc">
+              <li className="leading-normal">Led UI/UX design and API integration for core financial partners including Unit.co (banking) and CheckHQ (payroll), creating a unified interface that reduced user administrative time by over 40%.</li>
+              <li className="leading-normal">Architected and developed a full-stack multi-tenant web application integrating high-level financial APIs into a single, jargon-free platform for small and mid-size businesses.</li>
+              <li className="leading-normal">Developed Penny, an AI merchant services specialist using LLM-based parsing to analyze processing statements and identify overcharging in real-time, enabling cost optimization for clients.</li>
+              <li className="leading-normal">Designed and implemented an AI-powered Compliance Engine that maps federal and state deadlines to entity types, achieving a 0% missed-deadline rate for active platform users.</li>
+              <li className="leading-normal">Maintained 99.9% uptime for critical business functions including payroll and payment processing, ensuring high availability and reliability.</li>
+              <li className="leading-normal">Managed partner relations to align API roadmaps and assisted in regional sales to gather user feedback for iterative design improvements.</li>
+            </ul>
+          </div>
+
           {/* Apple - Sr. Technical Sales Representative */}
           <div className="pb-6 border-b border-border/50 last:border-b-0">
             <div className="flex flex-col md:flex-row md:items-start md:justify-between mb-4">

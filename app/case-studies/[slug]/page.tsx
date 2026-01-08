@@ -32,22 +32,23 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
 
         {/* Header */}
         <header className="mb-8">
-          <div className="flex items-center justify-between mb-4 gap-4">
-            <div className="flex items-center gap-4 flex-1">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4 gap-4">
+            <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
               {caseStudy.logo && (
-                <div className="relative w-20 h-20 md:w-24 md:h-24 flex-shrink-0">
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 flex-shrink-0">
                   <Image
                     src={caseStudy.logo}
                     alt={`${caseStudy.title} logo`}
                     fill
                     className="object-contain"
+                    sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
                   />
                 </div>
               )}
-              <h1 className="text-4xl md:text-5xl font-bold">{caseStudy.title}</h1>
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold break-words min-w-0">{caseStudy.title}</h1>
             </div>
             <span
-              className={`text-xs font-medium px-3 py-1.5 rounded-full ml-4 ${
+              className={`text-xs font-medium px-3 py-1.5 rounded-full flex-shrink-0 self-start sm:self-auto ${
                 caseStudy.status === 'Completed'
                   ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                   : caseStudy.status === 'Ongoing'
