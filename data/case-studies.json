@@ -54,6 +54,17 @@
       "created_at": "2026-01-08T07:30:08.591Z",
       "updated_at": "2026-01-08T07:41:07.409Z",
       "logo": "/case-studies/3/logos/logo-1767858063372-1766633315369-781drg.png"
+    },
+    {
+      "id": 4,
+      "slug": "agar-chungus",
+      "title": "Agar Chungus",
+      "description": "<p>Agar Chungus&nbsp;is a fast-paced, multiplayer web game inspired by the viral hit&nbsp;<em>Agar.io</em>. In this game, players control a cell in a competitive arena with one simple goal: consume smaller cells and pellets to grow larger while avoiding being eaten by bigger players. It captures the classic \"eat-or-be-eaten\" mechanics that made the .io genre famous, providing a smooth, browser-based experience for competitive play.</p><p>Based on the architecture of the&nbsp;<a href=\"https://github.com/rybealey/agar\" rel=\"noopener noreferrer\" target=\"_blank\">rybealey/agar</a>&nbsp;repository, the game is built using a modern JavaScript stack designed for low-latency real-time interaction.</p><h3>Technologies Used</h3><ul><li><strong>Node.js &amp; Express:</strong>&nbsp;The backend is powered by Node.js, providing a scalable environment to handle multiple concurrent game sessions. Express is used to serve the game assets and manage server-side routing.</li><li><strong>Socket.io:</strong>&nbsp;This is the core engine for the game’s multiplayer functionality. It enables real-time, bi-directional communication between the server and the clients, ensuring that cell movements and \"eats\" are synchronized across all players with minimal lag.</li><li><strong>HTML5 Canvas:</strong>&nbsp;The game’s graphics are rendered using the HTML5 Canvas API. This allows for high-performance 2D rendering directly in the browser without the need for external plugins, enabling smooth movement for dozens of entities on screen.</li><li><strong>JavaScript (ES6+):</strong>&nbsp;The game logic—ranging from collision detection and cell physics to the \"split\" and \"eject mass\" mechanics—is written in clean, modern JavaScript.</li><li><strong>CSS3:</strong>&nbsp;Used for the UI overlay, menus, and responsive design elements to ensure the game is playable across different screen sizes.</li></ul><p>The project is a great example of using&nbsp;<strong>WebSockets</strong>&nbsp;to create a high-stakes multiplayer environment entirely within a web browser.</p>",
+      "status": "Completed",
+      "images": [],
+      "production_url": "https://agar.rybealey.com",
+      "created_at": "2026-01-09T04:42:39.894Z",
+      "updated_at": "2026-01-09T04:42:39.894Z"
     }
   ],
   "technologies": [
@@ -128,6 +139,26 @@
     {
       "id": 18,
       "name": "Authorize.Net"
+    },
+    {
+      "id": 19,
+      "name": "Node.js"
+    },
+    {
+      "id": 20,
+      "name": "Socket.io"
+    },
+    {
+      "id": 21,
+      "name": "HTML5"
+    },
+    {
+      "id": 22,
+      "name": "JavaScript"
+    },
+    {
+      "id": 23,
+      "name": "CSS3"
     }
   ],
   "caseStudyTechnologies": [
@@ -174,8 +205,32 @@
     {
       "case_study_id": 1,
       "technology_id": 2
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 11
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 19
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 20
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 21
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 22
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 23
     }
   ],
-  "nextCaseStudyId": 4,
-  "nextTechnologyId": 19
+  "nextCaseStudyId": 5,
+  "nextTechnologyId": 24
 }
