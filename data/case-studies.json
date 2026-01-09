@@ -64,7 +64,8 @@
       "images": [],
       "production_url": "https://agar.rybealey.com",
       "created_at": "2026-01-09T04:42:39.894Z",
-      "updated_at": "2026-01-09T04:42:39.894Z"
+      "updated_at": "2026-01-09T04:55:30.988Z",
+      "logo": "/case-studies/4/logos/logo-1767934525841-Screenshot_2026-01-08_at_10.54.52_PM.png"
     }
   ],
   "technologies": [
@@ -208,15 +209,7 @@
     },
     {
       "case_study_id": 4,
-      "technology_id": 11
-    },
-    {
-      "case_study_id": 4,
-      "technology_id": 19
-    },
-    {
-      "case_study_id": 4,
-      "technology_id": 20
+      "technology_id": 23
     },
     {
       "case_study_id": 4,
@@ -228,7 +221,15 @@
     },
     {
       "case_study_id": 4,
-      "technology_id": 23
+      "technology_id": 19
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 11
+    },
+    {
+      "case_study_id": 4,
+      "technology_id": 20
     }
   ],
   "nextCaseStudyId": 5,
