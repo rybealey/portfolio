@@ -1,3 +1,5 @@
+import { ResumeExportButton } from '@/components/ResumeExportButton';
+
 export default function ResumePage() {
   return (
     <div className="min-h-screen bg-background relative">
@@ -10,18 +12,25 @@ export default function ResumePage() {
       <div id="main-content" className="relative z-10 py-12 sm:py-16 px-4 sm:px-6 md:px-12 lg:px-16 max-w-5xl mx-auto">
       {/* Header */}
       <header className="mb-12">
-        <h1 className="text-5xl font-bold mb-3">Ryan Bealey</h1>
-        <p className="text-xl text-muted-foreground mb-6 font-medium">IT Professional</p>
-        <div className="flex flex-col md:flex-row md:items-center md:gap-3 text-sm text-muted-foreground">
-          <span>Austin, TX</span>
-          <span className="hidden md:inline text-muted-foreground/50">•</span>
-          <a href="tel:+15129379136" className="hover:text-foreground focus-visible-ring rounded transition-colors">
-            1 (512) 937-9136
-          </a>
-          <span className="hidden md:inline text-muted-foreground/50" aria-hidden="true">•</span>
-          <a href="mailto:hello@ryanbealey.com" className="hover:text-foreground focus-visible-ring rounded transition-colors">
-            hello@ryanbealey.com
-          </a>
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-6">
+          <div>
+            <h1 className="text-5xl font-bold mb-3">Ryan Bealey</h1>
+            <p className="text-xl text-muted-foreground mb-6 font-medium">IT Professional</p>
+            <div className="flex flex-col md:flex-row md:items-center md:gap-3 text-sm text-muted-foreground">
+              <span>Austin, TX</span>
+              <span className="hidden md:inline text-muted-foreground/50">•</span>
+              <a href="tel:+15129379136" className="hover:text-foreground focus-visible-ring rounded transition-colors">
+                1 (512) 937-9136
+              </a>
+              <span className="hidden md:inline text-muted-foreground/50" aria-hidden="true">•</span>
+              <a href="mailto:hello@ryanbealey.com" className="hover:text-foreground focus-visible-ring rounded transition-colors">
+                hello@ryanbealey.com
+              </a>
+            </div>
+          </div>
+          <div className="flex-shrink-0">
+            <ResumeExportButton />
+          </div>
         </div>
       </header>
 
