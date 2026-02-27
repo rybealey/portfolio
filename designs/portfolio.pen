@@ -1,0 +1,5128 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "TTRaW",
+      "x": 0,
+      "y": 0,
+      "name": "Ry Bealey — Portfolio",
+      "width": 1440,
+      "fill": "#F5F5F5",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "tNXRG",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$border-light"
+          },
+          "padding": [
+            24,
+            120
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "yKiC6",
+              "name": "Logo",
+              "fill": "$text-primary",
+              "content": "ry.bealey",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "tgtpX",
+              "name": "Nav",
+              "gap": 40,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "IidRt",
+                  "name": "n1",
+                  "fill": "$text-muted",
+                  "content": "About",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "DpKNj",
+                  "name": "n2",
+                  "fill": "$text-muted",
+                  "content": "Experience",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "Hr6Dg",
+                  "name": "n3",
+                  "fill": "$text-muted",
+                  "content": "Projects",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "InURl",
+                  "name": "n4",
+                  "fill": "$text-muted",
+                  "content": "Skills",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "DZ1oA",
+                  "name": "ctaBtn",
+                  "fill": "$accent",
+                  "padding": [
+                    8,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UybVD",
+                      "name": "ctaText",
+                      "fill": "#0A0F1C",
+                      "content": "Contact Me",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QpAdP",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            100,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "odwAY",
+              "name": "badge",
+              "stroke": {
+                "thickness": 1,
+                "fill": "#1E293B"
+              },
+              "gap": 8,
+              "padding": [
+                6,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "cHGoY",
+                  "name": "badgeDot",
+                  "fill": "$accent",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "PDtVV",
+                  "name": "badgeText",
+                  "fill": "$accent",
+                  "content": "status: available_for_work",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "IcN7e",
+              "name": "heroTitle",
+              "fill": "$text-primary",
+              "content": "Ry Bealey",
+              "lineHeight": 1,
+              "fontFamily": "Inter",
+              "fontSize": 88,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "hl8ii",
+              "name": "heroSub",
+              "fill": "$accent",
+              "content": "Product Designer & Creative Developer",
+              "lineHeight": 1,
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 20,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "9tSM3",
+              "name": "heroDesc",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": 560,
+              "content": "Crafting thoughtful digital experiences at the intersection of design and technology. Currently based in New York.",
+              "lineHeight": 1.6,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "L9rhn",
+              "name": "heroActions",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "MF59E",
+                  "name": "btn1",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "rDseS",
+                      "name": "btn1Text",
+                      "fill": "#0A0F1C",
+                      "content": "View Projects",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "diFoW",
+                      "name": "btn1Arrow",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HRxuW",
+                  "name": "btn2",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#1E293B"
+                  },
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6wML2",
+                      "name": "btn2Text",
+                      "fill": "$text-secondary",
+                      "content": "Download CV",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "vxN7q",
+          "name": "About",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "gap": 80,
+          "padding": [
+            100,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "NXlac",
+              "name": "aboutLeft",
+              "width": 400,
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fkaSM",
+                  "name": "aboutLabel",
+                  "fill": "$accent",
+                  "content": "01 — ABOUT",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "vfv4R",
+                  "name": "aboutTitle",
+                  "fill": "$text-primary",
+                  "content": "A brief introduction.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 40,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "e52o5",
+                  "name": "Portrait",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "visualsbying",
+                    "link": "https://unsplash.com/@visualsbying",
+                    "author": "Ingmar"
+                  },
+                  "width": 400,
+                  "height": 320,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1736979110875-6f8e8bfdeb26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzIwMDUyMjN8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "f96Ff",
+              "name": "aboutRight",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "qeZUO",
+                  "name": "aboutP1",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "I'm a multidisciplinary designer and developer with over 8 years of experience building digital products that make a difference. I believe in the power of thoughtful design to solve complex problems.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "qdDXm",
+                  "name": "aboutP2",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "My work spans brand identity, product design, and front-end development — always driven by a desire to create experiences that are both beautiful and functional.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "RZ7bv",
+                  "name": "statsRow",
+                  "width": "fill_container",
+                  "gap": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "R1Usc",
+                      "name": "stat1",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gPWoj",
+                          "name": "stat1Val",
+                          "fill": "$accent",
+                          "content": "8+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "H9vFo",
+                          "name": "stat1Label",
+                          "fill": "$text-muted",
+                          "content": "Years Experience",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5AOl4",
+                      "name": "stat2",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "tukLL",
+                          "name": "stat2Val",
+                          "fill": "$accent",
+                          "content": "50+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "3f0Be",
+                          "name": "stat2Label",
+                          "fill": "$text-muted",
+                          "content": "Projects Delivered",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "CJPZX",
+                      "name": "stat3",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fFGBe",
+                          "name": "stat3Val",
+                          "fill": "$accent",
+                          "content": "30+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "FU9rp",
+                          "name": "stat3Label",
+                          "fill": "$text-muted",
+                          "content": "Happy Clients",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "BarSh",
+          "name": "Experience",
+          "width": "fill_container",
+          "fill": "$bg-card",
+          "layout": "vertical",
+          "gap": 56,
+          "padding": [
+            100,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Q89qp",
+              "name": "expHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "H5APn",
+                  "name": "expHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UxgbC",
+                      "name": "expLabel",
+                      "fill": "$accent",
+                      "content": "02 — EXPERIENCE",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "vQSqJ",
+                      "name": "expTitle",
+                      "fill": "$text-primary",
+                      "content": "Where I've worked.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 40,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pw0k1",
+              "name": "expList",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jbIm7",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "07xWc",
+                      "name": "r1date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "2022 — Present",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7n9C9",
+                      "name": "r1mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "mPaok",
+                          "name": "r1role",
+                          "fill": "$text-primary",
+                          "content": "Senior Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "iz0fv",
+                          "name": "r1comp",
+                          "fill": "$accent",
+                          "content": "Stripe",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "IY8b9",
+                          "name": "r1desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Leading design for the Payments team, working on checkout flows and dashboard experiences that serve millions of businesses worldwide.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "IeDWD",
+                      "name": "r1arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "BRvnc",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "uZONO",
+                      "name": "r2date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "2019 — 2022",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xWmTz",
+                      "name": "r2mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "8lhPz",
+                          "name": "r2role",
+                          "fill": "$text-primary",
+                          "content": "Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "jGgnl",
+                          "name": "r2comp",
+                          "fill": "$accent",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xm8Zx",
+                          "name": "r2desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Designed core collaboration features and prototyping tools used by design teams at companies like Google, Microsoft, and Airbnb.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "gTtCz",
+                      "name": "r2arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "tUQvr",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "kBRiV",
+                      "name": "r3date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 180,
+                      "content": "2017 — 2019",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "FR1Pm",
+                      "name": "r3mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "TApbr",
+                          "name": "r3role",
+                          "fill": "$text-primary",
+                          "content": "UI/UX Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "i6Jmm",
+                          "name": "r3comp",
+                          "fill": "$accent",
+                          "content": "Spotify",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "b3WYq",
+                          "name": "r3desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Redesigned the podcast discovery experience and contributed to the design system used across mobile and web platforms.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "qQvGf",
+                      "name": "r3arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "cEqkE",
+          "name": "Skills",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 56,
+          "padding": [
+            100,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "308ta",
+              "name": "skillsHeader",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "AdV87",
+                  "name": "skillsLabel",
+                  "fill": "$accent",
+                  "content": "03 — SKILLS",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "Ro1aX",
+                  "name": "skillsTitle",
+                  "fill": "$text-primary",
+                  "content": "What I do best.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 40,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "mzvwX",
+              "name": "skillsGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "jz411",
+                  "name": "sk1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F1Ept",
+                      "name": "sk1Title",
+                      "fill": "$accent",
+                      "content": "Design",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "k509b",
+                      "name": "sk1Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "g9rmn",
+                          "name": "sk1i1",
+                          "fill": "$text-secondary",
+                          "content": "UI/UX Design",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UtTPZ",
+                          "name": "sk1i2",
+                          "fill": "$text-secondary",
+                          "content": "Design Systems",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NiMsu",
+                          "name": "sk1i3",
+                          "fill": "$text-secondary",
+                          "content": "Prototyping",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "T6gVC",
+                          "name": "sk1i4",
+                          "fill": "$text-secondary",
+                          "content": "User Research",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "No0fc",
+                          "name": "sk1i5",
+                          "fill": "$text-secondary",
+                          "content": "Brand Identity",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mHX1o",
+                  "name": "sk2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HBICY",
+                      "name": "sk2Title",
+                      "fill": "$accent",
+                      "content": "Development",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "LgJci",
+                      "name": "sk2Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "PVvMO",
+                          "name": "sk2i1",
+                          "fill": "$text-secondary",
+                          "content": "React / Next.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pKojy",
+                          "name": "sk2i2",
+                          "fill": "$text-secondary",
+                          "content": "TypeScript",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "RQFBz",
+                          "name": "sk2i3",
+                          "fill": "$text-secondary",
+                          "content": "Tailwind CSS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "3iF8d",
+                          "name": "sk2i4",
+                          "fill": "$text-secondary",
+                          "content": "Node.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "olarM",
+                          "name": "sk2i5",
+                          "fill": "$text-secondary",
+                          "content": "Python",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "l32uz",
+                  "name": "sk3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "52DdV",
+                      "name": "sk3Title",
+                      "fill": "$accent",
+                      "content": "Tools",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "URXv3",
+                      "name": "sk3Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Bz6tX",
+                          "name": "sk3i1",
+                          "fill": "$text-secondary",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Ad8Zw",
+                          "name": "sk3i2",
+                          "fill": "$text-secondary",
+                          "content": "Framer",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "OvyWc",
+                          "name": "sk3i3",
+                          "fill": "$text-secondary",
+                          "content": "After Effects",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "pLfMp",
+                          "name": "sk3i4",
+                          "fill": "$text-secondary",
+                          "content": "Blender",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "rcSuy",
+                          "name": "sk3i5",
+                          "fill": "$text-secondary",
+                          "content": "Git / GitHub",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9uOKB",
+          "name": "Projects",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 56,
+          "padding": [
+            100,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "oU1KA",
+              "name": "projHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Fhm21",
+                  "name": "projHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "elBMO",
+                      "name": "projLabel",
+                      "fill": "$accent",
+                      "content": "04 — PROJECTS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "wtJpv",
+                      "name": "projTitle",
+                      "fill": "$text-primary",
+                      "content": "Selected work.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 40,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jMK9Z",
+              "name": "projGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "n8l9z",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Yxu5e",
+                      "name": "card1Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005311922.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "apMsx",
+                      "name": "card1Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "KUwsm",
+                          "name": "card1Tag",
+                          "fill": "$accent",
+                          "content": "Web App — 2024",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "nM4gH",
+                          "name": "card1Title",
+                          "fill": "$text-primary",
+                          "content": "Pulse Analytics",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hjUiw",
+                          "name": "card1Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A real-time analytics dashboard for SaaS companies. Designed the entire product from concept to launch.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yAhts",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HjTNU",
+                      "name": "card2Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005317757.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "C92sI",
+                      "name": "card2Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "6Yc4R",
+                          "name": "card2Tag",
+                          "fill": "$accent",
+                          "content": "Mobile App — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "umrgL",
+                          "name": "card2Title",
+                          "fill": "$text-primary",
+                          "content": "Mindful",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Nr6v7",
+                          "name": "card2Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A meditation and wellness app with a focus on minimalist design and calming user interactions.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "we4lx",
+              "name": "projGrid2",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "RRpe1",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "szNYI",
+                      "name": "card3Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005337244.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "d8Ro2",
+                      "name": "card3Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "e3zCZ",
+                          "name": "card3Tag",
+                          "fill": "$accent",
+                          "content": "Brand Identity — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "UUioX",
+                          "name": "card3Title",
+                          "fill": "$text-primary",
+                          "content": "Nomad Studio",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "yiBDG",
+                          "name": "card3Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Complete brand identity and website for a creative agency specializing in remote-first design.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "r01iI",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LqDEU",
+                      "name": "card4Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005344614.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "sT8CQ",
+                      "name": "card4Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "YuYcU",
+                          "name": "card4Tag",
+                          "fill": "$accent",
+                          "content": "E-Commerce — 2022",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "oWlB4",
+                          "name": "card4Title",
+                          "fill": "$text-primary",
+                          "content": "Aura",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "en7UW",
+                          "name": "card4Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A luxury fashion e-commerce platform with a focus on editorial-style product presentation.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "q2sd3",
+          "name": "Contact CTA",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": 120,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "WUyKZ",
+              "name": "ctaLabel",
+              "fill": "$accent",
+              "content": "05 — CONTACT",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 11,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "s01Yo",
+              "name": "ctaHeadline",
+              "fill": "$text-primary",
+              "content": "Let's work together.",
+              "lineHeight": 1,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 56,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "PS8i8",
+              "name": "ctaSub",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": 560,
+              "content": "I'm currently available for freelance projects, full-time positions, and interesting collaborations.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "9uYO4",
+              "name": "ctaActions",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "nlkJo",
+                  "name": "ctaEmail",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    40
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c1oLH",
+                      "name": "ctaEmailTxt",
+                      "fill": "#0A0F1C",
+                      "content": "hello@johndoe.com",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m5knq",
+                      "name": "ctaEmailArr",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YNUzu",
+                  "name": "ctaCopy",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  },
+                  "padding": [
+                    16,
+                    40
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VCD5a",
+                      "name": "ctaCopyTxt",
+                      "fill": "$text-secondary",
+                      "content": "Copy Email",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "B6fIm",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            48,
+            120
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "CUnRI",
+              "name": "footerTop",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Fm8aT",
+                  "name": "footerLeft",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jBto6",
+                      "name": "footerLogo",
+                      "fill": "$text-primary",
+                      "content": "ry.bealey",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "bMTsw",
+                      "name": "footerTagline",
+                      "fill": "$text-muted",
+                      "content": "Designing the future, one pixel at a time.",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IXKWR",
+                  "name": "footerRight",
+                  "gap": 40,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2e5lF",
+                      "name": "footerLink1",
+                      "fill": "$text-muted",
+                      "content": "LinkedIn",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "7kDuM",
+                      "name": "footerLink2",
+                      "fill": "$text-muted",
+                      "content": "Dribbble",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "8H3Sw",
+                      "name": "footerLink3",
+                      "fill": "$text-muted",
+                      "content": "GitHub",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "83VxT",
+                      "name": "footerLink4",
+                      "fill": "$text-muted",
+                      "content": "Twitter",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "rWoP4",
+              "name": "footerDiv",
+              "fill": "$border-dark",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "VHz03",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "6mlgw",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "content": "© 2025 Ry Bealey. All rights reserved.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "mQuEw",
+                  "name": "footerBack",
+                  "fill": "$accent",
+                  "content": "Back to top ↑",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "cNp0b",
+      "x": 1540,
+      "y": 0,
+      "name": "Ry Bealey — Tablet",
+      "width": 768,
+      "fill": "#F5F5F5",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "4Nl62",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$border-light"
+          },
+          "padding": [
+            20,
+            40
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "HvtQH",
+              "name": "Logo",
+              "fill": "$text-primary",
+              "content": "ry.bealey",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "x6fYB",
+              "name": "Nav",
+              "gap": 24,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CYP3q",
+                  "name": "n1",
+                  "fill": "$text-muted",
+                  "content": "About",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "33a3u",
+                  "name": "n2",
+                  "fill": "$text-muted",
+                  "content": "Experience",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "KPjHC",
+                  "name": "n3",
+                  "fill": "$text-muted",
+                  "content": "Projects",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "8USXm",
+                  "name": "n4",
+                  "fill": "$text-muted",
+                  "content": "Skills",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "frame",
+                  "id": "ulubq",
+                  "name": "ctaBtn",
+                  "fill": "$accent",
+                  "padding": [
+                    8,
+                    20
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vdydY",
+                      "name": "ctaText",
+                      "fill": "#0A0F1C",
+                      "content": "Contact Me",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VybZX",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            72,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "HBun3",
+              "name": "badge",
+              "stroke": {
+                "thickness": 1,
+                "fill": "#1E293B"
+              },
+              "gap": 8,
+              "padding": [
+                6,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "3ed1k",
+                  "name": "badgeDot",
+                  "fill": "$accent",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "EnGOL",
+                  "name": "badgeText",
+                  "fill": "$accent",
+                  "content": "status: available_for_work",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "ojfkH",
+              "name": "heroTitle",
+              "fill": "$text-primary",
+              "content": "Ry Bealey",
+              "lineHeight": 1,
+              "fontFamily": "Inter",
+              "fontSize": 64,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "wAYMY",
+              "name": "heroSub",
+              "fill": "$accent",
+              "content": "Product Designer & Creative Developer",
+              "lineHeight": 1,
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "ol6Z9",
+              "name": "heroDesc",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crafting thoughtful digital experiences at the intersection of design and technology. Currently based in New York.",
+              "lineHeight": 1.6,
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "UmHaU",
+              "name": "heroActions",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "XIr5L",
+                  "name": "btn1",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6tasN",
+                      "name": "btn1Text",
+                      "fill": "#0A0F1C",
+                      "content": "View Projects",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sVyFl",
+                      "name": "btn1Arrow",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OEhGf",
+                  "name": "btn2",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#1E293B"
+                  },
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2DtrW",
+                      "name": "btn2Text",
+                      "fill": "$text-secondary",
+                      "content": "Download CV",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "5CkQh",
+          "name": "About",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 48,
+          "padding": [
+            72,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "knuva",
+              "name": "aboutLeft",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "qwCha",
+                  "name": "aboutLabel",
+                  "fill": "$accent",
+                  "content": "01 — ABOUT",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "HTVcE",
+                  "name": "aboutTitle",
+                  "fill": "$text-primary",
+                  "content": "A brief introduction.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 36,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "Ggbo4",
+                  "name": "Portrait",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "visualsbying",
+                    "link": "https://unsplash.com/@visualsbying",
+                    "author": "Ingmar"
+                  },
+                  "width": "fill_container",
+                  "height": 280,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1736979110875-6f8e8bfdeb26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzIwMDUyMjN8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "nN8XH",
+              "name": "aboutRight",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "tcFtb",
+                  "name": "aboutP1",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "I'm a multidisciplinary designer and developer with over 8 years of experience building digital products that make a difference. I believe in the power of thoughtful design to solve complex problems.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "1LJGz",
+                  "name": "aboutP2",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "My work spans brand identity, product design, and front-end development — always driven by a desire to create experiences that are both beautiful and functional.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "lhT9I",
+                  "name": "statsRow",
+                  "width": "fill_container",
+                  "gap": 48,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "i9C6g",
+                      "name": "stat1",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "fVgiR",
+                          "name": "stat1Val",
+                          "fill": "$accent",
+                          "content": "8+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zhNmr",
+                          "name": "stat1Label",
+                          "fill": "$text-muted",
+                          "content": "Years Experience",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gqSJZ",
+                      "name": "stat2",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gwzPe",
+                          "name": "stat2Val",
+                          "fill": "$accent",
+                          "content": "50+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xLq1C",
+                          "name": "stat2Label",
+                          "fill": "$text-muted",
+                          "content": "Projects Delivered",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "4PvEV",
+                      "name": "stat3",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "9gYh3",
+                          "name": "stat3Val",
+                          "fill": "$accent",
+                          "content": "30+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "dx8zd",
+                          "name": "stat3Label",
+                          "fill": "$text-muted",
+                          "content": "Happy Clients",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JBMGC",
+          "name": "Experience",
+          "width": "fill_container",
+          "fill": "$bg-card",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            72,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "0uaeF",
+              "name": "expHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "T3pcW",
+                  "name": "expHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gwn9D",
+                      "name": "expLabel",
+                      "fill": "$accent",
+                      "content": "02 — EXPERIENCE",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "uD79B",
+                      "name": "expTitle",
+                      "fill": "$text-primary",
+                      "content": "Where I've worked.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 40,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "3PrHS",
+              "name": "expList",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gDh0t",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "1YBwE",
+                      "name": "r1date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "2022 — Present",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "AXJqq",
+                      "name": "r1mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "Sfmc6",
+                          "name": "r1role",
+                          "fill": "$text-primary",
+                          "content": "Senior Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n5cZ8",
+                          "name": "r1comp",
+                          "fill": "$accent",
+                          "content": "Stripe",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "G7JK6",
+                          "name": "r1desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Leading design for the Payments team, working on checkout flows and dashboard experiences that serve millions of businesses worldwide.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "IzCXM",
+                      "name": "r1arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ifAM5",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vSvyf",
+                      "name": "r2date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "2019 — 2022",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vqFOL",
+                      "name": "r2mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "sEmS8",
+                          "name": "r2role",
+                          "fill": "$text-primary",
+                          "content": "Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Udm1K",
+                          "name": "r2comp",
+                          "fill": "$accent",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "eH6Uk",
+                          "name": "r2desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Designed core collaboration features and prototyping tools used by design teams at companies like Google, Microsoft, and Airbnb.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "py4Fa",
+                      "name": "r2arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "74M2E",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "gap": 24,
+                  "padding": [
+                    32,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "9zHhe",
+                      "name": "r3date",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": 140,
+                      "content": "2017 — 2019",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "JIvT5",
+                      "name": "r3mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "hgEEh",
+                          "name": "r3role",
+                          "fill": "$text-primary",
+                          "content": "UI/UX Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "0SEvk",
+                          "name": "r3comp",
+                          "fill": "$accent",
+                          "content": "Spotify",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "emtom",
+                          "name": "r3desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Redesigned the podcast discovery experience and contributed to the design system used across mobile and web platforms.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "mh32r",
+                      "name": "r3arrow",
+                      "fill": "$accent",
+                      "content": "↗",
+                      "fontFamily": "Inter",
+                      "fontSize": 18,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bp9nj",
+          "name": "Skills",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            72,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "2BykK",
+              "name": "skillsHeader",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "VXEMq",
+                  "name": "skillsLabel",
+                  "fill": "$accent",
+                  "content": "03 — SKILLS",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "NJA0j",
+                  "name": "skillsTitle",
+                  "fill": "$text-primary",
+                  "content": "What I do best.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 40,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7JLNm",
+              "name": "skillsGrid",
+              "width": "fill_container",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "SD8b5",
+                  "name": "sk1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XCk0I",
+                      "name": "sk1Title",
+                      "fill": "$accent",
+                      "content": "Design",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vVVhh",
+                      "name": "sk1Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "dtRqM",
+                          "name": "sk1i1",
+                          "fill": "$text-secondary",
+                          "content": "UI/UX Design",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "uoqZ2",
+                          "name": "sk1i2",
+                          "fill": "$text-secondary",
+                          "content": "Design Systems",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cRTw5",
+                          "name": "sk1i3",
+                          "fill": "$text-secondary",
+                          "content": "Prototyping",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "2IHFL",
+                          "name": "sk1i4",
+                          "fill": "$text-secondary",
+                          "content": "User Research",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "R8VgO",
+                          "name": "sk1i5",
+                          "fill": "$text-secondary",
+                          "content": "Brand Identity",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "4yjy3",
+                  "name": "sk2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "6U638",
+                      "name": "sk2Title",
+                      "fill": "$accent",
+                      "content": "Development",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HGiBD",
+                      "name": "sk2Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "LA6YP",
+                          "name": "sk2i1",
+                          "fill": "$text-secondary",
+                          "content": "React / Next.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "I9KGG",
+                          "name": "sk2i2",
+                          "fill": "$text-secondary",
+                          "content": "TypeScript",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "zN16x",
+                          "name": "sk2i3",
+                          "fill": "$text-secondary",
+                          "content": "Tailwind CSS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "MXq8D",
+                          "name": "sk2i4",
+                          "fill": "$text-secondary",
+                          "content": "Node.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "KA0Dh",
+                          "name": "sk2i5",
+                          "fill": "$text-secondary",
+                          "content": "Python",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GCDLw",
+                  "name": "sk3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 32,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nSYAH",
+                      "name": "sk3Title",
+                      "fill": "$accent",
+                      "content": "Tools",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "3aZvi",
+                      "name": "sk3Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "KyKvr",
+                          "name": "sk3i1",
+                          "fill": "$text-secondary",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "1G4my",
+                          "name": "sk3i2",
+                          "fill": "$text-secondary",
+                          "content": "Framer",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xqyuj",
+                          "name": "sk3i3",
+                          "fill": "$text-secondary",
+                          "content": "After Effects",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "sKC31",
+                          "name": "sk3i4",
+                          "fill": "$text-secondary",
+                          "content": "Blender",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "0rcHr",
+                          "name": "sk3i5",
+                          "fill": "$text-secondary",
+                          "content": "Git / GitHub",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dq4g4",
+          "name": "Projects",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            72,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "GmQy9",
+              "name": "projHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ZqSgj",
+                  "name": "projHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "AmK8G",
+                      "name": "projLabel",
+                      "fill": "$accent",
+                      "content": "04 — PROJECTS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "ZBJXS",
+                      "name": "projTitle",
+                      "fill": "$text-primary",
+                      "content": "Selected work.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 40,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cevNp",
+              "name": "projGrid",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "5Bez5",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "6foos",
+                      "name": "card1Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005311922.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "dwARU",
+                      "name": "card1Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "BHJy9",
+                          "name": "card1Tag",
+                          "fill": "$accent",
+                          "content": "Web App — 2024",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "ajcYc",
+                          "name": "card1Title",
+                          "fill": "$text-primary",
+                          "content": "Pulse Analytics",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "1z5c4",
+                          "name": "card1Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A real-time analytics dashboard for SaaS companies. Designed the entire product from concept to launch.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "mVx8f",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "zPY8u",
+                      "name": "card2Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005317757.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Gzz4e",
+                      "name": "card2Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "XDv59",
+                          "name": "card2Tag",
+                          "fill": "$accent",
+                          "content": "Mobile App — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "hQQpk",
+                          "name": "card2Title",
+                          "fill": "$text-primary",
+                          "content": "Mindful",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "rqbft",
+                          "name": "card2Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A meditation and wellness app with a focus on minimalist design and calming user interactions.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wrqNb",
+              "name": "projGrid2",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Ay4i1",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "NHI4M",
+                      "name": "card3Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005337244.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "KyQSH",
+                      "name": "card3Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "EGGnL",
+                          "name": "card3Tag",
+                          "fill": "$accent",
+                          "content": "Brand Identity — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "dDLtg",
+                          "name": "card3Title",
+                          "fill": "$text-primary",
+                          "content": "Nomad Studio",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "bzDhw",
+                          "name": "card3Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Complete brand identity and website for a creative agency specializing in remote-first design.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "80e9z",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "JchOc",
+                      "name": "card4Img",
+                      "width": "fill_container",
+                      "height": 280,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005344614.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "4VKM9",
+                      "name": "card4Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 28,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "tOfWR",
+                          "name": "card4Tag",
+                          "fill": "$accent",
+                          "content": "E-Commerce — 2022",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "EzaNf",
+                          "name": "card4Title",
+                          "fill": "$text-primary",
+                          "content": "Aura",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "35gyS",
+                          "name": "card4Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A luxury fashion e-commerce platform with a focus on editorial-style product presentation.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "2N1bD",
+          "name": "Contact CTA",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            72,
+            48
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "VcBtd",
+              "name": "ctaLabel",
+              "fill": "$accent",
+              "content": "05 — CONTACT",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 11,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "DNbIu",
+              "name": "ctaHeadline",
+              "fill": "$text-primary",
+              "content": "Let's work together.",
+              "lineHeight": 1,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 44,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "tedwy",
+              "name": "ctaSub",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "I'm currently available for freelance projects, full-time positions, and interesting collaborations.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 16,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "J12Hp",
+              "name": "ctaActions",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "MCGWF",
+                  "name": "ctaEmail",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    16,
+                    40
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "8lUU6",
+                      "name": "ctaEmailTxt",
+                      "fill": "#0A0F1C",
+                      "content": "hello@johndoe.com",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "tX1vp",
+                      "name": "ctaEmailArr",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "1Q6rp",
+                  "name": "ctaCopy",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  },
+                  "padding": [
+                    16,
+                    40
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "olz8T",
+                      "name": "ctaCopyTxt",
+                      "fill": "$text-secondary",
+                      "content": "Copy Email",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "5ngzB",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            40,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "N58Vt",
+              "name": "footerTop",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FFaDg",
+                  "name": "footerLeft",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aBhI0",
+                      "name": "footerLogo",
+                      "fill": "$text-primary",
+                      "content": "ry.bealey",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wt2KB",
+                      "name": "footerTagline",
+                      "fill": "$text-muted",
+                      "content": "Designing the future, one pixel at a time.",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bivzF",
+                  "name": "footerRight",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "E5tjh",
+                      "name": "footerLink1",
+                      "fill": "$text-muted",
+                      "content": "LinkedIn",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "k1LJZ",
+                      "name": "footerLink2",
+                      "fill": "$text-muted",
+                      "content": "Dribbble",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dg0d0",
+                      "name": "footerLink3",
+                      "fill": "$text-muted",
+                      "content": "GitHub",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "GTajH",
+                      "name": "footerLink4",
+                      "fill": "$text-muted",
+                      "content": "Twitter",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "yKRq9",
+              "name": "footerDiv",
+              "fill": "$border-dark",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "N0IVk",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "6FgK1",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "content": "© 2025 Ry Bealey. All rights reserved.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "EAic4",
+                  "name": "footerBack",
+                  "fill": "$accent",
+                  "content": "Back to top ↑",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "8yqgZ",
+      "x": 2408,
+      "y": 0,
+      "name": "Ry Bealey — Phone",
+      "width": 390,
+      "fill": "#F5F5F5",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "QtfhX",
+          "name": "Header",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$border-light"
+          },
+          "padding": [
+            16,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "JEtQG",
+              "name": "Logo",
+              "fill": "$text-primary",
+              "content": "ry.bealey",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 16,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "V21Hb",
+              "name": "Nav",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "jmp1b",
+                  "name": "hamburger",
+                  "width": 24,
+                  "height": 24,
+                  "iconFontName": "menu",
+                  "iconFontFamily": "lucide",
+                  "fill": "$text-primary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TOm2r",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": [
+            56,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "1qUuH",
+              "name": "badge",
+              "stroke": {
+                "thickness": 1,
+                "fill": "#1E293B"
+              },
+              "gap": 8,
+              "padding": [
+                6,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "q4Mzb",
+                  "name": "badgeDot",
+                  "fill": "$accent",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "VsnQE",
+                  "name": "badgeText",
+                  "fill": "$accent",
+                  "content": "status: available_for_work",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "yazBr",
+              "name": "heroTitle",
+              "fill": "$text-primary",
+              "content": "Ry Bealey",
+              "lineHeight": 1,
+              "fontFamily": "Inter",
+              "fontSize": 48,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "5QuwN",
+              "name": "heroSub",
+              "fill": "$accent",
+              "content": "Product Designer & Creative Developer",
+              "lineHeight": 1,
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "dPUgA",
+              "name": "heroDesc",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Crafting thoughtful digital experiences at the intersection of design and technology. Currently based in New York.",
+              "lineHeight": 1.6,
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "p5Wlc",
+              "name": "heroActions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pq9uA",
+                  "name": "btn1",
+                  "width": "fill_container",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lT6RI",
+                      "name": "btn1Text",
+                      "fill": "#0A0F1C",
+                      "content": "View Projects",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "DnBLk",
+                      "name": "btn1Arrow",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RheGK",
+                  "name": "btn2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#1E293B"
+                  },
+                  "padding": [
+                    14,
+                    32
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "K9Yvc",
+                      "name": "btn2Text",
+                      "fill": "$text-secondary",
+                      "content": "Download CV",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JuXX5",
+          "name": "About",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            56,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "NuWaP",
+              "name": "aboutLeft",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "5QcU6",
+                  "name": "aboutLabel",
+                  "fill": "$accent",
+                  "content": "01 — ABOUT",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "fOYXA",
+                  "name": "aboutTitle",
+                  "fill": "$text-primary",
+                  "content": "A brief introduction.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "1Td7G",
+                  "name": "Portrait",
+                  "metadata": {
+                    "type": "unsplash",
+                    "username": "visualsbying",
+                    "link": "https://unsplash.com/@visualsbying",
+                    "author": "Ingmar"
+                  },
+                  "width": "fill_container",
+                  "height": 240,
+                  "fill": {
+                    "type": "image",
+                    "enabled": true,
+                    "url": "https://images.unsplash.com/photo-1736979110875-6f8e8bfdeb26?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w4NDM0ODN8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzIwMDUyMjN8&ixlib=rb-4.1.0&q=80&w=1080",
+                    "mode": "fill"
+                  },
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Diu5C",
+              "name": "aboutRight",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "wxDPZ",
+                  "name": "aboutP1",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "I'm a multidisciplinary designer and developer with over 8 years of experience building digital products that make a difference. I believe in the power of thoughtful design to solve complex problems.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "7ab2v",
+                  "name": "aboutP2",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "My work spans brand identity, product design, and front-end development — always driven by a desire to create experiences that are both beautiful and functional.",
+                  "lineHeight": 1.7,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "Ny4yQ",
+                  "name": "statsRow",
+                  "width": "fill_container",
+                  "gap": 24,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "8yYJe",
+                      "name": "stat1",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "i47tk",
+                          "name": "stat1Val",
+                          "fill": "$accent",
+                          "content": "8+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NWZqw",
+                          "name": "stat1Label",
+                          "fill": "$text-muted",
+                          "content": "Years Experience",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "9qXPw",
+                      "name": "stat2",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FDlEB",
+                          "name": "stat2Val",
+                          "fill": "$accent",
+                          "content": "50+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "5Uyoz",
+                          "name": "stat2Label",
+                          "fill": "$text-muted",
+                          "content": "Projects Delivered",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fOeKk",
+                      "name": "stat3",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "oSuDD",
+                          "name": "stat3Val",
+                          "fill": "$accent",
+                          "content": "30+",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 36,
+                          "fontWeight": "700"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cdy4b",
+                          "name": "stat3Label",
+                          "fill": "$text-muted",
+                          "content": "Happy Clients",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "500",
+                          "letterSpacing": 1
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "22uxZ",
+          "name": "Experience",
+          "width": "fill_container",
+          "fill": "$bg-card",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            56,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "nFhvb",
+              "name": "expHeader",
+              "width": "fill_container",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PRLnZ",
+                  "name": "expHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "H14Fc",
+                      "name": "expLabel",
+                      "fill": "$accent",
+                      "content": "02 — EXPERIENCE",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "ehOZh",
+                      "name": "expTitle",
+                      "fill": "$text-primary",
+                      "content": "Where I've worked.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RTWQc",
+              "name": "expList",
+              "width": "fill_container",
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wcfPF",
+                  "name": "row1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    24,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "UisXA",
+                      "name": "r1date",
+                      "fill": "$text-muted",
+                      "content": "2022 — Present",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eOM4M",
+                      "name": "r1mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "sIVNm",
+                          "name": "r1role",
+                          "fill": "$text-primary",
+                          "content": "Senior Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "7UjnB",
+                          "name": "r1comp",
+                          "fill": "$accent",
+                          "content": "Stripe",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "sGanh",
+                          "name": "r1desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Leading design for the Payments team, working on checkout flows and dashboard experiences that serve millions of businesses worldwide.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y8Y69",
+                  "name": "row2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    24,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lABB6",
+                      "name": "r2date",
+                      "fill": "$text-muted",
+                      "content": "2019 — 2022",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "rlGjl",
+                      "name": "r2mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "FcreR",
+                          "name": "r2role",
+                          "fill": "$text-primary",
+                          "content": "Product Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GamTs",
+                          "name": "r2comp",
+                          "fill": "$accent",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gVw9Y",
+                          "name": "r2desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Designed core collaboration features and prototyping tools used by design teams at companies like Google, Microsoft, and Airbnb.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yskMy",
+                  "name": "row3",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": {
+                      "top": 1
+                    },
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": [
+                    24,
+                    0
+                  ],
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "RjYUF",
+                      "name": "r3date",
+                      "fill": "$text-muted",
+                      "content": "2017 — 2019",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eYaW1",
+                      "name": "r3mid",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 8,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gBa5G",
+                          "name": "r3role",
+                          "fill": "$text-primary",
+                          "content": "UI/UX Designer",
+                          "fontFamily": "Inter",
+                          "fontSize": 18,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Bw33i",
+                          "name": "r3comp",
+                          "fill": "$accent",
+                          "content": "Spotify",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "3NlVa",
+                          "name": "r3desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Redesigned the podcast discovery experience and contributed to the design system used across mobile and web platforms.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yRpiT",
+          "name": "Skills",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            56,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "2XGEV",
+              "name": "skillsHeader",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "m3MPk",
+                  "name": "skillsLabel",
+                  "fill": "$accent",
+                  "content": "03 — SKILLS",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "600",
+                  "letterSpacing": 2
+                },
+                {
+                  "type": "text",
+                  "id": "4ellS",
+                  "name": "skillsTitle",
+                  "fill": "$text-primary",
+                  "content": "What I do best.",
+                  "lineHeight": 1.1,
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "E5CRT",
+              "name": "skillsGrid",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "A6yTA",
+                  "name": "sk1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c1Yrd",
+                      "name": "sk1Title",
+                      "fill": "$accent",
+                      "content": "Design",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "3Drzy",
+                      "name": "sk1Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VacMn",
+                          "name": "sk1i1",
+                          "fill": "$text-secondary",
+                          "content": "UI/UX Design",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZPF0C",
+                          "name": "sk1i2",
+                          "fill": "$text-secondary",
+                          "content": "Design Systems",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "wh60Y",
+                          "name": "sk1i3",
+                          "fill": "$text-secondary",
+                          "content": "Prototyping",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "xRXT6",
+                          "name": "sk1i4",
+                          "fill": "$text-secondary",
+                          "content": "User Research",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GJaCh",
+                          "name": "sk1i5",
+                          "fill": "$text-secondary",
+                          "content": "Brand Identity",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "sSVfy",
+                  "name": "sk2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jo7NK",
+                      "name": "sk2Title",
+                      "fill": "$accent",
+                      "content": "Development",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "gwrMT",
+                      "name": "sk2Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "ndPHS",
+                          "name": "sk2i1",
+                          "fill": "$text-secondary",
+                          "content": "React / Next.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "UyHZi",
+                          "name": "sk2i2",
+                          "fill": "$text-secondary",
+                          "content": "TypeScript",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "cLgqU",
+                          "name": "sk2i3",
+                          "fill": "$text-secondary",
+                          "content": "Tailwind CSS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "r5a1T",
+                          "name": "sk2i4",
+                          "fill": "$text-secondary",
+                          "content": "Node.js",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "abmVp",
+                          "name": "sk2i5",
+                          "fill": "$text-secondary",
+                          "content": "Python",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "PwY5T",
+                  "name": "sk3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "XVcWe",
+                      "name": "sk3Title",
+                      "fill": "$accent",
+                      "content": "Tools",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "EuFtM",
+                      "name": "sk3Items",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "52m1I",
+                          "name": "sk3i1",
+                          "fill": "$text-secondary",
+                          "content": "Figma",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "sw20f",
+                          "name": "sk3i2",
+                          "fill": "$text-secondary",
+                          "content": "Framer",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "c6Z2E",
+                          "name": "sk3i3",
+                          "fill": "$text-secondary",
+                          "content": "After Effects",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "GsWNc",
+                          "name": "sk3i4",
+                          "fill": "$text-secondary",
+                          "content": "Blender",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "bobNi",
+                          "name": "sk3i5",
+                          "fill": "$text-secondary",
+                          "content": "Git / GitHub",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "rZ2vx",
+          "name": "Projects",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 32,
+          "padding": [
+            56,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "WDrYJ",
+              "name": "projHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "h93rZ",
+                  "name": "projHeaderLeft",
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ifCzu",
+                      "name": "projLabel",
+                      "fill": "$accent",
+                      "content": "04 — PROJECTS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "text",
+                      "id": "vnWow",
+                      "name": "projTitle",
+                      "fill": "$text-primary",
+                      "content": "Selected work.",
+                      "lineHeight": 1.1,
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TIpoq",
+              "name": "projGrid",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Pm2uI",
+                  "name": "card1",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "T77tK",
+                      "name": "card1Img",
+                      "width": "fill_container",
+                      "height": 200,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005311922.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zu6Ms",
+                      "name": "card1Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qb1Ag",
+                          "name": "card1Tag",
+                          "fill": "$accent",
+                          "content": "Web App — 2024",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "Rp7q7",
+                          "name": "card1Title",
+                          "fill": "$text-primary",
+                          "content": "Pulse Analytics",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "RWMU6",
+                          "name": "card1Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A real-time analytics dashboard for SaaS companies. Designed the entire product from concept to launch.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "dVXGv",
+                  "name": "card2",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "eTZo7",
+                      "name": "card2Img",
+                      "width": "fill_container",
+                      "height": 200,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005317757.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "NZGkV",
+                      "name": "card2Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "pUcxj",
+                          "name": "card2Tag",
+                          "fill": "$accent",
+                          "content": "Mobile App — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "Frr4W",
+                          "name": "card2Title",
+                          "fill": "$text-primary",
+                          "content": "Mindful",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "M6PSd",
+                          "name": "card2Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A meditation and wellness app with a focus on minimalist design and calming user interactions.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XXZxT",
+              "name": "projGrid2",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "1rZAK",
+                  "name": "card3",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "BIhwA",
+                      "name": "card3Img",
+                      "width": "fill_container",
+                      "height": 200,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005337244.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "vGXpP",
+                      "name": "card3Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "jkq8B",
+                          "name": "card3Tag",
+                          "fill": "$accent",
+                          "content": "Brand Identity — 2023",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "VlVDb",
+                          "name": "card3Title",
+                          "fill": "$text-primary",
+                          "content": "Nomad Studio",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "z6HNP",
+                          "name": "card3Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Complete brand identity and website for a creative agency specializing in remote-first design.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "bjpQ9",
+                  "name": "card4",
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "Bbv7z",
+                      "name": "card4Img",
+                      "width": "fill_container",
+                      "height": 200,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "./images/generated-1772005344614.png",
+                        "mode": "fill"
+                      }
+                    },
+                    {
+                      "type": "frame",
+                      "id": "PbCdW",
+                      "name": "card4Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 12,
+                      "padding": 20,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qgDIw",
+                          "name": "card4Tag",
+                          "fill": "$accent",
+                          "content": "E-Commerce — 2022",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600",
+                          "letterSpacing": 1.5
+                        },
+                        {
+                          "type": "text",
+                          "id": "lFXg1",
+                          "name": "card4Title",
+                          "fill": "$text-primary",
+                          "content": "Aura",
+                          "fontFamily": "Inter",
+                          "fontSize": 22,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "9gk9s",
+                          "name": "card4Desc",
+                          "fill": "$text-secondary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "A luxury fashion e-commerce platform with a focus on editorial-style product presentation.",
+                          "lineHeight": 1.6,
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "f5Gwx",
+          "name": "Contact CTA",
+          "width": "fill_container",
+          "fill": "$bg-page",
+          "layout": "vertical",
+          "gap": 28,
+          "padding": [
+            56,
+            24
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "xxgDf",
+              "name": "ctaLabel",
+              "fill": "$accent",
+              "content": "05 — CONTACT",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 11,
+              "fontWeight": "600",
+              "letterSpacing": 2
+            },
+            {
+              "type": "text",
+              "id": "5fGKQ",
+              "name": "ctaHeadline",
+              "fill": "$text-primary",
+              "content": "Let's work together.",
+              "lineHeight": 1,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 36,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "yhcbi",
+              "name": "ctaSub",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "I'm currently available for freelance projects, full-time positions, and interesting collaborations.",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "7qc5r",
+              "name": "ctaActions",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zDvWC",
+                  "name": "ctaEmail",
+                  "width": "fill_container",
+                  "fill": "$accent",
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "h9nbW",
+                      "name": "ctaEmailTxt",
+                      "fill": "#0A0F1C",
+                      "content": "hello@johndoe.com",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Lfqni",
+                      "name": "ctaEmailArr",
+                      "fill": "#0A0F1C",
+                      "content": "→",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OS22u",
+                  "name": "ctaCopy",
+                  "width": "fill_container",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-light"
+                  },
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "BTwzQ",
+                      "name": "ctaCopyTxt",
+                      "fill": "$text-secondary",
+                      "content": "Copy Email",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "VoZZH",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "$bg-dark",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": [
+            32,
+            24
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Uwbkn",
+              "name": "footerTop",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "qUiQM",
+                  "name": "footerLeft",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "LmyTj",
+                      "name": "footerLogo",
+                      "fill": "$text-primary",
+                      "content": "ry.bealey",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 16,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "aZxZh",
+                      "name": "footerTagline",
+                      "fill": "$text-muted",
+                      "content": "Designing the future, one pixel at a time.",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KZ5PA",
+                  "name": "footerRight",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NFr7K",
+                      "name": "footerLink1",
+                      "fill": "$text-muted",
+                      "content": "LinkedIn",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "sdk1g",
+                      "name": "footerLink2",
+                      "fill": "$text-muted",
+                      "content": "Dribbble",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "CQhOG",
+                      "name": "footerLink3",
+                      "fill": "$text-muted",
+                      "content": "GitHub",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ogbkJ",
+                      "name": "footerLink4",
+                      "fill": "$text-muted",
+                      "content": "Twitter",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "Bq6wE",
+              "name": "footerDiv",
+              "fill": "$border-dark",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "frame",
+              "id": "NFvLJ",
+              "name": "footerBottom",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 8,
+              "justifyContent": "space_between",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "8R9X7",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "content": "© 2025 Ry Bealey. All rights reserved.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "VQv1U",
+                  "name": "footerBack",
+                  "fill": "$accent",
+                  "content": "Back to top ↑",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "accent": {
+      "type": "color",
+      "value": "#22D3EE"
+    },
+    "bg-card": {
+      "type": "color",
+      "value": "#1E293B"
+    },
+    "bg-card-alt": {
+      "type": "color",
+      "value": "#0F172A"
+    },
+    "bg-dark": {
+      "type": "color",
+      "value": "#050810"
+    },
+    "bg-page": {
+      "type": "color",
+      "value": "#0A0F1C"
+    },
+    "border-dark": {
+      "type": "color",
+      "value": "#0F172A"
+    },
+    "border-light": {
+      "type": "color",
+      "value": "#1E293B"
+    },
+    "text-muted": {
+      "type": "color",
+      "value": "#64748B"
+    },
+    "text-primary": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "text-primary-inv": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "text-secondary": {
+      "type": "color",
+      "value": "#94A3B8"
+    }
+  }
+}
