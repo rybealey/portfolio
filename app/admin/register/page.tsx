@@ -1,4 +1,4 @@
-import { RegisterForm } from "@/components/admin/register-form";
+import { RegisterForm } from "@/components/admin/registerForm";
 import { redirectIfAuthenticated } from "@/lib/auth/proxy";
 import { createAdminClient } from "@/lib/supabase/server";
 import { Lock } from "lucide-react";

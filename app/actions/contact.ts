@@ -1,7 +1,7 @@
 "use server";
 
 import { Resend } from "resend";
-import { contactEmailHtml } from "@/lib/email/contact-template";
+import { contactEmailHtml } from "@/lib/email/contactTemplate";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 

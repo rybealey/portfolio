@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/admin/login-form";
+import { LoginForm } from "@/components/admin/loginForm";
 import { redirectIfAuthenticated } from "@/lib/auth/proxy";
 
 export default async function AdminLoginPage() {

@@ -902,264 +902,685 @@
             },
             {
               "type": "frame",
-              "id": "mzvwX",
+              "id": "hxjmW",
               "name": "skillsGrid",
               "width": "fill_container",
-              "gap": 24,
+              "layout": "vertical",
+              "gap": 48,
               "children": [
                 {
                   "type": "frame",
-                  "id": "jz411",
-                  "name": "sk1",
+                  "id": "wJrYH",
+                  "name": "skillRow1",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 16,
                   "children": [
                     {
                       "type": "text",
-                      "id": "F1Ept",
-                      "name": "sk1Title",
+                      "id": "QPQBy",
+                      "name": "catLabel",
                       "fill": "$accent",
                       "content": "Design",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "k509b",
-                      "name": "sk1Items",
+                      "id": "ot6nc",
+                      "name": "chips",
                       "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 12,
+                      "gap": 10,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "g9rmn",
-                          "name": "sk1i1",
-                          "fill": "$text-secondary",
-                          "content": "UI/UX Design",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "ZETuR",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qVydB",
+                              "fill": "$text-primary",
+                              "content": "UI / UX Design",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "UtTPZ",
-                          "name": "sk1i2",
-                          "fill": "$text-secondary",
-                          "content": "Design Systems",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "175BC",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "CJfz3",
+                              "fill": "$text-secondary",
+                              "content": "Design Systems",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "NiMsu",
-                          "name": "sk1i3",
-                          "fill": "$text-secondary",
-                          "content": "Prototyping",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "xk0yR",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yIwML",
+                              "fill": "$text-secondary",
+                              "content": "Prototyping",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "T6gVC",
-                          "name": "sk1i4",
-                          "fill": "$text-secondary",
-                          "content": "User Research",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "HqBZ0",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "coHHv",
+                              "fill": "$text-secondary",
+                              "content": "User Research",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "No0fc",
-                          "name": "sk1i5",
-                          "fill": "$text-secondary",
-                          "content": "Brand Identity",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "bui2u",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "6cr2J",
+                              "fill": "$text-secondary",
+                              "content": "Brand Identity",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rwM7s",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "rCJbM",
+                              "fill": "$text-secondary",
+                              "content": "Wireframing",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "fvt8K",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "NqWlY",
+                              "fill": "$text-secondary",
+                              "content": "Accessibility",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wcIYC",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "eEJDF",
+                              "fill": "$text-secondary",
+                              "content": "Motion Design",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "mHX1o",
-                  "name": "sk2",
+                  "type": "rectangle",
+                  "id": "tsdPi",
+                  "name": "divider",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "fkDYw",
+                  "name": "skillRow2",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 16,
                   "children": [
                     {
                       "type": "text",
-                      "id": "HBICY",
-                      "name": "sk2Title",
+                      "id": "RMug7",
+                      "name": "catLabel",
                       "fill": "$accent",
                       "content": "Development",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "LgJci",
-                      "name": "sk2Items",
+                      "id": "lMiLO",
+                      "name": "chips",
                       "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 12,
+                      "gap": 10,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "PVvMO",
-                          "name": "sk2i1",
-                          "fill": "$text-secondary",
-                          "content": "React / Next.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "HRWJa",
+                          "name": "chip",
+                          "fill": "$accent",
+                          "cornerRadius": 2,
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "p7c8q",
+                              "fill": "$bg-dark",
+                              "content": "React / Next.js",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "600"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "pKojy",
-                          "name": "sk2i2",
-                          "fill": "$text-secondary",
-                          "content": "TypeScript",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "AuWkM",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ZEX8s",
+                              "fill": "$text-primary",
+                              "content": "TypeScript",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "RQFBz",
-                          "name": "sk2i3",
-                          "fill": "$text-secondary",
-                          "content": "Tailwind CSS",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "LW19J",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "LcrpE",
+                              "fill": "$text-primary",
+                              "content": "Tailwind CSS",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "3iF8d",
-                          "name": "sk2i4",
-                          "fill": "$text-secondary",
-                          "content": "Node.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "d3VWd",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "sqgMG",
+                              "fill": "$text-secondary",
+                              "content": "Node.js",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "olarM",
-                          "name": "sk2i5",
-                          "fill": "$text-secondary",
-                          "content": "Python",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "5fmNO",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "g5jza",
+                              "fill": "$text-secondary",
+                              "content": "Python",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CoHuZ",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "ueV0u",
+                              "fill": "$text-secondary",
+                              "content": "GraphQL",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mdpsT",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "yWJEq",
+                              "fill": "$text-secondary",
+                              "content": "PostgreSQL",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "rhEKx",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uW3YJ",
+                              "fill": "$text-secondary",
+                              "content": "REST APIs",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "l32uz",
-                  "name": "sk3",
+                  "type": "rectangle",
+                  "id": "Vjw6U",
+                  "name": "divider",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "nmLxv",
+                  "name": "skillRow3",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 16,
                   "children": [
                     {
                       "type": "text",
-                      "id": "52DdV",
-                      "name": "sk3Title",
+                      "id": "Y8FZj",
+                      "name": "catLabel",
                       "fill": "$accent",
-                      "content": "Tools",
+                      "content": "Tools & Craft",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "URXv3",
-                      "name": "sk3Items",
+                      "id": "WdK4I",
+                      "name": "chips",
                       "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 12,
+                      "gap": 10,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "Bz6tX",
-                          "name": "sk3i1",
-                          "fill": "$text-secondary",
-                          "content": "Figma",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "Dod2w",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "uTLgJ",
+                              "fill": "$text-primary",
+                              "content": "Figma",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "Ad8Zw",
-                          "name": "sk3i2",
-                          "fill": "$text-secondary",
-                          "content": "Framer",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "nd7rD",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "edEQV",
+                              "fill": "$text-primary",
+                              "content": "Framer",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "OvyWc",
-                          "name": "sk3i3",
-                          "fill": "$text-secondary",
-                          "content": "After Effects",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "Hksgh",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "2AYDg",
+                              "fill": "$text-secondary",
+                              "content": "After Effects",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "pLfMp",
-                          "name": "sk3i4",
-                          "fill": "$text-secondary",
-                          "content": "Blender",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "Vhi7z",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "KbKdW",
+                              "fill": "$text-secondary",
+                              "content": "Blender",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "rcSuy",
-                          "name": "sk3i5",
-                          "fill": "$text-secondary",
-                          "content": "Git / GitHub",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "snLXe",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "MT587",
+                              "fill": "$text-secondary",
+                              "content": "Git / GitHub",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "mmnC5",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "k0l7L",
+                              "fill": "$text-secondary",
+                              "content": "VS Code",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Q4Nok",
+                          "name": "chip",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            8,
+                            16
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "v9Xr1",
+                              "fill": "$text-secondary",
+                              "content": "Vercel",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 12,
+                              "fontWeight": "500"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -2680,264 +3101,639 @@
             },
             {
               "type": "frame",
-              "id": "7JLNm",
+              "id": "GtjL0",
               "name": "skillsGrid",
               "width": "fill_container",
-              "gap": 24,
+              "layout": "vertical",
+              "gap": 40,
               "children": [
                 {
                   "type": "frame",
-                  "id": "SD8b5",
-                  "name": "sk1",
+                  "id": "nWOlM",
+                  "name": "skillRow1",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 14,
                   "children": [
                     {
                       "type": "text",
-                      "id": "XCk0I",
-                      "name": "sk1Title",
+                      "id": "Btvo1",
                       "fill": "$accent",
                       "content": "Design",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "vVVhh",
-                      "name": "sk1Items",
+                      "id": "HVgV3",
+                      "name": "chips",
                       "width": "fill_container",
                       "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "dtRqM",
-                          "name": "sk1i1",
-                          "fill": "$text-secondary",
-                          "content": "UI/UX Design",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "T5IvC",
+                          "name": "tD1r1",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "uIKkT",
+                              "name": "tc1a",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "eha6E",
+                                  "fill": "$text-primary",
+                                  "content": "UI / UX Design",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "SJpl9",
+                              "name": "tc1b",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Gvk2k",
+                                  "fill": "$text-secondary",
+                                  "content": "Design Systems",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "594yb",
+                              "name": "tc1c",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "tNmra",
+                                  "fill": "$text-secondary",
+                                  "content": "Prototyping",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "DE7ct",
+                              "name": "tc1d",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "K2hzp",
+                                  "fill": "$text-secondary",
+                                  "content": "User Research",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "CPKMv",
+                              "name": "tc1e",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "avhSw",
+                                  "fill": "$text-secondary",
+                                  "content": "Brand Identity",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "uoqZ2",
-                          "name": "sk1i2",
-                          "fill": "$text-secondary",
-                          "content": "Design Systems",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "cRTw5",
-                          "name": "sk1i3",
-                          "fill": "$text-secondary",
-                          "content": "Prototyping",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "2IHFL",
-                          "name": "sk1i4",
-                          "fill": "$text-secondary",
-                          "content": "User Research",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "R8VgO",
-                          "name": "sk1i5",
-                          "fill": "$text-secondary",
-                          "content": "Brand Identity",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "jawS4",
+                          "name": "tRow1line2",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Nxb8E",
+                              "name": "tc1f",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "RnAbK",
+                                  "fill": "$text-secondary",
+                                  "content": "Wireframing",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "cnTU1",
+                              "name": "tc1g",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "y2sDc",
+                                  "fill": "$text-secondary",
+                                  "content": "Motion Design",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "4yjy3",
-                  "name": "sk2",
+                  "type": "rectangle",
+                  "id": "CuTAj",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "fL6ht",
+                  "name": "skillRow2",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 14,
                   "children": [
                     {
                       "type": "text",
-                      "id": "6U638",
-                      "name": "sk2Title",
+                      "id": "cfTKu",
                       "fill": "$accent",
                       "content": "Development",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "HGiBD",
-                      "name": "sk2Items",
+                      "id": "pyy98",
+                      "name": "chips",
                       "width": "fill_container",
                       "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "LA6YP",
-                          "name": "sk2i1",
-                          "fill": "$text-secondary",
-                          "content": "React / Next.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "xi2cz",
+                          "name": "tD2r1",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "P9bfQ",
+                              "name": "tc2a",
+                              "fill": "$accent",
+                              "cornerRadius": 2,
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Xzpee",
+                                  "fill": "$bg-dark",
+                                  "content": "React / Next.js",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "8YxQ9",
+                              "name": "tc2b",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "UQSGF",
+                                  "fill": "$text-primary",
+                                  "content": "TypeScript",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "mGgiU",
+                              "name": "tc2c",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "70qpO",
+                                  "fill": "$text-primary",
+                                  "content": "Tailwind CSS",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "jEHe3",
+                              "name": "tc2d",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "9s34a",
+                                  "fill": "$text-secondary",
+                                  "content": "Node.js",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "2kDAt",
+                              "name": "tc2e",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "smTGU",
+                                  "fill": "$text-secondary",
+                                  "content": "Python",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "p5DC5",
+                              "name": "tc2f",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "DLchk",
+                                  "fill": "$text-secondary",
+                                  "content": "GraphQL",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "I9KGG",
-                          "name": "sk2i2",
-                          "fill": "$text-secondary",
-                          "content": "TypeScript",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "zN16x",
-                          "name": "sk2i3",
-                          "fill": "$text-secondary",
-                          "content": "Tailwind CSS",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "MXq8D",
-                          "name": "sk2i4",
-                          "fill": "$text-secondary",
-                          "content": "Node.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "KA0Dh",
-                          "name": "sk2i5",
-                          "fill": "$text-secondary",
-                          "content": "Python",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "8oNHk",
+                          "name": "tDev2",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "mCjGA",
+                              "name": "tc2g",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                7,
+                                14
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "3v39U",
+                                  "fill": "$text-secondary",
+                                  "content": "REST APIs",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "GCDLw",
-                  "name": "sk3",
+                  "type": "rectangle",
+                  "id": "qPO29",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "4GpQJ",
+                  "name": "skillRow3",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 32,
+                  "gap": 14,
                   "children": [
                     {
                       "type": "text",
-                      "id": "nSYAH",
-                      "name": "sk3Title",
+                      "id": "IrJno",
                       "fill": "$accent",
-                      "content": "Tools",
+                      "content": "Tools & Craft",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "3aZvi",
-                      "name": "sk3Items",
+                      "id": "2VcyU",
+                      "name": "chips",
                       "width": "fill_container",
-                      "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "KyKvr",
-                          "name": "sk3i1",
-                          "fill": "$text-secondary",
-                          "content": "Figma",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "Zf8YF",
+                          "name": "tc3a",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "EtOSK",
+                              "fill": "$text-primary",
+                              "content": "Figma",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "1G4my",
-                          "name": "sk3i2",
-                          "fill": "$text-secondary",
-                          "content": "Framer",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "KiVyf",
+                          "name": "tc3b",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$accent"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AvYub",
+                              "fill": "$text-primary",
+                              "content": "Framer",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "xqyuj",
-                          "name": "sk3i3",
-                          "fill": "$text-secondary",
-                          "content": "After Effects",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "os1se",
+                          "name": "tc3c",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "1rqXo",
+                              "fill": "$text-secondary",
+                              "content": "After Effects",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "sKC31",
-                          "name": "sk3i4",
-                          "fill": "$text-secondary",
-                          "content": "Blender",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "73uVR",
+                          "name": "tc3d",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Quyt2",
+                              "fill": "$text-secondary",
+                              "content": "Blender",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "0rcHr",
-                          "name": "sk3i5",
-                          "fill": "$text-secondary",
-                          "content": "Git / GitHub",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "F4ZAI",
+                          "name": "tc3e",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "qrFT1",
+                              "fill": "$text-secondary",
+                              "content": "Git / GitHub",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "phfsw",
+                          "name": "tc3f",
+                          "cornerRadius": 2,
+                          "stroke": {
+                            "thickness": 1,
+                            "fill": "$border-light"
+                          },
+                          "padding": [
+                            7,
+                            14
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "AM032",
+                              "fill": "$text-secondary",
+                              "content": "Vercel",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
                         }
                       ]
                     }
@@ -4378,265 +5174,506 @@
             },
             {
               "type": "frame",
-              "id": "E5CRT",
+              "id": "RLDZT",
               "name": "skillsGrid",
               "width": "fill_container",
               "layout": "vertical",
-              "gap": 16,
+              "gap": 32,
               "children": [
                 {
                   "type": "frame",
-                  "id": "A6yTA",
-                  "name": "sk1",
+                  "id": "mUDC8",
+                  "name": "skillRow1",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 24,
+                  "gap": 12,
                   "children": [
                     {
                       "type": "text",
-                      "id": "c1Yrd",
-                      "name": "sk1Title",
+                      "id": "JpmLs",
                       "fill": "$accent",
                       "content": "Design",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "3Drzy",
-                      "name": "sk1Items",
+                      "id": "aqBbv",
+                      "name": "chips",
                       "width": "fill_container",
                       "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "VacMn",
-                          "name": "sk1i1",
-                          "fill": "$text-secondary",
-                          "content": "UI/UX Design",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "7Mvmf",
+                          "name": "pD1r1",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "DwMNk",
+                              "name": "pc1a",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "hsXRi",
+                                  "fill": "$text-primary",
+                                  "content": "UI / UX Design",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "kcftf",
+                              "name": "pc1b",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BAaRh",
+                                  "fill": "$text-secondary",
+                                  "content": "Design Systems",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "nqUEx",
+                              "name": "pc1c",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "VSmsz",
+                                  "fill": "$text-secondary",
+                                  "content": "Prototyping",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "ZPF0C",
-                          "name": "sk1i2",
-                          "fill": "$text-secondary",
-                          "content": "Design Systems",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "wh60Y",
-                          "name": "sk1i3",
-                          "fill": "$text-secondary",
-                          "content": "Prototyping",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "xRXT6",
-                          "name": "sk1i4",
-                          "fill": "$text-secondary",
-                          "content": "User Research",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "GJaCh",
-                          "name": "sk1i5",
-                          "fill": "$text-secondary",
-                          "content": "Brand Identity",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "nRUXl",
+                          "name": "pD1line2",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "vmfi0",
+                              "name": "pc1d",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ljOM5",
+                                  "fill": "$text-secondary",
+                                  "content": "User Research",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "t1Yxj",
+                              "name": "pc1e",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IAZgL",
+                                  "fill": "$text-secondary",
+                                  "content": "Brand Identity",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "sSVfy",
-                  "name": "sk2",
+                  "type": "rectangle",
+                  "id": "XE6mo",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "d3Hzm",
+                  "name": "skillRow2",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 24,
+                  "gap": 12,
                   "children": [
                     {
                       "type": "text",
-                      "id": "jo7NK",
-                      "name": "sk2Title",
+                      "id": "IOfk0",
                       "fill": "$accent",
                       "content": "Development",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "gwrMT",
-                      "name": "sk2Items",
+                      "id": "v0fFG",
+                      "name": "chips",
                       "width": "fill_container",
                       "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "ndPHS",
-                          "name": "sk2i1",
-                          "fill": "$text-secondary",
-                          "content": "React / Next.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "3kXPP",
+                          "name": "pD2r1",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "ZoWk8",
+                              "name": "pc2a",
+                              "fill": "$accent",
+                              "cornerRadius": 2,
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "WgrLO",
+                                  "fill": "$bg-dark",
+                                  "content": "React / Next.js",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "osDQx",
+                              "name": "pc2b",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "XHlzm",
+                                  "fill": "$text-primary",
+                                  "content": "TypeScript",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "S8eip",
+                              "name": "pc2c",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "IUddS",
+                                  "fill": "$text-primary",
+                                  "content": "Tailwind CSS",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "UyHZi",
-                          "name": "sk2i2",
-                          "fill": "$text-secondary",
-                          "content": "TypeScript",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "cLgqU",
-                          "name": "sk2i3",
-                          "fill": "$text-secondary",
-                          "content": "Tailwind CSS",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "r5a1T",
-                          "name": "sk2i4",
-                          "fill": "$text-secondary",
-                          "content": "Node.js",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "abmVp",
-                          "name": "sk2i5",
-                          "fill": "$text-secondary",
-                          "content": "Python",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "moXhk",
+                          "name": "pDev2",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "aRIFU",
+                              "name": "pc2d",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "2dkzf",
+                                  "fill": "$text-secondary",
+                                  "content": "Node.js",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "G6e55",
+                              "name": "pc2e",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "ahNln",
+                                  "fill": "$text-secondary",
+                                  "content": "Python",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
                 },
                 {
-                  "type": "frame",
-                  "id": "PwY5T",
-                  "name": "sk3",
+                  "type": "rectangle",
+                  "id": "gclIz",
+                  "fill": "$border-dark",
                   "width": "fill_container",
-                  "fill": "$bg-card",
-                  "stroke": {
-                    "thickness": 1,
-                    "fill": "$border-dark"
-                  },
+                  "height": 1
+                },
+                {
+                  "type": "frame",
+                  "id": "IujM3",
+                  "name": "skillRow3",
+                  "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 20,
-                  "padding": 24,
+                  "gap": 12,
                   "children": [
                     {
                       "type": "text",
-                      "id": "XVcWe",
-                      "name": "sk3Title",
+                      "id": "hrTjP",
                       "fill": "$accent",
-                      "content": "Tools",
+                      "content": "Tools & Craft",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 16,
-                      "fontWeight": "700"
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
                     },
                     {
                       "type": "frame",
-                      "id": "EuFtM",
-                      "name": "sk3Items",
+                      "id": "33TnI",
+                      "name": "chips",
                       "width": "fill_container",
                       "layout": "vertical",
-                      "gap": 12,
+                      "gap": 8,
                       "children": [
                         {
-                          "type": "text",
-                          "id": "52m1I",
-                          "name": "sk3i1",
-                          "fill": "$text-secondary",
-                          "content": "Figma",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "v9NND",
+                          "name": "pT1r1",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "a2kKO",
+                              "name": "pc3a",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "QZia3",
+                                  "fill": "$text-primary",
+                                  "content": "Figma",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Bd0Q3",
+                              "name": "pc3b",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$accent"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "J82Gh",
+                                  "fill": "$text-primary",
+                                  "content": "Framer",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "c7Tud",
+                              "name": "pc3c",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "MjNtO",
+                                  "fill": "$text-secondary",
+                                  "content": "After Effects",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         },
                         {
-                          "type": "text",
-                          "id": "sw20f",
-                          "name": "sk3i2",
-                          "fill": "$text-secondary",
-                          "content": "Framer",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "c6Z2E",
-                          "name": "sk3i3",
-                          "fill": "$text-secondary",
-                          "content": "After Effects",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "GsWNc",
-                          "name": "sk3i4",
-                          "fill": "$text-secondary",
-                          "content": "Blender",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
-                        },
-                        {
-                          "type": "text",
-                          "id": "bobNi",
-                          "name": "sk3i5",
-                          "fill": "$text-secondary",
-                          "content": "Git / GitHub",
-                          "fontFamily": "JetBrains Mono",
-                          "fontSize": 13,
-                          "fontWeight": "normal"
+                          "type": "frame",
+                          "id": "13cDq",
+                          "name": "pTools2",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "tx3ME",
+                              "name": "pc3d",
+                              "cornerRadius": 2,
+                              "stroke": {
+                                "thickness": 1,
+                                "fill": "$border-light"
+                              },
+                              "padding": [
+                                6,
+                                12
+                              ],
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "qGoSp",
+                                  "fill": "$text-secondary",
+                                  "content": "Git / GitHub",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }

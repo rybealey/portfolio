@@ -3,10 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
-import { CountUp } from "@/components/count-up";
+import { CountUp } from "@/components/countUp";
 import { Typewriter } from "@/components/typewriter";
-import { MobileNav } from "@/components/mobile-nav";
-import { ContactModal } from "@/components/contact-modal";
+import { MobileNav } from "@/components/mobileNav";
+import { ContactModal } from "@/components/contactModal";
 
 
 export default async function Home() {
