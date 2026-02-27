@@ -24,7 +24,7 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-bg-page text-text-primary font-sans">
       {/* ===== 1. HEADER ===== */}
-      <header className="flex items-center justify-between border-b border-border-light px-6 py-4 md:px-10 lg:px-[120px] lg:py-6">
+      <header className="sticky top-0 z-50 flex items-center justify-between border-b border-border-light bg-bg-page/80 backdrop-blur-md px-6 py-4 md:px-10 lg:px-[120px] lg:py-6">
         <span className="font-mono text-base font-bold">ry.bealey</span>
 
         {/* Mobile nav sheet */}
