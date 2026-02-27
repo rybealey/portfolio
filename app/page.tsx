@@ -14,6 +14,8 @@ export default async function Home() {
   const { data: profile } = await supabase.from("profile").select().single();
   const { data: skills } = await supabase.from("skills").select().order("sort_order");
   const { data: workHistory } = await supabase.from("work_history").select().order("sort_order");
+  const { data: socials } = await supabase.from("socials").select().order("sort_order");
+  const { data: projects } = await supabase.from("projects").select().order("sort_order");
 
   const skillsByType = (skills ?? []).reduce<Record<string, string[]>>((acc, s) => {
     (acc[s.type] ??= []).push(s.skill);
@@ -209,60 +211,39 @@ export default async function Home() {
             Selected work.
           </h2>
 
-          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
-            {[
-              {
-                tag: "Web App",
-                title: "Pulse Analytics",
-                description:
-                  "A real-time analytics dashboard for monitoring user engagement and product metrics.",
-                gradient: "from-cyan-500/20 to-blue-600/20",
-              },
-              {
-                tag: "Mobile App",
-                title: "Mindful",
-                description:
-                  "A meditation and mindfulness app with guided sessions and progress tracking.",
-                gradient: "from-emerald-500/20 to-teal-600/20",
-              },
-              {
-                tag: "Branding",
-                title: "Nomad Studio",
-                description:
-                  "Brand identity and website design for a creative agency focused on remote work.",
-                gradient: "from-purple-500/20 to-pink-600/20",
-              },
-              {
-                tag: "SaaS",
-                title: "Aura",
-                description:
-                  "A project management tool designed for small creative teams and freelancers.",
-                gradient: "from-orange-500/20 to-red-600/20",
-              },
-            ].map((project) => (
-              <Card key={project.title} className="overflow-hidden border-border-light bg-bg-card-alt py-0 shadow-none">
-                {/* Image placeholder */}
-                <div
-                  className={`h-[200px] bg-gradient-to-br ${project.gradient} md:h-[280px]`}
-                >
-                  <div className="flex h-full items-center justify-center font-mono text-sm text-text-muted">
-                    {project.title.toLowerCase().replace(" ", "-")}.png
+          {(projects ?? []).length > 0 ? (
+            <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
+              {(projects ?? []).map((project) => (
+                <Card key={project.id} className="overflow-hidden border-border-light bg-bg-card-alt py-0 shadow-none">
+                  <div className="h-[200px] bg-gradient-to-br from-cyan-500/20 to-blue-600/20 md:h-[280px]">
+                    <div className="flex h-full items-center justify-center font-mono text-sm text-text-muted">
+                      {project.slug}.png
+                    </div>
                   </div>
-                </div>
-                <CardContent className="flex flex-col gap-2 p-5 lg:p-7">
-                  <span className="font-mono text-xs text-brand">
-                    {project.tag}
-                  </span>
-                  <h3 className="text-lg font-semibold lg:text-xl">
-                    {project.title}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-text-secondary">
-                    {project.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+                  <CardContent className="flex flex-col gap-2 p-5 lg:p-7">
+                    <span className="font-mono text-xs text-brand">
+                      {project.type}
+                    </span>
+                    <h3 className="text-lg font-semibold lg:text-xl">
+                      {project.name}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-text-secondary">
+                      {project.excerpt}
+                    </p>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <Card className="border-border-light bg-bg-card-alt py-0 shadow-none">
+              <CardContent className="flex flex-col items-center justify-center gap-3 py-16">
+                <span className="text-2xl">🔧</span>
+                <p className="font-mono text-sm text-text-secondary">
+                  Currently revamping this section — check back soon for the good stuff.
+                </p>
+              </CardContent>
+            </Card>
+          )}
         </section>
 
         {/* ===== 7. CONTACT CTA ===== */}
@@ -292,21 +273,26 @@ export default async function Home() {
       <footer className="border-t border-border-light px-6 py-8 md:px-12 md:py-10 lg:px-[120px] lg:py-12">
         {/* Top row */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex flex-col gap-1">
-            <span className="font-mono text-base font-bold">ry.bealey</span>
-            <span className="text-sm text-text-muted">
-              Designer &amp; Developer
-            </span>
+          <div className="flex items-center gap-3">
+            <img src="/icon.png" alt="" className="h-9 w-9 rounded-full" />
+            <div className="flex flex-col gap-1">
+              <span className="font-mono text-base font-bold">ry.bealey</span>
+              <span className="text-sm text-text-muted">
+                Designer &amp; Developer
+              </span>
+            </div>
           </div>
 
           <div className="flex gap-4 lg:gap-10">
-            {["GitHub", "LinkedIn"].map((social) => (
+            {(socials ?? []).map((social) => (
               <a
-                key={social}
-                href="#"
+                key={social.id}
+                href={social.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="font-mono text-sm text-text-secondary transition-colors hover:text-brand"
               >
-                {social}
+                {social.platform}
               </a>
             ))}
           </div>

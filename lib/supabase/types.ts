@@ -112,33 +112,45 @@ export type Database = {
       projects: {
         Row: {
           id: string;
-          tag: string;
-          title: string;
-          description: string;
-          image_url: string | null;
-          gradient: string;
-          url: string | null;
+          name: string;
+          type: string;
+          excerpt: string;
+          slug: string;
+          date_completed: string;
+          role: string;
+          timeline: string;
+          tools: string;
+          team: number;
           sort_order: number;
+          created_at: string;
         };
         Insert: {
           id?: string;
-          tag: string;
-          title: string;
-          description: string;
-          image_url?: string | null;
-          gradient?: string;
-          url?: string | null;
+          name: string;
+          type: string;
+          excerpt: string;
+          slug: string;
+          date_completed: string;
+          role: string;
+          timeline: string;
+          tools: string;
+          team?: number;
           sort_order?: number;
+          created_at?: string;
         };
         Update: {
           id?: string;
-          tag?: string;
-          title?: string;
-          description?: string;
-          image_url?: string | null;
-          gradient?: string;
-          url?: string | null;
+          name?: string;
+          type?: string;
+          excerpt?: string;
+          slug?: string;
+          date_completed?: string;
+          role?: string;
+          timeline?: string;
+          tools?: string;
+          team?: number;
           sort_order?: number;
+          created_at?: string;
         };
         Relationships: [];
       };
@@ -193,6 +205,30 @@ export type Database = {
         };
         Relationships: [];
       };
+      socials: {
+        Row: {
+          id: string;
+          platform: string;
+          url: string;
+          sort_order: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          platform: string;
+          url: string;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          platform?: string;
+          url?: string;
+          sort_order?: number;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {};
     Functions: {};
@@ -207,3 +243,4 @@ export type Skill = Database["public"]["Tables"]["skills"]["Row"];
 export type Project = Database["public"]["Tables"]["projects"]["Row"];
 export type SocialLink = Database["public"]["Tables"]["social_links"]["Row"];
 export type WorkHistory = Database["public"]["Tables"]["work_history"]["Row"];
+export type Social = Database["public"]["Tables"]["socials"]["Row"];

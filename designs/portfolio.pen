@@ -9371,6 +9371,1600 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "pxs7g",
+      "x": 0,
+      "y": 9892,
+      "name": "Email — Tablet",
+      "width": 600,
+      "fill": "#E2E8F0",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "dLTr7",
+          "name": "Top Spacer",
+          "width": "fill_container",
+          "height": 40
+        },
+        {
+          "type": "frame",
+          "id": "mUdYs",
+          "name": "Email Card",
+          "clip": true,
+          "width": 520,
+          "fill": "$bg-dark",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border-light"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "7xQGM",
+              "name": "Accent Bar",
+              "width": "fill_container",
+              "height": 4,
+              "fill": "$accent"
+            },
+            {
+              "type": "frame",
+              "id": "b3z40",
+              "name": "Email Header",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$border-dark"
+              },
+              "padding": [
+                28,
+                32
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Jwt5F",
+                  "name": "logo",
+                  "fill": "$text-primary",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "KDMLd",
+                  "name": "New Tag",
+                  "fill": "#22D3EE1A",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#22D3EE33"
+                  },
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "0KzKb",
+                      "name": "tagDot",
+                      "fill": "$accent",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "q1Ev5",
+                      "name": "tagText",
+                      "fill": "$accent",
+                      "content": "New Message",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Wmhk8",
+              "name": "Email Body",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 28,
+              "padding": 32,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "t2yEP",
+                  "name": "Greeting",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mlfii",
+                      "name": "greetTitle",
+                      "fill": "$text-primary",
+                      "content": "You've got a new message!",
+                      "lineHeight": 1.2,
+                      "fontFamily": "Inter",
+                      "fontSize": 24,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NIbnC",
+                      "name": "greetSub",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Someone just submitted your contact form. Here are the details:",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MIh6v",
+                  "name": "Details Card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 6,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "IyAjq",
+                      "name": "Details Header",
+                      "width": "fill_container",
+                      "fill": "$bg-card-alt",
+                      "stroke": {
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$border-dark"
+                      },
+                      "gap": 8,
+                      "padding": [
+                        14,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "6MagQ",
+                          "name": "detailsIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "file-text",
+                          "iconFontFamily": "lucide",
+                          "fill": "$accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "3RfBO",
+                          "name": "detailsTitle",
+                          "fill": "$accent",
+                          "content": "SUBMISSION DETAILS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HNpsJ",
+                      "name": "Details Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "hZP05",
+                          "name": "Name Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "gap": 16,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "nu9Cf",
+                              "name": "Name Label",
+                              "width": 120,
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "64fBg",
+                                  "name": "nameIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "user",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "Ie4ZC",
+                                  "name": "nameLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Full Name",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "xfZ9U",
+                              "name": "nameValue",
+                              "fill": "$text-primary",
+                              "content": "Jane Doe",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "ofkkA",
+                          "name": "Email Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "gap": 16,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "6ZGKs",
+                              "name": "Email Label",
+                              "width": 120,
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "d6uaI",
+                                  "name": "emailIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "mail",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "ZlqR7",
+                                  "name": "emailLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Email",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "rohFM",
+                              "name": "emailValue",
+                              "fill": "$accent",
+                              "content": "jane@example.com",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "8y1sy",
+                          "name": "Message Row",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            16,
+                            0,
+                            20,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "9XKbt",
+                              "name": "Message Label",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "IYbAq",
+                                  "name": "msgIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "message-square",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "bY2nb",
+                                  "name": "msgLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Message",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "9rrmR",
+                              "name": "msgValue",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Hi Ry! I came across your portfolio and I'm really impressed by your work. We're building a new SaaS product and are looking for a designer/developer who can help us create a polished user experience. Would you be interested in chatting about a potential collaboration?",
+                              "lineHeight": 1.7,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "89o22",
+                  "name": "Timestamp",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "zVVVk",
+                      "name": "clockIcon",
+                      "width": 13,
+                      "height": 13,
+                      "iconFontName": "clock-3",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "2t6YH",
+                      "name": "timeText",
+                      "fill": "$text-muted",
+                      "content": "Received on Feb 26, 2026 at 3:42 PM EST",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KUAIv",
+                  "name": "Reply Button",
+                  "width": "fill_container",
+                  "fill": "$accent",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "3I4Rn",
+                      "name": "replyIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "reply",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0A0F1C"
+                    },
+                    {
+                      "type": "text",
+                      "id": "9zREX",
+                      "name": "replyText",
+                      "fill": "#0A0F1C",
+                      "content": "Reply to Jane",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "TDTKo",
+              "name": "Email Footer",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "top": 1
+                },
+                "fill": "$border-dark"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                24,
+                32
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "R1gO8",
+                  "name": "footerLogo",
+                  "fill": "$text-muted",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "qURET",
+                  "name": "footerTagline",
+                  "fill": "$text-muted",
+                  "content": "Designing the future, one pixel at a time.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "0KVpt",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "© 2026 Ry Bealey. You're receiving this because someone submitted your contact form.",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "9KOyT",
+          "name": "Bottom Spacer",
+          "width": "fill_container",
+          "height": 40
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "mrFmm",
+      "x": 700,
+      "y": 9892,
+      "name": "Email — Mobile",
+      "width": 390,
+      "fill": "#E2E8F0",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "6PhA4",
+          "name": "Top Spacer",
+          "width": "fill_container",
+          "height": 24
+        },
+        {
+          "type": "frame",
+          "id": "dCuTJ",
+          "name": "Email Card",
+          "clip": true,
+          "width": 358,
+          "fill": "$bg-dark",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border-light"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "82Uu3",
+              "name": "Accent Bar",
+              "width": "fill_container",
+              "height": 4,
+              "fill": "$accent"
+            },
+            {
+              "type": "frame",
+              "id": "pINQw",
+              "name": "Email Header",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$border-dark"
+              },
+              "padding": 20,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "a5q2b",
+                  "name": "logo",
+                  "fill": "$text-primary",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "hAwjV",
+                  "name": "New Tag",
+                  "fill": "#22D3EE1A",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#22D3EE33"
+                  },
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "MZOWV",
+                      "name": "tagDot",
+                      "fill": "$accent",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "A060a",
+                      "name": "tagText",
+                      "fill": "$accent",
+                      "content": "New Message",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "iDOXN",
+              "name": "Email Body",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 24,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CL6wK",
+                  "name": "Greeting",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "EFVuP",
+                      "name": "greetTitle",
+                      "fill": "$text-primary",
+                      "content": "You've got a new message!",
+                      "lineHeight": 1.2,
+                      "fontFamily": "Inter",
+                      "fontSize": 20,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1sv8O",
+                      "name": "greetSub",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Someone just submitted your contact form. Here are the details:",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "aYB3G",
+                  "name": "Details Card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 6,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "XU2WA",
+                      "name": "Details Header",
+                      "width": "fill_container",
+                      "fill": "$bg-card-alt",
+                      "stroke": {
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$border-dark"
+                      },
+                      "gap": 8,
+                      "padding": [
+                        14,
+                        20
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "FH92N",
+                          "name": "detailsIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "file-text",
+                          "iconFontFamily": "lucide",
+                          "fill": "$accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "q5a1q",
+                          "name": "detailsTitle",
+                          "fill": "$accent",
+                          "content": "SUBMISSION DETAILS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "xMIod",
+                      "name": "Details Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        20
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Tb5iN",
+                          "name": "Name Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "xg9G9",
+                              "name": "Name Label",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "e2R2Q",
+                                  "name": "nameIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "user",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "zoE56",
+                                  "name": "nameLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Full Name",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "9OEPM",
+                              "name": "nameValue",
+                              "fill": "$text-primary",
+                              "content": "Jane Doe",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "bvnZ2",
+                          "name": "Email Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "layout": "vertical",
+                          "gap": 6,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "UMnch",
+                              "name": "Email Label",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "QHBwz",
+                                  "name": "emailIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "mail",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "HoKKy",
+                                  "name": "emailLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Email",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "gMtPp",
+                              "name": "emailValue",
+                              "fill": "$accent",
+                              "content": "jane@example.com",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "sfIDu",
+                          "name": "Message Row",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            16,
+                            0,
+                            20,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "djPji",
+                              "name": "Message Label",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "Lvbci",
+                                  "name": "msgIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "message-square",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "FT50k",
+                                  "name": "msgLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Message",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "ZYrDJ",
+                              "name": "msgValue",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Hi Ry! I came across your portfolio and I'm really impressed by your work. We're building a new SaaS product and are looking for a designer/developer who can help us create a polished user experience. Would you be interested in chatting about a potential collaboration?",
+                              "lineHeight": 1.7,
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Zak9o",
+                  "name": "Timestamp",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 4,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "HoBNn",
+                      "name": "clockIcon",
+                      "width": 13,
+                      "height": 13,
+                      "iconFontName": "clock-3",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "k9Cnu",
+                      "name": "timeText",
+                      "fill": "$text-muted",
+                      "content": "Received on Feb 26, 2026 at 3:42 PM EST",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ENzpX",
+                  "name": "Reply Button",
+                  "width": "fill_container",
+                  "fill": "$accent",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "MXlu9",
+                      "name": "replyIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "reply",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0A0F1C"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KvQgR",
+                      "name": "replyText",
+                      "fill": "#0A0F1C",
+                      "content": "Reply to Jane",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4bra1",
+              "name": "Email Footer",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "top": 1
+                },
+                "fill": "$border-dark"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                20,
+                24
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ofNfc",
+                  "name": "footerLogo",
+                  "fill": "$text-muted",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "8Uujh",
+                  "name": "footerTagline",
+                  "fill": "$text-muted",
+                  "content": "Designing the future, one pixel at a time.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "oHjT3",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "© 2026 Ry Bealey. You're receiving this because someone submitted your contact form.",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "dS4WS",
+          "name": "Bottom Spacer",
+          "width": "fill_container",
+          "height": 24
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "kFwJy",
+      "x": -1000,
+      "y": 9892,
+      "name": "Email — Desktop",
+      "width": 900,
+      "fill": "#E2E8F0",
+      "layout": "vertical",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "FC0sQ",
+          "name": "Top Spacer",
+          "width": "fill_container",
+          "height": 56
+        },
+        {
+          "type": "frame",
+          "id": "2Wg33",
+          "name": "Email Card",
+          "clip": true,
+          "width": 760,
+          "fill": "$bg-dark",
+          "cornerRadius": 8,
+          "stroke": {
+            "thickness": 1,
+            "fill": "$border-light"
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "type": "frame",
+              "id": "qh5JD",
+              "name": "Accent Bar",
+              "width": "fill_container",
+              "height": 4,
+              "fill": "$accent"
+            },
+            {
+              "type": "frame",
+              "id": "7nSUr",
+              "name": "Email Header",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "bottom": 1
+                },
+                "fill": "$border-dark"
+              },
+              "padding": [
+                28,
+                40
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lwwC5",
+                  "name": "logo",
+                  "fill": "$text-primary",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 16,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "pZFIm",
+                  "name": "New Tag",
+                  "fill": "#22D3EE1A",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "#22D3EE33"
+                  },
+                  "gap": 6,
+                  "padding": [
+                    4,
+                    10
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "bNOT6",
+                      "name": "tagDot",
+                      "fill": "$accent",
+                      "width": 6,
+                      "height": 6
+                    },
+                    {
+                      "type": "text",
+                      "id": "H1HpG",
+                      "name": "tagText",
+                      "fill": "$accent",
+                      "content": "New Message",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GQObN",
+              "name": "Email Body",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 32,
+              "padding": 40,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wtPVi",
+                  "name": "Greeting",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "vXZHt",
+                      "name": "greetTitle",
+                      "fill": "$text-primary",
+                      "content": "You've got a new message!",
+                      "lineHeight": 1.2,
+                      "fontFamily": "Inter",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "giwJy",
+                      "name": "greetSub",
+                      "fill": "$text-secondary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Someone just submitted your contact form. Here are the details:",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 15,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Q0zgu",
+                  "name": "Details Card",
+                  "clip": true,
+                  "width": "fill_container",
+                  "fill": "$bg-card",
+                  "cornerRadius": 6,
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-dark"
+                  },
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "2HPj4",
+                      "name": "Details Header",
+                      "width": "fill_container",
+                      "fill": "$bg-card-alt",
+                      "stroke": {
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$border-dark"
+                      },
+                      "gap": 8,
+                      "padding": [
+                        16,
+                        24
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "vFwQ2",
+                          "name": "detailsIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "file-text",
+                          "iconFontFamily": "lucide",
+                          "fill": "$accent"
+                        },
+                        {
+                          "type": "text",
+                          "id": "4W3jC",
+                          "name": "detailsTitle",
+                          "fill": "$accent",
+                          "content": "SUBMISSION DETAILS",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "600",
+                          "letterSpacing": 2
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "zmLeF",
+                      "name": "Details Body",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "padding": [
+                        0,
+                        24
+                      ],
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "7kMM3",
+                          "name": "Name Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "gap": 16,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Xj2pO",
+                              "name": "Name Label",
+                              "width": 140,
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "GOGpa",
+                                  "name": "nameIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "user",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "cO0T9",
+                                  "name": "nameLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Full Name",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "U4tmM",
+                              "name": "nameValue",
+                              "fill": "$text-primary",
+                              "content": "Jane Doe",
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "cxFOV",
+                          "name": "Email Row",
+                          "width": "fill_container",
+                          "stroke": {
+                            "thickness": {
+                              "bottom": 1
+                            },
+                            "fill": "$border-dark"
+                          },
+                          "gap": 16,
+                          "padding": [
+                            16,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "d07pM",
+                              "name": "Email Label",
+                              "width": 140,
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "MiaQ4",
+                                  "name": "emailIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "mail",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "kWQUC",
+                                  "name": "emailLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Email",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "Y5YtR",
+                              "name": "emailValue",
+                              "fill": "$accent",
+                              "content": "jane@example.com",
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "3QZ0x",
+                          "name": "Message Row",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 10,
+                          "padding": [
+                            16,
+                            0,
+                            20,
+                            0
+                          ],
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "V5qi8",
+                              "name": "Message Label",
+                              "gap": 8,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "C6j5d",
+                                  "name": "msgIcon",
+                                  "width": 14,
+                                  "height": 14,
+                                  "iconFontName": "message-square",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$text-muted"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "6hVhw",
+                                  "name": "msgLabelText",
+                                  "fill": "$text-muted",
+                                  "content": "Message",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 12,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "B5VNG",
+                              "name": "msgValue",
+                              "fill": "$text-secondary",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "Hi Ry! I came across your portfolio and I'm really impressed by your work. We're building a new SaaS product and are looking for a designer/developer who can help us create a polished user experience. Would you be interested in chatting about a potential collaboration?",
+                              "lineHeight": 1.7,
+                              "fontFamily": "Inter",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Tph5m",
+                  "name": "Timestamp",
+                  "width": "fill_container",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "nSLYf",
+                      "name": "clockIcon",
+                      "width": 13,
+                      "height": 13,
+                      "iconFontName": "clock-3",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-muted"
+                    },
+                    {
+                      "type": "text",
+                      "id": "YgIVF",
+                      "name": "timeText",
+                      "fill": "$text-muted",
+                      "content": "Received on Feb 26, 2026 at 3:42 PM EST",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "nkctp",
+                  "name": "Reply Button",
+                  "width": "fill_container",
+                  "fill": "$accent",
+                  "cornerRadius": 4,
+                  "gap": 8,
+                  "padding": [
+                    14,
+                    24
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "cuTQB",
+                      "name": "replyIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "reply",
+                      "iconFontFamily": "lucide",
+                      "fill": "#0A0F1C"
+                    },
+                    {
+                      "type": "text",
+                      "id": "63IVw",
+                      "name": "replyText",
+                      "fill": "#0A0F1C",
+                      "content": "Reply to Jane",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "YbVu4",
+              "name": "Email Footer",
+              "width": "fill_container",
+              "stroke": {
+                "thickness": {
+                  "top": 1
+                },
+                "fill": "$border-dark"
+              },
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                28,
+                40
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "3kyjx",
+                  "name": "footerLogo",
+                  "fill": "$text-muted",
+                  "content": "ry.bealey",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "a5mxa",
+                  "name": "footerTagline",
+                  "fill": "$text-muted",
+                  "content": "Designing the future, one pixel at a time.",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "u7oFs",
+                  "name": "footerCopy",
+                  "fill": "$text-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "© 2026 Ry Bealey. You're receiving this because someone submitted your contact form.",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Rak3m",
+          "name": "Bottom Spacer",
+          "width": "fill_container",
+          "height": 56
+        }
+      ]
     }
   ],
   "variables": {
