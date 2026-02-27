@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { ArrowRight, Mail, X } from "lucide-react";
 import {
   Sheet,
@@ -8,17 +9,28 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useState } from "react";
 
 const navItems = [
-  { num: "01", label: "About", href: "#about" },
+  { num: "01", label: "About",      href: "#about"      },
   { num: "02", label: "Experience", href: "#experience" },
-  { num: "03", label: "Projects", href: "#projects" },
-  { num: "04", label: "Skills", href: "#skills" },
+  { num: "03", label: "Projects",   href: "#projects"   },
+  { num: "04", label: "Skills",     href: "#skills"     },
 ];
 
-export function MobileNav() {
+type Social = { id: string; platform: string; url: string };
+
+export function MobileNav({ socials }: { socials: Social[] }) {
   const [open, setOpen] = useState(false);
+
+  // Auto-close when the viewport widens to the md breakpoint (≥ 768px)
+  // so the sheet never lingers behind the now-visible desktop nav.
+  useEffect(() => {
+    function onResize() {
+      if (window.innerWidth >= 768) setOpen(false);
+    }
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -47,7 +59,7 @@ export function MobileNav() {
           </SheetClose>
         </div>
 
-        {/* Nav Links */}
+        {/* Nav links */}
         <nav className="flex flex-col px-6 py-8">
           {navItems.map((item) => (
             <a
@@ -56,12 +68,8 @@ export function MobileNav() {
               onClick={() => setOpen(false)}
               className="flex items-center justify-between border-b border-border-dark py-5 first:border-t transition-colors"
             >
-              <span className="font-mono text-xs text-text-muted">
-                {item.num}
-              </span>
-              <span className="text-2xl font-semibold text-text-primary">
-                {item.label}
-              </span>
+              <span className="font-mono text-xs text-text-muted">{item.num}</span>
+              <span className="text-2xl font-semibold text-text-primary">{item.label}</span>
               <ArrowRight className="h-5 w-5 text-text-muted" />
             </a>
           ))}
@@ -78,17 +86,21 @@ export function MobileNav() {
             <span className="font-mono text-sm font-semibold">Contact Me</span>
           </a>
 
-          <div className="flex justify-center gap-8">
-            {["GitHub", "LinkedIn"].map((social) => (
-              <a
-                key={social}
-                href="#"
-                className="font-mono text-xs font-medium text-text-muted transition-colors hover:text-brand"
-              >
-                {social}
-              </a>
-            ))}
-          </div>
+          {socials.length > 0 && (
+            <div className="flex justify-center gap-8">
+              {socials.map((social) => (
+                <a
+                  key={social.id}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-mono text-xs font-medium text-text-muted transition-colors hover:text-brand"
+                >
+                  {social.platform}
+                </a>
+              ))}
+            </div>
+          )}
         </div>
       </SheetContent>
     </Sheet>

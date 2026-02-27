@@ -3,18 +3,18 @@ import { redirect } from "next/navigation";
 
 /**
  * Use in protected admin pages/layouts.
- * Reads the session from the local cookie (no network round-trip).
- * Redirects to /admin (login) if no valid session is found.
+ * Authenticates the user by contacting the Supabase Auth server (not just cookies).
+ * Redirects to /admin (login) if no valid user is found.
  */
 export async function requireAuth() {
   const supabase = await createClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (!session) redirect("/admin");
+  if (!user) redirect("/admin");
 
-  return session.user;
+  return user;
 }
 
 /**
@@ -24,8 +24,8 @@ export async function requireAuth() {
 export async function redirectIfAuthenticated() {
   const supabase = await createClient();
   const {
-    data: { session },
-  } = await supabase.auth.getSession();
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  if (session) redirect("/admin/dashboard");
+  if (user) redirect("/admin/dashboard");
 }

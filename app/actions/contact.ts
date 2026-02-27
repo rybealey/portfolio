@@ -32,7 +32,7 @@ export async function sendContactEmail(
   }
 
   try {
-    const { error } = await resend.emails.send({
+    const emailPromise = resend.emails.send({
       from: "Portfolio Contact <contact@mailer.ryanbealey.com>",
       to: "hello@ryanbealey.com",
       replyTo: email,
@@ -40,6 +40,19 @@ export async function sendContactEmail(
       html: contactEmailHtml({ name, email, message }),
       text: `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`,
     });
+
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
+    const audiencePromise = audienceId
+      ? resend.contacts.create({
+          audienceId,
+          email,
+          firstName: name.split(" ")[0],
+          lastName: name.split(" ").slice(1).join(" ") || undefined,
+          unsubscribed: false,
+        }).catch(() => null)
+      : Promise.resolve(null);
+
+    const [{ error }] = await Promise.all([emailPromise, audiencePromise]);
 
     if (error) {
       return { success: false, error: "Failed to send message. Please try again." };

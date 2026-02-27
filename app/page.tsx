@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
@@ -28,7 +28,7 @@ export default async function Home() {
         <span className="font-mono text-base font-bold">ry.bealey</span>
 
         {/* Mobile nav sheet */}
-        <MobileNav />
+        <MobileNav socials={socials ?? []} />
 
         {/* Desktop/tablet nav */}
         <nav className="hidden items-center gap-6 md:flex md:gap-6 lg:gap-10">
@@ -47,8 +47,27 @@ export default async function Home() {
 
       <main>
         {/* ===== 2. HERO ===== */}
-        <section className="px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
-          <div className="flex flex-col gap-5 md:gap-6 lg:gap-8">
+        <section className="relative overflow-hidden bg-bg-dark px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
+          {/* Dot mesh — cyan dots at 20% opacity, matching design */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(circle, #22D3EE 1px, transparent 1px)",
+              backgroundSize: "28px 28px",
+              opacity: 0.2,
+            }}
+          />
+          {/* Gradient fade — transparent at top, dissolves to bg-dark at ~88% */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent 0%, transparent 40%, rgba(5,8,16,0.8) 70%, #050810 88%)",
+            }}
+          />
+          <div className="relative z-10 flex flex-col gap-5 md:gap-6 lg:gap-8">
             {/* Status badge */}
             <Badge variant="outline" className="w-fit gap-2 border-border-light bg-transparent px-3 py-1.5 font-mono text-xs text-text-secondary md:text-sm">
               <span className="relative flex h-2.5 w-2.5">
@@ -169,34 +188,34 @@ export default async function Home() {
         </section>
 
         {/* ===== 5. SKILLS ===== */}
-        <section id="skills" className="bg-bg-dark px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
+        <section id="skills" className="bg-bg-page px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
           <span className="font-mono text-sm text-brand">// skills</span>
           <h2 className="mt-4 mb-10 text-[32px] font-bold leading-tight md:text-[40px] md:mb-12 lg:text-[48px] lg:mb-16">
             What I do.
           </h2>
 
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-4 lg:gap-6">
-            {Object.entries(skillsByType).map(([type, items]) => (
-              <Card key={type} className="border-border-light bg-bg-card-alt py-0 shadow-none">
-                <CardHeader className="p-6 pb-0 lg:p-8 lg:pb-0">
-                  <CardTitle className="font-mono text-lg font-semibold text-brand">
-                    {type}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-6 pt-4 lg:p-8 lg:pt-4">
-                  <ul className="flex flex-col gap-3">
+          <div className="flex flex-col">
+            {Object.entries(skillsByType).map(([type, items], groupIndex, arr) => (
+              <div key={type}>
+                <div className="flex flex-col gap-4 py-5 md:py-6">
+                  <span className="font-mono text-[11px] font-semibold tracking-[2px] text-brand">
+                    {type.toUpperCase()}
+                  </span>
+                  <div className="flex flex-wrap gap-2.5">
                     {items.map((item) => (
-                      <li
+                      <span
                         key={item}
-                        className="flex items-center gap-2 text-sm text-text-secondary"
+                        className="cursor-default rounded-full border border-border-light px-4 py-2 font-mono text-xs font-medium text-text-secondary transition-colors duration-200 hover:border-brand hover:text-brand"
                       >
-                        <span className="h-1 w-1 rounded-full bg-brand" />
                         {item}
-                      </li>
+                      </span>
                     ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                  </div>
+                </div>
+                {groupIndex < arr.length - 1 && (
+                  <div className="h-px bg-border-dark" />
+                )}
+              </div>
             ))}
           </div>
         </section>
