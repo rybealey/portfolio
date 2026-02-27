@@ -1,8 +1,14 @@
 import { RegisterForm } from "@/components/admin/register-form";
 import { redirectIfAuthenticated } from "@/lib/auth/proxy";
+import { createAdminClient } from "@/lib/supabase/server";
+import { Lock } from "lucide-react";
 
 export default async function AdminRegisterPage() {
   await redirectIfAuthenticated();
+
+  const admin = createAdminClient();
+  const { data } = await admin.auth.admin.listUsers({ perPage: 1 });
+  const registrationOpen = (data?.users?.length ?? 0) === 0;
 
   return (
     <div className="flex min-h-screen bg-bg-dark font-sans">
@@ -72,7 +78,25 @@ export default async function AdminRegisterPage() {
       {/* ===== RIGHT PANEL ===== */}
       <div className="flex w-full flex-col items-center justify-center bg-bg-dark px-6 py-12 lg:w-[560px] lg:shrink-0 lg:px-20 lg:py-16">
         <div className="w-full max-w-sm lg:max-w-none">
-          <RegisterForm />
+          {registrationOpen ? (
+            <RegisterForm />
+          ) : (
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-border-light bg-bg-page">
+                  <Lock className="h-5 w-5 text-text-muted" />
+                </div>
+                <h1 className="text-[28px] font-bold text-text-primary">Registration closed</h1>
+                <p className="text-sm leading-relaxed text-text-secondary">
+                  An account cannot be created at this time. If you already have an account,{" "}
+                  <a href="/admin" className="font-semibold text-brand hover:opacity-80 transition-opacity">
+                    sign in here
+                  </a>
+                  .
+                </p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>
