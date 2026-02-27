@@ -51,7 +51,10 @@ export default async function Home() {
           <div className="flex flex-col gap-5 md:gap-6 lg:gap-8">
             {/* Status badge */}
             <Badge variant="outline" className="w-fit gap-2 border-border-light bg-transparent px-3 py-1.5 font-mono text-xs text-text-secondary md:text-sm">
-              <span className={`h-2.5 w-2.5 rounded-full ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
+              <span className="relative flex h-2.5 w-2.5">
+                <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
+                <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
+              </span>
               {profile?.looking_for_work ? "status: available_for_work" : "status: not_available"}
             </Badge>
 
