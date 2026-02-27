@@ -102,18 +102,12 @@ export default async function Home() {
 
             {/* Right column */}
             <div className="flex flex-col justify-center gap-6">
-              <p className="text-base leading-relaxed text-text-secondary lg:text-lg">
-                I&apos;m a product designer and developer with over 8 years of
-                experience building digital products. I started my career in
-                graphic design before transitioning into UI/UX, and eventually
-                fell in love with front-end development.
-              </p>
-              <p className="text-base leading-relaxed text-text-secondary lg:text-lg">
-                My sweet spot is the intersection of design and engineering —
-                where pixel-perfect interfaces meet clean, maintainable code. I
-                believe the best products come from understanding both sides of
-                the equation.
-              </p>
+              {profile?.about && (
+                <div
+                  className="text-base leading-relaxed text-text-secondary lg:text-lg [&>p]:mb-4 [&>p:last-child]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: profile.about }}
+                />
+              )}
 
               {/* Stats */}
               <div className="flex gap-6 pt-4 lg:gap-12">

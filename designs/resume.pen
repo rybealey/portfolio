@@ -852,6 +852,858 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "MnEKA",
+      "x": 1816,
+      "y": 0,
+      "name": "Resume — Light",
+      "clip": true,
+      "width": 816,
+      "height": 1056,
+      "fill": "#FFFFFF",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "QAEJO",
+          "name": "header",
+          "width": "fill_container",
+          "fill": "#F8FAFC",
+          "stroke": {
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "#E2E8F0"
+          },
+          "padding": [
+            32,
+            40,
+            28,
+            40
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "frame",
+              "id": "RbCEb",
+              "name": "nameBlock",
+              "layout": "vertical",
+              "gap": 4,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "9Bwi4",
+                  "name": "nameText",
+                  "fill": "#0F172A",
+                  "content": "Ryan Bealey",
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "700",
+                  "letterSpacing": -1
+                },
+                {
+                  "type": "text",
+                  "id": "iQDvg",
+                  "name": "titleText",
+                  "fill": "#0E7490",
+                  "content": "IT Professional",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "500",
+                  "letterSpacing": 1
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "q1W4q",
+              "name": "contactBlock",
+              "layout": "vertical",
+              "gap": 3,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ypfio",
+                  "name": "addr",
+                  "fill": "#64748B",
+                  "content": "9239 Amberglen Blvd., Apt. 3101  •  Austin, TX 78729",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "b2LJw",
+                  "name": "phone",
+                  "fill": "#64748B",
+                  "content": "1 (512) 937-9136  •  hello@ryanbealey.com",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 9,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "KxT1n",
+          "name": "body",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#FFFFFF",
+          "children": [
+            {
+              "type": "frame",
+              "id": "qzso5",
+              "name": "sidebar",
+              "width": 240,
+              "height": "fill_container",
+              "fill": "#F1F5F9",
+              "stroke": {
+                "thickness": {
+                  "right": 1
+                },
+                "fill": "#E2E8F0"
+              },
+              "layout": "vertical",
+              "gap": 20,
+              "padding": 24,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "pE3jI",
+                  "name": "skillsSection",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "IZQiN",
+                      "name": "skillsTitle",
+                      "fill": "#0E7490",
+                      "content": "SKILLS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "gCEqo",
+                      "name": "skillsDivider",
+                      "fill": "#F1F5F9",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "euf5p",
+                      "name": "sk1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qAgR6",
+                          "name": "sk1Title",
+                          "fill": "#0F172A",
+                          "content": "Systems & DevOps",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "fpsvJ",
+                          "name": "sk1Body",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Linux Server Administration, DevOps Methodologies, Multi-tenant Server Management, cPanel & WHM Administration",
+                          "lineHeight": 1.5,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "3J1t2",
+                      "name": "sk2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "1zyqz",
+                          "name": "sk2Title",
+                          "fill": "#0F172A",
+                          "content": "Hardware & Platforms",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "aTsrB",
+                          "name": "sk2Body",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "MacBook & Apple Hardware Support, iOS, iPadOS, watchOS, macOS, AV Support",
+                          "lineHeight": 1.5,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "UayOA",
+                      "name": "sk3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "o8I4Z",
+                          "name": "sk3Title",
+                          "fill": "#0F172A",
+                          "content": "Operations & Asset Mgmt",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NZDL9",
+                          "name": "sk3Body",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Technical Documentation & Knowledge Management, Disaster Recovery & Response, On-site & Remote Technical Support",
+                          "lineHeight": 1.5,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ePEja",
+                      "name": "sk4",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "kX034",
+                          "name": "sk4Title",
+                          "fill": "#0F172A",
+                          "content": "Infrastructure & Storage",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ykzv8",
+                          "name": "sk4Body",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Block Storage & Object Storage, Google Workspace & Microsoft 365 Administration",
+                          "lineHeight": 1.5,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uYHHc",
+                      "name": "sk5",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "H0NYE",
+                          "name": "sk5Title",
+                          "fill": "#0F172A",
+                          "content": "Collaboration & Process",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "NDj87",
+                          "name": "sk5Body",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "Cross-functional Collaboration, Slack & Slack Workflows, Zoom & Webex",
+                          "lineHeight": 1.5,
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "oIcXq",
+                  "name": "eduSection",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "I1ltL",
+                      "name": "eduTitle",
+                      "fill": "#0E7490",
+                      "content": "EDUCATION",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "k8d8K",
+                      "name": "eduDivider",
+                      "fill": "#F1F5F9",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HH4Mq",
+                      "name": "eduCard",
+                      "width": "fill_container",
+                      "fill": "#F1F5F9",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "#CBD5E1"
+                      },
+                      "layout": "vertical",
+                      "gap": 4,
+                      "padding": [
+                        12,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "8sNAc",
+                          "name": "eduDegree",
+                          "fill": "#0F172A",
+                          "content": "B.A. in Digital Media",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 11,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "gatKX",
+                          "name": "eduSchool",
+                          "fill": "#0E7490",
+                          "content": "University of Central Florida",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "mL1rc",
+                          "name": "eduDate",
+                          "fill": "#64748B",
+                          "content": "Aug 2016 — Dec 2019  •  Orlando",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "text",
+                          "id": "A69lL",
+                          "name": "eduSpec",
+                          "fill": "#64748B",
+                          "content": "Web Development Specialization",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 9,
+                          "fontWeight": "normal",
+                          "fontStyle": "italic"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7rvzp",
+              "name": "mainCol",
+              "width": "fill_container",
+              "height": "fill_container",
+              "fill": "#FFFFFF",
+              "layout": "vertical",
+              "gap": 18,
+              "padding": [
+                24,
+                32
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gjl2e",
+                  "name": "profileSection",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wg2un",
+                      "name": "profileTitle",
+                      "fill": "#0E7490",
+                      "content": "PROFILE",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "ZsXmY",
+                      "name": "profileDivider",
+                      "fill": "#F1F5F9",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "A2aZ5",
+                      "name": "profileBody",
+                      "fill": "#334155",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Results-driven IT professional with 10+ years in technical support, systems administration, and customer success. Proven track record of managing complex infrastructure, debugging multi-tenant systems, and implementing DevOps methodologies. Strong background in Apple ecosystem hardware support and cross-functional collaboration.",
+                      "lineHeight": 1.6,
+                      "fontFamily": "Inter",
+                      "fontSize": 10,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "vHB7v",
+                  "name": "empSection",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 10,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "SS8Ac",
+                      "name": "empTitle",
+                      "fill": "#0E7490",
+                      "content": "EMPLOYMENT HISTORY",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "600",
+                      "letterSpacing": 2
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "P7QHn",
+                      "name": "empDivider",
+                      "fill": "#F1F5F9",
+                      "width": "fill_container",
+                      "height": 1
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ViCRA",
+                      "name": "job1",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Dey6k",
+                          "name": "job1Header",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "2LBIi",
+                              "name": "job1Left",
+                              "layout": "vertical",
+                              "gap": 1,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "xZbhp",
+                                  "name": "job1Role",
+                                  "fill": "#0F172A",
+                                  "content": "Founder",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "wkCRF",
+                                  "name": "job1Co",
+                                  "fill": "#0E7490",
+                                  "content": "SERVERIZZ®",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 9,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "Ga1Ul",
+                              "name": "job1Date",
+                              "fill": "#64748B",
+                              "content": "Dec 2014 — Present • Austin",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "gtj1d",
+                          "name": "job1Bullets",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Founded and operated a local web hosting company, providing comprehensive hosting solutions and white-glove technical support to small businesses.\n• Engineered and managed multi-tenant server environments, demonstrating strong expertise in DevOps and systems administration.\n• Deployed and managed cPanel & WHM environments for over ten years, optimizing server operations and client management.\n• Provided expert technical support for server software including PHP, Apache, Linux, and MySQL.\n• Implemented Block Storage and Object Storage solutions to enhance data efficiency.\n• Oversaw all aspects of business operations, including client relations, service delivery, technical infrastructure, and asset management.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "L2url",
+                      "name": "job2",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "TcXpF",
+                          "name": "job2Header",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "DkrF0",
+                              "name": "job2Left",
+                              "layout": "vertical",
+                              "gap": 1,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "B1lRy",
+                                  "name": "job2Role",
+                                  "fill": "#0F172A",
+                                  "content": "Sr. Technical Sales Representative",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "TEtmb",
+                                  "name": "job2Co",
+                                  "fill": "#0E7490",
+                                  "content": "Apple",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 9,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "6d3oc",
+                              "name": "job2Date",
+                              "fill": "#64748B",
+                              "content": "Mar 2022 — Present • Austin",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "J9Tez",
+                          "name": "job2Bullets",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Provided advanced technical support for complex software and hardware issues across macOS, iOS, iPadOS, and watchOS platforms.\n• Collaborated with internal teams to escalate complex technical issues and contribute to continuous improvement of support processes.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pwqps",
+                      "name": "job3",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "oFgC4",
+                          "name": "job3Header",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "bjTc6",
+                              "name": "job3Left",
+                              "layout": "vertical",
+                              "gap": 1,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "gKKLy",
+                                  "name": "job3Role",
+                                  "fill": "#0F172A",
+                                  "content": "Technical Product Advisor",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "6UTf8",
+                                  "name": "job3Co",
+                                  "fill": "#0E7490",
+                                  "content": "Apple",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 9,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "rnZW1",
+                              "name": "job3Date",
+                              "fill": "#64748B",
+                              "content": "Mar 2021 — Mar 2022 • Austin",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "KzR7Y",
+                          "name": "job3Bullets",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Delivered expert technical support and product knowledge in high-traffic retail environment (Apple Domain NORTHSIDE).",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "pP6oB",
+                      "name": "job4",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "g8gKF",
+                          "name": "job4Header",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "n4qwW",
+                              "name": "job4Left",
+                              "layout": "vertical",
+                              "gap": 1,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "NhJ3z",
+                                  "name": "job4Role",
+                                  "fill": "#0F172A",
+                                  "content": "AppleCare Knowledge Mgmt Coordinator",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "X4mU6",
+                                  "name": "job4Co",
+                                  "fill": "#0E7490",
+                                  "content": "Apple",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 9,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "j3OZ7",
+                              "name": "job4Date",
+                              "fill": "#64748B",
+                              "content": "Sep 2020 — Mar 2021 • Austin",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "oS5WB",
+                          "name": "job4Bullets",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Authored comprehensive technical documentation for internal projects, ensuring clarity and accessibility of critical information.\n• Provided extensive knowledge management support to AppleCare employees on a global scale, streamlining information dissemination processes.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Nb5jQ",
+                      "name": "job5",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "Naz7F",
+                          "name": "job5Header",
+                          "width": "fill_container",
+                          "justifyContent": "space_between",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "Zl4Es",
+                              "name": "job5Left",
+                              "layout": "vertical",
+                              "gap": 1,
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "BvCUj",
+                                  "name": "job5Role",
+                                  "fill": "#0F172A",
+                                  "content": "AppleCare Technical Support Advisor",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 11,
+                                  "fontWeight": "600"
+                                },
+                                {
+                                  "type": "text",
+                                  "id": "GbjSB",
+                                  "name": "job5Co",
+                                  "fill": "#0E7490",
+                                  "content": "Apple",
+                                  "fontFamily": "JetBrains Mono",
+                                  "fontSize": 9,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "text",
+                              "id": "GWsKJ",
+                              "name": "job5Date",
+                              "fill": "#64748B",
+                              "content": "Jul 2018 — Sep 2020 • Austin",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 9,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "text",
+                          "id": "im76J",
+                          "name": "job5Bullets",
+                          "fill": "#334155",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "• Provided technical support troubleshooting software and hardware issues across iOS, iPadOS, watchOS, and macOS operating systems.\n• Diagnosed and recommended hardware service solutions, ensuring optimal device performance in high-volume environment.",
+                          "lineHeight": 1.5,
+                          "fontFamily": "Inter",
+                          "fontSize": 9,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
