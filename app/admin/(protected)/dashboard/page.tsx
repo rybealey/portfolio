@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Eye, Folder, Mail, Activity, ArrowUpRight, Plus, MoreHorizontal } from "lucide-react";
+import { Eye, Folder, Mail, Activity, ArrowUpRight, MoreHorizontal } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { requireAuth } from "@/lib/auth/proxy";
 import { getLatestDeployment } from "@/lib/vercel/client";
@@ -82,13 +82,6 @@ export default async function DashboardPage() {
             Here&apos;s what&apos;s happening with your portfolio today.
           </p>
         </div>
-        <Link
-          href="/admin/projects/new"
-          className="flex items-center gap-2 rounded-md bg-brand px-4 py-2.5 text-sm font-semibold text-bg-dark transition-opacity hover:opacity-90"
-        >
-          <Plus className="h-4 w-4" />
-          New Project
-        </Link>
       </div>
 
       {/* Stats row */}
