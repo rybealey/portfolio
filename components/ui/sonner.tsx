@@ -15,9 +15,9 @@ export function Toaster() {
         unstyled: true,
         classNames: {
           toast:
-            "w-[380px] rounded-lg bg-bg-card p-5 flex flex-col gap-3 border font-sans shadow-lg",
+            "w-[380px] rounded-lg bg-bg-card p-5 flex flex-col gap-2 border font-sans shadow-lg relative",
           closeButton:
-            "!bg-transparent !border-0 !text-text-muted hover:!text-text-primary !right-3 !top-3 !left-auto !transform-none",
+            "!absolute !right-3 !top-3 !left-auto !bottom-auto !transform-none !bg-transparent !border-0 !text-text-muted hover:!text-text-primary !p-0 !h-4 !w-4",
           title: "text-sm font-semibold text-text-primary",
           description: "text-[13px] leading-relaxed text-text-secondary",
           success: "border-green-500/20",
