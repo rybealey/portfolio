@@ -69,14 +69,16 @@ export default async function Home() {
             }}
           />
           <div className="relative z-10 flex flex-col gap-5 md:gap-6 lg:gap-8">
-            {/* Status badge */}
-            <Badge variant="outline" className="w-fit gap-2 border-border-light bg-transparent px-3 py-1.5 font-mono text-xs text-text-secondary md:text-sm">
-              <span className="relative flex h-2.5 w-2.5">
-                <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
-                <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
-              </span>
-              {profile?.looking_for_work ? "status: available_for_work" : "status: not_available"}
-            </Badge>
+            {/* Status badges */}
+            <div className="flex flex-wrap gap-2">
+              <Badge variant="outline" className="w-fit gap-2 border-border-light bg-transparent px-3 py-1.5 font-mono text-xs text-text-secondary md:text-sm">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className={`absolute inline-flex h-full w-full animate-ping rounded-full opacity-75 ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
+                  <span className={`relative inline-flex h-2.5 w-2.5 rounded-full ${profile?.looking_for_work ? "bg-green-400" : "bg-yellow-400"}`} />
+                </span>
+                {profile?.looking_for_work ? "looking_for_work: true" : "looking_for_work: false"}
+              </Badge>
+            </div>
 
             <h1 className="text-[48px] font-bold leading-[1.05] tracking-tight md:text-[64px] lg:text-[88px]">
               {profile?.first_name ?? "First"}<br />
