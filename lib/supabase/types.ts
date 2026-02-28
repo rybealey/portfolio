@@ -37,57 +37,6 @@ export type Database = {
         };
         Relationships: [];
       };
-      stats: {
-        Row: {
-          id: string;
-          value: string;
-          label: string;
-          sort_order: number;
-        };
-        Insert: {
-          id?: string;
-          value: string;
-          label: string;
-          sort_order?: number;
-        };
-        Update: {
-          id?: string;
-          value?: string;
-          label?: string;
-          sort_order?: number;
-        };
-        Relationships: [];
-      };
-      experiences: {
-        Row: {
-          id: string;
-          date_range: string;
-          role: string;
-          company: string;
-          description: string;
-          url: string | null;
-          sort_order: number;
-        };
-        Insert: {
-          id?: string;
-          date_range: string;
-          role: string;
-          company: string;
-          description: string;
-          url?: string | null;
-          sort_order?: number;
-        };
-        Update: {
-          id?: string;
-          date_range?: string;
-          role?: string;
-          company?: string;
-          description?: string;
-          url?: string | null;
-          sort_order?: number;
-        };
-        Relationships: [];
-      };
       skills: {
         Row: {
           id: string;
@@ -169,27 +118,6 @@ export type Database = {
         };
         Relationships: [];
       };
-      social_links: {
-        Row: {
-          id: string;
-          platform: string;
-          url: string;
-          sort_order: number;
-        };
-        Insert: {
-          id?: string;
-          platform: string;
-          url: string;
-          sort_order?: number;
-        };
-        Update: {
-          id?: string;
-          platform?: string;
-          url?: string;
-          sort_order?: number;
-        };
-        Relationships: [];
-      };
       work_history: {
         Row: {
           id: string;
@@ -252,10 +180,7 @@ export type Database = {
 
 // Convenience row types
 export type Profile = Database["public"]["Tables"]["profile"]["Row"];
-export type Stat = Database["public"]["Tables"]["stats"]["Row"];
-export type Experience = Database["public"]["Tables"]["experiences"]["Row"];
 export type Skill = Database["public"]["Tables"]["skills"]["Row"];
 export type Project = Database["public"]["Tables"]["projects"]["Row"];
-export type SocialLink = Database["public"]["Tables"]["social_links"]["Row"];
 export type WorkHistory = Database["public"]["Tables"]["work_history"]["Row"];
 export type Social = Database["public"]["Tables"]["socials"]["Row"];
