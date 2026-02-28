@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +16,7 @@ export default async function Home() {
   const { data: skills } = await supabase.from("skills").select().order("sort_order");
   const { data: workHistory } = await supabase.from("work_history").select().order("sort_order");
   const { data: socials } = await supabase.from("socials").select().order("sort_order");
-  const { data: projects } = await supabase.from("projects").select().order("sort_order");
+  const { data: projects } = await supabase.from("projects").select().eq("status", "published").order("sort_order");
 
   const skillsByType = (skills ?? []).reduce<Record<string, string[]>>((acc, s) => {
     (acc[s.type] ??= []).push(s.skill);
@@ -149,78 +150,77 @@ export default async function Home() {
           </div>
         </section>
 
-        {/* ===== 4. EXPERIENCE ===== */}
+        {/* ===== 4. EXPERIENCE & SKILLS ===== */}
         <section id="experience" className="px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
+          <span id="skills" />
           <span className="font-mono text-sm text-brand">// experience</span>
           <h2 className="mt-4 mb-10 text-[32px] font-bold leading-tight md:text-[40px] md:mb-12 lg:text-[48px] lg:mb-16">
             Where I&apos;ve worked.
           </h2>
 
-          <div className="flex flex-col">
-            {(workHistory ?? []).map((job, i, arr) => {
-              const startYear = new Date(job.start_date).getFullYear();
-              const endLabel = job.end_date ? new Date(job.end_date).getFullYear().toString() : "Present";
-              const dateRange = startYear === Number(endLabel) ? `${startYear}` : `${startYear} — ${endLabel}`;
-
-              return (
-              <div key={job.id}>
-                <div className="flex flex-col gap-2 py-6 lg:flex-row lg:items-start lg:gap-0 lg:py-8">
-                  <span className="font-mono text-sm text-text-muted lg:w-[180px] lg:shrink-0 lg:pt-1">
-                    {dateRange}
-                  </span>
-                  <div className="flex flex-1 flex-col gap-1">
-                    <h3 className="text-lg font-semibold lg:text-xl">
-                      {job.job_title}
-                    </h3>
-                    <span className="font-mono text-sm text-brand">
-                      {job.employer}
+          <div className="flex flex-col gap-10 lg:flex-row lg:gap-16">
+            {/* Left on desktop, below on mobile — Skills sidebar */}
+            <div className="order-2 flex flex-col gap-5 lg:order-1 lg:w-[300px] lg:shrink-0 lg:sticky lg:top-24 lg:self-start">
+              {Object.entries(skillsByType).map(([type, items], groupIndex, arr) => (
+                <div key={type}>
+                  <div className="flex flex-col gap-3">
+                    <span className="font-mono text-[11px] font-semibold tracking-[2px] text-brand">
+                      {type.toUpperCase()}
                     </span>
-                    <p className="mt-1 text-sm leading-relaxed text-text-secondary lg:text-base">
-                      {job.job_description}
-                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {items.map((item) => (
+                        <span
+                          key={item}
+                          className="cursor-default rounded-full border border-border-light px-3.5 py-1.5 font-mono text-xs font-medium text-text-secondary transition-colors duration-200 hover:border-brand hover:text-brand"
+                        >
+                          {item}
+                        </span>
+                      ))}
+                    </div>
                   </div>
+                  {groupIndex < arr.length - 1 && (
+                    <div className="mt-5 h-px bg-border-dark" />
+                  )}
                 </div>
-                {i < arr.length - 1 && <Separator className="bg-border-light" />}
-              </div>
-              );
-            })}
-          </div>
-        </section>
+              ))}
+            </div>
 
-        {/* ===== 5. SKILLS ===== */}
-        <section id="skills" className="bg-bg-page px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
-          <span className="font-mono text-sm text-brand">// skills</span>
-          <h2 className="mt-4 mb-10 text-[32px] font-bold leading-tight md:text-[40px] md:mb-12 lg:text-[48px] lg:mb-16">
-            What I do.
-          </h2>
+            <Separator className="order-2 bg-border-light lg:hidden" />
 
-          <div className="flex flex-col">
-            {Object.entries(skillsByType).map(([type, items], groupIndex, arr) => (
-              <div key={type}>
-                <div className="flex flex-col gap-4 py-5 md:py-6">
-                  <span className="font-mono text-[11px] font-semibold tracking-[2px] text-brand">
-                    {type.toUpperCase()}
-                  </span>
-                  <div className="flex flex-wrap gap-2.5">
-                    {items.map((item) => (
-                      <span
-                        key={item}
-                        className="cursor-default rounded-full border border-border-light px-4 py-2 font-mono text-xs font-medium text-text-secondary transition-colors duration-200 hover:border-brand hover:text-brand"
-                      >
-                        {item}
+            {/* Right on desktop, above on mobile — Work history */}
+            <div className="order-1 flex flex-1 flex-col lg:order-2">
+              {(workHistory ?? []).map((job, i, arr) => {
+                const startYear = new Date(job.start_date).getFullYear();
+                const endLabel = job.end_date ? new Date(job.end_date).getFullYear().toString() : "Present";
+                const dateRange = startYear === Number(endLabel) ? `${startYear}` : `${startYear} — ${endLabel}`;
+
+                return (
+                <div key={job.id}>
+                  <div className="flex flex-col gap-2 py-6 lg:flex-row lg:items-start lg:gap-0 lg:py-8">
+                    <span className="font-mono text-sm text-text-muted lg:w-[180px] lg:shrink-0 lg:pt-1">
+                      {dateRange}
+                    </span>
+                    <div className="flex flex-1 flex-col gap-1">
+                      <h3 className="text-lg font-semibold lg:text-xl">
+                        {job.job_title}
+                      </h3>
+                      <span className="font-mono text-sm text-brand">
+                        {job.employer}
                       </span>
-                    ))}
+                      <p className="mt-1 text-sm leading-relaxed text-text-secondary lg:text-base">
+                        {job.job_description}
+                      </p>
+                    </div>
                   </div>
+                  {i < arr.length - 1 && <Separator className="bg-border-light" />}
                 </div>
-                {groupIndex < arr.length - 1 && (
-                  <div className="h-px bg-border-dark" />
-                )}
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* ===== 6. PROJECTS ===== */}
+        {/* ===== 5. PROJECTS ===== */}
         <section id="projects" className="px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[100px]">
           <span className="font-mono text-sm text-brand">// projects</span>
           <h2 className="mt-4 mb-10 text-[32px] font-bold leading-tight md:text-[40px] md:mb-12 lg:text-[48px] lg:mb-16">
@@ -230,24 +230,36 @@ export default async function Home() {
           {(projects ?? []).length > 0 ? (
             <div className="grid grid-cols-1 gap-5 lg:grid-cols-2 lg:gap-6">
               {(projects ?? []).map((project) => (
-                <Card key={project.id} className="overflow-hidden border-border-light bg-bg-card-alt py-0 shadow-none">
-                  <div className="h-[200px] bg-gradient-to-br from-cyan-500/20 to-blue-600/20 md:h-[280px]">
-                    <div className="flex h-full items-center justify-center font-mono text-sm text-text-muted">
-                      {project.slug}.png
-                    </div>
-                  </div>
-                  <CardContent className="flex flex-col gap-2 p-5 lg:p-7">
-                    <span className="font-mono text-xs text-brand">
-                      {project.type}
-                    </span>
-                    <h3 className="text-lg font-semibold lg:text-xl">
-                      {project.name}
-                    </h3>
-                    <p className="text-sm leading-relaxed text-text-secondary">
-                      {project.excerpt}
-                    </p>
-                  </CardContent>
-                </Card>
+                <Link key={project.id} href={`/projects/${project.slug}`}>
+                  <Card className="overflow-hidden border-border-light bg-bg-card-alt py-0 shadow-none transition-colors hover:border-brand/30">
+                    {project.cover_image ? (
+                      <div className="h-[200px] overflow-hidden md:h-[280px]">
+                        <img
+                          src={project.cover_image}
+                          alt={project.name}
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div className="h-[200px] bg-gradient-to-br from-cyan-500/20 to-blue-600/20 md:h-[280px]">
+                        <div className="flex h-full items-center justify-center font-mono text-sm text-text-muted">
+                          {project.slug}.png
+                        </div>
+                      </div>
+                    )}
+                    <CardContent className="flex flex-col gap-2 p-5 lg:p-7">
+                      <span className="font-mono text-xs text-brand">
+                        {project.type}
+                      </span>
+                      <h3 className="text-lg font-semibold lg:text-xl">
+                        {project.name}
+                      </h3>
+                      <p className="text-sm leading-relaxed text-text-secondary">
+                        {project.excerpt}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
               ))}
             </div>
           ) : (
@@ -262,7 +274,7 @@ export default async function Home() {
           )}
         </section>
 
-        {/* ===== 7. CONTACT CTA ===== */}
+        {/* ===== 6. CONTACT CTA ===== */}
         <section id="contact" className="bg-bg-dark px-6 py-14 md:px-12 md:py-[72px] lg:px-[120px] lg:py-[120px]">
           <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
             <span className="font-mono text-sm text-brand">// contact</span>
@@ -285,7 +297,7 @@ export default async function Home() {
         </section>
       </main>
 
-      {/* ===== 8. FOOTER ===== */}
+      {/* ===== 7. FOOTER ===== */}
       <footer className="border-t border-border-light px-6 py-8 md:px-12 md:py-10 lg:px-[120px] lg:py-12">
         {/* Top row */}
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">

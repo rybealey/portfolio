@@ -147,7 +147,8 @@
                   "content": "Update projects, manage content, and monitor your portfolio — all from one place.",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -204,7 +205,8 @@
                       "fill": "$text-secondary",
                       "content": "$ ssh admin@ry.bealey",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -213,7 +215,8 @@
                       "fill": "$accent",
                       "content": "> authenticating...",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -222,7 +225,8 @@
                       "fill": "#22C55E",
                       "content": "✓ session ready",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -235,7 +239,8 @@
               "fill": "$text-muted",
               "content": "© 2026 Ry Bealey. All rights reserved.",
               "fontFamily": "Inter",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -304,7 +309,8 @@
                       "content": "Enter your credentials to access the admin dashboard.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -370,7 +376,8 @@
                               "fill": "$text-muted",
                               "content": "admin@ry.bealey",
                               "fontFamily": "Inter",
-                              "fontSize": 14
+                              "fontSize": 14,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -438,7 +445,8 @@
                                   "fill": "$text-muted",
                                   "content": "••••••••••",
                                   "fontFamily": "Inter",
-                                  "fontSize": 14
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -491,7 +499,8 @@
                               "fill": "$text-secondary",
                               "content": "Remember me",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -785,7 +794,8 @@
                   "content": "Set up your admin credentials to start managing your portfolio content.",
                   "lineHeight": 1.6,
                   "fontFamily": "Inter",
-                  "fontSize": 16
+                  "fontSize": 16,
+                  "fontWeight": "normal"
                 },
                 {
                   "type": "frame",
@@ -842,7 +852,8 @@
                       "fill": "$text-secondary",
                       "content": "$ create-admin --new",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -851,7 +862,8 @@
                       "fill": "$accent",
                       "content": "> initializing account...",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "text",
@@ -860,7 +872,8 @@
                       "fill": "#22C55E",
                       "content": "✓ ready to configure",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     }
                   ]
                 }
@@ -873,7 +886,8 @@
               "fill": "$text-muted",
               "content": "© 2026 Ry Bealey. All rights reserved.",
               "fontFamily": "Inter",
-              "fontSize": 12
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         },
@@ -942,7 +956,8 @@
                       "content": "Fill in your details to set up your admin access.",
                       "lineHeight": 1.5,
                       "fontFamily": "Inter",
-                      "fontSize": 14
+                      "fontSize": 14,
+                      "fontWeight": "normal"
                     }
                   ]
                 },
@@ -1008,7 +1023,8 @@
                               "fill": "$text-muted",
                               "content": "Ry Bealey",
                               "fontFamily": "Inter",
-                              "fontSize": 14
+                              "fontSize": 14,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -1068,7 +1084,8 @@
                               "fill": "$text-muted",
                               "content": "admin@ry.bealey",
                               "fontFamily": "Inter",
-                              "fontSize": 14
+                              "fontSize": 14,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -1136,7 +1153,8 @@
                                   "fill": "$text-muted",
                                   "content": "••••••••••",
                                   "fontFamily": "Inter",
-                                  "fontSize": 14
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -1216,7 +1234,8 @@
                                   "fill": "$text-muted",
                                   "content": "••••••••••",
                                   "fontFamily": "Inter",
-                                  "fontSize": 14
+                                  "fontSize": 14,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -1268,7 +1287,8 @@
                               "fill": "$text-secondary",
                               "content": "I agree to the Terms of Service and Privacy Policy",
                               "fontFamily": "Inter",
-                              "fontSize": 13
+                              "fontSize": 13,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -1423,7 +1443,8 @@
                           "fill": "$text-muted",
                           "content": "Already have an account?",
                           "fontFamily": "Inter",
-                          "fontSize": 13
+                          "fontSize": 13,
+                          "fontWeight": "normal"
                         },
                         {
                           "type": "text",
@@ -1623,7 +1644,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1668,7 +1690,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1702,7 +1725,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1736,7 +1760,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1781,7 +1806,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -1815,7 +1841,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -1905,7 +1932,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -1989,7 +2017,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -2133,7 +2162,8 @@
                           "fill": "$text-secondary",
                           "content": "Here's what's happening with your portfolio today.",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -2260,7 +2290,8 @@
                               "fill": "$text-muted",
                               "content": "+12.5% from last month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -2345,7 +2376,8 @@
                               "fill": "$text-muted",
                               "content": "+2 new this month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -2428,7 +2460,8 @@
                               "fill": "$text-muted",
                               "content": "3 unread",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -2511,7 +2544,8 @@
                               "fill": "$text-muted",
                               "content": "All systems operational",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -2749,7 +2783,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Feb 24, 2026",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -2854,7 +2889,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Feb 20, 2026",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -2959,7 +2995,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Feb 14, 2026",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3058,7 +3095,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Jan 30, 2026",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -3210,7 +3248,8 @@
                                       "fill": "$text-muted",
                                       "content": "2 hours ago",
                                       "fontFamily": "JetBrains Mono",
-                                      "fontSize": 11
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3260,7 +3299,8 @@
                                       "fill": "$text-muted",
                                       "content": "5 hours ago",
                                       "fontFamily": "JetBrains Mono",
-                                      "fontSize": 11
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3310,7 +3350,8 @@
                                       "fill": "$text-muted",
                                       "content": "Yesterday",
                                       "fontFamily": "JetBrains Mono",
-                                      "fontSize": 11
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3360,7 +3401,8 @@
                                       "fill": "$text-muted",
                                       "content": "2 days ago",
                                       "fontFamily": "JetBrains Mono",
-                                      "fontSize": 11
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3410,7 +3452,8 @@
                                       "fill": "$text-muted",
                                       "content": "3 days ago",
                                       "fontFamily": "JetBrains Mono",
-                                      "fontSize": 11
+                                      "fontSize": 11,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -3600,7 +3643,8 @@
                           "fill": "$text-secondary",
                           "content": "Dashboard",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -3681,7 +3725,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -3715,7 +3760,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -3749,7 +3795,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -3794,7 +3841,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -3828,7 +3876,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -3918,7 +3967,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -4002,7 +4052,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -4146,7 +4197,8 @@
                           "fill": "$text-secondary",
                           "content": "Track visitor activity, traffic sources, and server performance.",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -4277,7 +4329,8 @@
                               "fill": "$text-muted",
                               "content": "+18.2% from last month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -4362,7 +4415,8 @@
                               "fill": "$text-muted",
                               "content": "+24.8% from last month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -4445,7 +4499,8 @@
                               "fill": "$text-muted",
                               "content": "+8.1% from last month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -4528,7 +4583,8 @@
                               "fill": "$text-muted",
                               "content": "-5.3% from last month",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -4634,7 +4690,8 @@
                                       "fill": "$text-muted",
                                       "content": "Page Views",
                                       "fontFamily": "Inter",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 },
@@ -4655,7 +4712,8 @@
                                       "fill": "$text-muted",
                                       "content": "Sessions",
                                       "fontFamily": "Inter",
-                                      "fontSize": 12
+                                      "fontSize": 12,
+                                      "fontWeight": "normal"
                                     }
                                   ]
                                 }
@@ -4694,7 +4752,8 @@
                                   "fill": "$text-muted",
                                   "content": "500",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -4703,7 +4762,8 @@
                                   "fill": "$text-muted",
                                   "content": "400",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -4712,7 +4772,8 @@
                                   "fill": "$text-muted",
                                   "content": "300",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -4721,7 +4782,8 @@
                                   "fill": "$text-muted",
                                   "content": "200",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -4730,7 +4792,8 @@
                                   "fill": "$text-muted",
                                   "content": "100",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 },
                                 {
                                   "type": "text",
@@ -4739,7 +4802,8 @@
                                   "fill": "$text-muted",
                                   "content": "0",
                                   "fontFamily": "JetBrains Mono",
-                                  "fontSize": 10
+                                  "fontSize": 10,
+                                  "fontWeight": "normal"
                                 }
                               ]
                             },
@@ -4878,7 +4942,8 @@
                               "fill": "$text-muted",
                               "content": "Jan 28",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -4887,7 +4952,8 @@
                               "fill": "$text-muted",
                               "content": "Feb 3",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -4896,7 +4962,8 @@
                               "fill": "$text-muted",
                               "content": "Feb 9",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -4905,7 +4972,8 @@
                               "fill": "$text-muted",
                               "content": "Feb 15",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -4914,7 +4982,8 @@
                               "fill": "$text-muted",
                               "content": "Feb 21",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             },
                             {
                               "type": "text",
@@ -4923,7 +4992,8 @@
                               "fill": "$text-muted",
                               "content": "Feb 27",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 10
+                              "fontSize": 10,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -5086,7 +5156,8 @@
                                           "fill": "$text-primary",
                                           "content": "/",
                                           "fontFamily": "JetBrains Mono",
-                                          "fontSize": 13
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -5141,7 +5212,8 @@
                                           "fill": "$text-primary",
                                           "content": "/projects/pulse",
                                           "fontFamily": "JetBrains Mono",
-                                          "fontSize": 13
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -5196,7 +5268,8 @@
                                           "fill": "$text-primary",
                                           "content": "/about",
                                           "fontFamily": "JetBrains Mono",
-                                          "fontSize": 13
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -5251,7 +5324,8 @@
                                           "fill": "$text-primary",
                                           "content": "/projects/mindful",
                                           "fontFamily": "JetBrains Mono",
-                                          "fontSize": 13
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -5300,7 +5374,8 @@
                                           "fill": "$text-primary",
                                           "content": "/contact",
                                           "fontFamily": "JetBrains Mono",
-                                          "fontSize": 13
+                                          "fontSize": 13,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -5827,7 +5902,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Uptime",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     },
                                     {
                                       "type": "text",
@@ -5866,7 +5942,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Response Time",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     },
                                     {
                                       "type": "text",
@@ -5905,7 +5982,8 @@
                                       "fill": "$text-secondary",
                                       "content": "CPU Usage",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     },
                                     {
                                       "type": "text",
@@ -5944,7 +6022,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Memory",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     },
                                     {
                                       "type": "text",
@@ -5977,7 +6056,8 @@
                                       "fill": "$text-secondary",
                                       "content": "Bandwidth",
                                       "fontFamily": "Inter",
-                                      "fontSize": 13
+                                      "fontSize": 13,
+                                      "fontWeight": "normal"
                                     },
                                     {
                                       "type": "text",
@@ -6148,7 +6228,8 @@
                           "fill": "$text-secondary",
                           "content": "Dashboard",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6182,7 +6263,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6263,7 +6345,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6297,7 +6380,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6342,7 +6426,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6376,7 +6461,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -6466,7 +6552,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -6550,7 +6637,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -6694,7 +6782,8 @@
                           "fill": "$text-secondary",
                           "content": "Manage, edit, and organize your portfolio projects.",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -6795,7 +6884,8 @@
                               "fill": "$text-muted",
                               "content": "Published (6)",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         },
@@ -6816,7 +6906,8 @@
                               "fill": "$text-muted",
                               "content": "Draft (2)",
                               "fontFamily": "Inter",
-                              "fontSize": 12
+                              "fontSize": 12,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -6999,7 +7090,8 @@
                                           "content": "SaaS analytics dashboard for product teams",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7060,7 +7152,8 @@
                                           "fill": "$text-muted",
                                           "content": "Feb 24, 2026",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7088,7 +7181,8 @@
                                           "fill": "$text-muted",
                                           "content": "3,847 views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -7305,7 +7399,8 @@
                                           "content": "Meditation and wellness mobile application",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7366,7 +7461,8 @@
                                           "fill": "$text-muted",
                                           "content": "Feb 20, 2026",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7394,7 +7490,8 @@
                                           "fill": "$text-muted",
                                           "content": "— views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -7611,7 +7708,8 @@
                                           "content": "Component library and design tokens framework",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7672,7 +7770,8 @@
                                           "fill": "$text-muted",
                                           "content": "Feb 14, 2026",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7700,7 +7799,8 @@
                                           "fill": "$text-muted",
                                           "content": "2,193 views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -7926,7 +8026,8 @@
                                           "content": "Real-time file sync and collaboration platform",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -7987,7 +8088,8 @@
                                           "fill": "$text-muted",
                                           "content": "Jan 30, 2026",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -8015,7 +8117,8 @@
                                           "fill": "$text-muted",
                                           "content": "5,120 views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -8232,7 +8335,8 @@
                                           "content": "Developer journaling and progress tracking tool",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -8293,7 +8397,8 @@
                                           "fill": "$text-muted",
                                           "content": "Jan 15, 2026",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -8321,7 +8426,8 @@
                                           "fill": "$text-muted",
                                           "content": "1,832 views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -8538,7 +8644,8 @@
                                           "content": "Unified API gateway and documentation hub",
                                           "lineHeight": 1.4,
                                           "fontFamily": "Inter",
-                                          "fontSize": 12
+                                          "fontSize": 12,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -8599,7 +8706,8 @@
                                           "fill": "$text-muted",
                                           "content": "Dec 28, 2025",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     },
@@ -8627,7 +8735,8 @@
                                           "fill": "$text-muted",
                                           "content": "4,506 views",
                                           "fontFamily": "Inter",
-                                          "fontSize": 11
+                                          "fontSize": 11,
+                                          "fontWeight": "normal"
                                         }
                                       ]
                                     }
@@ -8925,7 +9034,8 @@
                           "fill": "$text-secondary",
                           "content": "Dashboard",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -8959,7 +9069,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -9040,7 +9151,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -9074,7 +9186,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -9119,7 +9232,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -9153,7 +9267,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -9243,7 +9358,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -9327,7 +9443,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -10960,7 +11077,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -11005,7 +11123,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -11075,7 +11194,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -11120,7 +11240,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -11154,7 +11275,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -11244,7 +11366,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -11328,7 +11451,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -12340,7 +12464,8 @@
                           "fill": "$text-secondary",
                           "content": "Dashboard",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -12374,7 +12499,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -12490,7 +12616,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -12535,7 +12662,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -12569,7 +12697,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -12659,7 +12788,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -12743,7 +12873,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -13846,7 +13977,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -13891,7 +14023,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -13925,7 +14058,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -14006,7 +14140,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -14040,7 +14175,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -14130,7 +14266,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -14214,7 +14351,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -15644,7 +15782,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -15689,7 +15828,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -15723,7 +15863,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -15804,7 +15945,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -15838,7 +15980,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -15928,7 +16071,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -16014,7 +16158,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -17716,7 +17861,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -17761,7 +17907,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -17795,7 +17942,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -17829,7 +17977,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -17910,7 +18059,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -18000,7 +18150,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -18084,7 +18235,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -19444,7 +19596,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -19489,7 +19642,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -19523,7 +19677,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -19557,7 +19712,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -19638,7 +19794,8 @@
                           "fill": "$text-secondary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -19728,7 +19885,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -19814,7 +19972,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -21772,7 +21931,8 @@
                           "fill": "$text-secondary",
                           "content": "Analytics",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -21817,7 +21977,8 @@
                           "fill": "$text-secondary",
                           "content": "Projects",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -21851,7 +22012,8 @@
                           "fill": "$text-secondary",
                           "content": "Work History",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -21885,7 +22047,8 @@
                           "fill": "$text-secondary",
                           "content": "Skills",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -21930,7 +22093,8 @@
                           "fill": "$text-secondary",
                           "content": "Media",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     },
@@ -21965,7 +22129,8 @@
                           "fill": "$text-primary",
                           "content": "Settings",
                           "fontFamily": "Inter",
-                          "fontSize": 14
+                          "fontSize": 14,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
@@ -22055,7 +22220,8 @@
                               "fill": "$text-muted",
                               "content": "Administrator",
                               "fontFamily": "Inter",
-                              "fontSize": 11
+                              "fontSize": 11,
+                              "fontWeight": "normal"
                             }
                           ]
                         }
@@ -22139,7 +22305,8 @@
                       "fill": "$text-muted",
                       "content": "Search anything...",
                       "fontFamily": "Inter",
-                      "fontSize": 13
+                      "fontSize": 13,
+                      "fontWeight": "normal"
                     },
                     {
                       "type": "frame",
@@ -23087,6 +23254,381 @@
                       ]
                     }
                   ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "M7T0t",
+      "x": 0,
+      "y": -600,
+      "name": "Sonner Toasts",
+      "width": 1440,
+      "height": 500,
+      "fill": "$bg-page",
+      "layout": "vertical",
+      "gap": 48,
+      "padding": 64,
+      "children": [
+        {
+          "type": "text",
+          "id": "dOee0",
+          "name": "label",
+          "fill": "$text-muted",
+          "content": "SONNER TOAST NOTIFICATIONS",
+          "fontFamily": "JetBrains Mono",
+          "fontSize": 11,
+          "fontWeight": "600",
+          "letterSpacing": 3
+        },
+        {
+          "type": "frame",
+          "id": "hMhx9",
+          "name": "toastRow",
+          "width": "fill_container",
+          "gap": 24,
+          "children": [
+            {
+              "type": "frame",
+              "id": "ITEjW",
+              "name": "successToast",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 8,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#22C55E33"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "LP1Le",
+                  "name": "successTop",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "yOhhX",
+                      "name": "successIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "circle-check",
+                      "iconFontFamily": "lucide",
+                      "fill": "#22C55E"
+                    },
+                    {
+                      "type": "text",
+                      "id": "f8DKP",
+                      "name": "successTitle",
+                      "fill": "$text-primary",
+                      "content": "Changes saved",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "iBrLh",
+                      "name": "successTimestamp",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "just now",
+                      "textAlign": "right",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "GqRT6",
+                  "name": "successDesc",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Your project has been updated successfully.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "Vx0j2",
+                  "name": "successBar",
+                  "fill": "#22C55E",
+                  "width": "fill_container",
+                  "height": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FqnFR",
+              "name": "errorToast",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 8,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#EF444433"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "UnxmL",
+                  "name": "errorTop",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "rO8vh",
+                      "name": "errorIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "circle-x",
+                      "iconFontFamily": "lucide",
+                      "fill": "#EF4444"
+                    },
+                    {
+                      "type": "text",
+                      "id": "HfIxW",
+                      "name": "errorTitle",
+                      "fill": "$text-primary",
+                      "content": "Authentication failed",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "QiosU",
+                      "name": "errorTimestamp",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "just now",
+                      "textAlign": "right",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "oSSAV",
+                  "name": "errorDesc",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Invalid credentials. Please check your email and password.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "t3EGk",
+                  "name": "errorBar",
+                  "fill": "#EF4444",
+                  "width": "fill_container",
+                  "height": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "OJ1I7",
+              "name": "warnToast",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 8,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#F59E0B33"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "DO93k",
+                  "name": "warnTop",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "8NdtW",
+                      "name": "warnIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "triangle-alert",
+                      "iconFontFamily": "lucide",
+                      "fill": "#F59E0B"
+                    },
+                    {
+                      "type": "text",
+                      "id": "jyqpg",
+                      "name": "warnTitle",
+                      "fill": "$text-primary",
+                      "content": "Session expiring soon",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gPj15",
+                      "name": "warnTimestamp",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "just now",
+                      "textAlign": "right",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "GRcDf",
+                  "name": "warnDesc",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Your session will expire in 5 minutes. Save your work.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "sEJKp",
+                  "name": "warnBar",
+                  "fill": "#F59E0B",
+                  "width": "fill_container",
+                  "height": 2
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "abUau",
+              "name": "infoToast",
+              "width": "fill_container",
+              "fill": "$bg-card",
+              "cornerRadius": 8,
+              "stroke": {
+                "thickness": 1,
+                "fill": "#22D3EE33"
+              },
+              "layout": "vertical",
+              "gap": 12,
+              "padding": [
+                16,
+                20
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "frkbb",
+                  "name": "infoTop",
+                  "width": "fill_container",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "HAPdh",
+                      "name": "infoIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "info",
+                      "iconFontFamily": "lucide",
+                      "fill": "#22D3EE"
+                    },
+                    {
+                      "type": "text",
+                      "id": "FKTEx",
+                      "name": "infoTitle",
+                      "fill": "$text-primary",
+                      "content": "Deployment queued",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Gz0bV",
+                      "name": "infoTimestamp",
+                      "fill": "$text-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "just now",
+                      "textAlign": "right",
+                      "fontFamily": "Inter",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Zdh7x",
+                  "name": "infoDesc",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Your changes are being deployed to production.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 2,
+                  "id": "nsI0i",
+                  "name": "infoBar",
+                  "fill": "#22D3EE",
+                  "width": "fill_container",
+                  "height": 2
                 }
               ]
             }

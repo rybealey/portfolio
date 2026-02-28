@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useState, useEffect } from "react";
 import { Mail, Sparkles } from "lucide-react";
+import { toast } from "sonner";
 import { signInWithMagicLink, type AuthState } from "@/app/actions/auth";
 
 export function RegisterForm() {
@@ -11,6 +12,12 @@ export function RegisterForm() {
     signInWithMagicLink,
     null
   );
+
+  useEffect(() => {
+    if (magicState?.error) {
+      toast.error("Registration failed", { description: magicState.error });
+    }
+  }, [magicState]);
 
   return (
     <div className="flex w-full flex-col gap-10">
@@ -42,11 +49,6 @@ export function RegisterForm() {
             />
           </div>
         </div>
-
-        {/* Error */}
-        {magicState?.error && (
-          <p className="font-mono text-xs text-red-400">{magicState.error}</p>
-        )}
 
         {/* Submit */}
         {magicState?.success ? (
