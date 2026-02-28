@@ -6,6 +6,7 @@ import { Separator } from "@/components/ui/separator";
 import { createClient } from "@/lib/supabase/server";
 import { MobileNav } from "@/components/mobileNav";
 import { ContactModal } from "@/components/contactModal";
+import { ProjectGallery } from "@/components/projectGallery";
 
 export default async function ProjectDetailPage({
   params,
@@ -220,32 +221,7 @@ export default async function ProjectDetailPage({
               </p>
             </div>
 
-            {/* First image full-width */}
-            <div className="h-[200px] overflow-hidden rounded-lg md:h-[360px] lg:h-[480px]">
-              <img
-                src={project.gallery_images[0]}
-                alt={`${project.name} gallery 1`}
-                className="h-full w-full object-cover"
-              />
-            </div>
-
-            {/* Remaining images in 2-col grid */}
-            {project.gallery_images.length > 1 && (
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-4 lg:gap-6">
-                {project.gallery_images.slice(1).map((url, i) => (
-                  <div
-                    key={url}
-                    className="h-[200px] overflow-hidden rounded-lg md:h-[240px] lg:h-[320px]"
-                  >
-                    <img
-                      src={url}
-                      alt={`${project.name} gallery ${i + 2}`}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <ProjectGallery images={project.gallery_images} projectName={project.name} />
           </section>
         )}
 
