@@ -6,11 +6,10 @@ import { CircleCheck, CircleX, TriangleAlert, Info } from "lucide-react";
 export function Toaster() {
   return (
     <SonnerToaster
-      position="top-right"
-      expand
+      position="bottom-right"
+      expand={false}
       richColors={false}
-      duration={Infinity}
-      closeButton
+      duration={4000}
       toastOptions={{
         unstyled: true,
         classNames: {
