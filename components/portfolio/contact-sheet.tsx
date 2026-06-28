@@ -31,12 +31,41 @@ export function ContactSheet({
   onOpenChange: (open: boolean) => void;
 }) {
   const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // Reset to the form view whenever the sheet opens (handled in the event,
+  // Reset to a fresh form view whenever the sheet opens (handled in the event,
   // not an effect, so there's no flash during the close animation).
   const handleOpenChange = (next: boolean) => {
-    if (next) setSent(false);
+    if (next) {
+      setSent(false);
+      setError(null);
+      setSubmitting(false);
+    }
     onOpenChange(next);
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    const payload = Object.fromEntries(new FormData(e.currentTarget));
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error || "Something went wrong. Please try again.");
+      }
+      setSent(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -108,13 +137,16 @@ export function ContactSheet({
             <SheetDescription className="sr-only">
               Contact form for getting in touch with Ry Bealey.
             </SheetDescription>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setSent(true);
-              }}
-              className="flex flex-col gap-4"
-            >
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              {/* Honeypot: hidden from people, tempting to bots. */}
+              <input
+                type="text"
+                name="company"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                className="sr-only"
+              />
               <div className="flex gap-3">
                 <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                   <label htmlFor="f-first" className={labelClass}>
@@ -137,6 +169,7 @@ export function ContactSheet({
                   id="f-email"
                   name="email"
                   type="email"
+                  required
                   placeholder="jane@studio.com"
                   className={fieldClass}
                 />
@@ -149,16 +182,27 @@ export function ContactSheet({
                   id="f-message"
                   name="message"
                   rows={4}
+                  required
                   placeholder="Tell me about your project…"
                   className={`min-h-[104px] rounded-[var(--radius-sm)] border-[var(--border-strong)] bg-[var(--surface-card)] px-3 py-[11px] text-sm leading-[1.5] text-[var(--text-strong)] focus-visible:border-[var(--accent)]`}
                 />
               </div>
+              {error && (
+                <p
+                  role="alert"
+                  className="font-mono text-[12px] leading-[1.5]"
+                  style={{ color: "var(--negative)" }}
+                >
+                  {error}
+                </p>
+              )}
               <div className="mt-1.5 flex items-center gap-3.5">
                 <Button
                   type="submit"
+                  disabled={submitting}
                   className="h-[52px] rounded-[var(--radius-sm)] px-7 text-base font-semibold hover:bg-[var(--accent-hover)]"
                 >
-                  send message
+                  {submitting ? "sending…" : "send message"}
                 </Button>
                 <SheetClose asChild>
                   <button

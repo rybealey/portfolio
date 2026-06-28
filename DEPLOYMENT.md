@@ -94,3 +94,23 @@ trigger it manually from the **Actions** tab (Run workflow).
 - **Restart manually:** `touch ~/repositories/portfolio/tmp/restart.txt`.
 - The build needs devDependencies; the script installs them with
   `npm ci --include=dev` even if the environment forces `NODE_ENV=production`.
+
+---
+
+## Contact form (AhaSend)
+
+The contact form posts to `app/api/contact/route.ts`, which sends mail via the
+AhaSend API v2. It needs four **runtime** env vars (build does not use them) —
+see [`.env.example`](.env.example):
+
+| Var | Notes |
+| --- | --- |
+| `AHASEND_API_KEY` | AhaSend API key, scope `messages:send:<domain>` (or `messages:send:all`) |
+| `AHASEND_ACCOUNT_ID` | AhaSend Account ID (used in the API path) |
+| `CONTACT_FROM_EMAIL` | sender address on a **verified** AhaSend domain |
+| `CONTACT_TO_EMAIL` | inbox that receives submissions |
+
+Set them in **cPanel → Setup Node.js App → Environment variables**, then
+**Restart** the app. For local dev, copy `.env.example` to `.env.local`. These
+are secrets — they are not committed and are **not** GitHub Actions secrets
+(the deploy build doesn't need them).
