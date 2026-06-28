@@ -283,15 +283,23 @@
     letter-spacing: -0.025em;
     color: var(--text-strong);
   }
-}
 
-/* Now-playing equalizer animation. */
-@keyframes eq {
-  from {
-    transform: scaleY(0.28);
+  /* Selected-work card — paper bento that lifts on hover. */
+  .project-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
   }
-  to {
-    transform: scaleY(1);
+  .project-card:hover {
+    border-color: var(--border-accent);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
   }
 }
 

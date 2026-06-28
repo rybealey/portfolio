@@ -2,16 +2,16 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ClockCard } from "@/components/portfolio/clock-card";
-import { NowPlayingCard } from "@/components/portfolio/now-playing-card";
+import { Tag, type TagTone } from "@/components/portfolio/tag";
+import { AiCard } from "@/components/portfolio/ai-card";
+import { WorkGrid } from "@/components/portfolio/work-grid";
 import { FloatingNav, type NavKey } from "@/components/portfolio/floating-nav";
 import { ContactSheet } from "@/components/portfolio/contact-sheet";
 
 /* ---------- content ---------- */
 
-const SKILLS: { group: string; tone: "paper" | "sage"; items: string[] }[] = [
+const SKILLS: { group: string; tone: TagTone; items: string[] }[] = [
   { group: "DESIGN", tone: "paper", items: ["UI / UX Design", "Prototyping", "User Research"] },
   {
     group: "DEVELOPMENT",
@@ -20,33 +20,6 @@ const SKILLS: { group: string; tone: "paper" | "sage"; items: string[] }[] = [
   },
   { group: "TOOLS", tone: "sage", items: ["VS Code", "GitHub", "Vercel", "Claude Code"] },
 ];
-
-const TAG_TONES = {
-  paper: {
-    background: "var(--surface-card)",
-    color: "var(--text-body)",
-    borderColor: "var(--border-default)",
-  },
-  sage: {
-    background: "var(--xanadu-100)",
-    color: "var(--xanadu-700)",
-    borderColor: "var(--xanadu-200)",
-  },
-} as const;
-
-/* ---------- small primitives ---------- */
-
-function Tag({ children, tone }: { children: React.ReactNode; tone: "paper" | "sage" }) {
-  return (
-    <Badge
-      variant="outline"
-      className="h-6 rounded-full border px-[9px] font-mono text-[var(--text-2xs)] font-medium tracking-[var(--tracking-label)] uppercase"
-      style={TAG_TONES[tone]}
-    >
-      {children}
-    </Badge>
-  );
-}
 
 /* ---------- page ---------- */
 
@@ -234,7 +207,7 @@ export function BentoPortfolio() {
                 className="m-0 max-w-[440px] text-base leading-[1.6]"
                 style={{ color: "var(--text-body)" }}
               >
-                I design and build thoughtful, user-centered products — where infrastructure, design
+                I design and build thoughtful, user-centered products, where infrastructure, design
                 and code meet.
               </p>
               <div className="mt-[26px] flex flex-wrap items-center gap-3">
@@ -258,7 +231,7 @@ export function BentoPortfolio() {
             <div className="flex flex-wrap items-stretch gap-4">
               {/* BASED_IN map */}
               <div
-                className="relative box-border min-h-[150px] min-w-[180px] flex-[1.2_1_200px] overflow-hidden rounded-[var(--radius-lg)]"
+                className="relative box-border min-h-[150px] min-w-[260px] flex-[1.2_1_260px] overflow-hidden rounded-[var(--radius-lg)]"
                 style={{
                   border: "1px solid var(--border-default)",
                   boxShadow: "var(--shadow-sm)",
@@ -334,7 +307,7 @@ export function BentoPortfolio() {
               </div>
 
               {/* CURRENTLY */}
-              <div className="bento box-border flex min-h-[150px] min-w-[180px] flex-[1_1_180px] flex-col p-[22px]">
+              <div className="bento box-border flex min-h-[150px] min-w-[260px] flex-[1_1_260px] flex-col p-[22px]">
                 <div className="mono-label">
                   <span className="opacity-55">{"// "}</span>currently
                 </div>
@@ -387,7 +360,7 @@ export function BentoPortfolio() {
                     className="mt-2 mb-0 text-[13px] leading-[1.55]"
                     style={{ color: "var(--text-body)" }}
                   >
-                    Eight years across the counter and the chat window taught me a ton — and I&apos;m
+                    Eight years across the counter and the chat window taught me a ton, and I&apos;m
                     ready to partner directly with stakeholders.
                   </p>
                 </div>
@@ -395,10 +368,9 @@ export function BentoPortfolio() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN: CLOCK + NOW PLAYING + SKILLS */}
+          {/* RIGHT COLUMN: AI + SKILLS */}
           <div className="flex min-w-[280px] flex-[1_1_320px] flex-col gap-4">
-            <ClockCard />
-            <NowPlayingCard />
+            <AiCard />
 
             {/* SKILLS */}
             <div className="bento flex flex-col gap-4 p-6">
@@ -489,31 +461,10 @@ export function BentoPortfolio() {
         {/* ===== WORK PANEL ===== */}
         <section
           id="work"
-          className="no-scrollbar box-border flex h-full flex-[0_0_100vw] snap-center justify-center overflow-y-auto"
-          style={{
-            alignItems: "safe center",
-            padding: "clamp(24px,4vw,48px) clamp(20px,4vw,40px) 132px",
-          }}
+          className="no-scrollbar box-border flex h-full flex-[0_0_100vw] snap-center items-start justify-center overflow-y-auto"
+          style={{ padding: "clamp(24px,4vw,48px) clamp(20px,4vw,40px) 132px" }}
         >
-          <div className="w-full max-w-[1180px]">
-            <div className="mb-[22px]">
-              <div className="eyebrow text-[13px]">
-                <span className="opacity-55">{"// "}</span>selected_work
-              </div>
-              <h2
-                className="display mt-3 text-[clamp(30px,4vw,42px)]"
-                style={{ letterSpacing: "-0.02em" }}
-              >
-                Selected work.
-              </h2>
-            </div>
-            <div
-              className="rounded-[var(--radius-lg)] px-7 py-16 text-center font-mono text-[13px] tracking-[0.04em]"
-              style={{ border: "1px dashed var(--border-strong)", color: "var(--text-faint)" }}
-            >
-              <span className="opacity-60">{"// "}</span>case studies in progress
-            </div>
-          </div>
+          <WorkGrid />
         </section>
       </main>
 
