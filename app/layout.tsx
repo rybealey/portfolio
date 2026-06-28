@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Newsreader, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Newsreader, Hanken_Grotesk, JetBrains_Mono, Sora, Inter } from "next/font/google";
 import "./globals.css";
 
 // Display serif — editorial weight & elegant italics
@@ -20,6 +20,20 @@ const hankenGrotesk = Hanken_Grotesk({
 // Mono / labels — engineer identity, code eyebrows
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+// Brand-kit faces — used only inside the SERVERIZZ project showcase, which
+// reproduces that brand's own Sora display / Inter body pairing.
+const sora = Sora({
+  variable: "--font-sora",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
   display: "swap",
 });
@@ -57,7 +71,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${newsreader.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${sora.variable} ${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

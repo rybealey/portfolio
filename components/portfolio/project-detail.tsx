@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/portfolio/tag";
 import { ProjectMotif } from "@/components/portfolio/project-motif";
+import { ProjectBrandKit, hasBrandKit } from "@/components/portfolio/project-brand-kit";
 import { PROJECTS, projectIndex, type Project } from "@/lib/projects";
 
 /* ---------- building blocks ---------- */
@@ -18,10 +19,7 @@ function Section({
   children: React.ReactNode;
 }) {
   return (
-    <section
-      className="grid gap-3 border-t pt-9 md:grid-cols-[200px_1fr] md:gap-7"
-      style={{ borderColor: "var(--border-subtle)" }}
-    >
+    <section className="grid gap-3 md:grid-cols-[200px_1fr] md:gap-7">
       <div className="eyebrow text-[13px]">
         <span className="opacity-55">{"// "}</span>
         {label}
@@ -71,8 +69,9 @@ export function ProjectDetail({
   if (!project) return null;
 
   const { detail } = project;
-  const prev = PROJECTS[(idx - 1 + PROJECTS.length) % PROJECTS.length];
-  const next = PROJECTS[(idx + 1) % PROJECTS.length];
+  // Linear, non-cyclic: the first project has no previous, the last no next.
+  const prev = idx > 0 ? PROJECTS[idx - 1] : null;
+  const next = idx < PROJECTS.length - 1 ? PROJECTS[idx + 1] : null;
 
   return (
     <div
@@ -84,8 +83,10 @@ export function ProjectDetail({
     >
       {/* STICKY TOP BAR */}
       <div
-        className="sticky top-0 z-[2] flex items-center justify-between gap-4 px-[clamp(20px,4vw,40px)] py-3"
+        className="sticky top-0 z-[2] flex items-center justify-between gap-4"
         style={{
+          padding:
+            "calc(env(safe-area-inset-top, 0px) + 14px) clamp(20px,4vw,44px) 14px",
           background: "rgba(246,244,236,0.86)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
@@ -126,7 +127,7 @@ export function ProjectDetail({
         >
           {project.title}
         </h1>
-        <div className="mt-4 flex flex-wrap gap-x-6 gap-y-1">
+        <div className="mt-[18px] flex flex-wrap gap-x-[18px] gap-y-[10px]">
           <MetaItem label="role" value={detail.role} />
           <MetaItem label="year" value={detail.year} />
         </div>
@@ -180,8 +181,8 @@ export function ProjectDetail({
           )}
         </div>
 
-        {/* SECTIONS */}
-        <div className="mt-10 flex flex-col gap-9">
+        {/* SECTIONS — separated by margin rhythm (56px below the cover, 48px between). */}
+        <div className="[&>section]:mt-12 [&>section:first-child]:mt-14">
           {/* overview */}
           <Section label="overview">
             <div className="flex max-w-[620px] flex-col gap-4">
@@ -192,6 +193,13 @@ export function ProjectDetail({
               ))}
             </div>
           </Section>
+
+          {/* brand_kit — project-themed design-system showcase (DS projects only) */}
+          {hasBrandKit(project.slug) && (
+            <Section label="brand_kit">
+              <ProjectBrandKit slug={project.slug} />
+            </Section>
+          )}
 
           {/* what_i_did */}
           <Section label="what_i_did">
@@ -385,42 +393,48 @@ export function ProjectDetail({
           </Section>
         </div>
 
-        {/* PREV / NEXT */}
-        <div
-          className="mt-12 grid grid-cols-2 gap-4 border-t pt-7"
-          style={{ borderColor: "var(--border-subtle)" }}
-        >
-          <button
-            type="button"
-            onClick={() => onNavigate(prev.slug)}
-            className="group cursor-pointer text-left"
+        {/* PREV / NEXT — only rendered when a neighbour exists. */}
+        {(prev || next) && (
+          <div
+            className="mt-16 flex flex-wrap justify-between gap-4 border-t pt-7"
+            style={{ borderColor: "var(--border-subtle)" }}
           >
-            <div className="font-mono text-[11px] tracking-[0.1em] uppercase" style={{ color: "var(--text-faint)" }}>
-              ← previous
-            </div>
-            <div
-              className="mt-1 text-[21px] group-hover:underline"
-              style={{ fontFamily: "var(--font-serif)", color: "var(--text-strong)" }}
-            >
-              {prev.title}
-            </div>
-          </button>
-          <button
-            type="button"
-            onClick={() => onNavigate(next.slug)}
-            className="group cursor-pointer text-right"
-          >
-            <div className="font-mono text-[11px] tracking-[0.1em] uppercase" style={{ color: "var(--text-faint)" }}>
-              next →
-            </div>
-            <div
-              className="mt-1 text-[21px] group-hover:underline"
-              style={{ fontFamily: "var(--font-serif)", color: "var(--text-strong)" }}
-            >
-              {next.title}
-            </div>
-          </button>
-        </div>
+            {prev && (
+              <button
+                type="button"
+                onClick={() => onNavigate(prev.slug)}
+                className="group cursor-pointer text-left"
+              >
+                <div className="font-mono text-[11px] tracking-[0.1em] uppercase" style={{ color: "var(--text-faint)" }}>
+                  ← previous
+                </div>
+                <div
+                  className="mt-[5px] text-[21px] group-hover:underline"
+                  style={{ fontFamily: "var(--font-serif)", color: "var(--text-strong)" }}
+                >
+                  {prev.title}
+                </div>
+              </button>
+            )}
+            {next && (
+              <button
+                type="button"
+                onClick={() => onNavigate(next.slug)}
+                className="group ml-auto cursor-pointer text-right"
+              >
+                <div className="font-mono text-[11px] tracking-[0.1em] uppercase" style={{ color: "var(--text-faint)" }}>
+                  next →
+                </div>
+                <div
+                  className="mt-[5px] text-[21px] group-hover:underline"
+                  style={{ fontFamily: "var(--font-serif)", color: "var(--text-strong)" }}
+                >
+                  {next.title}
+                </div>
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
