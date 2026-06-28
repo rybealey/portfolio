@@ -34,8 +34,12 @@ fi
 
 if [ -n "$activate" ] && [ -f "$activate" ]; then
   echo "==> Activating Node env: $activate"
+  # CloudLinux's activate script references unset vars (e.g. CL_VIRTUAL_ENV),
+  # so relax `nounset` just for the source, then restore it.
+  set +u
   # shellcheck disable=SC1090
   source "$activate"
+  set -u
 else
   echo "WARN: Node virtualenv activate script not found; using node on PATH." >&2
   echo "      Set NODEVENV_ACTIVATE to the path cPanel shows for this app." >&2
