@@ -1,14 +1,13 @@
 "use client";
 
-import { User, Briefcase, Mail } from "lucide-react";
+import { User, Briefcase } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-export type NavKey = "about" | "work" | "contact";
+export type NavKey = "about" | "work";
 
 const ITEMS: { key: NavKey; label: string; icon: LucideIcon }[] = [
   { key: "about", label: "about", icon: User },
   { key: "work", label: "work", icon: Briefcase },
-  { key: "contact", label: "contact", icon: Mail },
 ];
 
 /**
@@ -38,7 +37,7 @@ export function FloatingNav({
       }}
     >
       <div
-        className="relative flex w-[min(360px,calc(100vw-20px))] rounded-full p-[5px]"
+        className="relative flex w-[min(300px,calc(100vw-20px))] rounded-full p-[5px]"
         style={{
           background: "rgba(252,251,247,0.55)",
           backdropFilter: "blur(22px) saturate(180%)",

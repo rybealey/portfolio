@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -50,43 +50,136 @@ function Tag({ children, tone }: { children: React.ReactNode; tone: "paper" | "s
 
 /* ---------- page ---------- */
 
+// The horizontal scroller snaps between these full-viewport panels, in order.
+const PANEL_ORDER: NavKey[] = ["about", "work"];
+
 export function BentoPortfolio() {
   const [active, setActive] = useState<NavKey>("about");
   const [sheetOpen, setSheetOpen] = useState(false);
-
-  // Scroll-spy: mirror the active floating-nav item to the section in view.
+  const scrollerRef = useRef<HTMLElement>(null);
+  // Read inside the keydown handler without re-binding the listener each render.
+  const sheetOpenRef = useRef(sheetOpen);
   useEffect(() => {
-    const topOf = (id: string) => {
-      const el = document.getElementById(id);
-      return el ? el.getBoundingClientRect().top + window.scrollY : Infinity;
+    sheetOpenRef.current = sheetOpen;
+  }, [sheetOpen]);
+
+  // Smoothly align a panel to the centre of the horizontal scroller.
+  const goPanel = useCallback((id: NavKey) => {
+    const scroller = scrollerRef.current;
+    const el = document.getElementById(id);
+    if (!scroller || !el) return;
+    const s = scroller.getBoundingClientRect();
+    scroller.scrollBy({ left: el.getBoundingClientRect().left - s.left, behavior: "smooth" });
+  }, []);
+
+  // Panels scroll horizontally; "contact" scrolls down within the about panel.
+  const navigate = useCallback(
+    (key: NavKey | "contact") => {
+      if (key === "contact") {
+        const panel = document.getElementById("about");
+        const contact = document.getElementById("contact");
+        if (panel && contact) {
+          panel.scrollBy({
+            top: contact.getBoundingClientRect().top - panel.getBoundingClientRect().top - 20,
+            behavior: "smooth",
+          });
+        }
+        return;
+      }
+      goPanel(key);
+    },
+    [goPanel],
+  );
+
+  // Side-scroll mechanics: scroll-spy, wheel→section jumps, and arrow keys.
+  useEffect(() => {
+    const scroller = scrollerRef.current;
+    if (!scroller) return;
+
+    // Which panel currently sits under the scroller's horizontal centre.
+    const currentPanel = (): NavKey => {
+      const s = scroller.getBoundingClientRect();
+      const center = s.left + s.width / 2;
+      let cur: NavKey = PANEL_ORDER[0];
+      PANEL_ORDER.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().left <= center + 1) cur = id;
+      });
+      return cur;
     };
+
     const onScroll = () => {
-      const doc = document.documentElement;
-      const atBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 60;
-      const y = window.scrollY + 140;
-      let tab: NavKey = "about";
-      if (y >= topOf("work")) tab = "work";
-      if (y >= topOf("contact")) tab = "contact";
-      if (atBottom) tab = "contact";
+      const tab = currentPanel();
       setActive((prev) => (prev === tab ? prev : tab));
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
-  const navigate = useCallback((key: NavKey) => {
-    const el = document.getElementById(key);
-    if (!el) return;
-    const y = el.getBoundingClientRect().top + window.scrollY - 24;
-    window.scrollTo({ top: y, behavior: "smooth" });
-  }, []);
+    let wheelLock = false;
+    let wheelTimer: ReturnType<typeof setTimeout> | undefined;
+    const onWheel = (e: WheelEvent) => {
+      // Horizontal-intent gestures (trackpad swipe): pass straight to native scroll.
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+      const id = currentPanel();
+      const panel = document.getElementById(id);
+      // If this panel is taller than the viewport, let it scroll vertically to its edge.
+      if (panel && panel.scrollHeight > panel.clientHeight + 1) {
+        const atTop = panel.scrollTop <= 0;
+        const atBot = panel.scrollTop + panel.clientHeight >= panel.scrollHeight - 1;
+        if ((e.deltaY > 0 && !atBot) || (e.deltaY < 0 && !atTop)) return;
+      }
+      // Otherwise translate a vertical wheel into a discrete section jump.
+      e.preventDefault();
+      // While a fling's momentum tail keeps firing, keep extending the lock so one
+      // continuous gesture only ever advances a single section.
+      if (wheelLock) {
+        clearTimeout(wheelTimer);
+        wheelTimer = setTimeout(() => {
+          wheelLock = false;
+        }, 260);
+        return;
+      }
+      if (Math.abs(e.deltaY) < 18) return;
+      const i = PANEL_ORDER.indexOf(id);
+      const ni = e.deltaY > 0 ? Math.min(PANEL_ORDER.length - 1, i + 1) : Math.max(0, i - 1);
+      if (ni === i) return;
+      wheelLock = true;
+      goPanel(PANEL_ORDER[ni]);
+      clearTimeout(wheelTimer);
+      wheelTimer = setTimeout(() => {
+        wheelLock = false;
+      }, 900);
+    };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (sheetOpenRef.current) return; // the open sheet owns the keyboard
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      const i = PANEL_ORDER.indexOf(currentPanel());
+      const ni =
+        e.key === "ArrowRight"
+          ? Math.min(PANEL_ORDER.length - 1, i + 1)
+          : Math.max(0, i - 1);
+      goPanel(PANEL_ORDER[ni]);
+    };
+
+    scroller.addEventListener("scroll", onScroll, { passive: true });
+    scroller.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("keydown", onKey);
+    onScroll();
+    return () => {
+      scroller.removeEventListener("scroll", onScroll);
+      scroller.removeEventListener("wheel", onWheel);
+      window.removeEventListener("keydown", onKey);
+      clearTimeout(wheelTimer);
+    };
+  }, [goPanel]);
 
   return (
-    <div className="min-h-screen pb-[124px]" style={{ background: "var(--surface-page)" }}>
+    <div
+      className="flex h-screen flex-col overflow-hidden"
+      style={{ background: "var(--surface-page)", color: "var(--text-body)" }}
+    >
       {/* ===== TOP NAV ===== */}
       <nav
-        className="flex items-center justify-between px-[clamp(24px,5vw,64px)] py-4"
+        className="relative z-[5] flex flex-none items-center justify-between px-[clamp(24px,5vw,64px)] py-4"
         style={{
           background: "var(--surface-page)",
           borderBottom: "1px solid var(--border-subtle)",
@@ -106,9 +199,24 @@ export function BentoPortfolio() {
         </div>
       </nav>
 
-      <main className="mx-auto max-w-[1180px] px-[clamp(20px,4vw,40px)] pt-[clamp(28px,5vw,56px)]">
-        {/* ===== INTRO BENTO ===== */}
-        <div className="flex flex-wrap items-stretch gap-4">
+      {/* ===== HORIZONTAL SIDE-SCROLLER ===== */}
+      <main
+        id="scroller"
+        ref={scrollerRef}
+        className="no-scrollbar flex min-h-0 flex-1 snap-x snap-mandatory overflow-x-auto overflow-y-hidden"
+      >
+        {/* ===== ABOUT PANEL (intro bento + contact) ===== */}
+        <section
+          id="about"
+          className="no-scrollbar box-border flex h-full flex-[0_0_100vw] snap-center justify-center overflow-y-auto"
+          style={{
+            alignItems: "safe center",
+            padding: "clamp(24px,4vw,48px) clamp(20px,4vw,40px) 132px",
+          }}
+        >
+          <div className="w-full max-w-[1180px]">
+            {/* ===== INTRO BENTO ===== */}
+            <div className="flex flex-wrap items-stretch gap-4">
           {/* LEFT COLUMN: HERO + ABOUT */}
           <div className="flex min-w-[300px] flex-[1.05_1_360px] flex-col gap-4">
             {/* HERO */}
@@ -147,10 +255,7 @@ export function BentoPortfolio() {
             </div>
 
             {/* ABOUT: based_in + currently */}
-            <div
-              id="about"
-              className="flex flex-wrap items-stretch gap-4 scroll-mt-[90px]"
-            >
+            <div className="flex flex-wrap items-stretch gap-4">
               {/* BASED_IN map */}
               <div
                 className="relative box-border min-h-[150px] min-w-[180px] flex-[1.2_1_200px] overflow-hidden rounded-[var(--radius-lg)]"
@@ -319,28 +424,12 @@ export function BentoPortfolio() {
               ))}
             </div>
           </div>
-        </div>
+            </div>
 
-        {/* ===== WORK ===== */}
-        <div id="work" className="mt-14 mb-[22px] scroll-mt-20">
-          <div className="eyebrow text-[13px]">
-            <span className="opacity-55">{"// "}</span>selected_work
-          </div>
-          <h2 className="display mt-3 text-[clamp(30px,4vw,42px)]" style={{ letterSpacing: "-0.02em" }}>
-            Selected work.
-          </h2>
-        </div>
-        <div
-          className="rounded-[var(--radius-lg)] px-7 py-[44px] text-center font-mono text-[13px] tracking-[0.04em]"
-          style={{ border: "1px dashed var(--border-strong)", color: "var(--text-faint)" }}
-        >
-          <span className="opacity-60">{"// "}</span>case studies in progress
-        </div>
-
-        {/* ===== CONTACT ===== */}
-        <div
+            {/* ===== CONTACT (below the bento, scrolls within the about panel) ===== */}
+            <div
           id="contact"
-          className="mt-14 flex scroll-mt-20 flex-col rounded-[var(--radius-lg)] p-[clamp(36px,5vw,56px)]"
+          className="mt-4 flex flex-col rounded-[var(--radius-lg)] p-[clamp(32px,4vw,48px)]"
           style={{ background: "var(--surface-inverse)", boxShadow: "var(--shadow-md)" }}
         >
           <div className="font-mono text-[13px]" style={{ color: "var(--xanadu-300)" }}>
@@ -393,7 +482,39 @@ export function BentoPortfolio() {
           <div className="mt-12 font-mono text-[11px]" style={{ color: "var(--ink-400)" }}>
             © 2026 Ry Bealey. All rights reserved.
           </div>
-        </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== WORK PANEL ===== */}
+        <section
+          id="work"
+          className="no-scrollbar box-border flex h-full flex-[0_0_100vw] snap-center justify-center overflow-y-auto"
+          style={{
+            alignItems: "safe center",
+            padding: "clamp(24px,4vw,48px) clamp(20px,4vw,40px) 132px",
+          }}
+        >
+          <div className="w-full max-w-[1180px]">
+            <div className="mb-[22px]">
+              <div className="eyebrow text-[13px]">
+                <span className="opacity-55">{"// "}</span>selected_work
+              </div>
+              <h2
+                className="display mt-3 text-[clamp(30px,4vw,42px)]"
+                style={{ letterSpacing: "-0.02em" }}
+              >
+                Selected work.
+              </h2>
+            </div>
+            <div
+              className="rounded-[var(--radius-lg)] px-7 py-16 text-center font-mono text-[13px] tracking-[0.04em]"
+              style={{ border: "1px dashed var(--border-strong)", color: "var(--text-faint)" }}
+            >
+              <span className="opacity-60">{"// "}</span>case studies in progress
+            </div>
+          </div>
+        </section>
       </main>
 
       <FloatingNav active={active} onNavigate={navigate} hidden={sheetOpen} />
