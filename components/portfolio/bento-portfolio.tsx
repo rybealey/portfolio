@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tag, type TagTone } from "@/components/portfolio/tag";
 import { AiCard } from "@/components/portfolio/ai-card";
 import { WorkGrid } from "@/components/portfolio/work-grid";
+import { ProjectDetail } from "@/components/portfolio/project-detail";
 import { FloatingNav, type NavKey } from "@/components/portfolio/floating-nav";
 import { ContactSheet } from "@/components/portfolio/contact-sheet";
 
@@ -29,12 +30,19 @@ const PANEL_ORDER: NavKey[] = ["about", "work"];
 export function BentoPortfolio() {
   const [active, setActive] = useState<NavKey>("about");
   const [sheetOpen, setSheetOpen] = useState(false);
+  // Slug of the project whose detail overlay is open, or null when closed.
+  const [openProject, setOpenProject] = useState<string | null>(null);
   const scrollerRef = useRef<HTMLElement>(null);
   // Read inside the keydown handler without re-binding the listener each render.
   const sheetOpenRef = useRef(sheetOpen);
   useEffect(() => {
     sheetOpenRef.current = sheetOpen;
   }, [sheetOpen]);
+  // The detail overlay also owns the keyboard while open.
+  const overlayOpenRef = useRef(openProject);
+  useEffect(() => {
+    overlayOpenRef.current = openProject;
+  }, [openProject]);
 
   // Smoothly align a panel to the centre of the horizontal scroller.
   const goPanel = useCallback((id: NavKey) => {
@@ -123,7 +131,8 @@ export function BentoPortfolio() {
     };
 
     const onKey = (e: KeyboardEvent) => {
-      if (sheetOpenRef.current) return; // the open sheet owns the keyboard
+      // The open sheet or detail overlay owns the keyboard.
+      if (sheetOpenRef.current || overlayOpenRef.current) return;
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
       const i = PANEL_ORDER.indexOf(currentPanel());
       const ni =
@@ -464,12 +473,19 @@ export function BentoPortfolio() {
           className="no-scrollbar box-border flex h-full flex-[0_0_100vw] snap-center items-start justify-center overflow-y-auto"
           style={{ padding: "clamp(24px,4vw,48px) clamp(20px,4vw,40px) 132px" }}
         >
-          <WorkGrid />
+          <WorkGrid onOpenProject={setOpenProject} />
         </section>
       </main>
 
-      <FloatingNav active={active} onNavigate={navigate} hidden={sheetOpen} />
+      <FloatingNav active={active} onNavigate={navigate} hidden={sheetOpen || openProject !== null} />
       <ContactSheet open={sheetOpen} onOpenChange={setSheetOpen} />
+      {openProject && (
+        <ProjectDetail
+          slug={openProject}
+          onClose={() => setOpenProject(null)}
+          onNavigate={setOpenProject}
+        />
+      )}
     </div>
   );
 }
