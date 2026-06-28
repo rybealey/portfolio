@@ -24,7 +24,6 @@ jobs:
           username: ${{ secrets.CPANEL_SSH_USER }}
           key: ${{ secrets.CPANEL_SSH_KEY }}
           port: ${{ secrets.CPANEL_SSH_PORT || '22' }}
-          script_stop: true
           script: |
             set -e
             cd "${{ secrets.CPANEL_APP_PATH }}"
