@@ -9,24 +9,16 @@ import { ProjectMotif } from "@/components/portfolio/project-motif";
 
 function ProjectCard({
   project,
-  feature,
-  span2,
   onOpen,
 }: {
   project: Project;
-  feature: boolean;
-  span2: boolean;
   onOpen: (slug: string) => void;
 }) {
-  const titleSize = feature ? 27 : 22;
-  const minH = feature ? 320 : 300;
-
   return (
     <button
       type="button"
       onClick={() => onOpen(project.slug)}
-      className={`work-card group relative overflow-hidden ${span2 ? "min-[680px]:col-span-2" : ""}`}
-      style={{ minHeight: minH }}
+      className="work-card group relative aspect-square overflow-hidden"
       aria-label={`Open project: ${project.title}`}
     >
       {/* MEDIA — real cover if present, otherwise a brand motif */}
@@ -53,7 +45,7 @@ function ProjectCard({
 
       {/* KICKER BADGE */}
       <span
-        className="absolute top-3 left-3 rounded-full px-[9px] py-1 font-mono text-[10px] tracking-[0.12em] uppercase"
+        className="absolute top-[14px] left-[14px] rounded-full px-[9px] py-1 font-mono text-[10px] tracking-[0.12em] uppercase"
         style={{
           color: "var(--white)",
           background: "rgba(27,32,28,0.4)",
@@ -66,7 +58,7 @@ function ProjectCard({
 
       {/* ARROW */}
       <span
-        className="work-card-arrow absolute top-3 right-3 font-mono text-[18px] leading-none"
+        className="work-card-arrow absolute top-[13px] right-[15px] font-mono text-[18px] leading-none"
         style={{
           color: "rgba(255,255,255,0.82)",
           transition: "transform var(--dur-base) var(--ease-out)",
@@ -84,7 +76,7 @@ function ProjectCard({
             fontFamily: "var(--font-serif)",
             fontWeight: 400,
             letterSpacing: "-0.01em",
-            fontSize: titleSize,
+            fontSize: 22,
             color: "var(--white)",
           }}
         >
@@ -96,7 +88,7 @@ function ProjectCard({
         >
           {project.excerpt}
         </p>
-        <div className="mt-1 flex flex-wrap gap-[7px]">
+        <div className="mt-[3px] flex flex-wrap gap-[6px]">
           {project.tags.map((t) => (
             <span
               key={t}
@@ -123,12 +115,6 @@ function ProjectCard({
 export function WorkGrid({ onOpenProject }: { onOpenProject: (slug: string) => void }) {
   const [filter, setFilter] = useState("all");
   const visible = PROJECTS.filter((p) => filter === "all" || p.cats.includes(filter));
-
-  // Bento sizing: the first visible tile is the wide feature. If that leaves an
-  // odd number of standard tiles (a lone half-width tile), promote the last one
-  // to full width too so the grid never ends ragged.
-  const standardCount = Math.max(0, visible.length - 1);
-  const promoteLast = standardCount % 2 === 1;
 
   return (
     <div className="my-auto w-full max-w-[1180px]">
@@ -173,18 +159,32 @@ export function WorkGrid({ onOpenProject }: { onOpenProject: (slug: string) => v
         </div>
       </div>
 
-      {/* BENTO GRID */}
-      <div className="grid grid-cols-1 gap-4 min-[680px]:grid-cols-2">
-        {visible.map((p, i) => (
-          <ProjectCard
-            key={p.slug}
-            project={p}
-            feature={i === 0}
-            span2={i === 0 || (promoteLast && i === visible.length - 1)}
-            onOpen={onOpenProject}
-          />
-        ))}
-      </div>
+      {/* BENTO GRID — uniform square tiles, two-up above 680px */}
+      {visible.length > 0 ? (
+        <div className="grid grid-cols-1 gap-4 min-[680px]:grid-cols-2">
+          {visible.map((p) => (
+            <ProjectCard key={p.slug} project={p} onOpen={onOpenProject} />
+          ))}
+        </div>
+      ) : (
+        <div
+          className="rounded-[var(--radius-lg)] px-7 py-[72px] text-center"
+          style={{ border: "1px dashed var(--border-strong)" }}
+        >
+          <div
+            className="font-mono text-[13px] tracking-[0.04em]"
+            style={{ color: "var(--text-faint)" }}
+          >
+            <span className="opacity-60">{"// "}</span>no_projects_yet
+          </div>
+          <p
+            className="mx-auto mt-[14px] max-w-[360px] text-[15px] leading-[1.6]"
+            style={{ color: "var(--text-muted)" }}
+          >
+            Nothing here under this filter yet. Try another, or check back soon.
+          </p>
+        </div>
+      )}
     </div>
   );
 }
