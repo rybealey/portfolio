@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Passenger startup file (CommonJS Node entrypoint, not part of the app).
+    "app.js",
   ]),
 ]);
 

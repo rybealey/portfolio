@@ -20,6 +20,9 @@
 # production
 /build
 
+# passenger restart trigger (generated on the server)
+/tmp
+
 # misc
 .DS_Store
 *.pem
