@@ -1,26 +1,296 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   THEME MAP — expose brand fonts + shadcn semantic tokens to
+   Tailwind utilities. Brand colour/spacing/effect tokens are
+   declared as plain custom properties in :root below and are
+   referenced directly via var() in component styling.
+   ============================================================ */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-jetbrains);
+  --font-serif: var(--font-newsreader);
+  --font-heading: var(--font-hanken);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* ============================================================
+     RY BEALEY DESIGN SYSTEM — brand tokens
+     Signature: Xanadu green (#738678). Warm-neutral paper,
+     ink text, one sparing amber highlight.
+     ============================================================ */
+
+  /* ---- Xanadu green ramp (the signature) ---- */
+  --xanadu-900: #2a332c;
+  --xanadu-800: #344037;
+  --xanadu-700: #3e4d42;
+  --xanadu-600: #556b5a;
+  --xanadu-500: #738678; /* ← Xanadu, the brand anchor */
+  --xanadu-400: #93a597;
+  --xanadu-300: #b6c4b8;
+  --xanadu-200: #d3ddd4;
+  --xanadu-100: #e7ede7;
+  --xanadu-50: #f2f5f1;
+
+  /* ---- Warm ink neutrals ---- */
+  --ink-900: #1b201c; /* near-black, green-tinted */
+  --ink-800: #262c27;
+  --ink-700: #353b36;
+  --ink-600: #4a514b;
+  --ink-500: #5c625c;
+  --ink-400: #7e847d;
+  --ink-300: #a7aba4;
+  --ink-200: #c9ccc4;
+
+  /* ---- Warm paper surfaces ---- */
+  --paper-300: #dcdacf;
+  --paper-200: #e6e4da;
+  --paper-100: #efede4;
+  --paper-50: #f6f4ec; /* page background */
+  --white: #fcfbf7;
+
+  /* ---- Amber highlight (sparing) ---- */
+  --amber-600: #a9703a;
+  --amber-500: #c68a4e;
+  --amber-200: #e9d3b4;
+
+  /* ---- Status ---- */
+  --positive: #4e7a57;
+  --negative: #b4452f;
+  --caution: #c68a4e;
+
+  /* ---- Semantic aliases (brand) ---- */
+  --text-strong: var(--ink-900);
+  --text-body: var(--ink-700);
+  --text-muted: var(--ink-500);
+  --text-faint: var(--ink-400);
+  --text-inverse: var(--paper-50);
+  --text-accent: var(--xanadu-600);
+
+  --surface-page: var(--paper-50);
+  --surface-card: var(--white);
+  --surface-sunken: var(--paper-100);
+  --surface-sage: var(--xanadu-50);
+  --surface-inverse: var(--ink-900);
+
+  --border-subtle: var(--paper-200);
+  --border-default: var(--paper-300);
+  --border-strong: var(--ink-200);
+  --border-accent: var(--xanadu-300);
+
+  --accent-hover: var(--xanadu-600);
+  --accent-pressed: var(--xanadu-700);
+  --accent-surface: var(--xanadu-100);
+  --accent-contrast: var(--white);
+
+  --highlight: var(--amber-500);
+  --highlight-soft: var(--amber-200);
+
+  --focus-ring: var(--xanadu-400);
+
+  /* ---- Type scale ---- */
+  --text-2xs: 0.6875rem; /* 11px — mono micro-labels */
+  --text-xs: 0.75rem; /* 12px */
+  --text-sm: 0.875rem; /* 14px */
+  --text-base: 1rem; /* 16px */
+  --text-md: 1.125rem; /* 18px */
+  --text-lg: 1.375rem; /* 22px */
+  --text-xl: 1.75rem; /* 28px */
+  --text-2xl: 2.25rem; /* 36px */
+  --text-3xl: 3rem; /* 48px */
+  --text-4xl: 4rem; /* 64px */
+  --text-5xl: 5.5rem; /* 88px — editorial hero */
+
+  /* ---- Weights / leading / tracking ---- */
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --leading-tight: 1.04;
+  --leading-snug: 1.18;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.68;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-label: 0.14em; /* mono eyebrows, ALL CAPS */
+
+  /* ---- Spacing (8px grid) ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 2.5rem;
+  --space-8: 3rem;
+  --space-9: 4rem;
+  --space-10: 6rem;
+  --space-11: 8rem;
+
+  /* ---- Brand radii (restrained; mostly crisp) ---- */
+  --radius-xs: 3px;
+  --radius-sm: 5px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 18px;
+  --radius-pill: 999px;
+
+  /* ---- Elevation (warm, green-tinted, subtle) ---- */
+  --shadow-xs: 0 1px 2px rgba(27, 32, 28, 0.05);
+  --shadow-sm: 0 1px 3px rgba(27, 32, 28, 0.07), 0 1px 2px rgba(27, 32, 28, 0.04);
+  --shadow-md: 0 4px 12px rgba(27, 32, 28, 0.07), 0 2px 4px rgba(27, 32, 28, 0.04);
+  --shadow-lg: 0 12px 28px rgba(27, 32, 28, 0.1), 0 4px 8px rgba(27, 32, 28, 0.05);
+  --shadow-accent: 0 6px 18px rgba(85, 107, 90, 0.22);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 360ms;
+
+  /* ============================================================
+     SHADCN SEMANTIC TOKENS — remapped onto the brand palette so
+     shadcn primitives render on-brand out of the box.
+     ============================================================ */
+  --background: var(--surface-page);
+  --foreground: var(--text-body);
+  --card: var(--surface-card);
+  --card-foreground: var(--text-strong);
+  --popover: var(--surface-card);
+  --popover-foreground: var(--text-strong);
+  --primary: var(--xanadu-500);
+  --primary-foreground: var(--white);
+  --secondary: var(--surface-card);
+  --secondary-foreground: var(--text-strong);
+  --muted: var(--surface-sunken);
+  --muted-foreground: var(--text-muted);
+  --accent: var(--xanadu-100);
+  --accent-foreground: var(--xanadu-700);
+  --destructive: var(--negative);
+  --border: var(--border-default);
+  --input: var(--border-strong);
+  --ring: var(--focus-ring);
+  --chart-1: var(--xanadu-300);
+  --chart-2: var(--xanadu-500);
+  --chart-3: var(--xanadu-600);
+  --chart-4: var(--amber-500);
+  --chart-5: var(--ink-700);
+  --radius: 0.5rem;
+  --sidebar: var(--surface-card);
+  --sidebar-foreground: var(--text-body);
+  --sidebar-primary: var(--xanadu-500);
+  --sidebar-primary-foreground: var(--white);
+  --sidebar-accent: var(--xanadu-100);
+  --sidebar-accent-foreground: var(--xanadu-700);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--focus-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  *::selection {
+    background: var(--xanadu-200);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ============================================================
+   BRAND PRIMITIVES — reusable structural classes that carry the
+   warm-editorial styling. Colour/typography flow from the tokens.
+   ============================================================ */
+@layer components {
+  /* Code-comment eyebrow — the signature verbal device. */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    letter-spacing: 0.04em;
+    color: var(--text-accent);
+  }
+
+  /* Uppercase mono micro-label (// local_time, // currently…). */
+  .mono-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    letter-spacing: var(--tracking-label);
+    text-transform: uppercase;
+    color: var(--text-faint);
+  }
+
+  /* Paper bento card — line-led, lifts only on interaction. */
+  .bento {
+    background: var(--surface-card);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+  }
+
+  /* Editorial serif display headings. */
+  .display {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    color: var(--text-strong);
+  }
+}
+
+/* Now-playing equalizer animation. */
+@keyframes eq {
+  from {
+    transform: scaleY(0.28);
+  }
+  to {
+    transform: scaleY(1);
+  }
 }
