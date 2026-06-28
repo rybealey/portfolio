@@ -24,10 +24,29 @@ const jetbrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
+const SITE_URL = "https://rybealey.com";
+const TITLE = "Ry Bealey — Portfolio";
+const DESCRIPTION =
+  "Founder, consultant and web engineer. I design and build thoughtful, user-centered products where infrastructure, design and code meet.";
+
 export const metadata: Metadata = {
-  title: "Ry Bealey — Portfolio",
-  description:
-    "Founder, consultant and web engineer. I design and build thoughtful, user-centered products where infrastructure, design and code meet.",
+  // Resolves the file-based opengraph-image/twitter-image to absolute URLs.
+  metadataBase: new URL(SITE_URL),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "Ry Bealey",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
