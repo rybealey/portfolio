@@ -301,6 +301,55 @@
     box-shadow: var(--shadow-md);
     transform: translateY(-3px);
   }
+
+  /* Full-bleed image-overlay work card — content reads white over a dark
+     scrim; lifts and deepens its shadow on hover/focus. */
+  .work-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-align: left;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    background: var(--xanadu-100);
+    box-shadow: var(--shadow-sm);
+    transition:
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out);
+  }
+  .work-card:hover,
+  .work-card:focus-visible {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-3px);
+    outline: none;
+  }
+  .work-card:focus-visible {
+    box-shadow:
+      var(--shadow-lg),
+      0 0 0 3px var(--focus-ring);
+  }
+  /* Nudge the corner arrow on hover for a touch of life. */
+  .work-card:hover .work-card-arrow,
+  .work-card:focus-visible .work-card-arrow {
+    transform: translate(2px, -2px);
+  }
+}
+
+/* Project-detail overlay entrance. */
+@keyframes panelIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-panel-in {
+  animation: panelIn 0.34s var(--ease-out);
 }
 
 /* Hide scrollbars on the horizontal side-scroller and its panels — the regions
