@@ -13,6 +13,12 @@ APP_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$APP_ROOT"
 echo "==> Deploying $APP_ROOT"
 
+# Lift the virtual-memory (address-space) cap for this shell so V8 can reserve
+# the large region it wants for WebAssembly during the build. Without this,
+# CloudLinux's ulimit -v causes: "WebAssembly.instantiate(): Out of memory".
+# If the cap is LVE-enforced this is a no-op — raise the VMEM limit in WHM.
+ulimit -v unlimited 2>/dev/null || true
+
 # --- Activate the CloudLinux Node.js virtualenv ------------------------------
 # So npm/node use the Node version you selected for the app. Easiest: copy the
 # `source ...../bin/activate` command cPanel shows under Setup Node.js App and
