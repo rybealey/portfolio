@@ -37,14 +37,12 @@ export function FloatingNav({
       }}
     >
       <div
-        className="relative flex w-[min(300px,calc(100vw-20px))] rounded-full p-[5px]"
+        className="floating-nav-pill relative flex w-[min(300px,calc(100vw-20px))] rounded-full p-[5px]"
         style={{
           background: "rgba(252,251,247,0.55)",
           backdropFilter: "blur(22px) saturate(180%)",
           WebkitBackdropFilter: "blur(22px) saturate(180%)",
           border: "1px solid rgba(255,255,255,0.55)",
-          boxShadow:
-            "0 10px 34px rgba(27,32,28,0.20), 0 2px 8px rgba(27,32,28,0.08), inset 0 1px 0 rgba(255,255,255,0.7)",
         }}
       >
         {ITEMS.map(({ key, label, icon: Icon }) => {
