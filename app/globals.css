@@ -335,6 +335,21 @@
   .work-card:focus-visible .work-card-arrow {
     transform: translate(2px, -2px);
   }
+
+  /* Floating glass nav pill. On mobile (single-column layout) the outer
+     drop-shadow is removed — only the inner glass highlight remains. The
+     full lift returns at the 2-column breakpoint. */
+  .floating-nav-pill {
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+  @media (min-width: 680px) {
+    .floating-nav-pill {
+      box-shadow:
+        0 10px 34px rgba(27, 32, 28, 0.2),
+        0 2px 8px rgba(27, 32, 28, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+  }
 }
 
 /* Project-detail overlay entrance. */
