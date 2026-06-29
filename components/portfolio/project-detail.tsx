@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/portfolio/tag";
 import { ProjectMotif } from "@/components/portfolio/project-motif";
+import { KnightLaunchCover } from "@/components/portfolio/knightlaunch-cover";
 import { ProjectBrandKit, hasBrandKit } from "@/components/portfolio/project-brand-kit";
 import { PROJECTS, projectIndex, type Project } from "@/lib/projects";
 
@@ -173,7 +174,9 @@ export function ProjectDetail({
             background: "var(--xanadu-50)",
           }}
         >
-          {project.cover ? (
+          {project.slug === "knightlaunch" ? (
+            <KnightLaunchCover variant="detail" />
+          ) : project.cover ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={project.cover} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
           ) : (

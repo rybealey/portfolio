@@ -230,6 +230,98 @@ export const PROJECTS: Project[] = [
       ],
     },
   },
+  {
+    slug: "knightlaunch",
+    title: "KnightLaunch",
+    kicker: "design system",
+    cats: ["design", "brand"],
+    tags: ["Design System", "Brand", "Education"],
+    excerpt:
+      "A black-and-gold brand and UI system for KnightLaunch, the student-entrepreneurship function of the UCF College of Business. Built on the official UCF brand, with an Explore. Design. Launch. quest framing.",
+    // No raster cover: the card + detail render the live KnightLaunchCover.
+    detail: {
+      kicker: "design system · brand",
+      role: "Brand & Design Systems",
+      year: "2026",
+      // "Visit live" opens the standalone KnightLaunch brand guide.
+      liveUrl: "/guide/knightlaunch",
+      repoUrl: null,
+      summary:
+        "A disciplined brand and product design system for KnightLaunch, the student-entrepreneurship arm of the UCF College of Business (run by the Center for Entrepreneurial Leadership). Built primarily on the official UCF Brand Guide, black and bright gold, Knockout and Gotham, with a light KnightLaunch twist: the Explore. Design. Launch. program journey, rendered soberly in the UCF visual language.",
+      overview: [
+        "KnightLaunch needed an identity that read as official UCF, but spoke to students with energy and warmth. The system encodes that tension: the rigor and equity of the UCF Brand Guide, framed through a playful “every venture is a quest” narrative.",
+        "It is black-and-gold, full stop: UCF Black and Bright Gold with a neutral scale built from percentage tints of black, no novelty hues. The signature device is a gold accent rule, a 4–6px bar under headlines and on card edges, plus the Explore / Design / Launch phase cards.",
+      ],
+      contributions: [
+        {
+          title: "UCF-aligned tokens",
+          body: "Authored the black + bright-gold palette with the official percentage-tint neutral scale, plus the Oswald (Knockout) / Montserrat (Gotham) type system and spacing, radius, and effect tokens.",
+        },
+        {
+          title: "Component library",
+          body: "Built the React primitives, Button, Badge, Card, Input, and Icon, on a curated Lucide glyph set, with no emoji anywhere.",
+        },
+        {
+          title: "Quest phase system",
+          body: "Designed the Explore / Design / Launch PhaseCards, step numerals, compass / drafting-compass / rocket glyphs, and the gold accent rule device.",
+        },
+        {
+          title: "Brand voice & lockup",
+          body: "Codified the inviting, adventurous voice and the typographic KNIGHTLAUNCH unit lockup, deliberately without reproducing UCF’s trademarked Pegasus mark.",
+        },
+      ],
+      features: [
+        "UCF black & bright-gold palette",
+        "Oswald / Montserrat type scale",
+        "Gold accent-rule device",
+        "Explore / Design / Launch phases",
+        "Lucide icon standard, no emoji",
+        "Button · Badge · Card · Input",
+        "StatBlock + unit lockup",
+        "Full homepage UI kit",
+      ],
+      stack: [
+        { group: "Typefaces", items: ["Oswald (Knockout)", "Montserrat (Gotham)"] },
+        {
+          group: "Palette",
+          items: ["UCF Black #000000", "Bright Gold #FFC904", "Black tints", "Off-white #F4F4F4"],
+        },
+        { group: "Build", items: ["React", "Design Tokens", "Lucide"] },
+      ],
+      timeline: [
+        {
+          phase: "Brief",
+          title: "UCF-first",
+          body: "Anchor on the official UCF Brand Guide; set aside the earlier teal/cream exploration.",
+        },
+        {
+          phase: "Tokens",
+          title: "Foundations",
+          body: "Black + gold color, Oswald/Montserrat type, spacing and effects.",
+        },
+        {
+          phase: "Components",
+          title: "Primitives & phases",
+          body: "Buttons, cards, inputs, icons, and the Explore/Design/Launch PhaseCards.",
+        },
+        {
+          phase: "Kit",
+          title: "Homepage",
+          body: "A full KnightLaunch homepage recreation in the UCF language.",
+        },
+      ],
+      outcomes: [
+        { stat: "1,710", label: "students at events last year" },
+        { stat: "$50K+", label: "in cash & business services" },
+        { stat: "3", label: "phases: explore, design, launch" },
+      ],
+      gallery: [
+        { id: "detail-gal-knightlaunch-1", placeholder: "color & type" },
+        { id: "detail-gal-knightlaunch-2", placeholder: "phase cards" },
+        { id: "detail-gal-knightlaunch-3", placeholder: "homepage UI kit" },
+      ],
+    },
+  },
 ];
 
 export function projectIndex(slug: string): number {

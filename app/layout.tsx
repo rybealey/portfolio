@@ -1,5 +1,13 @@
 import type { Metadata } from "next";
-import { Newsreader, Hanken_Grotesk, JetBrains_Mono, Sora, Inter } from "next/font/google";
+import {
+  Newsreader,
+  Hanken_Grotesk,
+  JetBrains_Mono,
+  Sora,
+  Inter,
+  Oswald,
+  Montserrat,
+} from "next/font/google";
 import "./globals.css";
 
 // Display serif — editorial weight & elegant italics
@@ -38,6 +46,21 @@ const inter = Inter({
   display: "swap",
 });
 
+// KnightLaunch brand faces — used only inside the KnightLaunch project
+// showcase and its standalone brand guide (/guide/knightlaunch). Oswald is the
+// condensed-display Knockout substitute; Montserrat is the Gotham substitute.
+const oswald = Oswald({
+  variable: "--font-oswald",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  display: "swap",
+});
+
 const SITE_URL = "https://rybealey.com";
 const TITLE = "Ry Bealey — Portfolio";
 const DESCRIPTION =
@@ -71,7 +94,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${newsreader.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${sora.variable} ${inter.variable} h-full antialiased`}
+      className={`${newsreader.variable} ${hankenGrotesk.variable} ${jetbrainsMono.variable} ${sora.variable} ${inter.variable} ${oswald.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full">{children}</body>
     </html>

@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import { FILTERS, PROJECTS, type Project } from "@/lib/projects";
 import { ProjectMotif } from "@/components/portfolio/project-motif";
+import { KnightLaunchCover } from "@/components/portfolio/knightlaunch-cover";
 
 /* ---------- card ---------- */
 
@@ -21,8 +22,10 @@ function ProjectCard({
       className="work-card group relative aspect-square overflow-hidden"
       aria-label={`Open project: ${project.title}`}
     >
-      {/* MEDIA — real cover if present, otherwise a brand motif */}
-      {project.cover ? (
+      {/* MEDIA — live cover, real cover image, or a brand motif fallback */}
+      {project.slug === "knightlaunch" ? (
+        <KnightLaunchCover variant="card" />
+      ) : project.cover ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={project.cover}
