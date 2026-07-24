@@ -171,7 +171,7 @@ export function ProjectDetail({
             aspectRatio: "16 / 9",
             border: "1px solid var(--border-default)",
             boxShadow: "var(--shadow-sm)",
-            background: "var(--xanadu-50)",
+            background: "#0B0E18",
           }}
         >
           {project.slug === "knightlaunch" ? (
@@ -326,73 +326,6 @@ export function ProjectDetail({
                 );
               })}
             </ol>
-          </Section>
-
-          {/* outcomes */}
-          <Section label="outcomes">
-            <div
-              className="grid gap-3"
-              style={{ gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))" }}
-            >
-              {detail.outcomes.map((o) => (
-                <div
-                  key={o.label}
-                  className="p-5"
-                  style={{
-                    background: "var(--surface-sage)",
-                    border: "1px solid var(--xanadu-200)",
-                    borderRadius: "var(--radius-lg)",
-                  }}
-                >
-                  <div
-                    className="text-[30px] leading-none"
-                    style={{ fontFamily: "var(--font-serif)", color: "var(--text-strong)" }}
-                  >
-                    {o.stat}
-                  </div>
-                  <div
-                    className="mt-2 font-mono text-[11px] tracking-[0.06em]"
-                    style={{ color: "var(--xanadu-700)" }}
-                  >
-                    {o.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Section>
-
-          {/* gallery */}
-          <Section label="gallery">
-            <div
-              className="grid gap-3"
-              style={{ gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))" }}
-            >
-              {detail.gallery.map((g) => (
-                <div
-                  key={g.id}
-                  className="relative overflow-hidden"
-                  style={{
-                    aspectRatio: "4 / 3",
-                    borderRadius: "var(--radius-md)",
-                    border: "1px solid var(--border-default)",
-                    background: "var(--xanadu-50)",
-                  }}
-                >
-                  <ProjectMotif slug={project.slug} />
-                  <span
-                    className="absolute bottom-2 left-2 rounded-full px-[8px] py-[3px] font-mono text-[10px] tracking-[0.08em] uppercase"
-                    style={{
-                      color: "var(--text-muted)",
-                      background: "rgba(246,244,236,0.82)",
-                      backdropFilter: "blur(3px)",
-                      WebkitBackdropFilter: "blur(3px)",
-                    }}
-                  >
-                    {g.placeholder}
-                  </span>
-                </div>
-              ))}
-            </div>
           </Section>
         </div>
 
