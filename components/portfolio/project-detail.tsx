@@ -4,8 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Tag } from "@/components/portfolio/tag";
-import { ProjectMotif } from "@/components/portfolio/project-motif";
-import { KnightLaunchCover } from "@/components/portfolio/knightlaunch-cover";
+import { ProjectCover } from "@/components/portfolio/project-cover";
 import { ProjectBrandKit, hasBrandKit } from "@/components/portfolio/project-brand-kit";
 import { PROJECTS, projectIndex, type Project } from "@/lib/projects";
 
@@ -174,14 +173,7 @@ export function ProjectDetail({
             background: "#0B0E18",
           }}
         >
-          {project.slug === "knightlaunch" ? (
-            <KnightLaunchCover variant="detail" />
-          ) : project.cover ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={project.cover} alt="" aria-hidden className="absolute inset-0 h-full w-full object-cover" />
-          ) : (
-            <ProjectMotif slug={project.slug} />
-          )}
+          <ProjectCover slug={project.slug} variant="detail" />
         </div>
 
         {/* SECTIONS — separated by margin rhythm (56px below the cover, 48px between). */}
