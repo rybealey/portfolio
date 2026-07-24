@@ -417,7 +417,7 @@ export function BentoPortfolio() {
             <span className="opacity-60">{"// "}</span>contact
           </div>
           <h2
-            className="my-[14px] mb-4 text-[clamp(32px,4.5vw,48px)]"
+            className="my-[14px] mb-4 text-[clamp(30px,4vw,44px)]"
             style={{
               fontFamily: "var(--font-serif)",
               fontWeight: 400,
@@ -441,15 +441,6 @@ export function BentoPortfolio() {
             >
               send an email
             </Button>
-            <a
-              href="https://github.com/rybealey"
-              target="_blank"
-              rel="noopener"
-              className="font-mono text-[13px] no-underline hover:underline"
-              style={{ color: "var(--xanadu-300)" }}
-            >
-              GitHub ↗
-            </a>
             <a
               href="https://www.linkedin.com/in/ryanbealey/"
               target="_blank"

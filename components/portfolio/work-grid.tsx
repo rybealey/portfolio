@@ -1,8 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
-import { FILTERS, PROJECTS, type Project } from "@/lib/projects";
+import { PROJECTS, type Project } from "@/lib/projects";
 import { ProjectMotif } from "@/components/portfolio/project-motif";
 import { KnightLaunchCover } from "@/components/portfolio/knightlaunch-cover";
 
@@ -116,12 +114,9 @@ function ProjectCard({
 /* ---------- grid ---------- */
 
 export function WorkGrid({ onOpenProject }: { onOpenProject: (slug: string) => void }) {
-  const [filter, setFilter] = useState("all");
-  const visible = PROJECTS.filter((p) => filter === "all" || p.cats.includes(filter));
-
   return (
     <div className="my-auto w-full max-w-[1180px]">
-      {/* HEADER + FILTER BAR */}
+      {/* HEADER */}
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div className="flex-none">
           <div className="eyebrow text-[13px]">
@@ -134,38 +129,12 @@ export function WorkGrid({ onOpenProject }: { onOpenProject: (slug: string) => v
             Selected work.
           </h2>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {FILTERS.map((f) => {
-            const on = filter === f.key;
-            return (
-              <button
-                key={f.key}
-                type="button"
-                onClick={() => setFilter(f.key)}
-                aria-pressed={on}
-                className="cursor-pointer rounded-full px-[15px] py-2 font-mono text-[11px] tracking-[0.1em] whitespace-nowrap uppercase"
-                style={{
-                  // Active chip: saturated brand green with white text (AA-contrast).
-                  // The inactive chip stays a light paper pill with muted ink text.
-                  background: on ? "var(--accent-hover)" : "var(--surface-card)",
-                  color: on ? "var(--white)" : "var(--text-muted)",
-                  border: `1px solid ${on ? "var(--accent-hover)" : "var(--border-default)"}`,
-                  boxShadow: on ? "var(--shadow-sm)" : "none",
-                  transition:
-                    "background-color 0.22s var(--ease-out), color 0.22s var(--ease-out), border-color 0.22s var(--ease-out)",
-                }}
-              >
-                {f.label}
-              </button>
-            );
-          })}
-        </div>
       </div>
 
       {/* BENTO GRID — uniform square tiles, two-up above 680px */}
-      {visible.length > 0 ? (
+      {PROJECTS.length > 0 ? (
         <div className="grid grid-cols-1 gap-4 min-[680px]:grid-cols-2">
-          {visible.map((p) => (
+          {PROJECTS.map((p) => (
             <ProjectCard key={p.slug} project={p} onOpen={onOpenProject} />
           ))}
         </div>
@@ -184,7 +153,7 @@ export function WorkGrid({ onOpenProject }: { onOpenProject: (slug: string) => v
             className="mx-auto mt-[14px] max-w-[360px] text-[15px] leading-[1.6]"
             style={{ color: "var(--text-muted)" }}
           >
-            Nothing here under this filter yet. Try another, or check back soon.
+            Case studies are being added back one at a time. Check in soon.
           </p>
         </div>
       )}
