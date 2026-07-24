@@ -34,8 +34,6 @@ export type Project = {
   cats: string[];
   tags: string[];
   excerpt: string;
-  /** Optional cover image path (under /public). Falls back to a motif. */
-  cover?: string;
   detail: ProjectDetail;
 };
 
@@ -56,7 +54,6 @@ export const PROJECTS: Project[] = [
     tags: ["Design System", "Brand", "UI Kit"],
     excerpt:
       "The brand and product design system for SERVERIZZ: a dark, terminal-fluent language of tokens, components, and UI kits powering the IaaS platform and agency.",
-    cover: "/images/serverizz-cover.png",
     detail: {
       kicker: "design system · brand",
       role: "Design Systems Lead",
@@ -147,7 +144,6 @@ export const PROJECTS: Project[] = [
     tags: ["Design System", "Brand", "Fintech"],
     excerpt:
       "A warm, editorial brand and product system for Impeccabyte: merchant services for the next generation of founders. Clay and amber on cream, with a crafted serif voice.",
-    cover: "/images/impeccabyte-cover.png",
     detail: {
       kicker: "design system · brand",
       role: "Brand & Design Systems",
