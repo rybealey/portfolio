@@ -143,54 +143,50 @@ Without these values the tile shows "Quiet right now" instead of failing.
 
 ## Deploy to cPanel
 
-The site runs as a Passenger app from **Setup Node.js App**. Don't use cPanel's container-based application deploy: it needs rootless containers, which this server doesn't allow, and it treats the site as static. Astro 7 needs Node.js 22.23.4 or newer; the app uses 24.
+The site runs as a Passenger app from **Setup Node.js App**, straight from cPanel's Git copy of this repository. Don't use cPanel's container-based application deploy: it needs rootless containers, which this server doesn't allow, and it treats the site as static. Astro 7 needs Node.js 22.23.4 or newer; the app uses 24.
 
 ### First deploy
 
-1. In cPanel, open **Setup Node.js App** and create an application:
+1. In **Git Version Control**, click **Create** and clone `https://github.com/rybealey/portfolio.git` into `repositories/portfolio`.
+2. In **Setup Node.js App**, create an application:
    - Node.js version: 24
    - Application mode: Production
-   - Application root: `ryanbealey` (outside `public_html`)
+   - Application root: `repositories/portfolio`
    - Application URL: `ryanbealey.com`
    - Application startup file: `app.cjs`
+   - Passenger log file: `logs/portfolio-passenger.log`, so app errors land somewhere the account can read
    - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
-   - Also `MALLOC_ARENA_MAX=2` and `NODE_OPTIONS=--disable-wasm-trap-handler`. CloudLinux caps each process at 4 GB of address space, counting memory that's only reserved, and without these the share cards and image resizing reserve past it and crash the app. The deploy script sets the same limits for the build.
-2. In **Git Version Control**, click **Create** and clone `https://github.com/rybealey/portfolio.git` into `repositories/portfolio`.
-3. Under **Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
-   1. Builds in `repositories/portfolio` with the app's Node 24.
-   2. Copies the built site, `app.cjs`, the package files and the database scripts into `~/ryanbealey`.
-   3. Installs runtime dependencies there.
-   4. Restarts Passenger.
-   5. Clears the build's own dependencies to save disk space.
+   - Also `MALLOC_ARENA_MAX=2` and `NODE_OPTIONS=--disable-wasm-trap-handler`. CloudLinux caps each process at 4 GB of address space, counting memory that's only reserved, and without these the share cards and image resizing reserve past it and crash the app. The build sets the same limits for itself.
+3. Back in **Git Version Control → Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
+   1. Installs dependencies into the app's Node.js environment with its Node 24.
+   2. Builds a copy of the source in `~/.cache/portfolio-build`. Astro empties its output folder before building, so building in place would take the site down, and a failed build would leave it down.
+   3. Swaps the new `dist/` into the repository and restarts Passenger. A failed build stops before this step and leaves the live site as it was.
 
-   After each install it loads the native modules (lightningcss for the build, resvg and sharp at runtime). npm skips an optional dependency it can't install without saying why, so if one is missing the script installs its Linux build by name. That either fixes it or shows npm's real error in the deploy log.
+   After installing, it loads the native modules (lightningcss for the build, resvg and sharp at runtime). npm skips an optional dependency it can't install without saying why, so if one is missing the script installs its Linux build by name. That either fixes it or shows npm's real error in the deploy log.
 4. Over SSH (cPanel's Terminal works), create the tables and import the starting content once. The database values go on the command line because cPanel's app variables don't reach the shell:
 
    ```bash
-   source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey
+   source ~/nodevenv/repositories/portfolio/24/bin/activate && cd ~/repositories/portfolio
    export DB_HOST=localhost DB_PORT=3306 DB_NAME=… DB_USER=…
    read -s DB_PASSWORD && export DB_PASSWORD
    node scripts/db-migrate.mjs && node scripts/db-seed.mjs
-   touch tmp/restart.txt
    ```
 
 5. Add the rules from `deploy/htaccess.example` above cPanel's Passenger block in the domain's `.htaccess`.
 
+If the app is changed in Setup Node.js App and Passenger keeps the old settings, restart it as root. cPanel keeps Passenger's registry in a non-default folder:
+
+```bash
+PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ea-passenger-runtime passenger-config restart-app /home/ryanblkt/repositories/portfolio
+```
+
 ### Later deploys
 
 1. Push to GitHub.
-2. In **Git Version Control → Manage → Pull or Deploy**, click **Update from Remote**, then **Deploy HEAD Commit**.
-3. Migrations stay manual. If the release adds a file to `db/migrations/`, apply it over SSH with the DB variables exported as above: `cd ~/ryanbealey && node scripts/db-migrate.mjs`.
+2. In **Git Version Control → Manage → Pull or Deploy**, click **Update from Remote**, then **Deploy HEAD Commit**. If cPanel says the repository can't deploy although it's clean, its status is stale; deploy from the command line instead: `uapi --user=ryanblkt VersionControlDeployment create repository_root=/home/ryanblkt/repositories/portfolio`.
+3. Migrations stay manual. If the release adds a file to `db/migrations/`, apply it over SSH with the DB variables exported as above: `cd ~/repositories/portfolio && node scripts/db-migrate.mjs`.
 
-The deploy log is in `~/.cpanel/logs/`.
-
-### Without Git
-
-`npm run package` builds `release/ryanbealey.tar.gz` locally. Upload it to `~/ryanbealey`, extract it, then install and restart:
-
-```bash
-source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey && npm install --omit=dev && touch tmp/restart.txt
-```
+The deploy log is in `~/.cpanel/logs/`, and the app's own log in `~/logs/portfolio-passenger.log`.
 
 ## Status and roadmap
 
