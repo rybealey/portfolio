@@ -10,11 +10,13 @@ import ClockTile from '../components/tiles/ClockTile.astro';
 import FactTile from '../components/tiles/FactTile.astro';
 import ContactTile from '../components/tiles/ContactTile.astro';
 import { site } from '../data/site';
+import { formatUpdated, lastUpdated } from '../lib/updated';
 
 const [billing, web, fin] = await getCaseStudies();
 if (!billing || !web || !fin) throw new Error('Home expects three published case studies');
 
-const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: site.timeZone });
+const updatedAt = await lastUpdated();
+const updated = updatedAt ? formatUpdated(updatedAt) : 'Recently';
 
 const person = {
   '@context': 'https://schema.org',
@@ -47,7 +49,7 @@ const person = {
         <FactTile href="/about" label="Now" title="Product and Operations Lead" caption="SERVERIZZ, Austin" />
       </BentoCell>
       <BentoCell id="updated" size="small" movable name="Updated">
-        <FactTile href="/colophon" label="Updated" title={updated} caption="Built from a public spec" />
+        <FactTile href="/colophon" label="Updated" title={updated} caption="How this site is built" />
       </BentoCell>
       <BentoCell id="apple" size="half" movable name="Apple">
         <FactTile

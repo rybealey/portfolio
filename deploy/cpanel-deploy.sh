@@ -92,6 +92,9 @@ rsync -a --delete \
   --exclude /.git --exclude /node_modules --exclude /dist --exclude /.astro --exclude /tmp \
   "$REPO/" "$STAGE/src/"
 ln -sfn "$REPO/node_modules" "$STAGE/src/node_modules"
+# The copy has no .git, so pass the commit date for the home page's "Updated" tile.
+SITE_COMMITTED_AT="$(git -C "$REPO" log -1 --format=%cI 2>/dev/null || true)"
+export SITE_COMMITTED_AT
 (cd "$STAGE/src" && npm run build)
 
 # Swap the new build in with two renames on the same disk, then restart, so

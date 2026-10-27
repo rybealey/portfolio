@@ -1,6 +1,18 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
 import node from '@astrojs/node';
+import { execFileSync } from 'node:child_process';
+
+// The date of the commit being built, for the home page's "Updated" tile.
+// The cPanel deploy builds a copy without .git, so it passes the date in.
+const committedAt = (() => {
+  if (process.env.SITE_COMMITTED_AT) return process.env.SITE_COMMITTED_AT;
+  try {
+    return execFileSync('git', ['log', '-1', '--format=%cI'], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim() || null;
+  } catch {
+    return null;
+  }
+})();
 
 // Every page renders on request on the Node server that Passenger starts
 // through app.cjs, reading case studies and notes from MariaDB, so content
@@ -17,6 +29,9 @@ export default defineConfig({
   // Pages are built whole before sending, so a failure mid-page returns a
   // real 500 instead of a 200 that stops halfway.
   adapter: node({ mode: 'standalone', experimentalDisableStreaming: true }),
+  vite: {
+    define: { __SITE_COMMITTED_AT__: JSON.stringify(committedAt) },
+  },
   env: {
     schema: {
       SPOTIFY_CLIENT_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
