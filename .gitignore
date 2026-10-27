@@ -1,4 +1,5 @@
-node_modules/
+# No trailing slash: in a Node.js app folder on cPanel it's a symlink.
+node_modules
 dist/
 release/
 .astro/
@@ -7,6 +8,8 @@ release/
 !.env.example
 .DS_Store
 tmp/
+# Passenger's log when the folder runs as a Node.js app.
+stderr.log
 
 # Local editor and tooling settings
 .claude/
