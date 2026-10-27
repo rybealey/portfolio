@@ -6,7 +6,7 @@ import { renderMarkdown } from './markdown';
 import { getCaseStudies, type CaseStudy } from './work';
 import type { PreviewKind } from './link-preview';
 
-export type TopicKey = 'billing' | 'web' | 'support' | 'build';
+export type TopicKey = 'billing' | 'web' | 'support' | 'build' | 'thoughts';
 type Band = 'pink' | 'tangerine' | 'lime' | 'cyan' | 'violet';
 
 export const TOPICS: Record<TopicKey, { label: string; band: Band; blurb: string; caseStudy?: string }> = {
@@ -32,6 +32,12 @@ export const TOPICS: Record<TopicKey, { label: string; band: Band; blurb: string
     label: 'Build',
     band: 'tangerine',
     blurb: 'How this site and the tools behind my work get built.',
+  },
+  // Personal notes, not about work. Pink is the one band no other topic uses.
+  thoughts: {
+    label: 'Thoughts',
+    band: 'pink',
+    blurb: "Notes from off the clock: what I'm into, thinking about or making when it isn't work.",
   },
 };
 

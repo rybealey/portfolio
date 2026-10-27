@@ -174,7 +174,7 @@ A note:
 }
 ```
 
-- **Required:** `topic` (`billing`, `web`, `support` or `build`) and `body`. `status` defaults to `draft`, `publishedOn` to today in Austin, and `slug` to the date plus the body's first words. A slug you send must start with the date.
+- **Required:** `topic` (`billing`, `web`, `support`, `build` or `thoughts`) and `body`. `status` defaults to `draft`, `publishedOn` to today in Austin, and `slug` to the date plus the body's first words. A slug you send must start with the date.
 - **Attachment:** at most one, or `null`. `{ "type": "link", "url" }` unfurls the link when saved. `{ "type": "caseStudy", "slug" }` attaches a case study. `{ "type": "image", "sha256", "alt", "caption" }` attaches an image uploaded first to `/api/v1/media`.
 - **Slugs don't change.** They're the permalink, so `PATCH` refuses `slug`. Create a new note and delete the old one instead.
 
