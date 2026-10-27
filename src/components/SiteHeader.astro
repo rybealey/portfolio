@@ -55,6 +55,17 @@ const resumeHref = site.resumePdf ?? '/resume';
     sync();
   });
 
+  // Until the visitor picks a theme, follow their system setting live.
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+    let saved = null;
+    try {
+      saved = localStorage.getItem('rb:theme');
+    } catch {}
+    if (saved) return;
+    root.dataset.theme = event.matches ? 'dark' : 'light';
+    sync();
+  });
+
   const menu = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
   menu?.addEventListener('click', () => {
     const open = menu.getAttribute('aria-expanded') !== 'true';
