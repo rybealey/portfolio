@@ -121,18 +121,16 @@ const QUERY = `
   LEFT JOIN link_previews lp ON lp.url_hash = n.link_url_hash
   LEFT JOIN media pm ON pm.id = lp.image_media_id
   LEFT JOIN media im ON im.id = n.image_media_id
-  LEFT JOIN case_studies cs ON cs.id = n.case_study_id AND cs.published = 1
+  LEFT JOIN case_studies cs ON cs.id = n.case_study_id
   WHERE n.status = 'published' OR ?
   ORDER BY n.published_on DESC, n.slug DESC`;
 
-/** Newest first. Drafts show in `npm run dev` only. */
-export function getNotes(): Promise<Note[]> {
-  return cached('notes', async () => {
-    const [list, studies] = await Promise.all([rows<Row>(QUERY, [import.meta.env.DEV]), getCaseStudies()]);
-    return Promise.all(
-      list.map(async (row): Promise<Note> => {
+const loadNotes = () =>
+  cached('notes', async () =>
+    Promise.all(
+      (await rows<Row>(QUERY, [import.meta.env.DEV])).map(async (row): Promise<{ note: Note; caseSlug: string | null }> => {
         const image = media(row.im_sha, row.im_type, row.im_width, row.im_height);
-        return {
+        const note: Note = {
           id: row.slug,
           body: row.body,
           html: await renderMarkdown(row.body),
@@ -157,12 +155,23 @@ export function getNotes(): Promise<Note[]> {
                     image: media(row.pm_sha, row.pm_type, row.pm_width, row.pm_height),
                   }
                 : undefined,
-            caseStudy: row.cs_slug ? studies.find((study) => study.id === row.cs_slug) : undefined,
             image: image && row.image_alt ? { ...image, alt: row.image_alt, caption: row.image_caption } : undefined,
           },
         };
+        return { note, caseSlug: row.cs_slug };
       }),
-    );
+    ),
+  );
+
+/** Newest first. Drafts show in `npm run dev` only. */
+export async function getNotes(): Promise<Note[]> {
+  // The attached case study is looked up on every read, not cached with the
+  // note, so a note only shows a case study that /work/<slug> would show too,
+  // even when the two caches were filled at different times.
+  const [notes, studies] = await Promise.all([loadNotes(), getCaseStudies()]);
+  return notes.map(({ note, caseSlug }) => {
+    const caseStudy = caseSlug ? studies.find((study) => study.id === caseSlug) : undefined;
+    return caseStudy ? { ...note, data: { ...note.data, caseStudy } } : note;
   });
 }
 

@@ -6,7 +6,7 @@ import { renderMarkdown } from '../../lib/markdown';
 
 const entry = await getCaseStudy(Astro.params.slug ?? '');
 if (!entry) return Astro.rewrite('/404');
-const { order, label, title, summary, status, accent, metrics } = entry.data;
+const { number, label, title, summary, status, accent, metrics } = entry.data;
 const html = await renderMarkdown(entry.body);
 const statusChip = {
   shipped: { label: 'Shipped', tone: 'success' },
@@ -21,7 +21,7 @@ const statusChip = {
   <article class="page" style={`--accent: var(--color-accent-${accent})`}>
     {/* Shares the home tile's transition name, so the tile morphs into this header. */}
     <div class="morph" style={`view-transition-name: case-${entry.id}; view-transition-class: case`}>
-    <PageIntro eyebrow={`0${order} · ${label}`} title={title} lede={summary} status={statusChip[status]}>
+    <PageIntro eyebrow={`${number} · ${label}`} title={title} lede={summary} status={statusChip[status]}>
       <ul role="list" class="metrics" aria-label="Highlights">
         {metrics.map((metric) => <li class="hud chip">{metric}</li>)}
       </ul>

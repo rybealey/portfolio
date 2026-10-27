@@ -7,13 +7,13 @@ interface Props {
 }
 
 const { entry } = Astro.props;
-const { order, label, title, accent } = entry.data;
+const { number, label, title, accent } = entry.data;
 // The chip is a spectrum fill with void text, which reads in both themes.
 const band = { billing: 'lime', web: 'cyan', fin: 'violet' }[accent];
 ---
 
 <a class="case" href={`/work/${entry.id}`}>
-  <span class="hud chip-fill" style={`background: var(--rv-${band})`}>0{order} · {label} · Case study</span>
+  <span class="hud chip-fill" style={`background: var(--rv-${band})`}>{number} · {label} · Case study</span>
   <span class="case-title">{title}</span>
   <span class="more">Read the case study <Icon name="arrow" /></span>
 </a>

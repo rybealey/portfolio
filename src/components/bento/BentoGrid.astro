@@ -17,16 +17,23 @@ import Icon from '../Icon.astro';
         if (!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
         const grid = document.querySelector('[data-bento]');
         const cells = [...grid.querySelectorAll(':scope > [data-movable]')];
-        grid.dataset.defaultOrder = JSON.stringify(cells.map((c) => c.dataset.tileId));
+        const designed = cells.map((c) => c.dataset.tileId);
+        grid.dataset.defaultOrder = JSON.stringify(designed);
         const byId = new Map(cells.map((c) => [c.dataset.tileId, c]));
         const saved = JSON.parse(localStorage.getItem('rb:bento') || 'null');
-        if (!Array.isArray(saved) || saved.length !== cells.length || !saved.every((id) => byId.has(id))) return;
+        if (!Array.isArray(saved)) return;
+        // A layout saved before the tiles changed still applies: tiles that
+        // are gone drop out, and new ones take their designed place.
+        const order = saved.filter((id, i) => byId.has(id) && saved.indexOf(id) === i);
+        designed.forEach((id, i) => order.includes(id) || order.splice(i, 0, id));
+        if (order.every((id, i) => id === designed[i])) return localStorage.removeItem('rb:bento');
+        if (order.length !== saved.length || order.some((id, i) => id !== saved[i])) localStorage.setItem('rb:bento', JSON.stringify(order));
         const slots = cells.map((c) => {
           const marker = document.createComment('');
           c.replaceWith(marker);
           return marker;
         });
-        slots.forEach((marker, i) => marker.replaceWith(byId.get(saved[i])));
+        slots.forEach((marker, i) => marker.replaceWith(byId.get(order[i])));
       } catch {}
     })();
   </script>
@@ -60,6 +67,7 @@ import Icon from '../Icon.astro';
   .bento :global(.size-hero) { grid-column: span 8; grid-row: span 2; }
   .bento :global(.size-feature) { grid-column: span 4; grid-row: span 2; }
   .bento :global(.size-half) { grid-column: span 4; }
+  .bento :global(.size-wide) { grid-column: span 8; }
   .bento :global(.size-small) { grid-column: span 2; }
   .bento :global(.size-small > .tile:not(.spotify)) { padding: 20px; }
   .bento :global(.size-full) { grid-column: 1 / -1; }
@@ -131,7 +139,8 @@ import Icon from '../Icon.astro';
 
   @media (max-width: 1100px) {
     .bento { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-    .bento :global(.size-hero) { grid-column: span 6; }
+    .bento :global(.size-hero),
+    .bento :global(.size-wide) { grid-column: span 6; }
     .bento :global(.size-feature),
     .bento :global(.size-half),
     .bento :global(.size-small) { grid-column: span 3; }
@@ -142,6 +151,7 @@ import Icon from '../Icon.astro';
     .bento :global(.size-hero),
     .bento :global(.size-feature),
     .bento :global(.size-half),
+    .bento :global(.size-wide),
     .bento :global(.size-full) { grid-column: 1 / -1; grid-row: auto; }
     .bento :global(.size-small) { grid-column: span 1; }
     .bento :global(.size-small > .tile:not(.spotify)) { padding: var(--space-16); }

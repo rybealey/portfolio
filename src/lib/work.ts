@@ -11,6 +11,8 @@ export interface CaseStudy {
   updatedAt: Date;
   data: {
     order: number;
+    /** Its place among the published case studies, "01" up, so the numbers stay in sequence as case studies come and go. */
+    number: string;
     label: string;
     title: string;
     summary: string;
@@ -42,12 +44,13 @@ interface Row {
 // MariaDB returns JSON columns as strings.
 const list = (value: string | string[]) => (typeof value === 'string' ? (JSON.parse(value) as string[]) : value);
 
-const toCaseStudy = (row: Row): CaseStudy => ({
+const toCaseStudy = (row: Row, index: number): CaseStudy => ({
   id: row.slug,
   body: row.body,
   updatedAt: row.updated_at,
   data: {
     order: row.sort_order,
+    number: String(index + 1).padStart(2, '0'),
     label: row.label,
     title: row.title,
     summary: row.summary,
@@ -60,7 +63,7 @@ const toCaseStudy = (row: Row): CaseStudy => ({
   },
 });
 
-/** Published case studies in their set order. */
+/** Published case studies in their set order. There may be any number, including none. */
 export function getCaseStudies(): Promise<CaseStudy[]> {
   return cached('case-studies', async () =>
     (await rows<Row>('SELECT * FROM case_studies WHERE published = 1 ORDER BY sort_order, slug')).map(toCaseStudy),
