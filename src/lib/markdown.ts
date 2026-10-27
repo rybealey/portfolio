@@ -32,6 +32,10 @@ const marked = new Marked({
     html(token) {
       return escape(token.text);
     },
+    // Wide tables scroll sideways inside their own box instead of the page.
+    table(token) {
+      return `<div class="table-wrap" role="region" aria-label="Table" tabindex="0">${Renderer.prototype.table.call(this, token)}</div>`;
+    },
     // Links to other sites open in a new tab (see src/lib/links.ts).
     link(token) {
       const html = Renderer.prototype.link.call(this, token);

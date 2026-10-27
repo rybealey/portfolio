@@ -3,11 +3,12 @@ import Base from '../../layouts/Base.astro';
 import PageIntro from '../../components/PageIntro.astro';
 import { getCaseStudy } from '../../lib/work';
 import { renderMarkdown } from '../../lib/markdown';
+import { outline } from '../../lib/outline';
 
 const entry = await getCaseStudy(Astro.params.slug ?? '');
 if (!entry) return Astro.rewrite('/404');
-const { order, label, title, summary, status, accent, metrics } = entry.data;
-const html = await renderMarkdown(entry.body);
+const { order, label, title, summary, role, timeframe, stack, status, accent, metrics } = entry.data;
+const { html, sections } = outline(await renderMarkdown(entry.body));
 const statusChip = {
   shipped: { label: 'Shipped', tone: 'success' },
   live: { label: 'Live', tone: 'success' },
@@ -15,6 +16,11 @@ const statusChip = {
   prototype: { label: 'Prototype', tone: 'warning' },
   'in-progress': { label: 'Write-up in progress', tone: 'warning' },
 } as const;
+// "TBD" is a placeholder in the data, not something to show.
+const facts = [
+  { term: 'Role', detail: role },
+  ...(timeframe && timeframe !== 'TBD' ? [{ term: 'Timeframe', detail: timeframe }] : []),
+];
 ---
 
 <Base title={title} description={summary}>
@@ -27,19 +33,239 @@ const statusChip = {
       </ul>
     </PageIntro>
     </div>
-    <div class="body">
-      <Fragment set:html={html} />
-      <p><a href="/">Back to home</a></p>
+
+    <div class="layout">
+      <aside class="rail" aria-label="About this case study">
+        <section class="card" aria-labelledby="case-file">
+          <h2 id="case-file" class="hud rail-label">Case file</h2>
+          <dl>
+            {
+              facts.map(({ term, detail }) => (
+                <div>
+                  <dt class="hud">{term}</dt>
+                  <dd>{detail}</dd>
+                </div>
+              ))
+            }
+            {
+              stack.length > 0 && (
+                <div>
+                  <dt class="hud">Stack</dt>
+                  <dd>
+                    <ul role="list" class="stack">
+                      {stack.map((item) => <li class="hud chip">{item}</li>)}
+                    </ul>
+                  </dd>
+                </div>
+              )
+            }
+          </dl>
+        </section>
+        {
+          sections.length > 2 && (
+            <details class="contents" open data-contents>
+              <summary class="hud rail-label">Contents</summary>
+              <nav aria-label="Contents">
+                <ol role="list">
+                  {sections.map((section) => (
+                    <li>
+                      <a href={`#${section.id}`} data-section={section.id}>
+                        <span class="hud toc-num" aria-hidden="true">{section.number ?? '·'}</span>
+                        <span>{section.title}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </details>
+          )
+        }
+      </aside>
+
+      <div class="prose">
+        <Fragment set:html={html} />
+        <p class="back"><a class="btn btn-ghost btn-sm" href="/">← All work</a></p>
+      </div>
     </div>
   </article>
 </Base>
 
+<script>
+  // Highlights the section being read in the contents list, and starts the
+  // list folded on narrow screens, where it sits above the article.
+  const contents = document.querySelector<HTMLDetailsElement>('[data-contents]');
+  if (contents) {
+    if (matchMedia('(max-width: 1099px)').matches) contents.open = false;
+    const links = new Map(
+      [...contents.querySelectorAll<HTMLAnchorElement>('[data-section]')].map((link) => [link.dataset.section!, link]),
+    );
+    const headings = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    let current: HTMLAnchorElement | undefined;
+    const mark = () => {
+      // The last heading above the top third of the viewport is the one being read.
+      const line = innerHeight / 3;
+      const active = headings.filter((h) => h.getBoundingClientRect().top <= line).at(-1) ?? headings[0];
+      const link = active && links.get(active.id);
+      if (link === current) return;
+      current?.removeAttribute('aria-current');
+      link?.setAttribute('aria-current', 'location');
+      current = link;
+    };
+    addEventListener('scroll', mark, { passive: true });
+    addEventListener('resize', mark);
+    mark();
+  }
+</script>
+
 <style>
-  .page { max-width: 1280px; min-height: 50vh; margin: 0 auto; padding: 48px 40px 96px; display: flex; flex-direction: column; gap: 40px; }
+  .page { max-width: 1280px; min-height: 50vh; margin: 0 auto; padding: 48px 40px 96px; display: flex; flex-direction: column; gap: 48px; }
   .metrics { display: flex; flex-wrap: wrap; gap: var(--space-8); }
   .metrics .chip { color: var(--accent); }
-  .body { max-width: 760px; display: flex; flex-direction: column; gap: var(--space-16); color: var(--color-ink-muted); }
+
+  /* The rail sits beside the article on wide screens, above it otherwise. */
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 64px; align-items: start; }
+  .rail { grid-column: 2; grid-row: 1; position: sticky; top: 24px; display: flex; flex-direction: column; gap: var(--space-16); }
+  .prose { grid-column: 1; grid-row: 1; min-width: 0; max-width: 880px; }
+
+  .rail-label { color: var(--color-hud); font-size: var(--type-hud-size); font-weight: var(--type-hud-weight); }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding: 20px;
+    border: 1px solid var(--color-hairline);
+    border-top: 3px solid var(--accent);
+    border-radius: var(--radius-md);
+    background: var(--color-panel);
+  }
+  dl { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+  dt { color: var(--color-hud); margin-bottom: 4px; }
+  dd { margin: 0; color: var(--color-ink); font-weight: 700; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .stack .chip { font-weight: var(--type-hud-weight); }
+
+  .contents { padding: 4px 4px 0; }
+  .contents summary { cursor: pointer; list-style: none; padding: 4px 0 10px; }
+  .contents summary::-webkit-details-marker { display: none; }
+  .contents summary::after { content: ' +'; }
+  .contents[open] summary::after { content: ' −'; }
+  .contents ol { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--color-hairline); }
+  .contents a {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 6px 0 6px 14px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .contents a:hover { color: var(--color-ink); }
+  .contents a[aria-current] { color: var(--color-ink); font-weight: 700; border-left-color: var(--accent); }
+  .toc-num { min-width: 2ch; color: var(--color-hud); }
+  .contents a[aria-current] .toc-num { color: var(--accent); }
+
+  /* The case study body: Markdown from the database, rendered as HTML. */
+  .prose { font-size: 17px; line-height: 1.7; color: var(--color-ink-muted); }
+  .prose > :global(* + *) { margin-top: 18px; }
+  .prose :global(:is(p, ul, ol)) { max-width: 68ch; }
+  .prose :global(strong) { color: var(--color-ink); }
+  .prose :global(a:not(.btn)) { color: var(--color-link); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .prose :global(h2) {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    margin-top: 72px;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-hairline);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2;
+    letter-spacing: var(--type-display-tracking);
+    color: var(--color-ink);
+    text-wrap: balance;
+    scroll-margin-top: 24px;
+  }
+  .prose > :global(h2:first-child) { margin-top: 0; padding-top: 0; border-top: 0; }
+  .prose :global(h2 .num) { flex: none; color: var(--accent); font-size: 14px; transform: translateY(-3px); }
+  .prose :global(h3) {
+    margin-top: 40px;
+    font-size: 19px;
+    line-height: 1.35;
+    color: var(--color-ink);
+    scroll-margin-top: 24px;
+  }
+  .prose :global(:is(h2, h3) + *) { margin-top: 14px; }
+  .prose :global(ul) { padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .prose :global(ul > li) { position: relative; padding-left: 22px; }
+  .prose :global(ul > li::before) {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.68em;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+  .prose :global(ol) { padding-left: 1.4em; display: flex; flex-direction: column; gap: 10px; }
+  .prose :global(hr) { border: 0; border-top: 1px solid var(--color-hairline); margin: 48px 0; }
+  .prose :global(:not(pre) > code) {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 1px 6px;
+    border-radius: var(--radius-sm);
+    background: var(--color-code-bg);
+    color: var(--color-ink);
+  }
+
+  /* Tables scroll inside their own box, with the label column pinned. */
+  .prose :global(.table-wrap) {
+    overflow-x: auto;
+    margin-top: 24px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-panel);
+  }
+  .prose :global(.table-wrap:focus-visible) { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  .prose :global(table) { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+  .prose :global(th) {
+    padding: 12px 16px;
+    text-align: left;
+    vertical-align: bottom;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-hud);
+    background: var(--color-panel-sunk);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .prose :global(td) { padding: 12px 16px; vertical-align: top; color: var(--color-ink); background: var(--color-panel); }
+  .prose :global(tbody tr + tr td) { border-top: 1px solid var(--color-hairline); }
+  .prose :global(tbody tr:nth-child(even) td) { background: var(--color-table-row-alt); }
+  .prose :global(:is(td, th):first-child) { position: sticky; left: 0; z-index: 1; }
+  .prose :global(th:first-child) { background: var(--color-panel-sunk); }
+  .prose :global(td:first-child) { font-weight: 700; min-width: 140px; }
+
+  .back { margin-top: 64px !important; }
+
+  @media (max-width: 1099px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .rail { grid-column: 1; grid-row: 1; position: static; }
+    .prose { grid-row: 2; }
+  }
   @media (max-width: 680px) {
-    .page { padding: var(--space-24) var(--space-16) 64px; }
+    .page { padding: var(--space-24) var(--space-16) 64px; gap: 32px; }
+    .prose { font-size: 16px; }
+    .prose :global(h2) { margin-top: 56px; padding-top: 24px; }
+    .prose :global(table) { font-size: 14px; }
+    .prose :global(:is(td, th)) { padding: 10px 12px; }
+    .prose :global(td:first-child) { min-width: 120px; }
   }
 </style>
