@@ -1,9 +1,565 @@
 ---
-import Placeholder from '../layouts/Placeholder.astro';
+import Base from '../layouts/Base.astro';
+import { externalAttrs } from '../lib/links';
+import { formatUpdated, lastUpdated } from '../lib/updated';
+import { repo, stack, steps, buildLog, swatches, typefaces, lanes, publisher, credits } from '../data/colophon';
+import ryvanse from '../../design/tokens/ryvanse.tokens.json';
+import derived from '../../design/tokens/ry-bealey.tokens.json';
+import tokensCss from '../styles/tokens.css?raw';
+
+// Counted from the token files, so the page can't drift from them.
+const counts = {
+  colors: ryvanse.color.tokens.length,
+  families: Object.keys(ryvanse.type.families).length,
+  roles: derived.color.tokens.length,
+  properties: new Set(tokensCss.match(/--[\w-]+(?=:)/g)).size,
+};
+const updatedAt = await lastUpdated();
+const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
 ---
 
-<Placeholder
+<Base
   title="Colophon"
-  eyebrow="Colophon"
-  lede="How this site was specced and built with AI: Astro, a token pipeline from the Ryvanse design system, and a public spec folder."
-/>
+  description="How ryanbealey.com is made: specced by Ry, built with Claude Code, rendered by Astro and Node from MariaDB on SERVERIZZ Grid, and styled with the Ryvanse design system."
+>
+  <div class="page">
+    <section class="intro" aria-labelledby="colophon-title">
+      <div class="intro-copy">
+        <p class="hud eyebrow">Colophon · How this site is made</p>
+        <h1 id="colophon-title">Specced by me, built with AI, served from a server I run.</h1>
+        <p class="lede">
+          I wrote the plan, designed every page on a canvas, and built the site with Claude Code as my pair. It runs on Astro and Node,
+          reads its content live from MariaDB, and takes its look from Ryvanse, the design system I made for my streaming brand.
+        </p>
+        <p class="muted">This page lists the parts, how they fit together, and who made the pieces I didn't.</p>
+      </div>
+
+      <aside class="intro-side" aria-label="Build sheet">
+        <div class="night sheet">
+          <div class="stripe" aria-hidden="true">{bands.map((band) => <span style={`background: var(--rv-${band})`} />)}</div>
+          <div class="night-body">
+            <div class="night-top">
+              <span class="hud">Build sheet</span>
+              <span class="hud chip live">Live</span>
+            </div>
+            <dl>
+              <div><dt class="hud">Framework</dt><dd>Astro 7.4, rendered on request</dd></div>
+              <div><dt class="hud">Runtime</dt><dd>Node 24 on Passenger</dd></div>
+              <div><dt class="hud">Data</dt><dd>MariaDB 10.11</dd></div>
+              <div><dt class="hud">Client JS</dt><dd>About 5.5 KB gzipped, no framework</dd></div>
+              <div><dt class="hud">Tokens</dt><dd>{counts.properties} CSS custom properties</dd></div>
+              <div><dt class="hud">Target</dt><dd>WCAG 2.2 AA</dd></div>
+              {updatedAt && <div><dt class="hud">Updated</dt><dd><time datetime={updatedAt.toISOString()}>{formatUpdated(updatedAt)}</time></dd></div>}
+            </dl>
+            <p class="caption">Planned Oct 26, 2026. Built Oct 27. Launching Nov 9.</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="split" aria-labelledby="stack-title">
+      <div class="split-head">
+        <p class="hud eyebrow">The stack</p>
+        <h2 id="stack-title">Rendered on request, with very little JavaScript</h2>
+        <p>Every page is built on the server when you ask for it, so a note I post shows up within half a minute, with no deploy.</p>
+        <p class="muted">
+          The browser gets HTML, one stylesheet and a few small scripts: the theme switch, the ⌘K palette and the rearrangeable tiles on
+          the home page.
+        </p>
+      </div>
+      <dl class="spec">
+        {
+          stack.map((row) => (
+            <div class="spec-row">
+              <dt class="hud">
+                <span class="square" style={`background: var(--rv-${row.band})`} aria-hidden="true" />
+                {row.label}
+              </dt>
+              <dd>
+                <strong>{row.lead}</strong> {row.body}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="stack" aria-labelledby="ai-title">
+      <div class="section-head">
+        <p class="hud eyebrow">How it was built</p>
+        <h2 id="ai-title">I wrote the spec. Claude Code wrote the first drafts.</h2>
+        <p>
+          This site went from a written plan to a live server in about a day. AI did a lot of the typing. The decisions, and the review of
+          every change, were mine.
+        </p>
+      </div>
+      <ol role="list" class="steps">
+        {
+          steps.map((step, i) => (
+            <li class="card">
+              <span class="hud muted">
+                {String(i + 1).padStart(2, '0')} · {step.label}
+              </span>
+              <h3>{step.title}</h3>
+              <p class="muted">{step.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="night log">
+        <div class="stripe" aria-hidden="true">{bands.map((band) => <span style={`background: var(--rv-${band})`} />)}</div>
+        <div class="night-body">
+          <p class="hud night-top">Build log · from git, Central Time</p>
+          <ol role="list">
+            {
+              buildLog.map((entry) => (
+                <li class:list={{ goal: entry.goal }}>
+                  <span class="hud day">{entry.day}</span>
+                  <span class="hud time">{entry.time}</span>
+                  <span class="what">{entry.what}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="tokens-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Design system</p>
+        <h2 id="tokens-title">Ryvanse, turned down for work</h2>
+        <p>
+          Ryvanse is the identity I built for my gaming and streaming brand: a night ground, a five-color spectrum, hard offset shadows and
+          a streak of terminal. Here it runs in a quieter register. The big display type appears once a page, pink marks the main action,
+          and tiles only get the sticker shadow on hover.
+        </p>
+        <p class="muted">The site never copies a color by hand. A small script turns the design system's token files into CSS before every build.</p>
+      </div>
+
+      <div class="pipe">
+        <div class="pipe-inputs">
+          <div class="file">
+            <code>ryvanse.tokens.json</code>
+            <p class="caption">A copy of the Ryvanse tokens, untouched: colors, type, spacing, radii and shadows.</p>
+            <p class="file-meta">
+              <span class="hud chip">{counts.colors} colors</span>
+              <span class="hud chip">{counts.families} families</span>
+            </p>
+          </div>
+          <div class="file">
+            <code>ry-bealey.tokens.json</code>
+            <p class="caption">The work register: semantic roles, each with a light and a dark value, plus long-form type.</p>
+            <p class="file-meta"><span class="hud chip">{counts.roles} roles × 2 themes</span></p>
+          </div>
+        </div>
+        <span class="arrow" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </span>
+        <div class="file">
+          <code>scripts/build-tokens.mjs</code>
+          <p class="caption">Runs before every dev server and build. Resolves each role to a Ryvanse color and fails loudly on a name it doesn't know.</p>
+          <p class="file-meta"><span class="hud chip">Before dev and build</span></p>
+        </div>
+        <span class="arrow" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </span>
+        <div class="file out">
+          <code>src/styles/tokens.css</code>
+          <p class="caption">Custom properties in their own cascade layer. Light is the default; dark swaps the semantic roles. Never edited by hand.</p>
+          <p class="file-meta"><span class="hud chip">{counts.properties} properties</span></p>
+        </div>
+      </div>
+
+      <ul role="list" class="swatches" aria-label="The spectrum">
+        {
+          swatches.map((swatch) => (
+            <li>
+              <span class="fill hud" style={`background: var(--rv-${swatch.band})`}>{swatch.name}</span>
+              <span class="swatch-text">
+                <code>{swatch.hex}</code>
+                <span class="caption">{swatch.role}</span>
+              </span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="caption">In light mode the fills stay the same, and text in an accent switches to a darker ink that passes 4.5:1 on white.</p>
+    </section>
+
+    <section class="stack" aria-labelledby="type-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Type</p>
+        <h2 id="type-title">Three typefaces, all open source</h2>
+        <p class="muted">
+          Self-hosted as WOFF2, so no font request leaves this site. The share cards use WOFF copies of the same faces, because satori can't
+          read WOFF2.
+        </p>
+      </div>
+      <div class="three">
+        {
+          typefaces.map((face) => (
+            <article class="card specimen">
+              <span class="hud eyebrow">{face.role}</span>
+              <span class:list={['aa', face.face]} aria-hidden="true">Aa</span>
+              <h3>{face.name}</h3>
+              <p class="muted">{face.body}</p>
+              <p class="license caption">
+                <span>{face.copyright}</span>
+                <span>SIL Open Font License 1.1</span>
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="ship-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Shipping</p>
+        <h2 id="ship-title">Code ships through Git. Words ship through an API.</h2>
+        <p class="muted">
+          Changing how the site works and posting to it are separate paths, so writing a note never needs a deploy, and a bad build never
+          takes the site down.
+        </p>
+      </div>
+      <div class="two">
+        {
+          lanes.map((lane) => (
+            <article class="card lane">
+              <div class="lane-top">
+                <h3 class="hud eyebrow">{lane.label}</h3>
+                <span class="hud chip muted">{lane.time}</span>
+              </div>
+              <ol role="list" class="lane-steps">
+                {lane.steps.map((step, i) => (
+                  <li>
+                    <span class="hud num" style={`background: var(--rv-${bands[i]})`}>
+                      {i + 1}
+                    </span>
+                    <span>{step}</span>
+                  </li>
+                ))}
+              </ol>
+              <p class="outcome">
+                <span class="hud chip ok">{lane.outcome.chip}</span>
+                <span class="caption">{lane.outcome.body}</span>
+              </p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="pub-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Companion app</p>
+        <h2 id="pub-title">Publisher, a Mac app made for this site</h2>
+      </div>
+      <div class="card publisher">
+        <div class="app-icon" role="img" aria-label="Publisher's app icon: the five spectrum chevrons on a night ground">
+          <span class="chevrons">{bands.map((band) => <span style={`background: var(--rv-${band})`} />)}</span>
+        </div>
+        <div class="pub-copy">
+          <p>
+            There's no web admin on this site. I publish from Publisher, a native SwiftUI app that talks to the site's publishing API. It
+            lists, edits and creates notes and case studies, previews Markdown the way the site renders it, and uploads images.
+          </p>
+          <p class="muted">An iPhone app for posting notes on the go joins it next, in the same Xcode project.</p>
+          <p class="tags">
+            <span class="hud chip">SwiftUI</span>
+            <span class="hud chip">macOS 26</span>
+            <span class="hud chip">Swift 6</span>
+          </p>
+        </div>
+        <ul role="list" class="pub-list">
+          {
+            publisher.map((point) => (
+              <li>
+                <span class="square" style={`background: var(--rv-${point.band})`} aria-hidden="true" />
+                <span>{point.body}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="credits-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Credits</p>
+        <h2 id="credits-title">Made with other people's good work</h2>
+      </div>
+      <div class="credits">
+        {
+          credits.map((group) => (
+            <div style={`border-top-color: var(--rv-${group.band})`}>
+              <h3 class="hud muted">{group.label}</h3>
+              <ul role="list">
+                {group.items.map((item) => (
+                  <li>
+                    {item.name}
+                    {item.note && <span class="muted"> {item.note}</span>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+      <div class="source">
+        <div>
+          <p class="hud eyebrow">Source</p>
+          <p>The code for this site is public, README and all.</p>
+        </div>
+        <a class="btn btn-ghost btn-sm" href={repo} {...externalAttrs(repo)}>View on GitHub</a>
+      </div>
+    </section>
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 40px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 112px;
+  }
+  .eyebrow { color: var(--color-hud); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--type-display-weight);
+    font-size: clamp(34px, 4vw, var(--type-display-size));
+    line-height: 1.05;
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: var(--type-h2-weight);
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-line);
+    text-wrap: balance;
+  }
+  h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-line); }
+  h3.hud { font-size: var(--type-hud-size); line-height: var(--type-hud-line); }
+  p { margin: 0; }
+  .lede { font-size: var(--type-lede-size); line-height: var(--type-lede-line); text-wrap: pretty; }
+  .square { flex: none; width: 10px; height: 10px; border-radius: 2px; }
+  code { font-family: var(--font-mono); font-weight: 500; font-size: 14px; line-height: 20px; }
+
+  .card {
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .stack { display: flex; flex-direction: column; gap: 32px; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; max-width: 760px; }
+
+  /* Night cards: the build sheet and the log stay void plates in both
+     themes, like the home hero, so the lime HUD keeps its contrast. */
+  .night {
+    background: var(--rv-void);
+    color: var(--rv-ink);
+    border: 1px solid var(--rv-hairline);
+    border-radius: var(--radius-md);
+    box-shadow: 4px 4px 0 0 var(--color-pop);
+    overflow: hidden;
+  }
+  :global([data-theme='light']) .night { border-color: var(--rv-void); }
+  .night .caption { color: var(--rv-ink-muted); }
+  .night-body { padding: var(--space-24); display: flex; flex-direction: column; gap: 20px; }
+  .night-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--rv-lime); }
+  .live { color: var(--rv-lime); border-color: currentColor; padding: 2px 6px; font-size: 11px; line-height: 14px; }
+
+  /* Intro */
+  .intro { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px 24px; align-items: start; }
+  .intro-copy { grid-column: span 7; display: flex; flex-direction: column; gap: 24px; }
+  .intro-side { grid-column: 9 / span 4; }
+  .sheet dl { margin: 0; display: flex; flex-direction: column; }
+  .sheet dl > div {
+    display: grid;
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 10px 0;
+    border-top: 1px solid var(--rv-hairline);
+  }
+  .sheet dt { color: var(--rv-ink-muted); }
+  .sheet dd { margin: 0; font-size: 15px; line-height: 22px; }
+
+  /* The stack */
+  .split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: start; }
+  .split-head { grid-column: span 4; display: flex; flex-direction: column; gap: 16px; }
+  .spec { grid-column: 6 / span 7; margin: 0; border-bottom: 1px solid var(--color-hairline); }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    gap: 4px 20px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .spec-row dt { display: flex; align-items: center; gap: 10px; color: var(--color-ink-muted); line-height: 20px; }
+  .spec-row dd { margin: 0; font-size: 15px; line-height: 24px; }
+
+  /* How it was built */
+  .steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24); }
+  .log ol { display: flex; flex-direction: column; }
+  .log li {
+    display: grid;
+    grid-template-columns: 88px 96px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 9px 0;
+    border-top: 1px solid var(--rv-hairline);
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .log .day { color: var(--rv-lime); }
+  .log .time { color: var(--rv-ink-muted); }
+  .log .goal .day { color: var(--rv-pink); }
+
+  /* Design system */
+  .pipe {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 32px minmax(0, 1fr) 32px minmax(0, 1fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+  .pipe-inputs { display: flex; flex-direction: column; gap: 12px; }
+  .arrow { display: flex; align-items: center; justify-content: center; color: var(--color-ink-muted); }
+  .file {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px;
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+  .file.out { border: 2px solid var(--color-ink); box-shadow: 4px 4px 0 0 var(--color-pop); }
+  .file-meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 8px; }
+  .file-meta .chip { color: var(--color-hud); border-color: currentColor; padding: 2px 6px; font-size: 11px; line-height: 14px; }
+  .swatches { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; }
+  .swatches li {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .fill { height: 88px; padding: 12px; display: flex; align-items: flex-end; color: var(--rv-void); }
+  .swatch-text { padding: 12px; display: flex; flex-direction: column; gap: 2px; }
+  .swatch-text code { font-weight: 700; font-size: 15px; }
+
+  /* Type */
+  .three { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-24); }
+  .specimen { gap: 16px; }
+  .aa { font-size: 88px; line-height: 1; }
+  .aa.display { font-family: var(--font-display); font-weight: 900; letter-spacing: -0.02em; }
+  .aa.body { font-family: var(--font-body); font-weight: 700; }
+  .aa.mono { font-family: var(--font-mono); font-weight: 700; }
+  .license { display: flex; flex-direction: column; gap: 2px; margin-top: auto; padding-top: 12px; border-top: 1px solid var(--color-hairline); }
+
+  /* Shipping */
+  .two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-24); }
+  .lane { padding: 28px; gap: 20px; }
+  .lane-top { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+  .lane-steps li {
+    display: grid;
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 16px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .num { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: var(--radius-sm); color: var(--rv-void); }
+  .outcome { display: flex; align-items: center; gap: 10px; }
+  .ok { flex: none; color: var(--color-success); border-color: currentColor; }
+
+  /* Publisher */
+  .publisher { display: grid; grid-template-columns: 200px minmax(0, 1fr) minmax(0, 1fr); gap: 40px; padding: 40px; align-items: start; }
+  .app-icon {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--rv-void);
+    border: 1px solid var(--rv-hairline);
+    border-radius: 36px;
+    box-shadow: 4px 4px 0 0 var(--color-pop);
+  }
+  .chevrons { display: flex; }
+  .chevrons span { width: 36px; height: 60px; clip-path: polygon(0 0, 12px 0, 36px 30px, 12px 60px, 0 60px, 24px 30px); }
+  .chevrons span + span { margin-left: -20px; }
+  .pub-copy { display: flex; flex-direction: column; gap: 16px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pub-list { border-bottom: 1px solid var(--color-hairline); }
+  .pub-list li {
+    display: grid;
+    grid-template-columns: 10px minmax(0, 1fr);
+    gap: 14px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-hairline);
+    font-size: 15px;
+    line-height: 24px;
+  }
+
+  /* Credits */
+  .credits { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24); }
+  .credits > div { border-top: 2px solid; padding-top: var(--space-16); display: flex; flex-direction: column; gap: 10px; }
+  .credits ul { display: flex; flex-direction: column; gap: 6px; font-size: 15px; line-height: 22px; }
+  .source {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-16);
+    padding: var(--space-24);
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+  .source > div { display: flex; flex-direction: column; gap: 4px; }
+
+  @media (max-width: 1100px) {
+    .intro-copy, .split-head, .spec { grid-column: span 12; }
+    .intro-side { grid-column: span 12; max-width: 520px; }
+    .steps, .credits { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .publisher { grid-template-columns: 160px minmax(0, 1fr); }
+    .pub-list { grid-column: 2; }
+  }
+
+  @media (max-width: 860px) {
+    .pipe { grid-template-columns: minmax(0, 1fr); }
+    .arrow { height: 32px; rotate: 90deg; }
+    .three, .two { grid-template-columns: minmax(0, 1fr); }
+    .swatches { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 680px) {
+    .page { padding: var(--space-16) var(--space-16) 64px; gap: 80px; }
+    .sheet dl > div, .spec-row { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .steps, .credits, .publisher { grid-template-columns: minmax(0, 1fr); }
+    .publisher { padding: var(--space-24); gap: var(--space-24); }
+    .pub-list { grid-column: auto; }
+    .app-icon { width: 112px; height: 112px; border-radius: 26px; }
+    .chevrons { scale: 0.7; }
+    .log li { grid-template-columns: 64px minmax(0, 1fr); gap: 4px 12px; }
+    .log .what { grid-column: 1 / -1; }
+    .swatches { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .lane { padding: var(--space-24); }
+    .outcome { align-items: flex-start; }
+  }
+</style>
