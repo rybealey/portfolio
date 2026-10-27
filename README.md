@@ -154,6 +154,7 @@ The site runs as a Passenger app from **Setup Node.js App**. Don't use cPanel's 
    - Application URL: `ryanbealey.com`
    - Application startup file: `app.cjs`
    - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
+   - Also `MALLOC_ARENA_MAX=2` and `NODE_OPTIONS=--disable-wasm-trap-handler`. CloudLinux caps each process at 4 GB of address space, counting memory that's only reserved, and without these the share cards and image resizing reserve past it and crash the app. The deploy script sets the same limits for the build.
 2. In **Git Version Control**, click **Create** and clone `https://github.com/rybealey/portfolio.git` into `repositories/portfolio`.
 3. Under **Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
    1. Builds in `repositories/portfolio` with the app's Node 24.

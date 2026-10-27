@@ -58,6 +58,13 @@ if [ "${SKIP_NODE_ENV:-}" != "1" ]; then
   source "$NODE_ENV_ACTIVATE"
   set -u
 fi
+# CloudLinux caps each process at 4 GB of address space, reserved or not.
+# glibc reserves 64 MB per thread for its allocator, and the build's Rust
+# tools start a thread per CPU, so on a many-core server the build runs out
+# without allocating much. WebAssembly's trap handler reserves 10 GB on its own.
+export MALLOC_ARENA_MAX=2 RAYON_NUM_THREADS=4 TOKIO_WORKER_THREADS=4 UV_THREADPOOL_SIZE=4
+export NODE_OPTIONS="--disable-wasm-trap-handler${NODE_OPTIONS:+ $NODE_OPTIONS}"
+
 log "node $(node --version), npm $(npm --version)"
 
 log "building in $REPO"
