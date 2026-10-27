@@ -1,0 +1,7 @@
+---
+const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
+---
+
+<div class="spectrum" aria-hidden="true">
+  {bands.map((band) => <span style={`background: var(--rv-${band})`} />)}
+</div>

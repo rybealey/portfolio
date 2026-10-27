@@ -1,0 +1,43 @@
+---
+import { site } from '../data/site';
+
+const links = [
+  { label: 'Email', href: `mailto:${site.email}` },
+  { label: 'LinkedIn', href: site.linkedin },
+  ...(site.github ? [{ label: 'GitHub', href: site.github }] : []),
+  { label: 'Resume', href: site.resumePdf ?? '/resume' },
+  { label: 'Colophon', href: '/colophon' },
+];
+---
+
+<footer class="site-footer">
+  <div class="inner">
+    <span class="caption">{site.name} · {site.location}</span>
+    <nav aria-label="Contact">
+      <ul role="list">
+        {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .site-footer { border-top: 1px solid var(--color-hairline); }
+  :global([data-theme='light']) .site-footer { background: var(--color-panel); }
+  .inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 40px 48px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-24);
+  }
+  ul { display: flex; flex-wrap: wrap; gap: var(--space-24); font-weight: 700; }
+  @media (max-width: 680px) {
+    .inner { padding: var(--space-24) var(--space-16) 40px; flex-direction: column-reverse; align-items: stretch; }
+    ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px var(--space-16); }
+    a { display: flex; align-items: center; min-height: 44px; }
+  }
+</style>

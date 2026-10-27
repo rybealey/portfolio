@@ -1,0 +1,166 @@
+@layer reset, tokens, base, components, utilities;
+
+@import './tokens.css';
+
+@font-face { font-family: 'Atkinson Hyperlegible'; font-weight: 400; font-style: normal; font-display: swap; src: url('/fonts/atkinson-hyperlegible-latin-400-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-weight: 400; font-style: italic; font-display: swap; src: url('/fonts/atkinson-hyperlegible-latin-400-italic.woff2') format('woff2'); }
+@font-face { font-family: 'Atkinson Hyperlegible'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/atkinson-hyperlegible-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 500; font-style: normal; font-display: swap; src: url('/fonts/jetbrains-mono-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'JetBrains Mono'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/jetbrains-mono-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Unbounded'; font-weight: 700; font-style: normal; font-display: swap; src: url('/fonts/unbounded-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Unbounded'; font-weight: 900; font-style: normal; font-display: swap; src: url('/fonts/unbounded-latin-900-normal.woff2') format('woff2'); }
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  body, h1, h2, h3, p, figure, blockquote, ul, ol { margin: 0; }
+  ul[role='list'], ol[role='list'] { padding: 0; list-style: none; }
+  img, svg { display: block; max-width: 100%; }
+  button, input { font: inherit; color: inherit; }
+}
+
+@layer base {
+  html { background: var(--color-bg); }
+  body {
+    min-height: 100vh;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  a { color: var(--color-link); text-underline-offset: 3px; }
+  a:hover { color: var(--color-ink); }
+  :focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  ::selection { background: var(--rv-pink); color: var(--rv-void); }
+}
+
+@layer components {
+  .hud {
+    font-family: var(--font-mono);
+    font-size: var(--type-hud-size);
+    line-height: var(--type-hud-line);
+    font-weight: var(--type-hud-weight);
+    letter-spacing: var(--type-hud-tracking);
+    text-transform: uppercase;
+  }
+  .title {
+    font-family: var(--font-display);
+    font-weight: var(--type-title-weight);
+    font-size: var(--type-title-size);
+    line-height: var(--type-title-line);
+  }
+  .caption { font-size: var(--type-caption-size); line-height: var(--type-caption-line); color: var(--color-ink-muted); }
+  .muted { color: var(--color-ink-muted); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    min-height: 48px;
+    padding: 0 var(--space-24);
+    border-radius: var(--radius-pill);
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 160ms cubic-bezier(0.3, 1.5, 0.6, 1);
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--rv-pink); color: var(--rv-void); box-shadow: 4px 4px 0 0 var(--color-pop-on-pink); }
+  .btn-primary:hover { color: var(--rv-void); }
+  .btn-ghost { color: var(--color-ink); border: 2px solid var(--color-ink-muted); }
+  .btn-ghost:hover { color: var(--color-ink); }
+  .btn-sm { min-height: 44px; padding: 0 20px; }
+
+  .icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-8);
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0 12px;
+    background: transparent;
+    color: var(--color-ink-muted);
+    border: 2px solid var(--color-ink-muted);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .icon-btn:hover { color: var(--color-ink); border-color: var(--color-ink); }
+
+  .chip {
+    display: inline-flex;
+    padding: 4px var(--space-8);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+  }
+
+  .tile {
+    position: relative;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: var(--space-24);
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition:
+      transform 160ms cubic-bezier(0.3, 1.5, 0.6, 1),
+      box-shadow 160ms,
+      border-color 160ms;
+  }
+  a.tile:hover,
+  a.tile:focus-visible {
+    color: var(--color-ink);
+    transform: translateY(-2px);
+    box-shadow: 4px 4px 0 0 var(--color-pop);
+  }
+  [data-theme='light'] a.tile:hover,
+  [data-theme='light'] a.tile:focus-visible { border-color: var(--color-ink); }
+  .tile-stack { display: flex; flex-direction: column; gap: 4px; }
+  .tile-label { color: var(--color-hud); }
+  .tile-label.neutral { color: var(--color-ink-muted); }
+  /* Sized to the cell (a container), so long names fit half-width phone tiles. */
+  .tile-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(13px, 9cqi, 17px); line-height: 22px; }
+
+  .skip-link {
+    position: absolute;
+    left: var(--space-16);
+    top: -80px;
+    z-index: 100;
+    padding: var(--space-8) var(--space-16);
+    background: var(--color-focus);
+    color: var(--color-bg);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+  }
+  .skip-link:focus { top: var(--space-16); color: var(--color-bg); }
+
+  .spectrum { display: flex; height: 8px; }
+  .spectrum > span { flex: 1; }
+}
+
+@layer utilities {
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

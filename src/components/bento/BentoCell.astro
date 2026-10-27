@@ -1,0 +1,28 @@
+---
+import Icon from '../Icon.astro';
+
+// Spans follow the plan's tile sizes on the 12-column desktop grid.
+export type CellSize = 'hero' | 'feature' | 'half' | 'small' | 'full';
+
+interface Props {
+  id: string;
+  size: CellSize;
+  /** Movable cells can be dragged and reordered among each other. */
+  movable?: boolean;
+  /** Spoken name for the move handle, e.g. "Spotify". */
+  name?: string;
+}
+
+const { id, size, movable = false, name = id } = Astro.props;
+---
+
+<div class:list={['cell', `size-${size}`]} data-tile-id={id} data-movable={movable ? '' : undefined}>
+  <slot />
+  {
+    movable && (
+      <button type="button" class="grip" aria-label={`Move ${name} tile`} aria-describedby="bento-help" aria-pressed="false" data-grip>
+        <Icon name="grip" size={16} />
+      </button>
+    )
+  }
+</div>

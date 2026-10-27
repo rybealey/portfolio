@@ -1,0 +1,29 @@
+---
+import Base from './Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+
+interface Props {
+  title: string;
+  eyebrow: string;
+  lede: string;
+  description?: string;
+}
+
+const { title, eyebrow, lede, description } = Astro.props;
+---
+
+<Base title={title} description={description ?? lede}>
+  <div class="page">
+    <PageIntro eyebrow={eyebrow} title={title} lede={lede} status={{ label: 'In progress', tone: 'warning' }}>
+      <slot />
+      <p><a href="/">Back to home</a></p>
+    </PageIntro>
+  </div>
+</Base>
+
+<style>
+  .page { max-width: 1280px; min-height: 50vh; margin: 0 auto; padding: 48px 40px 96px; }
+  @media (max-width: 680px) {
+    .page { padding: var(--space-24) var(--space-16) 64px; }
+  }
+</style>

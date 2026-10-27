@@ -1,0 +1,38 @@
+---
+interface Props {
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  /** Status chip, e.g. "In progress". Pairs color with a word, never color alone. */
+  status?: { label: string; tone: 'success' | 'warning' };
+}
+
+const { eyebrow, title, lede, status } = Astro.props;
+---
+
+<header class="intro">
+  <div class="meta">
+    <p class="hud eyebrow">{eyebrow}</p>
+    {status && <span class:list={['hud', 'chip', 'status', status.tone]}>{status.label}</span>}
+  </div>
+  <h1>{title}</h1>
+  {lede && <p class="lede">{lede}</p>}
+  <slot />
+</header>
+
+<style>
+  .intro { display: flex; flex-direction: column; gap: 20px; max-width: 760px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  .eyebrow { color: var(--color-hud); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--type-display-weight);
+    font-size: clamp(32px, 5vw, var(--type-display-size));
+    line-height: 1.05;
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+  }
+  .lede { font-size: var(--type-lede-size); line-height: var(--type-lede-line); }
+  .status.success { color: var(--color-success); border-color: currentColor; }
+  .status.warning { color: var(--color-warning); border-color: currentColor; }
+</style>

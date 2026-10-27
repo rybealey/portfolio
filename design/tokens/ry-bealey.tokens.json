@@ -1,0 +1,45 @@
+{
+  "name": "Ry Bealey",
+  "version": 1,
+  "extends": "ryvanse.tokens.json",
+  "note": "The portfolio's work register. Ryvanse primitives stay untouched; this file adds semantic roles per theme, long-form type and the tokens the case studies need. Values in braces reference a Ryvanse color by name.",
+  "color": {
+    "themes": [
+      { "id": "dark", "name": "Dark" },
+      { "id": "light", "name": "Light" }
+    ],
+    "tokens": [
+      { "name": "bg", "value": { "dark": "{void}", "light": "#f6f4fa" }, "usage": "Page ground." },
+      { "name": "panel", "value": { "dark": "{panel}", "light": "#ffffff" }, "usage": "Tiles, footer and raised surfaces." },
+      { "name": "panel-sunk", "value": { "dark": "#2b1d47", "light": "#ebe5f5" }, "usage": "Empty media wells, such as album art before it loads." },
+      { "name": "hairline", "value": { "dark": "{hairline}", "light": "#e3ddee" }, "usage": "Decorative dividers and tile outlines only." },
+      { "name": "ink", "value": { "dark": "{ink}", "light": "{void}" }, "usage": "Primary text." },
+      { "name": "ink-muted", "value": { "dark": "{ink-muted}", "light": "#5a4d73" }, "usage": "Secondary text and control borders." },
+      { "name": "link", "value": { "dark": "{cyan}", "light": "#00707a" }, "usage": "Links. Always underlined in running text." },
+      { "name": "focus", "value": { "dark": "{lime}", "light": "#6438d0" }, "usage": "The 2px focus ring." },
+      { "name": "pop", "value": { "dark": "{pink}", "light": "{void}" }, "usage": "Hard shadow under a tile on hover or focus." },
+      { "name": "pop-on-pink", "value": { "dark": "{lime}", "light": "{void}" }, "usage": "Hard shadow under a pink button." },
+      { "name": "hud", "value": { "dark": "{lime}", "light": "#3f6e00" }, "usage": "HUD labels on tiles (NOW, UPDATED, HOME BASE)." },
+      { "name": "accent-billing", "value": { "dark": "{lime}", "light": "#3f6e00" }, "usage": "Case study 01. As text in light, as a fill in dark." },
+      { "name": "accent-web", "value": { "dark": "{cyan}", "light": "#00707a" }, "usage": "Case study 02." },
+      { "name": "accent-fin", "value": { "dark": "{violet}", "light": "#6438d0" }, "usage": "Case study 03." },
+      { "name": "success", "value": { "dark": "{lime}", "light": "#3f6e00" }, "usage": "Status chips like LIVE and SHIPPED. Always with the word." },
+      { "name": "warning", "value": { "dark": "{tangerine}", "light": "#a34a00" }, "usage": "PROTOTYPE and caveat callouts." },
+      { "name": "code-bg", "value": { "dark": "#0d0718", "light": "#f1edf8" }, "usage": "Code blocks and inline code." },
+      { "name": "table-row-alt", "value": { "dark": "#1b1230", "light": "#f6f4fa" }, "usage": "Even rows in data tables." }
+    ]
+  },
+  "type": {
+    "groups": [
+      {
+        "name": "Long-form",
+        "styles": [
+          { "name": "h2", "family": "display", "fontSize": "28px", "lineHeight": "36px", "fontWeight": 700, "usage": "Case-study section heads." },
+          { "name": "h3", "family": "body", "fontSize": "20px", "lineHeight": "28px", "fontWeight": 700, "usage": "Sub-sections." },
+          { "name": "lede", "family": "body", "fontSize": "21px", "lineHeight": "32px", "fontWeight": 400, "usage": "Opening paragraph and the hero line." },
+          { "name": "code", "family": "mono", "fontSize": "15px", "lineHeight": "22px", "fontWeight": 500, "usage": "Inline code and code blocks." }
+        ]
+      }
+    ]
+  }
+}

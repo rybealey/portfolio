@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from '../Icon.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  /** The flagship gets the tall tile, a summary and the read-more line. */
+  featured?: boolean;
+}
+
+const { entry, featured = false } = Astro.props;
+const { order, label, title, summary, accent, metrics } = entry.data;
+---
+
+<a class:list={['tile', 'case', { featured }]} href={`/work/${entry.id}`} style={`--accent: var(--color-accent-${accent})`}>
+  <div class="head">
+    <span class="hud number"><span class="swatch" aria-hidden="true"></span>0{order} · {label}</span>
+    <h2>{title}</h2>
+    {featured && <p class="muted">{summary}</p>}
+  </div>
+  <div class="foot">
+    <ul role="list" class="metrics" aria-label="Highlights">
+      {metrics.map((metric) => <li class="hud chip">{metric}</li>)}
+    </ul>
+    {featured && (
+      <span class="more">
+        Read the case study <Icon name="arrow" />
+      </span>
+    )}
+  </div>
+</a>
+
+<style>
+  .case { gap: var(--space-16); }
+  .featured { gap: var(--space-24); }
+  .head { display: flex; flex-direction: column; gap: 12px; }
+  .featured .head { gap: var(--space-16); }
+  .foot { display: flex; flex-direction: column; gap: 20px; }
+
+  .number {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: 4px var(--space-8);
+    background: var(--accent);
+    color: var(--rv-void);
+    border-radius: var(--radius-sm);
+  }
+  .swatch { display: none; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); }
+
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: 20px; line-height: 26px; text-wrap: balance; }
+  .featured h2 { font-size: var(--type-title-size); line-height: var(--type-title-line); }
+
+  .metrics { display: flex; flex-wrap: wrap; gap: var(--space-8); }
+  .metrics .chip { color: var(--accent); }
+  .more { display: inline-flex; align-items: center; gap: var(--space-8); font-weight: 700; }
+
+  /* Light mode: the accent becomes a small swatch and the chips go bare. */
+  :global([data-theme='light']) .number { padding: 0; background: none; color: var(--color-ink-muted); }
+  :global([data-theme='light']) .swatch { display: block; }
+  :global([data-theme='light']) .metrics { gap: 4px 20px; }
+  :global([data-theme='light']) .metrics .chip { padding: 0; border: 0; }
+</style>

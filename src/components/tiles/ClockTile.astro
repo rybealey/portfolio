@@ -1,0 +1,32 @@
+---
+import { site } from '../../data/site';
+---
+
+<a class="tile clock" href="/about">
+  <span class="hud tile-label">Home base</span>
+  <div class="tile-stack">
+    <span class="tile-name city">{site.location}</span>
+    <span class="caption"><time data-clock data-tz={site.timeZone}>Central Time</time><span data-clock-suffix hidden> local time</span></span>
+    <span class="coords muted">{site.coordinates}</span>
+  </div>
+</a>
+
+<script>
+  const clock = document.querySelector<HTMLTimeElement>('[data-clock]');
+  const suffix = document.querySelector<HTMLElement>('[data-clock-suffix]');
+  if (clock) {
+    const format = new Intl.DateTimeFormat('en-US', { timeZone: clock.dataset.tz, hour: 'numeric', minute: '2-digit' });
+    const tick = () => {
+      clock.textContent = format.format(new Date());
+      if (suffix) suffix.hidden = false;
+    };
+    tick();
+    setInterval(tick, 30_000);
+  }
+</script>
+
+<style>
+  .clock { padding: 20px; }
+  .city { font-size: 20px; line-height: 26px; }
+  .coords { font-family: var(--font-mono); font-weight: 500; font-size: 12px; line-height: 16px; letter-spacing: 0.08em; }
+</style>

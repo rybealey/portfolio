@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import BentoGrid from '../components/bento/BentoGrid.astro';
+import BentoCell from '../components/bento/BentoCell.astro';
+import HeroTile from '../components/tiles/HeroTile.astro';
+import CaseTile from '../components/tiles/CaseTile.astro';
+import SpotifyTile from '../components/tiles/SpotifyTile.astro';
+import ClockTile from '../components/tiles/ClockTile.astro';
+import FactTile from '../components/tiles/FactTile.astro';
+import ContactTile from '../components/tiles/ContactTile.astro';
+import { site } from '../data/site';
+
+const [billing, web, fin] = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+if (!billing || !web || !fin) throw new Error('Home expects three case studies in src/content/work');
+
+const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: site.timeZone });
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: site.name,
+  url: site.url,
+  email: `mailto:${site.email}`,
+  jobTitle: 'Founder, SERVERIZZ',
+  description: site.description,
+  homeLocation: { '@type': 'Place', name: site.location },
+  sameAs: [site.linkedin, ...(site.github ? [site.github] : [])],
+};
+---
+
+<Base>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(person)} />
+  <div class="page">
+    <h2 class="visually-hidden" id="work">Work and highlights</h2>
+    <BentoGrid>
+      {/* DOM order is the phone read order: hero, case studies, live tiles, about, contact. */}
+      <BentoCell id="hero" size="hero"><HeroTile /></BentoCell>
+      <BentoCell id="billing" size="feature"><CaseTile entry={billing} featured /></BentoCell>
+      <BentoCell id="web" size="half"><CaseTile entry={web} /></BentoCell>
+      <BentoCell id="fin" size="half"><CaseTile entry={fin} /></BentoCell>
+
+      <BentoCell id="spotify" size="small" movable name="Spotify"><SpotifyTile /></BentoCell>
+      <BentoCell id="home-base" size="small" movable name="Home base"><ClockTile /></BentoCell>
+      <BentoCell id="now" size="small" movable name="Now">
+        <FactTile href="/about" label="Now" title="Founder, SERVERIZZ" caption="Infrastructure, Austin" />
+      </BentoCell>
+      <BentoCell id="updated" size="small" movable name="Updated">
+        <FactTile href="/colophon" label="Updated" title={updated} caption="Built from a public spec" />
+      </BentoCell>
+      <BentoCell id="apple" size="half" movable name="Apple">
+        <FactTile
+          href="/about"
+          label="Apple · since 2018"
+          neutral
+          titleStyle="heading"
+          title="Eight years on Apple's front line"
+          caption="Sales chat, AppleCare support, knowledge management and community moderation."
+        />
+      </BentoCell>
+      <BentoCell id="impeccabyte" size="small" movable name="Impeccabyte">
+        <FactTile href="/about" label="Payments" neutral titleStyle="name" title="Impeccabyte" caption="My merchant services agency" />
+      </BentoCell>
+      <BentoCell id="ryvanse" size="small" movable name="Ryvanse">
+        <FactTile href="/about" label="Design" neutral titleStyle="name" title="Ryvanse" caption="My streaming brand, where this look started" />
+      </BentoCell>
+
+      <BentoCell id="contact" size="full"><ContactTile /></BentoCell>
+    </BentoGrid>
+  </div>
+</Base>
+
+<style>
+  .page { max-width: 1280px; margin: 0 auto; padding: var(--space-16) 40px 48px; }
+  @media (max-width: 680px) {
+    .page { padding: var(--space-8) var(--space-16) 40px; }
+  }
+</style>

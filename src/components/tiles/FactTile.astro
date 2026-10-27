@@ -1,0 +1,28 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  /** Neutral tiles (Apple, Impeccabyte, Ryvanse) keep the label muted. */
+  neutral?: boolean;
+  title: string;
+  /** "name" sets the title in Unbounded; "strong" in bold body type. */
+  titleStyle?: 'name' | 'strong' | 'heading';
+  caption?: string;
+}
+
+const { href, label, neutral = false, title, titleStyle = 'strong', caption } = Astro.props;
+---
+
+<a class="tile" href={href}>
+  <span class:list={['hud', 'tile-label', { neutral }]}>{label}</span>
+  <div class="tile-stack">
+    {titleStyle === 'heading' ? <h2 class="tile-name heading">{title}</h2> : <span class:list={[titleStyle === 'name' ? 'tile-name' : 'strong']}>{title}</span>}
+    {caption && <span class="caption">{caption}</span>}
+    <slot />
+  </div>
+</a>
+
+<style>
+  .strong { font-weight: 700; }
+  .heading { font-size: 20px; line-height: 26px; margin-bottom: 4px; }
+</style>

@@ -1,0 +1,20 @@
+---
+import Icon from '../Icon.astro';
+import { site } from '../../data/site';
+---
+
+<a class="tile contact" href={`mailto:${site.email}`} data-ga-event="contact_click" data-ga-method="email">
+  <h2>Hiring for billing, payments or AI implementation?</h2>
+  <span class="btn btn-primary">Let's chat <Icon name="arrow" /></span>
+</a>
+
+<style>
+  .contact { flex-direction: row; flex-wrap: wrap; align-items: center; gap: var(--space-24); padding: 40px; }
+  h2 { max-width: 640px; font-family: var(--font-display); font-weight: 700; font-size: var(--type-h2-size); line-height: var(--type-h2-line); text-wrap: balance; }
+  @media (max-width: 680px) {
+    .contact { flex-direction: column; align-items: stretch; padding: var(--space-24); gap: 12px; }
+    h2 { font-size: 20px; line-height: 26px; }
+    .btn { align-self: flex-start; padding: 0; min-height: 0; background: none; box-shadow: none; color: var(--rv-pink); }
+  }
+  :global([data-theme='light']) .btn { box-shadow: 4px 4px 0 0 var(--rv-void); }
+</style>

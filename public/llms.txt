@@ -1,0 +1,14 @@
+# Ry Bealey
+
+> Ry Bealey works in AI systems and implementation from Austin, TX. Ry turns billing, payments and support problems into specs, data models and working software, with AI as the build partner. Founder of SERVERIZZ since 2014, with eight years on Apple's front line in sales chat, AppleCare support, knowledge management and community moderation.
+
+## Case studies
+
+- [SERVERIZZ billing and ledger](https://ryanbealey.com/work/serverizz-billing): usage billing with hourly metering, prepaid balances and an append-only money ledger.
+- [SERVERIZZ web relaunch](https://ryanbealey.com/work/serverizz-web): getecobyte.com to serverizz.com, Design System 2.0, portal prototype, GTM and GA4.
+- [Fin AI support ops](https://ryanbealey.com/work/fin-support-ops): Intercom Fin agent design, routing and results.
+
+## Contact
+
+- Email: hello@ryanbealey.com
+- LinkedIn: https://www.linkedin.com/in/ryanbealey

@@ -1,0 +1,84 @@
+{
+  "name": "Ryvanse",
+  "version": 1,
+  "color": {
+    "themes": [{ "id": "dark", "name": "Dark" }],
+    "tokens": [
+      { "name": "void", "value": "#140c22", "usage": "The ground. Page and overlay backgrounds, channel art base, and the text color on every spectrum fill (pink, tangerine, lime, cyan, violet)." },
+      { "name": "panel", "value": "#22163a", "usage": "Raised surfaces on void: cards, chat boxes, schedule tiles, overlay plates. All text colors here pass 4.5:1 on panel." },
+      { "name": "hairline", "value": "#4a3770", "usage": "Decorative dividers and panel outlines only (1.9:1 on void). Never the only edge of a control; use ink-muted for that." },
+      { "name": "ink", "value": "#fff5fa", "usage": "Primary text on void and panel (17.8:1 / 15.8:1). Headlines, body copy, the wordmark." },
+      { "name": "ink-muted", "value": "#c7b6e2", "usage": "Secondary text on void and panel (10.2:1 / 9.0:1): taglines, timestamps, captions, metadata. Also control borders and focus rings." },
+      { "name": "pink", "value": "#ff3d9a", "usage": "The lead brand color. LIVE badges, primary buttons, the pop shadow, the biggest block in any layout. Text on it is void (5.8:1). As text it reads on void and panel (5.8:1 / 5.1:1)." },
+      { "name": "tangerine", "value": "#ff8f2e", "usage": "Spectrum band 2. Highlights, new-follower alerts, warm accents. Text on it is void (8.3:1)." },
+      { "name": "lime", "value": "#c8ff3c", "usage": "Spectrum band 3 and the nerd color: HUD readouts, pixel patterns, the focus ring, 'gg' moments. Text on it is void (16.1:1); lime text reads on void at any size." },
+      { "name": "cyan", "value": "#33e3e8", "usage": "Spectrum band 4. Links, info states, secondary buttons, subscriber alerts. Text on it is void (12.0:1)." },
+      { "name": "violet", "value": "#a77bff", "usage": "Spectrum band 5. Raid and community moments, tags, quiet accents. Text on it is void (6.3:1). Never in a gradient with cyan." }
+    ]
+  },
+  "type": {
+    "fonts": [
+      { "family": "Unbounded", "file": "fonts/unbounded-latin-700-normal.woff2", "weight": "700", "style": "normal" },
+      { "family": "Unbounded", "file": "fonts/unbounded-latin-900-normal.woff2", "weight": "900", "style": "normal" },
+      { "family": "Atkinson Hyperlegible", "file": "fonts/atkinson-hyperlegible-latin-400-normal.woff2", "weight": "400", "style": "normal" },
+      { "family": "Atkinson Hyperlegible", "file": "fonts/atkinson-hyperlegible-latin-400-italic.woff2", "weight": "400", "style": "italic" },
+      { "family": "Atkinson Hyperlegible", "file": "fonts/atkinson-hyperlegible-latin-700-normal.woff2", "weight": "700", "style": "normal" },
+      { "family": "JetBrains Mono", "file": "fonts/jetbrains-mono-latin-500-normal.woff2", "weight": "500", "style": "normal" },
+      { "family": "JetBrains Mono", "file": "fonts/jetbrains-mono-latin-700-normal.woff2", "weight": "700", "style": "normal" }
+    ],
+    "families": {
+      "display": "\"Unbounded\", \"Arial Black\", system-ui, sans-serif",
+      "body": "\"Atkinson Hyperlegible\", system-ui, sans-serif",
+      "mono": "\"JetBrains Mono\", ui-monospace, monospace"
+    },
+    "groups": [
+      {
+        "name": "Display",
+        "family": "display",
+        "styles": [
+          { "name": "display-xl", "fontSize": "72px", "lineHeight": "0.95", "fontWeight": 900, "letterSpacing": "-0.02em", "sample": "Ryvanse", "usage": "The wordmark, thumbnail titles, 'Starting soon' screens. One per surface." },
+          { "name": "display", "fontSize": "44px", "lineHeight": "1", "fontWeight": 900, "letterSpacing": "-0.01em", "sample": "Side quest unlocked", "usage": "Section heads on panels and channel art, alert headlines." },
+          { "name": "title", "fontSize": "24px", "lineHeight": "30px", "fontWeight": 700, "sample": "Tonight: cozy chaos", "usage": "Card titles, schedule days, lower-third names." }
+        ]
+      },
+      {
+        "name": "Text",
+        "family": "body",
+        "styles": [
+          { "name": "body", "fontSize": "17px", "lineHeight": "26px", "fontWeight": 400, "sample": "Pull up a chair, the dungeon can wait five minutes.", "usage": "Paragraphs, panel copy, about sections." },
+          { "name": "body-strong", "fontSize": "17px", "lineHeight": "26px", "fontWeight": 700, "sample": "New follower! Welcome to the party.", "usage": "Emphasis inside body, button labels, alert body lines." },
+          { "name": "caption", "fontSize": "14px", "lineHeight": "20px", "fontWeight": 400, "sample": "Streams Tue, Thu, Sat at 8pm CT", "usage": "Taglines, timestamps, credits, small print. In ink-muted." }
+        ]
+      },
+      {
+        "name": "HUD",
+        "family": "mono",
+        "styles": [
+          { "name": "hud", "fontSize": "12px", "lineHeight": "16px", "fontWeight": 700, "letterSpacing": "0.14em", "sample": "LIVE  ·  LVL 27  ·  HP 100", "usage": "Badges, stat readouts, game tags, timers. Always uppercase. Lime or ink on void, void on a spectrum fill." }
+        ]
+      }
+    ]
+  },
+  "spacing": {
+    "tokens": [
+      { "name": "space-8", "value": "8px", "usage": "Gap inside badges and between icon and label; the pixel unit for patterns." },
+      { "name": "space-16", "value": "16px", "usage": "Padding inside buttons, chips and alert cards; gap between stacked lines of a lower third." },
+      { "name": "space-24", "value": "24px", "usage": "Panel padding, gap between cards." },
+      { "name": "space-40", "value": "40px", "usage": "Safe margin from overlay and canvas edges; the width of one spectrum band." }
+    ]
+  },
+  "radius": {
+    "tokens": [
+      { "name": "radius-sm", "value": "4px", "usage": "HUD chips, game tags, pixel-ish edges." },
+      { "name": "radius-md", "value": "12px", "usage": "Cards, panels, alert plates, webcam frames." },
+      { "name": "radius-pill", "value": "999px", "usage": "Buttons and the LIVE badge." }
+    ]
+  },
+  "shadow": {
+    "note": "Hard offset shadows only. No blur, ever.",
+    "tokens": [
+      { "name": "pop", "value": "4px 4px 0 0 #ff3d9a", "usage": "The sticker shadow under primary buttons, alert plates and the webcam frame. Pink, offset down-right." },
+      { "name": "pop-lime", "value": "4px 4px 0 0 #c8ff3c", "usage": "The same shadow in lime for a pink element, so it never sits on its own color." }
+    ]
+  }
+}

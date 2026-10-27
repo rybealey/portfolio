@@ -1,0 +1,123 @@
+---
+import Icon from './Icon.astro';
+import { nav, site } from '../data/site';
+
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href);
+const resumeHref = site.resumePdf ?? '/resume';
+---
+
+<header class="site-header">
+  <a class="wordmark" href="/">{site.name}</a>
+  <nav aria-label="Primary" class="primary">
+    <ul role="list" class="links" id="primary-links">
+      {
+        nav.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+      <li class="links-resume"><a href={resumeHref}>Resume</a></li>
+    </ul>
+    <button type="button" class="icon-btn" data-theme-toggle aria-label="Switch to light mode">
+      <Icon name="sun" class="when-dark" />
+      <Icon name="moon" class="when-light" />
+    </button>
+    <button type="button" class="icon-btn hud" data-cmdk-open aria-label="Open command palette" aria-keyshortcuts="Meta+K Control+K">
+      <Icon name="search" size={16} />
+      <span class="cmdk-hint" aria-hidden="true">⌘K</span>
+    </button>
+    <button type="button" class="icon-btn menu-btn" aria-expanded="false" aria-controls="primary-links" data-menu-toggle>
+      <span class="visually-hidden">Menu</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+    <a class="btn btn-primary btn-sm resume-btn" href={resumeHref}>Resume</a>
+  </nav>
+</header>
+
+<script>
+  const root = document.documentElement;
+  const toggle = document.querySelector<HTMLButtonElement>('[data-theme-toggle]');
+  const sync = () => {
+    const light = root.dataset.theme === 'light';
+    toggle?.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+  };
+  sync();
+  toggle?.addEventListener('click', () => {
+    const next = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = next;
+    try {
+      localStorage.setItem('rb:theme', next);
+    } catch {}
+    sync();
+  });
+
+  const menu = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+  menu?.addEventListener('click', () => {
+    const open = menu.getAttribute('aria-expanded') !== 'true';
+    menu.setAttribute('aria-expanded', String(open));
+  });
+</script>
+
+<style>
+  .site-header {
+    position: relative;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: var(--space-24) 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-24);
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .primary { display: flex; align-items: center; gap: var(--space-16); }
+  .links { display: flex; align-items: center; gap: var(--space-24); padding-right: var(--space-8); font-weight: 700; }
+  .links a { color: var(--color-ink-muted); text-decoration: none; }
+  .links a:hover { color: var(--color-ink); }
+  .links a[aria-current='page'] { color: var(--color-ink); text-decoration: underline 3px var(--rv-pink); text-underline-offset: 8px; }
+  .links-resume, .menu-btn { display: none; }
+
+  :global([data-theme='light']) .icon-btn[data-cmdk-open] { background: var(--color-panel); }
+  /* The icons render inside Icon.astro, outside this component's scope. */
+  :global(.when-light) { display: none; }
+  :global([data-theme='light'] .when-light) { display: block; }
+  :global([data-theme='light'] .when-dark) { display: none; }
+
+  @media (max-width: 680px) {
+    .site-header { padding: 12px var(--space-16); }
+    .wordmark { font-size: 18px; }
+    .primary { gap: var(--space-8); }
+    .cmdk-hint, .resume-btn { display: none; }
+    .menu-btn { display: inline-flex; color: var(--color-ink); }
+    .links {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: var(--space-16);
+      right: var(--space-16);
+      z-index: 20;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+      padding: var(--space-8);
+      background: var(--color-panel);
+      border: 2px solid var(--color-ink-muted);
+      border-radius: 12px;
+      box-shadow: 4px 4px 0 0 var(--color-pop);
+    }
+    .links a { display: flex; align-items: center; min-height: 44px; padding: 0 12px; }
+    .links-resume { display: block; }
+    .primary:has([aria-expanded='true']) .links { display: flex; }
+  }
+</style>

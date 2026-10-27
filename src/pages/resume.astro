@@ -1,0 +1,8 @@
+---
+import Placeholder from '../layouts/Placeholder.astro';
+import { site } from '../data/site';
+---
+
+<Placeholder title="Resume" eyebrow="Resume" lede="The HTML resume and a PDF download land here before launch.">
+  <p>Until then, the fastest way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+</Placeholder>
