@@ -1,8 +1,609 @@
 ---
-import Placeholder from '../layouts/Placeholder.astro';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ContactTile from '../components/tiles/ContactTile.astro';
 import { site } from '../data/site';
+import { externalAttrs } from '../lib/links';
+import { updated, pdf, lanes, summary, glance, experience, projects, skills, education } from '../data/resume';
+
+const updatedLabel = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: site.timeZone });
+const host = new URL(site.url).host;
+const contact = [
+  { label: site.email, href: `mailto:${site.email}` },
+  { label: site.linkedin.replace(/^https:\/\/(www\.)?/, ''), href: site.linkedin },
+  ...(site.github ? [{ label: site.github.replace(/^https:\/\//, ''), href: site.github }] : []),
+];
+const sections = [
+  { id: 'summary', title: 'Summary' },
+  { id: 'experience', title: 'Experience' },
+  { id: 'projects', title: 'Independent projects' },
+  { id: 'skills', title: 'Skills' },
+  { id: 'education', title: 'Education' },
+].map((section, i) => ({ ...section, number: String(i + 1).padStart(2, '0') }));
+const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
+const num = (id: string) => sections.find((section) => section.id === id)!.number;
+
+// Backticks in the Markdown mark code; odd pieces are the code.
+const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code: i % 2 === 1 }));
 ---
 
-<Placeholder title="Resume" eyebrow="Resume" lede="The HTML resume and a PDF download land here before launch.">
-  <p>Until then, the fastest way to reach me is <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
-</Placeholder>
+<Base
+  title="Resume"
+  description="Ry Bealey's resume: AI systems and implementation, product and systems design, and support operations. Product and Operations Lead at SERVERIZZ, eight years at Apple."
+>
+  <div class="page">
+    <div class="print-stripe" aria-hidden="true">{bands.map((band) => <span style={`background: var(--rv-${band})`} />)}</div>
+
+    <header class="intro">
+      <p class="hud eyebrow">Resume · Updated <time datetime={updated.toISOString()}>{updatedLabel}</time></p>
+      <h1>{site.name}</h1>
+      <ul role="list" class="lanes" aria-label="Focus">
+        {
+          lanes.map((lane) => (
+            <li>
+              <span class="square" style={`background: var(--rv-${lane.band})`} aria-hidden="true" />
+              {lane.label}
+            </li>
+          ))
+        }
+      </ul>
+      <ul role="list" class="contact" aria-label="Contact">
+        <li>{site.location}</li>
+        {
+          contact.map((item) => (
+            <li>
+              <a href={item.href} {...externalAttrs(item.href)} data-ga-event={item.href.startsWith('mailto:') ? 'contact_click' : undefined} data-ga-method={item.href.startsWith('mailto:') ? 'email' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+        <li class="print-only">{host}</li>
+      </ul>
+    </header>
+
+    <div class="layout">
+      <aside class="rail" aria-label="About this resume">
+        <section class="card" aria-labelledby="resume-file">
+          <h2 id="resume-file" class="hud rail-label">Resume file</h2>
+          <dl>
+            {
+              glance.map((item) => (
+                <div>
+                  <dt class="hud">{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <div class="actions">
+            <a class="btn btn-primary btn-sm" href={pdf} download="Ry Bealey resume.pdf" data-ga-event="resume_download" data-ga-location="resume">
+              <Icon name="download" />
+              <span>Download PDF</span>
+            </a>
+            <button type="button" class="btn btn-ghost btn-sm" data-print>Print</button>
+          </div>
+        </section>
+        <details class="contents" open data-contents>
+          <summary class="hud rail-label">Contents</summary>
+          <nav aria-label="Contents">
+            <ol role="list">
+              {
+                sections.map((section) => (
+                  <li>
+                    <a href={`#${section.id}`} data-section={section.id}>
+                      <span class="hud toc-num" aria-hidden="true">{section.number}</span>
+                      <span>{section.title}</span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ol>
+          </nav>
+        </details>
+      </aside>
+
+      <div class="content">
+        <section class="sec" aria-labelledby="summary">
+          <h2 id="summary"><span class="hud num" aria-hidden="true">{num('summary')}</span>Summary</h2>
+          <p class="summary">{summary}</p>
+        </section>
+
+        <section class="sec" aria-labelledby="experience">
+          <h2 id="experience"><span class="hud num" aria-hidden="true">{num('experience')}</span>Experience</h2>
+          {
+            experience.map((job) => (
+              <article class="job">
+                <div class="job-head">
+                  <div class="job-title">
+                    <h3>{job.title}</h3>
+                    <p class="org">
+                      {job.org} <span class="caption">· {job.detail}</span>
+                    </p>
+                  </div>
+                  <p class="hud when">
+                    {job.dates}
+                    {job.now && <span class="hud chip now">Now</span>}
+                  </p>
+                </div>
+                {job.description && <p class="job-desc">{job.description}</p>}
+
+                {job.groups && (
+                  <div class="groups">
+                    {job.groups.map((group) => (
+                      <div class="group" style={`--mark: var(--rv-${group.band}); --mark-ink: var(--ink-${group.band})`}>
+                        <div class="group-head">
+                          <h4 class="hud group-name">
+                            <span class="square" aria-hidden="true" />
+                            {group.label}
+                          </h4>
+                          {group.link && (
+                            <a class="go" href={group.link.href}>
+                              {group.link.label}
+                              <Icon name="arrow" size={16} />
+                            </a>
+                          )}
+                        </div>
+                        <ul role="list" class="bullets">
+                          {group.bullets.map((bullet) => (
+                            <li>{pieces(bullet).map(({ part, code }) => (code ? <code>{part}</code> : part))}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {job.roles && (
+                  <ol role="list" class="ladder">
+                    {job.roles.map((role) => (
+                      <li>
+                        <span class:list={['dot', { now: role.now }]} aria-hidden="true" />
+                        <div class="role">
+                          <div class="role-head">
+                            <h4>
+                              {role.title} <span>· {role.team}</span>
+                            </h4>
+                            <p class="hud role-when">{role.dates}</p>
+                          </div>
+                          <ul role="list" class="bullets quiet">
+                            {role.bullets.map((bullet) => (
+                              <li>{bullet}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+
+                {job.bullets && (
+                  <ul role="list" class="bullets quiet">
+                    {job.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+              </article>
+            ))
+          }
+        </section>
+
+        <section class="sec" aria-labelledby="projects">
+          <h2 id="projects"><span class="hud num" aria-hidden="true">{num('projects')}</span>Independent projects</h2>
+          <div class="projects">
+            {
+              projects.map((project) => (
+                <article class="project" style={`--mark: var(--rv-${project.band}); --mark-ink: var(--ink-${project.band})`}>
+                  <p class="hud project-label">{project.label}</p>
+                  <h3>
+                    {project.name} <span class="print-only">· {project.tagline}</span>
+                  </h3>
+                  <ul role="list" class="bullets">
+                    {project.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                  {project.link && (
+                    <a class="go" href={project.link.href}>
+                      {project.link.label}
+                      <Icon name="arrow" size={16} />
+                    </a>
+                  )}
+                </article>
+              ))
+            }
+          </div>
+        </section>
+
+        <section class="sec" aria-labelledby="skills">
+          <h2 id="skills"><span class="hud num" aria-hidden="true">{num('skills')}</span>Skills</h2>
+          <dl class="spec">
+            {
+              skills.map((row) => (
+                <div class="spec-row">
+                  <dt class="hud">
+                    <span class="square" style={`background: var(--rv-${row.band})`} aria-hidden="true" />
+                    {row.label}
+                  </dt>
+                  <dd>{row.items}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </section>
+
+        <section class="sec" aria-labelledby="education">
+          <h2 id="education"><span class="hud num" aria-hidden="true">{num('education')}</span>Education</h2>
+          <ul role="list" class="education">
+            {
+              education.map((item) => (
+                <li>
+                  <span>
+                    <strong>{item.credential}</strong>
+                    {item.detail && `, ${item.detail}`} <span class="muted">· {item.school}</span>
+                  </span>
+                  <span class="hud year">{item.year}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <p class="print-only print-foot">Case studies and the latest version of this resume: {host}/resume</p>
+      </div>
+    </div>
+
+    <div class="hire">
+      <ContactTile />
+    </div>
+  </div>
+</Base>
+
+<script>
+  // Print opens the browser's print dialog; the print styles below lay the
+  // page out as a two-page document.
+  for (const button of document.querySelectorAll('[data-print]')) button.addEventListener('click', () => print());
+
+  // Highlights the section being read in the contents list, and starts the
+  // list folded on narrow screens, where it sits above the resume.
+  const contents = document.querySelector<HTMLDetailsElement>('[data-contents]');
+  if (contents) {
+    if (matchMedia('(max-width: 1099px)').matches) contents.open = false;
+    const links = new Map(
+      [...contents.querySelectorAll<HTMLAnchorElement>('[data-section]')].map((link) => [link.dataset.section!, link]),
+    );
+    const headings = [...links.keys()].map((id) => document.getElementById(id)).filter((el): el is HTMLElement => !!el);
+    let current: HTMLAnchorElement | undefined;
+    const mark = () => {
+      // The last heading above the top third of the viewport is the one being read.
+      const line = innerHeight / 3;
+      const active = headings.filter((h) => h.getBoundingClientRect().top <= line).at(-1) ?? headings[0];
+      const link = active && links.get(active.id);
+      if (link === current) return;
+      current?.removeAttribute('aria-current');
+      link?.setAttribute('aria-current', 'location');
+      current = link;
+    };
+    addEventListener('scroll', mark, { passive: true });
+    addEventListener('resize', mark);
+    mark();
+  }
+</script>
+
+<style>
+  .page {
+    /* Text in a spectrum color: the darker inks in light, the colors themselves in dark. */
+    --ink-pink: #c4006a;
+    --ink-tangerine: var(--color-warning);
+    --ink-lime: var(--color-accent-billing);
+    --ink-cyan: var(--color-accent-web);
+    --ink-violet: var(--color-accent-fin);
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 40px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+  }
+  :global([data-theme='dark']) .page { --ink-pink: var(--rv-pink); }
+  .eyebrow { color: var(--color-hud); }
+  .print-only, .print-stripe { display: none; }
+
+  /* Intro: the name, the three lanes in the résumé's order, contact */
+  .intro { display: flex; flex-direction: column; gap: 20px; max-width: 880px; }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--type-display-weight);
+    font-size: clamp(34px, 5vw, var(--type-display-size));
+    line-height: 1.05;
+    letter-spacing: var(--type-display-tracking);
+  }
+  .lanes { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 21px; line-height: 30px; font-weight: 700; }
+  .lanes li { display: flex; align-items: center; gap: 10px; }
+  .contact { display: flex; flex-wrap: wrap; gap: 6px 0; font-size: 15px; line-height: 24px; color: var(--color-ink-muted); }
+  .contact li + li::before { content: '·'; margin: 0 10px; }
+  .square { flex: none; display: inline-block; width: 10px; height: 10px; border-radius: 2px; }
+
+  /* The rail sits beside the résumé on wide screens, above it otherwise, as on a case study. */
+  .layout { display: grid; grid-template-columns: minmax(0, 1fr) 272px; gap: 64px; align-items: start; }
+  .rail { grid-column: 2; grid-row: 1; position: sticky; top: 24px; display: flex; flex-direction: column; gap: var(--space-16); }
+  .content { grid-column: 1; grid-row: 1; min-width: 0; max-width: 880px; display: flex; flex-direction: column; gap: 72px; }
+
+  .rail-label { color: var(--color-hud); }
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+    padding: 20px;
+    border: 1px solid var(--color-hairline);
+    border-top: 3px solid var(--rv-pink);
+    border-radius: var(--radius-md);
+    background: var(--color-panel);
+  }
+  .card dl { display: flex; flex-direction: column; gap: 14px; margin: 0; }
+  .card dt { color: var(--color-hud); margin-bottom: 4px; }
+  .card dd { margin: 0; font-weight: 700; font-size: 15px; line-height: 22px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 4px; }
+  .actions button { cursor: pointer; background: transparent; }
+
+  .contents { padding: 4px 4px 0; }
+  .contents summary { cursor: pointer; list-style: none; padding: 4px 0 10px; }
+  .contents summary::-webkit-details-marker { display: none; }
+  .contents summary::after { content: ' +'; }
+  .contents[open] summary::after { content: ' −'; }
+  .contents ol { display: flex; flex-direction: column; gap: 2px; border-left: 1px solid var(--color-hairline); }
+  .contents a {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    padding: 6px 0 6px 14px;
+    margin-left: -1px;
+    border-left: 2px solid transparent;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    font-size: 15px;
+    line-height: 1.35;
+  }
+  .contents a:hover { color: var(--color-ink); }
+  .contents a[aria-current] { color: var(--color-ink); font-weight: 700; border-left-color: var(--rv-pink); }
+  .toc-num { min-width: 2ch; color: var(--color-hud); }
+
+  /* Sections, numbered like a case study's */
+  .sec { display: flex; flex-direction: column; gap: 28px; }
+  .sec h2 {
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+    padding-top: 28px;
+    border-top: 1px solid var(--color-hairline);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(22px, 2.4vw, 28px);
+    line-height: 1.2;
+    letter-spacing: var(--type-display-tracking);
+    scroll-margin-top: 24px;
+  }
+  .sec:first-child h2 { padding-top: 0; border-top: 0; }
+  .num { flex: none; color: var(--ink-pink); font-size: 14px; transform: translateY(-3px); }
+  .summary { font-size: 19px; line-height: 30px; max-width: 68ch; text-wrap: pretty; }
+
+  /* A job */
+  .job { display: flex; flex-direction: column; gap: var(--space-16); }
+  .job + .job { padding-top: 36px; border-top: 1px dashed var(--color-hairline); }
+  .job-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 24px; }
+  .job-title { display: flex; flex-direction: column; gap: 2px; }
+  h3 { font-size: 21px; line-height: 28px; }
+  .org { font-weight: 700; color: var(--color-ink-muted); }
+  .when { display: flex; align-items: center; gap: 10px; color: var(--color-hud); white-space: nowrap; }
+  .now { color: var(--color-success); border-color: currentColor; padding: 2px 6px; font-size: 11px; line-height: 14px; }
+  .job-desc { color: var(--color-ink-muted); max-width: 68ch; }
+
+  .bullets { display: flex; flex-direction: column; gap: 10px; max-width: 72ch; color: var(--color-ink-muted); font-size: 16px; line-height: 26px; }
+  .bullets li { position: relative; padding-left: 22px; }
+  .bullets li::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    background: var(--mark, var(--rv-pink));
+  }
+  .bullets.quiet li::before { background: var(--color-ink-muted); }
+  code { font-family: var(--font-mono); font-size: 0.85em; padding: 1px 6px; border-radius: var(--radius-sm); background: var(--color-code-bg); color: var(--color-ink); }
+
+  .groups { display: flex; flex-direction: column; gap: var(--space-24); }
+  .group { display: flex; flex-direction: column; gap: 10px; }
+  .group-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .group-name { display: flex; align-items: center; gap: 10px; margin: 0; color: var(--mark-ink); }
+  .group-name .square { background: var(--mark); }
+  .go { display: inline-flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700; text-decoration: none; }
+  .go :global(svg) { flex: none; }
+
+  /* Apple: one employer, a ladder of roles. The rail runs from below each dot to the next role. */
+  .ladder > li { display: grid; grid-template-columns: 10px minmax(0, 1fr); gap: 0 20px; padding-bottom: 28px; position: relative; }
+  .ladder > li:last-child { padding-bottom: 0; }
+  .ladder > li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 4px;
+    top: 24px;
+    bottom: 4px;
+    width: 2px;
+    background: var(--color-hairline);
+  }
+  .dot { width: 10px; height: 10px; margin-top: 8px; border-radius: 2px; background: var(--color-ink-muted); }
+  .dot.now { background: var(--color-hud); }
+  .role { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+  .role-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px; }
+  .role-head h4 { margin: 0; font-size: inherit; }
+  .role-head h4 span { font-weight: 400; color: var(--color-ink-muted); }
+  .role-when { color: var(--color-ink-muted); }
+
+  /* Independent projects */
+  .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: var(--space-24);
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+  .project-label { color: var(--mark-ink); }
+  .project h3 { font-family: var(--font-display); font-size: 18px; line-height: 24px; }
+  .project .bullets { font-size: 15px; line-height: 24px; }
+  .project .go { margin-top: auto; padding-top: 4px; }
+
+  /* Skills, as the About page's loadout */
+  .spec { margin: 0; border-bottom: 1px solid var(--color-hairline); }
+  .spec-row {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 4px 20px;
+    align-items: baseline;
+    padding: 14px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .spec-row dt { display: flex; align-items: center; gap: 10px; color: var(--color-ink-muted); line-height: 20px; }
+  .spec-row dd { margin: 0; font-size: 15px; line-height: 24px; }
+
+  .education li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 4px 20px;
+    padding: 14px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .education li:last-child { border-bottom: 1px solid var(--color-hairline); }
+  .year { color: var(--color-hud); }
+
+  @media (max-width: 1099px) {
+    .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .rail { grid-column: 1; grid-row: 1; position: static; }
+    .content { grid-row: 2; }
+  }
+  @media (max-width: 680px) {
+    .page { padding: var(--space-24) var(--space-16) 64px; gap: 32px; }
+    .lanes { flex-direction: column; gap: 6px; font-size: 18px; line-height: 26px; }
+    .contact { flex-direction: column; }
+    .contact li + li::before { content: none; }
+    .content { gap: 56px; }
+    .sec h2 { padding-top: 24px; }
+    .summary { font-size: 17px; line-height: 27px; }
+    h3 { font-size: 19px; line-height: 26px; }
+    .projects { grid-template-columns: minmax(0, 1fr); }
+    .project { padding: 20px; }
+    .spec-row { grid-template-columns: minmax(0, 1fr); }
+  }
+
+  /* Print: a plain two-page document in the light theme, with none of the
+     site's chrome. Unlayered, so these beat the token layer in either theme. */
+  @media print {
+    @page { size: letter; margin: 0.45in 0.55in; }
+    :global(:root) {
+      --color-bg: #fff;
+      --color-panel: #fff;
+      --color-hairline: #c9c0d9;
+      --color-ink: #140c22;
+      --color-ink-muted: #4a3f5e;
+      --color-link: #140c22;
+      --color-hud: #140c22;
+      color-scheme: light;
+    }
+    :global(html), :global(body) { background: #fff !important; font-size: 9.5pt; line-height: 1.34; }
+    :global(body > :not(main)), .rail, .hire, .go, .group-head, .num, .now, .dot, .project-label, .eyebrow { display: none !important; }
+    :global(main) { display: block; }
+
+    .page { max-width: none; padding: 0; gap: 0; display: block; }
+    .print-only { display: inline; }
+    .print-foot { display: block; margin-top: 14pt; padding-top: 6pt; border-top: 1px solid var(--color-hairline); font-size: 8.5pt; color: var(--color-ink-muted); }
+    .print-stripe { display: flex; height: 4pt; margin-bottom: 10pt; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+    .print-stripe span { flex: 1; }
+
+    .intro { gap: 3pt; max-width: none; padding-bottom: 8pt; border-bottom: 1.5pt solid var(--color-ink); }
+    h1 { font-size: 22pt; line-height: 1.1; }
+    .lanes { display: block; font-size: 11pt; line-height: 1.4; }
+    .lanes li { display: inline; }
+    .lanes li + li::before { content: ' · '; }
+    .lanes .square { display: none; }
+    .contact { display: block; font-size: 9.5pt; line-height: 1.4; }
+    .contact li { display: inline; }
+    .contact li + li::before { content: ' · '; margin: 0; }
+    a { color: inherit; text-decoration: none; }
+
+    .layout, .content { display: block; max-width: none; }
+    .sec { display: block; padding-top: 9pt; }
+    .sec h2 {
+      display: flex;
+      align-items: center;
+      gap: 8pt;
+      margin: 0 0 6pt;
+      padding: 0;
+      border: 0;
+      font-family: var(--font-mono);
+      font-size: 7.5pt;
+      line-height: 1.2;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      break-after: avoid;
+    }
+    .sec h2::after { content: ''; flex: 1; height: 1px; background: var(--color-hairline); }
+    .summary { font-size: 9.5pt; line-height: 1.34; max-width: none; }
+
+    .job { display: block; }
+    .job + .job { margin-top: 7pt; padding-top: 0; border: 0; }
+    .job-head { flex-wrap: nowrap; gap: 12pt; break-after: avoid; }
+    .job-title { display: block; }
+    h3, .job-title .org { display: inline; font-size: 10pt; line-height: 1.34; }
+    .org .caption { font-size: inherit; font-weight: 400; }
+    .job-title h3::after { content: ' · '; }
+    .org { color: var(--color-ink); }
+    .when, .role-when, .year { font-family: var(--font-mono); font-weight: 500; font-size: 8pt; letter-spacing: 0; text-transform: none; color: var(--color-ink-muted); }
+    .job-desc { font-style: italic; max-width: none; margin-top: 1pt; }
+
+    .groups, .group, .ladder { display: block; }
+    .bullets { gap: 2pt; max-width: none; margin-top: 3pt; font-size: 9.5pt; line-height: 1.32; color: var(--color-ink); }
+    .group + .group .bullets { margin-top: 2pt; }
+    .bullets li { padding-left: 11pt; break-inside: avoid; }
+    .bullets li::before, .bullets.quiet li::before { left: 1pt; top: 5pt; width: 4pt; height: 4pt; border-radius: 1px; background: var(--color-ink); }
+    code { padding: 0; background: none; font-size: 0.9em; }
+
+    .ladder > li { display: block; padding: 3pt 0 0; }
+    .ladder > li::after { content: none !important; }
+    .role { gap: 0; }
+    .role-head { flex-wrap: nowrap; break-after: avoid; }
+    .role-head h4 { font-size: 9.5pt; }
+
+    .projects { display: block; }
+    .project { display: block; padding: 0; border: 0; border-radius: 0; background: none; }
+    .project + .project { margin-top: 5pt; }
+    .project h3 { font-family: var(--font-body); font-size: 10pt; }
+    .project h3 .print-only { font-weight: 400; color: var(--color-ink-muted); }
+    .project .bullets { font-size: 9.5pt; line-height: 1.32; }
+
+    .spec { border: 0; }
+    .spec-row { display: block; padding: 0; border: 0; break-inside: avoid; }
+    .spec-row + .spec-row { margin-top: 2pt; }
+    .spec-row dt, .spec-row dd { display: inline; font-size: 9.5pt; line-height: 1.32; }
+    .spec-row dt { font-family: var(--font-body); font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--color-ink); }
+    .spec-row dt::after { content: ': '; }
+    .spec-row dt .square { display: none; }
+
+    .education li { padding: 0; border: 0 !important; }
+    .education li + li { margin-top: 2pt; }
+  }
+</style>

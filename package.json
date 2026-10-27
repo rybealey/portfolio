@@ -18,6 +18,7 @@
     "db:previews": "node --env-file-if-exists=.env scripts/db-previews.mjs",
     "api:token": "node --env-file-if-exists=.env scripts/api-token.mjs",
     "spotify:auth": "node --env-file-if-exists=.env scripts/spotify-auth.mjs",
+    "resume:pdf": "node scripts/resume-pdf.mjs",
     "package": "npm run tokens && astro check && node scripts/astro-build.mjs && node scripts/package-release.mjs"
   },
   "dependencies": {
