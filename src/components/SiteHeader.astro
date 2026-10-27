@@ -46,13 +46,43 @@ const resumeHref = site.resumePdf ?? '/resume';
     toggle?.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
   };
   sync();
+
+  // "Sunrise" switch: the new theme fades in over the old one, slowly when
+  // brightening (the jump to light is what stings) and quickly when dimming.
+  // data-theme-to tells the CSS in global.css which timing to use. Browsers
+  // without View Transitions fade colors instead; reduced motion is instant.
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const FALLBACK_MS = { light: 600, dark: 250 } as const;
+  let fallbackTimer: number | undefined;
+
+  const applyTheme = (next: 'light' | 'dark') => {
+    if (root.dataset.theme === next) return;
+    const set = () => {
+      root.dataset.theme = next;
+      sync();
+    };
+    if (reducedMotion.matches) return set();
+
+    root.dataset.themeTo = next;
+    if (document.startViewTransition) {
+      document.startViewTransition(set).finished.finally(() => delete root.dataset.themeTo);
+      return;
+    }
+    clearTimeout(fallbackTimer);
+    root.classList.add('theme-fading');
+    set();
+    fallbackTimer = window.setTimeout(() => {
+      root.classList.remove('theme-fading');
+      delete root.dataset.themeTo;
+    }, FALLBACK_MS[next]);
+  };
+
   toggle?.addEventListener('click', () => {
     const next = root.dataset.theme === 'light' ? 'dark' : 'light';
-    root.dataset.theme = next;
     try {
       localStorage.setItem('rb:theme', next);
     } catch {}
-    sync();
+    applyTheme(next);
   });
 
   // Until the visitor picks a theme, follow their system setting live.
@@ -61,9 +91,7 @@ const resumeHref = site.resumePdf ?? '/resume';
     try {
       saved = localStorage.getItem('rb:theme');
     } catch {}
-    if (saved) return;
-    root.dataset.theme = event.matches ? 'dark' : 'light';
-    sync();
+    if (!saved) applyTheme(event.matches ? 'dark' : 'light');
   });
 
   const menu = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');

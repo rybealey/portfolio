@@ -157,6 +157,38 @@
   }
 }
 
+/* Theme switch, set up by SiteHeader.astro. Going to light, the new page
+   fades in on an ease-in curve so brightness barely moves at first; going to
+   dark it fades in fast. The old snapshot stays opaque underneath, so there
+   is no blended midpoint brighter or darker than either theme. */
+:root[data-theme-to='light'] { --theme-fade: 600ms; --theme-ease: cubic-bezier(0.55, 0, 0.75, 0.2); }
+:root[data-theme-to='dark'] { --theme-fade: 250ms; --theme-ease: cubic-bezier(0.25, 0.6, 0.4, 1); }
+
+::view-transition-old(root) { animation: none; }
+::view-transition-new(root) {
+  animation: theme-fade-in var(--theme-fade, 300ms) var(--theme-ease, ease) both;
+  mix-blend-mode: normal;
+}
+@keyframes theme-fade-in {
+  from { opacity: 0; }
+}
+
+/* Fallback without View Transitions: fade the colors themselves. */
+@layer utilities {
+  .theme-fading,
+  .theme-fading *,
+  .theme-fading *::before,
+  .theme-fading *::after {
+    transition:
+      background-color var(--theme-fade) var(--theme-ease),
+      color var(--theme-fade) var(--theme-ease),
+      border-color var(--theme-fade) var(--theme-ease),
+      box-shadow var(--theme-fade) var(--theme-ease),
+      fill var(--theme-fade) var(--theme-ease),
+      stroke var(--theme-fade) var(--theme-ease) !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
