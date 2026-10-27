@@ -10,6 +10,10 @@ export default defineConfig({
   site: 'https://ryanbealey.com',
   trailingSlash: 'never',
   build: { format: 'file' },
+  // Case studies live under /work/, so a trimmed URL lands on the home page's work grid.
+  redirects: {
+    '/work': { status: 301, destination: '/#work' },
+  },
   adapter: node({ mode: 'standalone' }),
   integrations: [sitemap()],
   env: {

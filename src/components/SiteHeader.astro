@@ -3,7 +3,10 @@ import Icon from './Icon.astro';
 import { nav, site } from '../data/site';
 
 const path = Astro.url.pathname;
-const isCurrent = (href: string) => !href.includes('#') && path.startsWith(href);
+const isCurrent = (item: (typeof nav)[number]) => {
+  const base = 'match' in item ? item.match : item.href;
+  return !base.includes('#') && path.startsWith(base);
+};
 const resumeHref = site.resumePdf ?? '/resume';
 ---
 
@@ -14,7 +17,7 @@ const resumeHref = site.resumePdf ?? '/resume';
       {
         nav.map((item) => (
           <li>
-            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+            <a href={item.href} aria-current={isCurrent(item) ? 'page' : undefined}>
               {item.label}
             </a>
           </li>
