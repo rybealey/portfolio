@@ -12,7 +12,7 @@ const { entry, featured = false } = Astro.props;
 const { order, label, title, summary, accent, metrics } = entry.data;
 ---
 
-<a class:list={['tile', 'case', { featured }]} href={`/work/${entry.id}`} style={`--accent: var(--color-accent-${accent})`}>
+<a class:list={['tile', 'case', { featured }]} href={`/work/${entry.id}`} style={`--accent: var(--color-accent-${accent}); view-transition-name: case-${entry.id}; view-transition-class: case`}>
   <div class="head">
     <span class="hud number"><span class="swatch" aria-hidden="true"></span>0{order} · {label}</span>
     <h2>{title}</h2>

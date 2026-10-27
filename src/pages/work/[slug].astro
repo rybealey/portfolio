@@ -27,11 +27,14 @@ const statusChip = {
 
 <Base title={title} description={summary}>
   <article class="page" style={`--accent: var(--color-accent-${accent})`}>
+    {/* Shares the home tile's transition name, so the tile morphs into this header. */}
+    <div class="morph" style={`view-transition-name: case-${entry.id}; view-transition-class: case`}>
     <PageIntro eyebrow={`0${order} · ${label}`} title={title} lede={summary} status={statusChip[status]}>
       <ul role="list" class="metrics" aria-label="Highlights">
         {metrics.map((metric) => <li class="hud chip">{metric}</li>)}
       </ul>
     </PageIntro>
+    </div>
     <div class="body">
       <Content />
       <p><a href="/">Back to home</a></p>
