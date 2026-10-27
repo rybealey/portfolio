@@ -175,6 +175,10 @@
 @keyframes theme-fade-in {
   from { opacity: 0; }
 }
+/* The stripe looks the same in both themes, so it skips the fade and shows
+   live. Otherwise its ripple plays under a nearly transparent layer. */
+:root[data-theme-to]::view-transition-old(site-stripe) { display: none; }
+:root[data-theme-to]::view-transition-new(site-stripe) { animation: none; }
 
 /* Page to page: cross-document View Transitions, no JavaScript. Browsers
    without them, and reduced motion, get a normal page load. */
