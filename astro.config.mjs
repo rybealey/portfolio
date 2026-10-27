@@ -12,9 +12,9 @@ export default defineConfig({
   // 'preserve' mirrors src/pages: about.html, but writing/index.html for a
   // section that also has child pages, which the Node server resolves cleanly.
   build: { format: 'preserve' },
-  // Case studies live under /work/, so a trimmed URL lands on the home page's work grid.
+  // Case studies live under /work/; the home page is the work index.
   redirects: {
-    '/work': { status: 301, destination: '/#work' },
+    '/work': { status: 301, destination: '/' },
   },
   // Code in notes is colored by CSS variables, so it follows the theme.
   markdown: { shikiConfig: { theme: 'css-variables' } },

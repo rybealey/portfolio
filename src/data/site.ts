@@ -18,8 +18,8 @@ export const site = {
 };
 
 export const nav = [
-  // Work has no page of its own yet; it is current anywhere under /work/.
-  { label: 'Work', href: '/#work', match: '/work' },
+  // The home page is the work index, so Work is current there and under /work/.
+  { label: 'Work', href: '/', match: ['/', '/work'] },
   { label: 'About', href: '/about' },
   { label: 'Writing', href: '/writing' },
 ] as const;

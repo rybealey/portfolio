@@ -3,10 +3,9 @@ import Icon from './Icon.astro';
 import { nav, site } from '../data/site';
 
 const path = Astro.url.pathname;
-const isCurrent = (item: (typeof nav)[number]) => {
-  const base = 'match' in item ? item.match : item.href;
-  return !base.includes('#') && path.startsWith(base);
-};
+// '/' only matches the home page itself; other entries match their section.
+const isCurrent = (item: (typeof nav)[number]) =>
+  ('match' in item ? item.match : [item.href]).some((base) => (base === '/' ? path === '/' : path.startsWith(base)));
 const resumeHref = site.resumePdf ?? '/resume';
 ---
 
