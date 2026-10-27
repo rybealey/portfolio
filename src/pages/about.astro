@@ -1,9 +1,328 @@
 ---
-import Placeholder from '../layouts/Placeholder.astro';
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ContactTile from '../components/tiles/ContactTile.astro';
+import { site } from '../data/site';
+import { glance, toolkit, timeline, principles, ventures, causes } from '../data/about';
+
+const toolCount = toolkit.reduce((n, row) => n + row.tools.length, 0);
+const resumeIsPdf = Boolean(site.resumePdf);
 ---
 
-<Placeholder
-  title="About Ry"
-  eyebrow="About"
-  lede="The ground-level story: Apple support, Impeccabyte, Ryvanse, and how I work with AI as a build partner."
-/>
+<Base
+  title="About"
+  description="Ry Bealey: eight years on Apple's front line and more than ten running SERVERIZZ, now turning billing, payments and support problems into working software with AI."
+>
+  <div class="page">
+    <section class="intro" aria-labelledby="about-title">
+      <div class="intro-copy">
+        <p class="hud eyebrow">About · {site.location}</p>
+        <h1 id="about-title">I build the systems behind the front line.</h1>
+        <p class="lede">
+          I've spent eight years on Apple's front line and more than ten running SERVERIZZ, a hosting company here in Austin. Both taught
+          me the same thing: the person on the other end of a system doesn't care how clever it is. They care that it works, and that
+          someone thought about them.
+        </p>
+        <p class="muted">
+          These days I turn billing, payments and support problems into specs, data models and working software, with AI as my build
+          partner. I'm looking for a fintech team where that's the job.
+        </p>
+
+        <div class="loadout">
+          <p class="hud eyebrow">The loadout · {toolCount} tools</p>
+          <dl>
+            {
+              toolkit.map((row) => (
+                <div class="kit-row">
+                  <dt class="hud">
+                    <span class="square" style={`background: var(--rv-${row.band})`} aria-hidden="true" />
+                    {row.label}
+                  </dt>
+                  <dd>{row.tools.join(' · ')}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+      </div>
+
+      <aside class="intro-side" aria-label="At a glance">
+        {
+          site.headshot && (
+            <figure class="portrait">
+              <img src={site.headshot} alt={`Portrait of ${site.name}`} width="800" height="1000" />
+              <figcaption class="hud">
+                {site.name} · {site.location}
+              </figcaption>
+            </figure>
+          )
+        }
+        <div class="glance">
+          <dl>
+            {
+              glance.map((item) => (
+                <div>
+                  <dt class="hud">{item.label}</dt>
+                  <dd class:list={{ strong: item.strong }}>{item.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+          <div class="glance-actions">
+            <a class="btn btn-primary btn-sm" href={site.resumePdf ?? '/resume'} data-ga-event="resume_download" data-ga-location="about">
+              <Icon name="download" />
+              <span>{resumeIsPdf ? 'Download resume (PDF)' : 'Read my resume'}</span>
+            </a>
+            <a class="btn btn-ghost btn-sm" href={`mailto:${site.email}`} data-ga-event="contact_click" data-ga-method="email">Email me</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="split" aria-labelledby="path-title">
+      <div class="split-head">
+        <p class="hud eyebrow">The path so far</p>
+        <h2 id="path-title">Two careers that turned out to be one</h2>
+        <p>
+          I started a hosting company before I joined Apple, and I've kept both going since. One taught me how systems are built. The
+          other taught me who they're for.
+        </p>
+        <p class="muted">
+          At SERVERIZZ I'm the one deciding how billing works, where card data lives, and who gets the call when a server goes down. At
+          Apple I've been the person a customer reaches when a product doesn't do what they expected: in a support queue, on a store
+          floor, and in chat.
+        </p>
+        <p class="muted">
+          So every spec I write starts from that second seat. Who's on the other end, what will they see, and what will the person
+          helping them need to know?
+        </p>
+      </div>
+
+      <ol role="list" class="timeline">
+        {
+          timeline.map((entry) => (
+            <li>
+              <span class="hud year">{entry.year}</span>
+              <span class:list={['dot', { serverizz: entry.serverizz }]} aria-hidden="true" />
+              <div class="entry">
+                <p class="entry-title">
+                  <span>{entry.title}</span>
+                  {entry.now && <span class="hud chip now">Now</span>}
+                </p>
+                <p class="muted">
+                  {entry.body}
+                  {entry.caseStudies && (
+                    <>
+                      {' '}
+                      Each one has a <a href="/#work">case study</a>.
+                    </>
+                  )}
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="stack" aria-labelledby="work-title">
+      <div class="section-head">
+        <p class="hud eyebrow">How I work</p>
+        <h2 id="work-title">AI is my build partner. The spec is the boss.</h2>
+      </div>
+      <ol role="list" class="principles">
+        {
+          principles.map((item, i) => (
+            <li class="card">
+              <span class="hud muted">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{item.title}</h3>
+              <p class="muted">{item.body}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="stack" aria-labelledby="also-title">
+      <div class="section-head">
+        <p class="hud eyebrow">Also mine</p>
+        <h2 id="also-title">Payments from the merchant's side, design for fun</h2>
+      </div>
+      <div class="pair">
+        {
+          ventures.map((venture) => (
+            <article class="card venture">
+              <span class="hud muted">{venture.label}</span>
+              <h3>{venture.name}</h3>
+              <p class="muted">{venture.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="stack" aria-labelledby="care-title">
+      <div class="section-head">
+        <p class="hud eyebrow">What I care about</p>
+        <h2 id="care-title">Doing right by people because it's right</h2>
+      </div>
+      <ul role="list" class="causes">
+        {
+          causes.map((cause) => (
+            <li style={`border-top-color: var(--rv-${cause.band})`}>
+              <span class="cause-title">{cause.title}</span>
+              <span class="caption">{cause.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="muted">I've also helped lead web design and communications for Pride@Apple.</p>
+    </section>
+
+    <ContactTile />
+  </div>
+</Base>
+
+<style>
+  .page {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 40px 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 112px;
+  }
+  .eyebrow { color: var(--color-hud); }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: var(--type-display-weight);
+    font-size: clamp(34px, 4vw, var(--type-display-size));
+    line-height: 1.05;
+    letter-spacing: var(--type-display-tracking);
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: var(--type-h2-weight);
+    font-size: var(--type-h2-size);
+    line-height: var(--type-h2-line);
+  }
+  h3 { font-size: var(--type-h3-size); line-height: var(--type-h3-line); }
+  .lede { font-size: var(--type-lede-size); line-height: var(--type-lede-line); text-wrap: pretty; }
+
+  /* Intro: bio and loadout on the left, the at-a-glance card on the right. */
+  .intro { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px 24px; align-items: start; }
+  .intro-copy { grid-column: span 7; display: flex; flex-direction: column; gap: 24px; }
+  .intro-side { grid-column: 9 / span 4; display: flex; flex-direction: column; gap: 40px; }
+
+  .loadout { display: flex; flex-direction: column; gap: 12px; padding-top: 16px; }
+  .loadout dl { margin: 0; border-bottom: 1px solid var(--color-hairline); }
+  .kit-row {
+    display: grid;
+    grid-template-columns: 176px minmax(0, 1fr);
+    gap: 4px 20px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .kit-row dt { display: flex; align-items: center; gap: 10px; color: var(--color-ink-muted); line-height: 20px; }
+  .kit-row dd { margin: 0; font-size: 15px; line-height: 24px; }
+  .square { flex: none; width: 10px; height: 10px; border-radius: 2px; }
+
+  /* Headshot in the Ryvanse webcam frame, shown once site.headshot is set. */
+  .portrait { position: relative; margin: 0 0 12px; }
+  .portrait img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-md);
+    box-shadow: 4px 4px 0 0 var(--color-pop);
+  }
+  .portrait figcaption {
+    position: absolute;
+    left: 20px;
+    bottom: -12px;
+    padding: 6px 10px;
+    background: var(--rv-lime);
+    color: var(--rv-void);
+    border-radius: var(--radius-sm);
+  }
+
+  .glance {
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  .glance dl { margin: 0; display: flex; flex-direction: column; gap: 16px; }
+  .glance dl > div { display: flex; flex-direction: column; gap: 2px; }
+  .glance dt { color: var(--color-hud); }
+  .glance dd { margin: 0; }
+  .glance .strong { font-weight: 700; }
+  .glance-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+  /* The path so far */
+  .split { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px 24px; align-items: start; }
+  .split-head { grid-column: span 4; display: flex; flex-direction: column; gap: 16px; }
+  .timeline { grid-column: 6 / span 7; margin: 0; }
+  .timeline li { display: grid; grid-template-columns: 72px 10px minmax(0, 1fr); gap: 0 20px; padding-bottom: 28px; position: relative; }
+  .timeline li:last-child { padding-bottom: 0; }
+  .year { color: var(--color-hud); line-height: 26px; }
+  .dot { width: 10px; height: 10px; margin-top: 8px; border-radius: 2px; background: var(--color-ink-muted); }
+  .dot.serverizz { background: var(--color-hud); }
+  /* The rail runs from below each dot to the next entry. */
+  .timeline li:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: calc(72px + 20px + 4px);
+    top: 24px;
+    bottom: 6px;
+    width: 2px;
+    background: var(--color-hairline);
+  }
+  .entry { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .entry p { margin: 0; }
+  .entry-title { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-weight: 700; }
+  .now { color: var(--color-success); border-color: currentColor; padding: 2px 6px; font-size: 11px; line-height: 14px; }
+
+  /* How I work, Also mine, What I care about */
+  .stack { display: flex; flex-direction: column; gap: 32px; }
+  .section-head { display: flex; flex-direction: column; gap: 16px; max-width: 760px; }
+  .card {
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: var(--space-24);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .principles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24); }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-24); }
+  .venture { padding: 32px; gap: var(--space-16); }
+  .venture h3 { font-family: var(--font-display); font-weight: 700; font-size: var(--type-title-size); line-height: var(--type-title-line); }
+  .causes { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-24); }
+  .causes li { border-top: 2px solid; padding-top: var(--space-16); display: flex; flex-direction: column; gap: 6px; }
+  .cause-title { font-weight: 700; }
+
+  @media (max-width: 1100px) {
+    .intro-copy { grid-column: span 12; }
+    .intro-side { grid-column: span 12; max-width: 520px; }
+    .split-head, .timeline { grid-column: span 12; }
+    .principles, .causes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
+  @media (max-width: 680px) {
+    .page { padding: var(--space-16) var(--space-16) 64px; gap: 80px; }
+    .kit-row { grid-template-columns: minmax(0, 1fr); }
+    .timeline li { grid-template-columns: 48px 10px minmax(0, 1fr); gap: 0 14px; }
+    .timeline li:not(:last-child)::after { left: calc(48px + 14px + 4px); }
+    .principles, .pair, .causes { grid-template-columns: minmax(0, 1fr); }
+    .venture { padding: var(--space-24); }
+  }
+</style>
