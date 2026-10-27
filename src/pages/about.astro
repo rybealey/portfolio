@@ -59,7 +59,7 @@ const headshot = Object.values(headshots)[0]?.default;
           headshot && (
             <figure class="portrait">
               <img
-                src={headshotUrl(HEADSHOT_WIDTHS[HEADSHOT_WIDTHS.length - 1])}
+                src={headshotUrl(Math.max(...HEADSHOT_WIDTHS))}
                 srcset={HEADSHOT_WIDTHS.map((width) => `${headshotUrl(width)} ${width}w`).join(', ')}
                 sizes="(max-width: 1100px) min(520px, calc(100vw - 32px)), 400px"
                 width={headshot.width}
