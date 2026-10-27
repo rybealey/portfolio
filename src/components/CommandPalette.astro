@@ -3,7 +3,12 @@ import { getCaseStudies } from '../lib/work';
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-const work = await getCaseStudies();
+// The palette is on every page, including ones that don't need the
+// database, so a database outage drops the case studies instead of the page.
+const work = await getCaseStudies().catch((error: unknown) => {
+  console.error('Command palette: case studies unavailable', error);
+  return [];
+});
 
 type Item = { label: string; meta: string; href?: string; action?: 'theme' | 'reset-layout' };
 

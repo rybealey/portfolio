@@ -78,15 +78,15 @@ npm run dev             # http://localhost:4321
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Tokens, then the Astro dev server on http://localhost:4321 |
-| `npm run build` | Tokens, `astro check`, then the production build into `dist/` |
+| `npm run build` | Tokens, then the production build into `dist/`. Needs no dev dependencies, so it runs on the server too |
 | `npm run preview` | Runs the built site through `app.cjs`, exactly as Passenger will |
-| `npm run check` | Type-checks `.astro` and `.ts` files |
+| `npm run check` | Type-checks `.astro` and `.ts` files (run it before committing) |
 | `npm run db:up` | Starts the local MariaDB in Docker and waits until it's healthy |
 | `npm run db:migrate` | Applies new files in `db/migrations/`, once each |
 | `npm run db:seed` | Loads `db/seed/`; safe to rerun, never deletes |
 | `npm run db:previews` | Fetches link previews for notes that don't have one yet (`-- --refresh` refetches all) |
 | `npm run spotify:auth` | One-time Spotify login that saves a refresh token to `.env` |
-| `npm run package` | Build, then bundle `release/ryanbealey.tar.gz` for cPanel |
+| `npm run package` | Type-check, build, then bundle `release/ryanbealey.tar.gz` for cPanel |
 
 `node scripts/render-banner.mjs` redraws this README's banner.
 

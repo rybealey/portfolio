@@ -14,7 +14,9 @@ export default defineConfig({
   redirects: {
     '/work': { status: 301, destination: '/' },
   },
-  adapter: node({ mode: 'standalone' }),
+  // Pages are built whole before sending, so a failure mid-page returns a
+  // real 500 instead of a 200 that stops halfway.
+  adapter: node({ mode: 'standalone', experimentalDisableStreaming: true }),
   env: {
     schema: {
       SPOTIFY_CLIENT_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
