@@ -15,6 +15,15 @@ const resumeIsPdf = Boolean(site.resumePdf);
 // With no file, the at-a-glance card stands alone.
 const headshots = import.meta.glob<{ default: ImageMetadata }>('../assets/headshot.{jpg,jpeg,png,webp,avif}', { eager: true });
 const headshot = Object.values(headshots)[0]?.default;
+const portrait = headshot && {
+  src: headshotUrl(Math.max(...HEADSHOT_WIDTHS)),
+  srcset: HEADSHOT_WIDTHS.map((width) => `${headshotUrl(width)} ${width}w`).join(', '),
+  sizes: '(max-width: 1100px) min(520px, calc(100vw - 32px)), 400px',
+  width: headshot.width,
+  height: headshot.height,
+  loading: 'eager' as const,
+  decoding: 'async' as const,
+};
 ---
 
 <Base
@@ -57,18 +66,12 @@ const headshot = Object.values(headshots)[0]?.default;
       <aside class="intro-side" aria-label="At a glance">
         {
           headshot && (
-            <figure class="portrait">
-              <img
-                src={headshotUrl(Math.max(...HEADSHOT_WIDTHS))}
-                srcset={HEADSHOT_WIDTHS.map((width) => `${headshotUrl(width)} ${width}w`).join(', ')}
-                sizes="(max-width: 1100px) min(520px, calc(100vw - 32px)), 400px"
-                width={headshot.width}
-                height={headshot.height}
-                alt={`Portrait of ${site.name}`}
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-              />
+            <figure class="portrait" data-portrait>
+              <div class="frame">
+                <img class="mono" {...portrait} alt={`Portrait of ${site.name}`} fetchpriority="high" />
+                {/* The same file in color, shown through a spotlight that follows the pointer. */}
+                <img class="color" {...portrait} alt="" aria-hidden="true" />
+              </div>
               <figcaption class="hud">
                 {site.name} · {site.location}
               </figcaption>
@@ -246,17 +249,43 @@ const headshot = Object.values(headshots)[0]?.default;
   .kit-row dd { margin: 0; font-size: 15px; line-height: 24px; }
   .square { flex: none; width: 10px; height: 10px; border-radius: 2px; }
 
-  /* Headshot in the Ryvanse webcam frame, shown once src/assets/headshot.* exists. */
+  /* Headshot in the Ryvanse webcam frame, shown once src/assets/headshot.* exists.
+     Grayscale under fine scanlines; color shows through a soft spotlight that
+     follows the pointer, or where a finger taps. */
   .portrait { position: relative; margin: 0 0 12px; }
-  .portrait img {
-    display: block;
-    width: 100%;
-    height: auto;
+  .frame {
+    position: relative;
     aspect-ratio: 4 / 5;
-    object-fit: cover;
+    overflow: hidden;
     border: 2px solid var(--color-ink);
     border-radius: var(--radius-md);
     box-shadow: 4px 4px 0 0 var(--color-pop);
+    isolation: isolate;
+  }
+  .frame img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; object-fit: cover; }
+  .mono { filter: grayscale(1) contrast(1.08); }
+  .color {
+    -webkit-mask-image: radial-gradient(circle var(--spot) at var(--spot-x, 50%) var(--spot-y, 40%), #000 55%, transparent 100%);
+    mask-image: radial-gradient(circle var(--spot) at var(--spot-x, 50%) var(--spot-y, 40%), #000 55%, transparent 100%);
+    transition: --spot 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .portrait.is-lit .color { --spot: 150px; }
+  .frame::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background: repeating-linear-gradient(to bottom, rgb(0 0 0 / 0.14) 0 1px, transparent 1px 3px);
+    mix-blend-mode: multiply;
+  }
+  @property --spot {
+    syntax: '<length>';
+    inherits: true;
+    initial-value: 0px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .color { transition: none; }
   }
   .portrait figcaption {
     position: absolute;
@@ -344,3 +373,36 @@ const headshot = Object.values(headshots)[0]?.default;
     .venture { padding: var(--space-24); }
   }
 </style>
+
+<script>
+  // The portrait's color spotlight: follows a mouse while it's over the
+  // photo; a tap lights it where the finger lands, briefly.
+  for (const portrait of document.querySelectorAll<HTMLElement>('[data-portrait]')) {
+    const frame = portrait.querySelector<HTMLElement>('.frame')!;
+    let fade: number | undefined;
+    const aim = (event: PointerEvent) => {
+      const box = frame.getBoundingClientRect();
+      portrait.style.setProperty('--spot-x', `${event.clientX - box.left}px`);
+      portrait.style.setProperty('--spot-y', `${event.clientY - box.top}px`);
+    };
+    const light = (on: boolean) => portrait.classList.toggle('is-lit', on);
+    frame.addEventListener('pointerenter', (event) => {
+      if (event.pointerType !== 'mouse') return;
+      aim(event);
+      light(true);
+    });
+    frame.addEventListener('pointermove', (event) => {
+      if (event.pointerType === 'mouse') aim(event);
+    });
+    frame.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'mouse') light(false);
+    });
+    frame.addEventListener('pointerdown', (event) => {
+      if (event.pointerType === 'mouse') return;
+      aim(event);
+      light(true);
+      clearTimeout(fade);
+      fade = window.setTimeout(() => light(false), 1400);
+    });
+  }
+</script>
