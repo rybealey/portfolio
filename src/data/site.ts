@@ -12,7 +12,6 @@ export const site = {
   // Set once known. Null hides the link rather than shipping a placeholder.
   github: null as string | null,
   resumePdf: null as string | null,
-  spotifyProfile: 'https://open.spotify.com',
 };
 
 export const nav = [

@@ -10,7 +10,6 @@ export type NowPlaying =
       artist: string;
       album: string;
       art: string | null;
-      url: string;
       /** ISO time; when the recent track finished, or now while playing. */
       at: string;
     }
@@ -48,7 +47,6 @@ interface SpotifyTrack {
   name: string;
   artists: { name: string }[];
   album: { name: string; images: { url: string; width: number }[] };
-  external_urls: { spotify: string };
 }
 
 const toTrack = (track: SpotifyTrack, state: 'playing' | 'recent', at: string): NowPlaying => ({
@@ -58,7 +56,6 @@ const toTrack = (track: SpotifyTrack, state: 'playing' | 'recent', at: string): 
   album: track.album.name,
   // Images come largest first; the tile is at most ~300px wide at 2x.
   art: track.album.images.find((i) => i.width <= 640)?.url ?? track.album.images[0]?.url ?? null,
-  url: track.external_urls.spotify,
   at,
 });
 

@@ -2,8 +2,9 @@
 // colored by Shiki with CSS variables, so they follow the light and dark
 // themes (see .astro-code in global.css). Raw HTML in a body is shown as
 // text, never injected.
-import { Marked, type Tokens } from 'marked';
+import { Marked, Renderer, type Tokens } from 'marked';
 import { codeToHtml, createCssVariablesTheme } from 'shiki';
+import { isExternal } from './links';
 
 const theme = createCssVariablesTheme({ name: 'css-variables', variablePrefix: '--astro-code-', fontStyle: true });
 
@@ -30,6 +31,11 @@ const marked = new Marked({
     },
     html(token) {
       return escape(token.text);
+    },
+    // Links to other sites open in a new tab (see src/lib/links.ts).
+    link(token) {
+      const html = Renderer.prototype.link.call(this, token);
+      return isExternal(token.href) ? html.replace(/^<a /, '<a target="_blank" rel="noopener noreferrer" ') : html;
     },
   },
 });

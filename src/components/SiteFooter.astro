@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import { externalAttrs } from '../lib/links';
 
 const links = [
   { label: 'Email', href: `mailto:${site.email}` },
@@ -15,7 +16,7 @@ const links = [
     <span class="caption">{site.name} · {site.location}</span>
     <nav aria-label="Contact">
       <ul role="list">
-        {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        {links.map((link) => <li><a href={link.href} {...externalAttrs(link.href)}>{link.label}</a></li>)}
       </ul>
     </nav>
   </div>

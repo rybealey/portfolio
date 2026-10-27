@@ -1,5 +1,6 @@
 ---
 import { site } from '../../data/site';
+import { externalAttrs } from '../../lib/links';
 import type { Month } from '../../lib/notes';
 
 interface Props {
@@ -28,7 +29,7 @@ const { months, currentMonth } = Astro.props;
         </svg>
         RSS feed
       </a>
-      <a class="btn btn-ghost btn-sm" href={site.linkedin}>LinkedIn</a>
+      <a class="btn btn-ghost btn-sm" href={site.linkedin} {...externalAttrs(site.linkedin)}>LinkedIn</a>
     </div>
   </div>
 
