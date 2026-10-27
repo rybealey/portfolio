@@ -31,7 +31,7 @@ npm run dev
 
 1. Create an app at https://developer.spotify.com/dashboard. Add the redirect URI `http://127.0.0.1:8888/callback` and pick Web API.
 2. Copy `.env.example` to `.env` and fill in `SPOTIFY_CLIENT_ID` and `SPOTIFY_CLIENT_SECRET`.
-3. Run `npm run spotify:auth`, open the link, approve, and paste the printed `SPOTIFY_REFRESH_TOKEN` into `.env`.
+3. Run `npm run spotify:auth` and approve access in the browser tab it opens. The script writes `SPOTIFY_REFRESH_TOKEN` into `.env` for you.
 
 Without these values the tile shows "Quiet right now" instead of failing.
 

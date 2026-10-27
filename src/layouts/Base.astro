@@ -37,6 +37,10 @@ const canonical = new URL(Astro.url.pathname, site.url);
       try {
         const theme = localStorage.getItem('rb:theme');
         if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+        if (!sessionStorage.getItem('rb:intro')) {
+          sessionStorage.setItem('rb:intro', '1');
+          document.documentElement.dataset.intro = '';
+        }
       } catch {}
     </script>
     <slot name="head" />

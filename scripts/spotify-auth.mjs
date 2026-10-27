@@ -4,10 +4,12 @@
 //    - Redirect URI: http://127.0.0.1:8888/callback (Spotify no longer accepts "localhost")
 //    - API: Web API
 // 2. Put SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET in .env
-// 3. Run `npm run spotify:auth`, open the printed link, approve.
-// 4. Copy the printed SPOTIFY_REFRESH_TOKEN into .env and into cPanel.
+// 3. Run `npm run spotify:auth` and approve access in the browser tab it opens.
+// 4. The refresh token is written to .env. Copy it into cPanel when deploying.
 import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
+import { execFile } from 'node:child_process';
+import { readFile, writeFile } from 'node:fs/promises';
 
 const { SPOTIFY_CLIENT_ID: id, SPOTIFY_CLIENT_SECRET: secret } = process.env;
 if (!id || !secret) {
@@ -19,6 +21,18 @@ const PORT = 8888;
 const REDIRECT = `http://127.0.0.1:${PORT}/callback`;
 const SCOPES = ['user-read-currently-playing', 'user-read-recently-played'];
 const state = randomBytes(16).toString('hex');
+const envFile = new URL('../.env', import.meta.url);
+
+// Writes the token into .env rather than printing it, so it never lands in
+// terminal scrollback or logs.
+async function saveRefreshToken(token) {
+  const current = await readFile(envFile, 'utf8').catch(() => '');
+  const line = `SPOTIFY_REFRESH_TOKEN=${token}`;
+  const next = /^SPOTIFY_REFRESH_TOKEN=.*$/m.test(current)
+    ? current.replace(/^SPOTIFY_REFRESH_TOKEN=.*$/m, () => line)
+    : `${current}${current && !current.endsWith('\n') ? '\n' : ''}${line}\n`;
+  await writeFile(envFile, next, { mode: 0o600 });
+}
 
 const authorize = new URL('https://accounts.spotify.com/authorize');
 authorize.search = new URLSearchParams({
@@ -53,15 +67,17 @@ const server = createServer(async (req, res) => {
   });
   const json = await tokenRes.json();
   if (!tokenRes.ok || !json.refresh_token) {
-    console.error(json);
+    console.error(`Token exchange failed (${tokenRes.status}): ${json.error_description ?? json.error ?? 'unknown error'}`);
     return finish(500, 'Token exchange failed. Check the terminal.');
   }
-  console.log('\nAdd this to .env and to cPanel > Setup Node.js App > Environment variables:\n');
-  console.log(`SPOTIFY_REFRESH_TOKEN=${json.refresh_token}\n`);
-  finish(200, 'Done. The refresh token is in your terminal; you can close this tab.');
+  await saveRefreshToken(json.refresh_token);
+  console.log('\nSaved SPOTIFY_REFRESH_TOKEN to .env.');
+  console.log('When deploying, copy it into cPanel > Setup Node.js App > Environment variables.\n');
+  finish(200, 'Done. The refresh token is saved in .env; you can close this tab.');
 });
 
 server.listen(PORT, '127.0.0.1', () => {
-  console.log('Open this link and approve access:\n');
+  console.log('Approve access in the browser. If no tab opened, use this link:\n');
   console.log(authorize.toString());
+  if (process.platform === 'darwin') execFile('open', [authorize.toString()]);
 });
