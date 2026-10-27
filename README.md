@@ -273,4 +273,5 @@ The MVP is planned to launch on **Nov 9, 2026**.
 - [x] Publishing API for the iOS and macOS apps
 - [ ] Full case-study write-ups, plus the Resume and Colophon pages
 - [ ] GTM and GA4 (tiles already carry `data-ga-event` attributes for `resume_download` and `contact_click`)
-- [ ] GitHub handle and resume PDF in `src/data/site.ts`
+- [x] GitHub profile in `src/data/site.ts`
+- [ ] Resume PDF in `src/data/site.ts`

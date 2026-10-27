@@ -10,7 +10,7 @@ export const site = {
   email: 'hello@ryanbealey.com',
   linkedin: 'https://www.linkedin.com/in/ryanbealey',
   // Set once known. Null hides the link rather than shipping a placeholder.
-  github: null as string | null,
+  github: 'https://github.com/rybealey' as string | null,
   resumePdf: null as string | null,
 };
 
