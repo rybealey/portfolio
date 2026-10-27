@@ -1,0 +1,369 @@
+---
+// The contact form, in a modal on every page (Base.astro). Any mailto: link
+// on the site, and the ⌘K palette's "Email Ry", opens it instead of a mail
+// app; the links keep their mailto: so they still work without JavaScript.
+// The modal itself never shows Ry's address. It posts to /api/contact.
+// Design: the contact modal canvas in the vault (portfolio-contact-canvas).
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { externalAttrs } from '../lib/links';
+
+const topics = [
+  { id: 'role', label: 'Hiring for a role' },
+  { id: 'project', label: 'A project' },
+  { id: 'other', label: 'Something else' },
+];
+---
+
+<dialog class="contact" aria-labelledby="contact-title" data-contact>
+  <div class="spectrum-bar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span></div>
+  <div class="handle" aria-hidden="true"></div>
+  <div class="inner">
+    <div class="head">
+      <div class="head-copy">
+        <p class="hud eyebrow">Contact · reply by email</p>
+        <h2 id="contact-title">Say hello</h2>
+        <p class="sub">Tell me what you're working on. I read everything and reply by email.</p>
+      </div>
+      <button type="button" class="icon-btn close" aria-label="Close" data-contact-close><Icon name="close" /></button>
+    </div>
+
+    <form class="form" novalidate data-contact-form>
+      <div class="alert" role="alert" hidden data-contact-failed>
+        <Icon name="alert" size={20} />
+        <p><strong>That didn't send.</strong> <span data-contact-failed-text>Your message is still here. Try again in a minute, or message me on LinkedIn instead.</span></p>
+      </div>
+
+      <div class="pair">
+        <div class="field">
+          <label for="contact-name">Name</label>
+          <input id="contact-name" name="name" type="text" autocomplete="name" placeholder="Your name" maxlength="120" aria-describedby="contact-name-error" required />
+          <p class="error" id="contact-name-error" hidden></p>
+        </div>
+        <div class="field">
+          <label for="contact-email">Email</label>
+          <input id="contact-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" maxlength="254" aria-describedby="contact-email-error" required />
+          <p class="error" id="contact-email-error" hidden></p>
+        </div>
+      </div>
+
+      <fieldset class="topics">
+        <legend>What's it about? <span class="optional">Optional</span></legend>
+        <div class="topic-list">
+          {topics.map((topic) => <button type="button" class="topic" aria-pressed="false" data-topic={topic.id}>{topic.label}</button>)}
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <div class="label-row">
+          <label for="contact-message">Message</label>
+          <span class="hud count" data-contact-count>0 / 2000</span>
+        </div>
+        <textarea id="contact-message" name="message" rows="5" maxlength="2000" placeholder="A few lines on the role, the project or the problem you're solving." aria-describedby="contact-message-error" required></textarea>
+        <p class="error" id="contact-message-error" hidden></p>
+      </div>
+
+      {/* Hidden from people; bots that fill every field give themselves away. */}
+      <div class="trap" aria-hidden="true">
+        <label for="contact-website">Website</label>
+        <input id="contact-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <div class="foot">
+        <div class="alt">
+          <span>Rather not use a form?</span>
+          <a href={site.linkedin} {...externalAttrs(site.linkedin)}>Message me on LinkedIn <Icon name="external" size={14} /></a>
+        </div>
+        <button type="submit" class="btn btn-primary send" data-contact-send>
+          <Icon name="arrow" />
+          <span data-contact-send-label>Send message</span>
+        </button>
+      </div>
+      <p class="fine">I only use your details to reply. No mailing list.</p>
+    </form>
+
+    <div class="sent" role="status" hidden data-contact-sent>
+      <span class="hud badge"><Icon name="check" size={16} /> Sent</span>
+      <h3 tabindex="-1" data-contact-sent-title>Thanks.</h3>
+      <p>Your message is with me. I'll reply to <strong data-contact-sent-email></strong>.</p>
+      <button type="button" class="btn btn-ghost btn-sm" data-contact-close>Back to the site</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>('[data-contact]');
+  if (dialog) {
+    const $ = <T extends Element>(sel: string) => dialog.querySelector<T>(sel)!;
+    const form = $<HTMLFormElement>('[data-contact-form]');
+    const fields = {
+      name: $<HTMLInputElement>('#contact-name'),
+      email: $<HTMLInputElement>('#contact-email'),
+      message: $<HTMLTextAreaElement>('#contact-message'),
+    };
+    const website = $<HTMLInputElement>('#contact-website');
+    const topics = [...dialog.querySelectorAll<HTMLButtonElement>('[data-topic]')];
+    const count = $('[data-contact-count]');
+    const failed = $<HTMLElement>('[data-contact-failed]');
+    const failedText = $('[data-contact-failed-text]');
+    const send = $<HTMLButtonElement>('[data-contact-send]');
+    const sendLabel = $('[data-contact-send-label]');
+    const sent = $<HTMLElement>('[data-contact-sent]');
+    const DEFAULT_FAILED = failedText.textContent ?? '';
+    type Field = keyof typeof fields;
+
+    let opener: HTMLElement | null = null;
+    let openedAt = 0;
+    let busy = false;
+
+    const setError = (field: Field, message: string | undefined) => {
+      const input = fields[field];
+      const error = $<HTMLElement>(`#contact-${field}-error`);
+      error.textContent = message ?? '';
+      error.hidden = !message;
+      input.toggleAttribute('aria-invalid', Boolean(message));
+    };
+
+    const validate = () => {
+      const errors: Partial<Record<Field, string>> = {};
+      if (!fields.name.value.trim()) errors.name = 'Add your name so I know who I am writing back to.';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.value.trim())) errors.email = 'Enter an email address like name@example.com.';
+      if (fields.message.value.trim().length < 10) errors.message = 'Add a few words so I know what this is about.';
+      return errors;
+    };
+
+    const showErrors = (errors: Partial<Record<Field, string>>) => {
+      (Object.keys(fields) as Field[]).forEach((field) => setError(field, errors[field]));
+      const first = (Object.keys(fields) as Field[]).find((field) => errors[field]);
+      if (first) fields[first].focus();
+    };
+
+    const setBusy = (on: boolean) => {
+      busy = on;
+      form.setAttribute('aria-busy', String(on));
+      for (const el of [...Object.values(fields), ...topics, send]) el.disabled = on;
+      sendLabel.textContent = on ? 'Sending…' : failed.hidden ? 'Send message' : 'Try again';
+    };
+
+    const reset = () => {
+      form.reset();
+      topics.forEach((topic) => topic.setAttribute('aria-pressed', 'false'));
+      (Object.keys(fields) as Field[]).forEach((field) => setError(field, undefined));
+      failed.hidden = true;
+      failedText.textContent = DEFAULT_FAILED;
+      sent.hidden = true;
+      form.hidden = false;
+      count.textContent = '0 / 2000';
+      setBusy(false);
+    };
+
+    const open = (from: HTMLElement | null) => {
+      if (dialog.open) return;
+      if (!sent.hidden) reset();
+      opener = from;
+      openedAt = performance.now();
+      dialog.showModal();
+      fields.name.focus();
+    };
+
+    const close = () => dialog.close();
+
+    dialog.addEventListener('close', () => {
+      opener?.focus();
+      opener = null;
+    });
+    // A click on the backdrop lands on the dialog itself.
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+    for (const button of dialog.querySelectorAll('[data-contact-close]')) button.addEventListener('click', close);
+
+    for (const topic of topics) {
+      topic.addEventListener('click', () => {
+        const on = topic.getAttribute('aria-pressed') !== 'true';
+        topics.forEach((other) => other.setAttribute('aria-pressed', String(other === topic && on)));
+      });
+    }
+    fields.message.addEventListener('input', () => (count.textContent = `${fields.message.value.length} / 2000`));
+    (Object.keys(fields) as Field[]).forEach((field) => fields[field].addEventListener('input', () => setError(field, undefined)));
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (busy) return;
+      const errors = validate();
+      if (Object.keys(errors).length) return showErrors(errors);
+
+      setBusy(true);
+      const topic = topics.find((t) => t.getAttribute('aria-pressed') === 'true')?.dataset.topic ?? null;
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            name: fields.name.value,
+            email: fields.email.value,
+            topic,
+            message: fields.message.value,
+            website: website.value,
+            elapsed: Math.round(performance.now() - openedAt),
+          }),
+        });
+        const body = await res.json().catch(() => ({}));
+        if (res.ok) {
+          const first = fields.name.value.trim().split(/\s+/)[0];
+          $('[data-contact-sent-title]').textContent = first ? `Thanks, ${first}.` : 'Thanks.';
+          $('[data-contact-sent-email]').textContent = fields.email.value.trim();
+          form.hidden = true;
+          sent.hidden = false;
+          $<HTMLElement>('[data-contact-sent-title]').focus();
+          busy = false;
+          return;
+        }
+        if (res.status === 422 && body?.error?.fields) {
+          setBusy(false);
+          return showErrors(body.error.fields);
+        }
+        failedText.textContent = res.status === 429 && body?.error?.message ? body.error.message : DEFAULT_FAILED;
+      } catch {
+        failedText.textContent = DEFAULT_FAILED;
+      }
+      failed.hidden = false;
+      setBusy(false);
+    });
+
+    // Every mailto: link opens the form instead of a mail app.
+    document.addEventListener('click', (event) => {
+      if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const link = (event.target as Element).closest<HTMLAnchorElement>('a[href^="mailto:"]');
+      if (!link) return;
+      event.preventDefault();
+      open(link);
+    });
+    // The ⌘K palette and anything else can ask for it too.
+    document.addEventListener('contact:open', () => open(document.activeElement as HTMLElement | null));
+  }
+</script>
+
+<style>
+  .contact {
+    box-sizing: border-box;
+    width: min(560px, calc(100vw - 32px));
+    max-height: calc(100dvh - 48px);
+    padding: 0;
+    overflow: auto;
+    background: var(--color-panel);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-md);
+    box-shadow: 6px 6px 0 0 var(--color-pop);
+  }
+  .contact::backdrop { background: rgb(13 7 24 / 0.82); }
+  :global([data-theme='light']) .contact::backdrop { background: rgb(20 12 34 / 0.55); }
+  .contact[open] { animation: contact-in 180ms cubic-bezier(0.3, 1.3, 0.6, 1); }
+  @keyframes contact-in { from { opacity: 0; transform: translateY(8px) scale(0.98); } }
+  :global(html:has(dialog.contact[open])) { overflow: hidden; }
+
+  .spectrum-bar { display: flex; height: 8px; }
+  .spectrum-bar span { flex: 1; }
+  .spectrum-bar span:nth-child(1) { background: var(--rv-pink); }
+  .spectrum-bar span:nth-child(2) { background: var(--rv-tangerine); }
+  .spectrum-bar span:nth-child(3) { background: var(--rv-lime); }
+  .spectrum-bar span:nth-child(4) { background: var(--rv-cyan); }
+  .spectrum-bar span:nth-child(5) { background: var(--rv-violet); }
+  .handle { display: none; }
+
+  .inner { padding: 28px 32px 32px; display: flex; flex-direction: column; gap: 24px; }
+  .head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+  .head-copy { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .eyebrow { color: var(--color-hud); }
+  h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; line-height: 34px; letter-spacing: -0.01em; }
+  .sub { color: var(--color-ink-muted); font-size: 16px; line-height: 24px; }
+  .close { flex: none; padding: 0; }
+
+  .form { display: flex; flex-direction: column; gap: 20px; }
+  .form[hidden], .sent[hidden], .alert[hidden], .error[hidden] { display: none; }
+  .pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  label, legend { font-weight: 700; font-size: 15px; line-height: 20px; }
+  .label-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .count { color: var(--color-ink-muted); letter-spacing: 0.08em; }
+  input, textarea {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 14px;
+    font: inherit;
+    font-size: 16px;
+    color: var(--color-ink);
+    background: var(--color-bg);
+    border: 2px solid var(--color-ink-muted);
+    border-radius: var(--radius-sm);
+  }
+  :global([data-theme='light']) .contact input, :global([data-theme='light']) .contact textarea { background: var(--color-panel); }
+  input { height: 48px; }
+  textarea { padding: 12px 14px; line-height: 24px; resize: vertical; min-height: 120px; }
+  input::placeholder, textarea::placeholder { color: var(--color-ink-muted); opacity: 0.8; }
+  input:focus, textarea:focus { outline: none; border-color: var(--color-focus); }
+  input[aria-invalid], textarea[aria-invalid] { border-color: var(--color-warning); }
+  input:disabled, textarea:disabled { opacity: 0.6; }
+  .error { font-size: 14px; line-height: 20px; color: var(--color-warning); }
+
+  .topics { margin: 0; padding: 0; border: 0; min-width: 0; }
+  legend { padding: 0; margin-bottom: 8px; }
+  .optional { font-weight: 400; color: var(--color-ink-muted); }
+  .topic-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .topic {
+    min-height: 44px;
+    padding: 0 16px;
+    border-radius: var(--radius-pill);
+    background: transparent;
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink-muted);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .topic[aria-pressed='true'] { background: var(--rv-pink); color: var(--rv-void); border-color: var(--rv-pink); box-shadow: 3px 3px 0 0 var(--color-pop-on-pink); }
+  .topic:disabled { opacity: 0.6; cursor: default; }
+
+  .alert { display: flex; gap: 12px; align-items: flex-start; padding: 14px 16px; border: 2px solid var(--color-warning); border-radius: var(--radius-sm); background: var(--color-panel-sunk); }
+  .alert :global(svg) { flex: none; margin-top: 1px; color: var(--color-warning); }
+  .alert p { font-size: 15px; line-height: 22px; }
+
+  .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+
+  .foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 4px; }
+  .alt { display: flex; flex-direction: column; gap: 2px; font-size: 14px; line-height: 20px; color: var(--color-ink-muted); }
+  .alt a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; color: var(--color-link); font-size: 15px; font-weight: 700; text-underline-offset: 3px; }
+  .send { border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+  .send:disabled { opacity: 0.75; cursor: progress; }
+  .fine { font-size: 13px; line-height: 18px; color: var(--color-ink-muted); }
+
+  .sent { display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 8px 0 4px; }
+  .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: var(--radius-sm); background: var(--color-success); color: var(--color-bg); }
+  .sent h3 { font-family: var(--font-display); font-weight: 700; font-size: 24px; line-height: 30px; outline: none; }
+  .sent p { color: var(--color-ink-muted); }
+  .sent strong { color: var(--color-ink); }
+
+  /* On a phone it's a sheet from the bottom edge. */
+  @media (max-width: 680px) {
+    .contact {
+      width: 100%;
+      max-width: 100%;
+      max-height: calc(100dvh - 24px);
+      margin: auto 0 0;
+      border-width: 2px 0 0;
+      border-radius: 16px 16px 0 0;
+      box-shadow: none;
+    }
+    .contact[open] { animation: contact-up 220ms cubic-bezier(0.3, 1.1, 0.6, 1); }
+    @keyframes contact-up { from { transform: translateY(40px); opacity: 0; } }
+    .handle { display: block; width: 40px; height: 4px; margin: 10px auto 0; border-radius: var(--radius-pill); background: var(--color-hairline); }
+    .inner { padding: 20px 20px 28px; }
+    .pair { grid-template-columns: minmax(0, 1fr); }
+    textarea { min-height: 100px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .contact[open] { animation: none; }
+  }
+</style>

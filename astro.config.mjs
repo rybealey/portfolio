@@ -42,6 +42,11 @@ export default defineConfig({
       DB_NAME: envField.string({ context: 'server', access: 'secret' }),
       DB_USER: envField.string({ context: 'server', access: 'secret' }),
       DB_PASSWORD: envField.string({ context: 'server', access: 'secret' }),
+      // The contact form (src/lib/contact.ts). Messages are always saved;
+      // with these set they're also emailed through SMTP2Go's API.
+      SMTP2GO_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CONTACT_TO: envField.string({ context: 'server', access: 'secret', optional: true }),
+      CONTACT_FROM: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
 });

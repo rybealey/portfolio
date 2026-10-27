@@ -4,6 +4,7 @@ import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Spectrum from '../components/Spectrum.astro';
 import CommandPalette from '../components/CommandPalette.astro';
+import ContactModal from '../components/ContactModal.astro';
 import { site } from '../data/site';
 import { cardFor, cardPath } from '../lib/og';
 
@@ -90,5 +91,6 @@ const imageUrl = shareImage ? new URL(shareImage, site.url).href : undefined;
     </main>
     <SiteFooter />
     <CommandPalette />
+    <ContactModal />
   </body>
 </html>

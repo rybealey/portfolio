@@ -30,6 +30,7 @@
 - [Project structure](#project-structure)
 - [Content and the database](#content-and-the-database)
 - [Publishing API](#publishing-api)
+- [Contact form](#contact-form)
 - [Design system](#design-system)
 - [Spotify setup](#spotify-setup)
 - [Deploy to cPanel](#deploy-to-cpanel)
@@ -111,7 +112,7 @@ npm run dev             # http://localhost:4321
     ├── data/               Site settings and the About page content
     ├── layouts/            Base page shell and the Writing layout
     ├── lib/                Database access, notes, case studies, Markdown, link previews, Spotify, bento logic
-    ├── pages/              Routes, including /api/v1 (publishing), /api/now-playing, /media and /sitemap.xml
+    ├── pages/              Routes, including /api/v1 (publishing), /api/contact, /api/now-playing, /media and /sitemap.xml
     └── styles/             Global CSS and the generated tokens
 ```
 
@@ -126,6 +127,7 @@ Case studies and notes are published from companion iOS and macOS apps (a separa
 | `link_previews` | The unfurled preview for each shared URL, fetched once. |
 | `media` | Images stored once by SHA-256 and served from `/media/<hash>.<ext>` with a year-long cache. |
 | `api_tokens` | One row per device allowed to use the publishing API. Only a hash of each token is kept. |
+| `contact_messages` | Every message sent through the contact form, with its delivery status. The sender's IP is kept only as a salted hash. |
 
 - **Reading.** Pages read through `src/lib/work.ts` and `src/lib/notes.ts`, which hold lists in memory for 30 seconds.
 - **Previews.** The API unfurls a note's link when it's posted. For a link added straight to the database, run `npm run db:previews`.
@@ -201,6 +203,29 @@ Errors come back as `{ "error": { "code", "message", "details"? } }`:
 
 Writes clear the site's 30-second content cache in the process that handled them. Passenger can run more than one process, so another may show the old version for up to 30 seconds.
 
+## Contact form
+
+Every email link on the site opens a contact form in a modal (`src/components/ContactModal.astro`) instead of a mail app: any `mailto:` link, plus "Email Ry" in the ⌘K palette. The links keep their `mailto:` so they still work without JavaScript, but the modal itself never shows Ry's address. The form posts to `/api/contact` (`src/pages/api/contact.ts`, logic in `src/lib/contact.ts`).
+
+- **Saved first.** Every message lands in the `contact_messages` table before anything else, so nothing is lost while email isn't set up or if SMTP2Go is down.
+- **Emailed when configured.** With `SMTP2GO_API_KEY`, `CONTACT_TO` and `CONTACT_FROM` set, each message is also sent through SMTP2Go's API, with the visitor's address as Reply-To. Its row's `status` becomes `sent`, or `failed` with the error. Without them the form still works and messages wait in the table.
+- **Spam.** A hidden field people never see, a check that the form was open for at least 2.5 seconds, a limit of 5 messages per sender per hour and 60 per hour overall, and a same-site Origin check. Spam is saved with status `spam` and answered as if it worked.
+
+### Setting up SMTP2Go
+
+1. In SMTP2Go, verify a sender domain or address for ryanbealey.com, and create an API key that can send email.
+2. In Setup Node.js App, add the environment variables, then restart the app:
+   - `SMTP2GO_API_KEY`: the key
+   - `CONTACT_TO`: where messages go, e.g. Ry's inbox. It's never sent to the browser.
+   - `CONTACT_FROM`: the verified sender, e.g. `ryanbealey.com <contact@ryanbealey.com>`
+3. Send a test message from the site and check its row: `SELECT id, status, error FROM contact_messages ORDER BY id DESC LIMIT 5;`
+
+To read messages that arrived before email was set up, or any that failed to send:
+
+```sql
+SELECT id, created_at, name, email, topic, message FROM contact_messages WHERE status IN ('received', 'failed') ORDER BY id DESC;
+```
+
 ## Design system
 
 The site uses the Ryvanse design system in a quieter "work" register. `design/tokens/ryvanse.tokens.json` is a copy of its tokens, and `ry-bealey.tokens.json` derives the portfolio's semantic colors for light and dark plus its long-form type. `scripts/build-tokens.mjs` turns both into the CSS custom properties in `src/styles/tokens.css`. Change the token files, not the generated CSS.
@@ -228,6 +253,7 @@ The site runs as a Passenger app from **Setup Node.js App**, straight from cPane
    - Application startup file: `app.cjs`
    - Passenger log file: `logs/portfolio-passenger.log`, so app errors land somewhere the account can read
    - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
+   - Optional, for the contact form's email: `SMTP2GO_API_KEY`, `CONTACT_TO` and `CONTACT_FROM` (see [Contact form](#contact-form))
    - Also `MALLOC_ARENA_MAX=2` and `NODE_OPTIONS=--disable-wasm-trap-handler`. CloudLinux caps each process at 4 GB of address space, counting memory that's only reserved, and without these the share cards and image resizing reserve past it and crash the app. The build sets the same limits for itself.
 3. Back in **Git Version Control → Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
    1. Installs dependencies into the app's Node.js environment with its Node 24.

@@ -109,7 +109,8 @@ const items: Item[] = [
   const run = (option: HTMLLIElement) => {
     dialog.close();
     const { href, action } = option.dataset;
-    if (href && /^https?:\/\//.test(href) && new URL(href).host !== location.host) window.open(href, '_blank', 'noopener');
+    if (href?.startsWith('mailto:')) document.dispatchEvent(new CustomEvent('contact:open'));
+    else if (href && /^https?:\/\//.test(href) && new URL(href).host !== location.host) window.open(href, '_blank', 'noopener');
     else if (href) window.location.href = href;
     else if (action === 'theme') document.querySelector<HTMLButtonElement>('[data-theme-toggle]')?.click();
     else if (action === 'reset-layout') {
