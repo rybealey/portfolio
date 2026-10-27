@@ -4,6 +4,7 @@ import Icon from '../components/Icon.astro';
 import ContactTile from '../components/tiles/ContactTile.astro';
 import { site } from '../data/site';
 import { externalAttrs } from '../lib/links';
+import { getCaseStudies } from '../lib/work';
 import { updated, pdf, lanes, summary, glance, experience, projects, skills, education } from '../data/resume';
 
 const updatedLabel = updated.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: site.timeZone });
@@ -22,6 +23,13 @@ const sections = [
 ].map((section, i) => ({ ...section, number: String(i + 1).padStart(2, '0') }));
 const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
 const num = (id: string) => sections.find((section) => section.id === id)!.number;
+
+// A link to a case study shows only while that case study is published, so
+// unpublishing one from Publisher never leaves a link to a 404. A failed
+// content load drops the links rather than the page.
+const published = new Set((await getCaseStudies().catch(() => [])).map((study) => `/work/${study.id}`));
+const live = <T extends { href: string }>(link: T | undefined) =>
+  link && (!link.href.startsWith('/work/') || published.has(link.href)) ? link : undefined;
 
 // Backticks in the Markdown mark code; odd pieces are the code.
 const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code: i % 2 === 1 }));
@@ -81,7 +89,6 @@ const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code:
               <Icon name="download" />
               <span>Download PDF</span>
             </a>
-            <button type="button" class="btn btn-ghost btn-sm" data-print>Print</button>
           </div>
         </section>
         <details class="contents" open data-contents>
@@ -137,9 +144,9 @@ const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code:
                             <span class="square" aria-hidden="true" />
                             {group.label}
                           </h4>
-                          {group.link && (
-                            <a class="go" href={group.link.href}>
-                              {group.link.label}
+                          {live(group.link) && (
+                            <a class="go" href={group.link!.href}>
+                              {group.link!.label}
                               <Icon name="arrow" size={16} />
                             </a>
                           )}
@@ -204,9 +211,9 @@ const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code:
                       <li>{bullet}</li>
                     ))}
                   </ul>
-                  {project.link && (
-                    <a class="go" href={project.link.href}>
-                      {project.link.label}
+                  {live(project.link) && (
+                    <a class="go" href={project.link!.href}>
+                      {project.link!.label}
                       <Icon name="arrow" size={16} />
                     </a>
                   )}
@@ -261,10 +268,6 @@ const pieces = (text: string) => text.split('`').map((part, i) => ({ part, code:
 </Base>
 
 <script>
-  // Print opens the browser's print dialog; the print styles below lay the
-  // page out as a two-page document.
-  for (const button of document.querySelectorAll('[data-print]')) button.addEventListener('click', () => print());
-
   // Highlights the section being read in the contents list, and starts the
   // list folded on narrow screens, where it sits above the resume.
   const contents = document.querySelector<HTMLDetailsElement>('[data-contents]');
