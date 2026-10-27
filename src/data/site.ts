@@ -12,8 +12,6 @@ export const site = {
   // Set once known. Null hides the link rather than shipping a placeholder.
   github: null as string | null,
   resumePdf: null as string | null,
-  // A path under public/, e.g. '/images/ry-bealey.jpg' (4:5). Null shows no portrait on /about.
-  headshot: null as string | null,
   spotifyProfile: 'https://open.spotify.com',
 };
 
