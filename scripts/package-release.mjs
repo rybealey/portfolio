@@ -21,6 +21,7 @@ const files = [
   'scripts/db-migrate.mjs',
   'scripts/db-seed.mjs',
   'scripts/db-previews.mjs',
+  'scripts/api-token.mjs',
   'src/lib/link-preview.ts',
   'src/lib/link-preview-store.ts',
 ];

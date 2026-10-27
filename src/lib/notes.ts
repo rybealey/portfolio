@@ -78,8 +78,9 @@ export interface Note {
 }
 
 const EXTENSIONS: Record<string, string> = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif', 'image/avif': 'avif' };
+export const mediaPath = (sha: string, type: string) => `/media/${sha}.${EXTENSIONS[type] ?? 'bin'}`;
 const media = (sha: string | null, type: string | null, width: number | null, height: number | null): MediaRef | undefined =>
-  sha && type ? { src: `/media/${sha}.${EXTENSIONS[type] ?? 'bin'}`, width, height } : undefined;
+  sha && type ? { src: mediaPath(sha, type), width, height } : undefined;
 
 interface Row {
   slug: string;

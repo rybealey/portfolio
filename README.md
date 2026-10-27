@@ -29,6 +29,7 @@
 - [Scripts](#scripts)
 - [Project structure](#project-structure)
 - [Content and the database](#content-and-the-database)
+- [Publishing API](#publishing-api)
 - [Design system](#design-system)
 - [Spotify setup](#spotify-setup)
 - [Deploy to cPanel](#deploy-to-cpanel)
@@ -85,6 +86,7 @@ npm run dev             # http://localhost:4321
 | `npm run db:migrate` | Applies new files in `db/migrations/`, once each |
 | `npm run db:seed` | Loads `db/seed/`; safe to rerun, never deletes |
 | `npm run db:previews` | Fetches link previews for notes that don't have one yet (`-- --refresh` refetches all) |
+| `npm run api:token` | Creates, lists and revokes publishing API tokens (`-- create "Ry's iPhone"`, `-- list`, `-- revoke 3`) |
 | `npm run spotify:auth` | One-time Spotify login that saves a refresh token to `.env` |
 | `npm run package` | Type-check, build, then bundle `release/ryanbealey.tar.gz` for cPanel |
 
@@ -109,13 +111,13 @@ npm run dev             # http://localhost:4321
     ├── data/               Site settings and the About page content
     ├── layouts/            Base page shell and the Writing layout
     ├── lib/                Database access, notes, case studies, Markdown, link previews, Spotify, bento logic
-    ├── pages/              Routes, including /api/now-playing, /media and /sitemap.xml
+    ├── pages/              Routes, including /api/v1 (publishing), /api/now-playing, /media and /sitemap.xml
     └── styles/             Global CSS and the generated tokens
 ```
 
 ## Content and the database
 
-Case studies and notes will be published from companion iOS and macOS apps (a separate project) through an API this site will expose. Until then, add rows directly.
+Case studies and notes are published from companion iOS and macOS apps (a separate project) through the [publishing API](#publishing-api).
 
 | Table | Holds |
 | --- | --- |
@@ -123,11 +125,81 @@ Case studies and notes will be published from companion iOS and macOS apps (a se
 | `notes` | One row per note. The `slug` is the permalink and starts with the date. At most one attachment (`link_url`, `case_study_id` or `image_media_id`), and an image needs `image_alt`; the database enforces both. Drafts stay out of production. |
 | `link_previews` | The unfurled preview for each shared URL, fetched once. |
 | `media` | Images stored once by SHA-256 and served from `/media/<hash>.<ext>` with a year-long cache. |
+| `api_tokens` | One row per device allowed to use the publishing API. Only a hash of each token is kept. |
 
 - **Reading.** Pages read through `src/lib/work.ts` and `src/lib/notes.ts`, which hold lists in memory for 30 seconds.
-- **Previews.** After adding a note with a link, run `npm run db:previews` to unfurl it.
+- **Previews.** The API unfurls a note's link when it's posted. For a link added straight to the database, run `npm run db:previews`.
 - **Changing the schema.** Add a numbered file to `db/migrations/` and run `npm run db:migrate`. Never edit a migration that has already run anywhere.
 - **Seed files.** `db/seed/` seeds local databases and the first production import. It isn't edited after that.
+
+## Publishing API
+
+JSON over HTTPS at `https://ryanbealey.com/api/v1`, for the iOS and macOS apps. Every request needs a device token, and responses are never cached. The code is in `src/lib/api.ts`, `src/lib/publish.ts` and `src/pages/api/v1/`.
+
+### Device tokens
+
+Each device gets its own token, so one can be revoked without touching the others. Create them over SSH, with the DB variables exported as for migrations (see [First deploy](#first-deploy)):
+
+```bash
+node scripts/api-token.mjs create "Ry's iPhone"
+```
+
+The token (`rb_` plus 43 characters) is printed once and only its hash is stored. Keep it in the device's Keychain and send it as `Authorization: Bearer rb_…`. `list` shows each token's last use; `revoke <id>` cuts a device off at once.
+
+### Endpoints
+
+| Method and path | Does |
+| --- | --- |
+| `GET /api/v1` | Checks the token; returns the device name and the allowed topics, statuses and accents |
+| `GET /api/v1/notes` | Every note, drafts included, newest first |
+| `POST /api/v1/notes` | Creates a note; `201` with `Location` |
+| `GET` · `PATCH` · `DELETE /api/v1/notes/{slug}` | Reads, edits (only the fields sent) or deletes one note |
+| `GET /api/v1/case-studies` | Every case study, unpublished included, in order |
+| `POST /api/v1/case-studies` | Creates a case study |
+| `GET` · `PATCH` · `DELETE /api/v1/case-studies/{slug}` | Reads, edits or deletes one; delete is refused (`409`) while a note attaches it |
+| `POST /api/v1/media` | Uploads one image as the raw body with its `Content-Type`; returns its `sha256` and `url` |
+
+A note:
+
+```json
+{
+  "topic": "build",
+  "body": "Markdown, up to 60,000 characters.",
+  "status": "published",
+  "pinned": false,
+  "publishedOn": "2026-10-27",
+  "attachment": { "type": "link", "url": "https://example.com/post" }
+}
+```
+
+- **Required:** `topic` (`billing`, `web`, `support` or `build`) and `body`. `status` defaults to `draft`, `publishedOn` to today in Austin, and `slug` to the date plus the body's first words. A slug you send must start with the date.
+- **Attachment:** at most one, or `null`. `{ "type": "link", "url" }` unfurls the link when saved. `{ "type": "caseStudy", "slug" }` attaches a case study. `{ "type": "image", "sha256", "alt", "caption" }` attaches an image uploaded first to `/api/v1/media`.
+- **Slugs don't change.** They're the permalink, so `PATCH` refuses `slug`. Create a new note and delete the old one instead.
+
+A case study needs `slug`, `label`, `title`, `summary`, `role`, `timeframe`, `status` (`shipped`, `live`, `phased`, `prototype` or `in-progress`) and `accent` (`billing`, `web` or `fin`). `stack` and `metrics` are lists of strings, `body` is Markdown, `order` defaults to last, and `published` defaults to `false`.
+
+### Images
+
+Upload JPEG, PNG, WebP, GIF or AVIF, up to 15 MB. Photos are turned upright, scaled to at most 2400 px on the long edge and re-encoded, which also strips EXIF data such as GPS location. GIFs are stored as sent. Convert HEIC to JPEG on the device first. Identical images are stored once.
+
+### Edits from two devices
+
+Every note and case study has a `version`, also sent as the `ETag` header. Send it back as `If-Match` on `PATCH` or `DELETE`. If the row changed since, say from the other device, the request fails with `412` and nothing is written. Fetch it again and reapply the edit. Without `If-Match`, the last write wins.
+
+### Errors
+
+Errors come back as `{ "error": { "code", "message", "details"? } }`:
+
+| Status | When |
+| --- | --- |
+| `401` | Missing, unknown or revoked token |
+| `404` | No note or case study with that slug |
+| `409` | Slug taken, or deleting a case study a note attaches |
+| `412` | `If-Match` version is out of date |
+| `413` · `415` | Upload too big, or the wrong `Content-Type` |
+| `422` | Invalid fields; `details` lists each with its path |
+
+Writes clear the site's 30-second content cache in the process that handled them. Passenger can run more than one process, so another may show the old version for up to 30 seconds.
 
 ## Design system
 
@@ -197,8 +269,8 @@ The MVP is planned to launch on **Nov 9, 2026**.
 - [x] Writing: feed, permalinks, topic pages, month archives, link previews, share cards, RSS
 - [x] Live content from MariaDB, with Docker for local development
 - [x] Spotify now playing
-- [ ] Production database set up on cPanel, then the first deploy
-- [ ] Publishing API for the iOS and macOS apps
+- [x] Production database set up on cPanel, then the first deploy
+- [x] Publishing API for the iOS and macOS apps
 - [ ] Full case-study write-ups, plus the Resume and Colophon pages
 - [ ] GTM and GA4 (tiles already carry `data-ga-event` attributes for `resume_download` and `contact_click`)
 - [ ] GitHub handle, resume PDF and Spotify profile link in `src/data/site.ts`

@@ -2,6 +2,9 @@
 // collection so a case study published from the Mac app shows up live.
 import { cached, rows } from './db';
 
+export const CASE_STUDY_STATUSES = ['shipped', 'live', 'phased', 'prototype', 'in-progress'] as const;
+export const ACCENTS = ['billing', 'web', 'fin'] as const;
+
 export interface CaseStudy {
   id: string;
   body: string;
@@ -14,8 +17,8 @@ export interface CaseStudy {
     role: string;
     timeframe: string;
     stack: string[];
-    status: 'shipped' | 'live' | 'phased' | 'prototype' | 'in-progress';
-    accent: 'billing' | 'web' | 'fin';
+    status: (typeof CASE_STUDY_STATUSES)[number];
+    accent: (typeof ACCENTS)[number];
     metrics: string[];
   };
 }
