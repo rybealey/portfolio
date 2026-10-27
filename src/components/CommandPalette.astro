@@ -15,7 +15,7 @@ type Item = { label: string; meta: string; href?: string; action?: 'theme' | 're
 const items: Item[] = [
   ...work.map((entry) => ({
     label: entry.data.title,
-    meta: `0${entry.data.order} · ${entry.data.label}`,
+    meta: `${entry.data.number} · ${entry.data.label}`,
     href: `/work/${entry.id}`,
   })),
   { label: 'Home', meta: 'Page', href: '/' },

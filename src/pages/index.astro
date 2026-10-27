@@ -12,8 +12,16 @@ import ContactTile from '../components/tiles/ContactTile.astro';
 import { site } from '../data/site';
 import { formatUpdated, lastUpdated } from '../lib/updated';
 
-const [billing, web, fin] = await getCaseStudies();
-if (!billing || !web || !fin) throw new Error('Home expects three published case studies');
+// Case studies come and go from Publisher, so the grid takes however many are
+// published: the first gets the tall tile, the rest get half tiles, and with
+// none the small tiles fill in beside the hero.
+const [featured, ...studies] = await getCaseStudies();
+// Three case studies leave every row of the 12-column grid full. Any other
+// count leaves the last row 4 or 8 columns short, so the Apple tile widens to
+// close the gap. Counted in grid cells: the tall tile covers 8, a half 4.
+const caseCells = featured ? 8 + 4 * studies.length : 0;
+const shortBy = (((4 - caseCells) % 12) + 12) % 12;
+const appleSize = shortBy === 0 ? 'half' : shortBy === 4 ? 'wide' : 'full';
 
 const updatedAt = await lastUpdated();
 const updated = updatedAt ? formatUpdated(updatedAt) : 'Recently';
@@ -39,9 +47,8 @@ const person = {
     <BentoGrid>
       {/* DOM order is the phone read order: hero, case studies, live tiles, about, contact. */}
       <BentoCell id="hero" size="hero"><HeroTile /></BentoCell>
-      <BentoCell id="billing" size="feature"><CaseTile entry={billing} featured /></BentoCell>
-      <BentoCell id="web" size="half"><CaseTile entry={web} /></BentoCell>
-      <BentoCell id="fin" size="half"><CaseTile entry={fin} /></BentoCell>
+      {featured && <BentoCell id={`case-${featured.id}`} size="feature"><CaseTile entry={featured} featured /></BentoCell>}
+      {studies.map((entry) => <BentoCell id={`case-${entry.id}`} size="half"><CaseTile entry={entry} /></BentoCell>)}
 
       <BentoCell id="spotify" size="small" movable name="Spotify"><SpotifyTile /></BentoCell>
       <BentoCell id="home-base" size="small" movable name="Home base"><ClockTile /></BentoCell>
@@ -51,7 +58,7 @@ const person = {
       <BentoCell id="updated" size="small" movable name="Updated">
         <FactTile href="/colophon" label="Updated" title={updated} caption="How this site is built" />
       </BentoCell>
-      <BentoCell id="apple" size="half" movable name="Apple">
+      <BentoCell id="apple" size={appleSize} movable name="Apple">
         <FactTile
           href="/about"
           label="Apple · since 2018"

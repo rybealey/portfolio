@@ -36,7 +36,11 @@ export function cached<T>(key: string, load: () => Promise<T>): Promise<T> {
   if (hit && hit.expires > Date.now()) return hit.value as Promise<T>;
   const value = load();
   cache.set(key, { expires: Date.now() + TTL_MS, value });
-  value.catch(() => cache.delete(key));
+  // Forget a failed load, but only if it's still the cached one: after an
+  // invalidate() a newer load may have taken its place.
+  value.catch(() => {
+    if (cache.get(key)?.value === value) cache.delete(key);
+  });
   return value;
 }
 
