@@ -18,7 +18,7 @@ const headshot = Object.values(headshots)[0]?.default;
 const portrait = headshot && {
   src: headshotUrl(Math.max(...HEADSHOT_WIDTHS)),
   srcset: HEADSHOT_WIDTHS.map((width) => `${headshotUrl(width)} ${width}w`).join(', '),
-  sizes: '(max-width: 1100px) min(520px, calc(100vw - 32px)), 400px',
+  sizes: '(max-width: 680px) min(360px, calc(100vw - 32px)), (max-width: 1100px) 300px, 400px',
   width: headshot.width,
   height: headshot.height,
   loading: 'eager' as const,
@@ -359,13 +359,21 @@ const portrait = headshot && {
 
   @media (max-width: 1100px) {
     .intro-copy { grid-column: span 12; }
-    .intro-side { grid-column: span 12; max-width: 520px; }
+    .intro-side { grid-column: span 12; max-width: 760px; }
+    /* Under the bio, the portrait sits beside the at-a-glance card at a
+       modest size instead of filling the column above it. */
+    .intro-side:has(.portrait) { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 32px; align-items: center; }
     .split-head, .timeline { grid-column: span 12; }
     .principles, .causes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 680px) {
     .page { padding: var(--space-16) var(--space-16) 64px; gap: 80px; }
+    /* On a phone the portrait goes back above the card, square and capped,
+       so it doesn't fill the whole first screen. */
+    .intro-side:has(.portrait) { grid-template-columns: minmax(0, 1fr); }
+    .portrait { width: min(100%, 360px); }
+    .frame { aspect-ratio: 1; }
     .kit-row { grid-template-columns: minmax(0, 1fr); }
     .timeline li { grid-template-columns: 48px 10px minmax(0, 1fr); gap: 0 14px; }
     .timeline li:not(:last-child)::after { left: calc(48px + 14px + 4px); }
