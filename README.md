@@ -78,7 +78,7 @@ npm run dev             # http://localhost:4321
 | Script | What it does |
 | --- | --- |
 | `npm run dev` | Tokens, then the Astro dev server on http://localhost:4321 |
-| `npm run build` | Tokens, then the production build into `dist/`. Needs no dev dependencies, so it runs on the server too |
+| `npm run build` | Tokens, then the production build into `dist/`. Needs no dev dependencies, and sets the memory limits CloudLinux needs, so it runs on the server too |
 | `npm run preview` | Runs the built site through `app.cjs`, exactly as Passenger will |
 | `npm run check` | Type-checks `.astro` and `.ts` files (run it before committing) |
 | `npm run db:up` | Starts the local MariaDB in Docker and waits until it's healthy |

@@ -9,7 +9,7 @@
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
     "dev": "npm run tokens && astro dev",
-    "build": "npm run tokens && astro build",
+    "build": "npm run tokens && node scripts/astro-build.mjs",
     "preview": "node --env-file-if-exists=.env app.cjs",
     "check": "astro check",
     "db:up": "docker compose up -d --wait",
@@ -17,7 +17,7 @@
     "db:seed": "node --env-file-if-exists=.env scripts/db-seed.mjs",
     "db:previews": "node --env-file-if-exists=.env scripts/db-previews.mjs",
     "spotify:auth": "node --env-file-if-exists=.env scripts/spotify-auth.mjs",
-    "package": "npm run tokens && astro check && astro build && node scripts/package-release.mjs"
+    "package": "npm run tokens && astro check && node scripts/astro-build.mjs && node scripts/package-release.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.9",
