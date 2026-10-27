@@ -1,0 +1,87 @@
+---
+import { site } from '../../data/site';
+import type { Month } from '../../lib/notes';
+
+interface Props {
+  months: Month[];
+  /** href of the month being viewed, marked current in the archive list. */
+  currentMonth?: string | undefined;
+}
+
+const { months, currentMonth } = Astro.props;
+---
+
+<aside class="rail" aria-label="About these notes">
+  <div class="about">
+    <p class="hud eyebrow">About these notes</p>
+    <p>Short and dated, written while the work happens. The finished story of each project lives in its <a href="/">case study</a>.</p>
+    <p class="muted">Every note has its own link, so you can share one on its own.</p>
+  </div>
+
+  <div class="block">
+    <p class="hud muted">Follow along</p>
+    <div class="follow">
+      <a class="btn btn-ghost btn-sm" href="/writing/rss.xml">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 11a8 8 0 0 1 8 8M5 4a15 15 0 0 1 15 15" />
+          <circle cx="6" cy="18" r="1.5" />
+        </svg>
+        RSS feed
+      </a>
+      <a class="btn btn-ghost btn-sm" href={site.linkedin}>LinkedIn</a>
+    </div>
+  </div>
+
+  {
+    months.length > 0 && (
+      <nav class="block" aria-label="Archive">
+        <p class="hud muted">Archive</p>
+        <ul role="list" class="months">
+          {months.map((month) => (
+            <li>
+              <a href={month.href} aria-current={month.href === currentMonth ? 'page' : undefined}>
+                <span class="month">{month.label}</span>
+                <span class="count">{month.notes.length}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+</aside>
+
+<style>
+  .rail { display: flex; flex-direction: column; gap: var(--space-24); }
+  .about {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: var(--space-24);
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    line-height: 24px;
+  }
+  .about p { margin: 0; }
+  .eyebrow { color: var(--color-hud); }
+  .block { display: flex; flex-direction: column; gap: 12px; }
+  .block > p { margin: 0; }
+  .follow { display: flex; flex-wrap: wrap; gap: 12px; }
+  .months { border-bottom: 1px solid var(--color-hairline); }
+  .months a {
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    border-top: 1px solid var(--color-hairline);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .months a:hover .month { text-decoration: underline; text-underline-offset: 3px; }
+  .months a[aria-current='page'] { font-weight: 700; }
+  .months a[aria-current='page'] .month { text-decoration: underline 3px var(--rv-pink); text-underline-offset: 6px; }
+  .count { font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-muted); }
+</style>

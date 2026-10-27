@@ -1,0 +1,45 @@
+---
+import { TOPICS, type TopicKey } from '../../lib/notes';
+
+interface Props {
+  current: 'all' | TopicKey;
+  total: number;
+  counts: Record<TopicKey, number>;
+}
+
+const { current, total, counts } = Astro.props;
+// Topics with no notes yet stay hidden.
+const tabs = [
+  { key: 'all', label: 'All', href: '/writing', count: total },
+  ...(Object.keys(TOPICS) as TopicKey[])
+    .filter((key) => counts[key] > 0)
+    .map((key) => ({ key, label: TOPICS[key].label, href: `/writing/${key}`, count: counts[key] })),
+];
+---
+
+<nav class="tabs" aria-label="Topics">
+  {
+    tabs.map((tab) => (
+      <a href={tab.href} aria-current={tab.key === current ? 'page' : undefined}>
+        {tab.label} <span class="count">{tab.count}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px 24px; padding-bottom: 4px; }
+  a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+  }
+  a:hover { color: var(--color-ink); }
+  a[aria-current='page'] { color: var(--color-ink); text-decoration: underline 3px var(--rv-pink); text-underline-offset: 8px; }
+  .count { font-family: var(--font-mono); font-weight: 500; font-size: 12px; color: var(--color-ink-muted); }
+</style>

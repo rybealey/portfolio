@@ -1,0 +1,144 @@
+---
+import { getEntry, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import TopicLabel from './TopicLabel.astro';
+import LinkPreview from './LinkPreview.astro';
+import CaseStudyCard from './CaseStudyCard.astro';
+import { formatDate, permalink, plainText, type Note } from '../../lib/notes';
+
+interface Props {
+  note: Note;
+  /** Show the PINNED marker (the feed's first note only). */
+  pinned?: boolean;
+}
+
+const { note, pinned = false } = Astro.props;
+const { Content } = await render(note);
+const caseStudy = note.data.caseStudy ? await getEntry(note.data.caseStudy) : undefined;
+const dateId = `${note.id}-date`;
+// A short note with nothing attached is set larger, like a pull quote.
+const short = !note.data.link && !caseStudy && !note.data.image && !(note.body ?? '').includes('```') && plainText(note).length < 160;
+---
+
+<article class="note" id={note.id} aria-labelledby={dateId}>
+  {
+    pinned && (
+      <p class="hud pinned">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 17v5M9 3h6l-1 7 4 3H6l4-3z" />
+        </svg>
+        Pinned
+      </p>
+    )
+  }
+  <div class="meta">
+    <a class="hud permalink" id={dateId} href={permalink(note)}>
+      <time datetime={note.data.date.toISOString().slice(0, 10)}>{formatDate(note.data.date)}</time>
+    </a>
+    <TopicLabel topic={note.data.topic} />
+    {note.data.draft && <span class="hud chip draft">Draft</span>}
+    <button type="button" class="copy" data-copy-link={permalink(note)} aria-label="Copy link to this note" hidden>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1" />
+        <path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1" />
+      </svg>
+      <span class="hud copied" aria-hidden="true">Copied</span>
+    </button>
+  </div>
+  <div class:list={['body', { short }]}>
+    <Content />
+  </div>
+  {note.data.link && <LinkPreview url={note.data.link} />}
+  {caseStudy && <CaseStudyCard entry={caseStudy} />}
+  {
+    note.data.image && (
+      <figure class="figure">
+        <Image src={note.data.image} alt={note.data.imageAlt!} widths={[720, 1440]} sizes="(max-width: 860px) 100vw, 720px" />
+        {note.data.imageCaption && <figcaption class="caption">{note.data.imageCaption}</figcaption>}
+      </figure>
+    )
+  }
+</article>
+
+<script>
+  // Copy-link buttons only appear when the clipboard is available.
+  const live = document.createElement('p');
+  live.className = 'visually-hidden';
+  live.setAttribute('aria-live', 'polite');
+  document.body.append(live);
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy-link]')) {
+    if (!navigator.clipboard) continue;
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      const url = new URL(button.dataset.copyLink!, location.origin).href;
+      try {
+        await navigator.clipboard.writeText(url);
+        button.dataset.copied = '';
+        live.textContent = 'Link copied.';
+        setTimeout(() => delete button.dataset.copied, 1600);
+      } catch {
+        live.textContent = "Couldn't copy the link.";
+      }
+    });
+  }
+</script>
+
+<style>
+  .note { display: flex; flex-direction: column; gap: 14px; padding: 28px 0; border-top: 1px solid var(--color-hairline); }
+  .pinned { margin: 0; display: flex; align-items: center; gap: var(--space-8); color: var(--color-hud); }
+  .meta { display: flex; align-items: center; gap: 12px; min-height: 44px; margin: -10px 0; }
+  .permalink { color: var(--color-ink-muted); text-decoration: none; }
+  .permalink:hover { color: var(--color-ink); text-decoration: underline; }
+  .draft { color: var(--color-warning); border-color: currentColor; padding: 2px 6px; font-size: 11px; line-height: 14px; }
+  .copy {
+    position: relative;
+    margin-left: auto;
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-items: center;
+    padding: 0;
+    background: transparent;
+    color: var(--color-ink-muted);
+    border: 0;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+  }
+  .copy:hover { color: var(--color-ink); }
+  .copied {
+    position: absolute;
+    right: 100%;
+    margin-right: 4px;
+    color: var(--color-success);
+    opacity: 0;
+    transition: opacity 120ms;
+    pointer-events: none;
+  }
+  .copy[data-copied] .copied { opacity: 1; }
+
+  .body { display: flex; flex-direction: column; gap: 12px; }
+  .body :global(p) { margin: 0; }
+  .body.short { font-size: var(--type-lede-size); line-height: var(--type-lede-line); }
+  .body :global(pre) {
+    margin: 0;
+    padding: 16px;
+    overflow-x: auto;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--type-code-size);
+    line-height: var(--type-code-line);
+  }
+  .body :global(code) { font-family: var(--font-mono); }
+  .body :global(:not(pre) > code) {
+    font-size: 15px;
+    padding: 1px 6px;
+    background: var(--color-code-bg);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-sm);
+  }
+
+  .figure { margin: 0; display: flex; flex-direction: column; gap: var(--space-8); }
+  .figure :global(img) { width: 100%; height: auto; border: 1px solid var(--color-hairline); border-radius: var(--radius-md); }
+</style>

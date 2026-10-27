@@ -1,0 +1,51 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from '../Icon.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+}
+
+const { entry } = Astro.props;
+const { order, label, title, accent } = entry.data;
+// The chip is a spectrum fill with void text, which reads in both themes.
+const band = { billing: 'lime', web: 'cyan', fin: 'violet' }[accent];
+---
+
+<a class="case" href={`/work/${entry.id}`}>
+  <span class="hud chip-fill" style={`background: var(--rv-${band})`}>0{order} · {label} · Case study</span>
+  <span class="case-title">{title}</span>
+  <span class="more">Read the case study <Icon name="arrow" /></span>
+</a>
+
+<style>
+  .case {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    color: var(--color-ink);
+    text-decoration: none;
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    transition:
+      transform 160ms cubic-bezier(0.3, 1.5, 0.6, 1),
+      box-shadow 160ms,
+      border-color 160ms;
+  }
+  .case:hover,
+  .case:focus-visible {
+    color: var(--color-ink);
+    transform: translateY(-2px);
+    border-color: var(--color-ink-muted);
+    box-shadow: 4px 4px 0 0 var(--color-pop);
+  }
+  .chip-fill { align-self: flex-start; padding: 4px 8px; border-radius: var(--radius-sm); color: var(--rv-void); }
+  .case-title { font-family: var(--font-display); font-weight: 700; font-size: 18px; line-height: 24px; }
+  .more { display: inline-flex; align-items: center; gap: var(--space-8); font-weight: 700; }
+  @media (prefers-reduced-motion: reduce) {
+    .case { transition: none; }
+    .case:hover, .case:focus-visible { transform: none; }
+  }
+</style>

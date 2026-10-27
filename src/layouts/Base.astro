@@ -9,11 +9,17 @@ import { site } from '../data/site';
 interface Props {
   title?: string;
   description?: string;
+  /** A share image path (1200x630), e.g. a note's generated card. */
+  image?: string | undefined;
+  type?: 'website' | 'article' | undefined;
 }
 
-const { title, description = site.description } = Astro.props;
+const { title, description = site.description, image, type = 'website' } = Astro.props;
+const imageUrl = image ? new URL(image, site.url).href : undefined;
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.lane}`;
-const canonical = new URL(Astro.url.pathname, site.url);
+// Clean URLs: no .html, no /index, no trailing slash.
+const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1') || '/';
+const canonical = new URL(cleanPath, site.url);
 ---
 
 <!doctype html>
@@ -26,10 +32,22 @@ const canonical = new URL(Astro.url.pathname, site.url);
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f6f4fa" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#140c22" media="(prefers-color-scheme: dark)" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={type} />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
+    {
+      imageUrl && (
+        <>
+          <meta property="og:image" content={imageUrl} />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:image" content={imageUrl} />
+        </>
+      )
+    }
+    <link rel="alternate" type="application/rss+xml" title={`${site.name} · Writing`} href="/writing/rss.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" href="/fonts/atkinson-hyperlegible-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />

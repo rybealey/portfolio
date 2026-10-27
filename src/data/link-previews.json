@@ -1,0 +1,26 @@
+{
+  "https://astro.build/blog/whats-new-june-2026/": {
+    "status": "ok",
+    "url": "https://astro.build/blog/whats-new-june-2026/",
+    "host": "astro.build",
+    "siteName": "Astro",
+    "title": "What's new in Astro - June 2026",
+    "description": "June 2026 - Astro 7, summer swag collection, Astro Germany meetup, and more!",
+    "imageUrl": "https://astro.build/_astro/og.CSeyUZmy.webp",
+    "kind": "large",
+    "image": "582c1bec3155.webp",
+    "fetchedAt": "2026-10-27T07:17:55.840Z"
+  },
+  "https://web.archive.org/web/2026/https://getecobyte.com/": {
+    "status": "ok",
+    "url": "https://web.archive.org/web/2026/https://getecobyte.com/",
+    "host": "web.archive.org",
+    "siteName": "SERVERIZZ",
+    "title": "SERVERIZZ — Managed hosting for small business",
+    "description": "Managed cPanel hosting from a real human. Claim your domain, then launch a fast, secure website — email, SSL and daily backups included. Austin-based, free migration on every plan.",
+    "imageUrl": null,
+    "kind": "summary",
+    "image": null,
+    "fetchedAt": "2026-10-27T07:17:55.718Z"
+  }
+}

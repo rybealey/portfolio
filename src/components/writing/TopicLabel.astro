@@ -1,0 +1,17 @@
+---
+import { TOPICS, type TopicKey } from '../../lib/notes';
+
+interface Props {
+  topic: TopicKey;
+}
+
+const { topic } = Astro.props;
+const { label, band } = TOPICS[topic];
+---
+
+<span class="hud topic"><span class="square" style={`background: var(--rv-${band})`} aria-hidden="true"></span>{label}</span>
+
+<style>
+  .topic { display: inline-flex; align-items: center; gap: var(--space-8); color: var(--color-ink-muted); }
+  .square { flex: none; width: 8px; height: 8px; border-radius: 2px; }
+</style>

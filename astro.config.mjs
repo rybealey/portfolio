@@ -9,11 +9,15 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://ryanbealey.com',
   trailingSlash: 'never',
-  build: { format: 'file' },
+  // 'preserve' mirrors src/pages: about.html, but writing/index.html for a
+  // section that also has child pages, which the Node server resolves cleanly.
+  build: { format: 'preserve' },
   // Case studies live under /work/, so a trimmed URL lands on the home page's work grid.
   redirects: {
     '/work': { status: 301, destination: '/#work' },
   },
+  // Code in notes is colored by CSS variables, so it follows the theme.
+  markdown: { shikiConfig: { theme: 'css-variables' } },
   adapter: node({ mode: 'standalone' }),
   integrations: [sitemap()],
   env: {

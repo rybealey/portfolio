@@ -1,0 +1,41 @@
+---
+import TopicLabel from './TopicLabel.astro';
+import { formatDate, permalink, plainText, type Note } from '../../lib/notes';
+
+interface Props {
+  note: Note;
+}
+
+const { note } = Astro.props;
+---
+
+<li>
+  <a class="row" href={permalink(note)}>
+    <time class="hud date" datetime={note.data.date.toISOString().slice(0, 10)}>{formatDate(note.data.date, { month: 'short', day: 'numeric' })}</time>
+    <span class="text">{plainText(note)}</span>
+    <TopicLabel topic={note.data.topic} />
+  </a>
+</li>
+
+<style>
+  li { border-top: 1px solid var(--color-hairline); }
+  .row {
+    display: grid;
+    grid-template-columns: 96px minmax(0, 1fr) 128px;
+    gap: 4px 20px;
+    align-items: baseline;
+    padding: 16px 12px;
+    margin: 0 -12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-ink);
+    text-decoration: none;
+    transition: background-color 120ms;
+  }
+  .row:hover, .row:focus-visible { color: var(--color-ink); background: var(--color-panel); }
+  .row:hover .text { text-decoration: underline; text-underline-offset: 3px; }
+  .date { color: var(--color-ink-muted); }
+  .text { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width: 680px) {
+    .row { grid-template-columns: minmax(0, 1fr); }
+  }
+</style>

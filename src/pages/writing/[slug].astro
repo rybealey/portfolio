@@ -1,0 +1,136 @@
+---
+// Two kinds of page share /writing/<slug>: a note's permalink
+// (/writing/2026-10-25-hourly-billing) and a topic page (/writing/billing).
+// Note slugs start with a date, so they never collide with a topic.
+import type { GetStaticPaths } from 'astro';
+import { getEntry } from 'astro:content';
+import WritingLayout from '../../layouts/Writing.astro';
+import NoteItem from '../../components/writing/NoteItem.astro';
+import TopicTabs from '../../components/writing/TopicTabs.astro';
+import TopicLabel from '../../components/writing/TopicLabel.astro';
+import CaseStudyCard from '../../components/writing/CaseStudyCard.astro';
+import Icon from '../../components/Icon.astro';
+import { TOPICS, excerpt, formatDate, getNotes, groupByMonth, plainText, shareImage, topicCounts, type Note, type TopicKey } from '../../lib/notes';
+
+export const getStaticPaths = (async () => {
+  const notes = await getNotes();
+  const counts = topicCounts(notes);
+  return [
+    ...notes.map((note) => ({ params: { slug: note.id }, props: { kind: 'note' as const, note } })),
+    ...(Object.keys(TOPICS) as TopicKey[])
+      .filter((topic) => counts[topic] > 0)
+      .map((topic) => ({ params: { slug: topic }, props: { kind: 'topic' as const, topic } })),
+  ];
+}) satisfies GetStaticPaths;
+
+type Props = { kind: 'note'; note: Note } | { kind: 'topic'; topic: TopicKey };
+
+const props = Astro.props;
+const notes = await getNotes();
+const months = groupByMonth(notes);
+
+let neighbors: { newer?: Note | undefined; older?: Note | undefined } = {};
+let topicNotes: Note[] = [];
+let caseStudy;
+if (props.kind === 'note') {
+  const index = notes.indexOf(notes.find((note) => note.id === props.note.id)!);
+  neighbors = { newer: notes[index - 1], older: notes[index + 1] };
+} else {
+  topicNotes = notes.filter((note) => note.data.topic === props.topic);
+  const slug = TOPICS[props.topic].caseStudy;
+  caseStudy = slug ? await getEntry('work', slug) : undefined;
+}
+const noteMonth = props.kind === 'note' ? months.find((month) => month.notes.some((note) => note.id === props.note.id)) : undefined;
+---
+
+{
+  props.kind === 'note' ? (
+    <WritingLayout
+      title={`Note, ${formatDate(props.note.data.date)}`}
+      description={excerpt(plainText(props.note), 160)}
+      image={shareImage(props.note)}
+      type="article"
+      months={months}
+      currentMonth={noteMonth?.href}
+    >
+      <Fragment slot="intro">
+        <p class="hud eyebrow">
+          <a href="/writing">Writing</a>
+          <span aria-hidden="true" class="muted">/</span>
+          <TopicLabel topic={props.note.data.topic} />
+        </p>
+        <h1 class="visually-hidden">Note from {formatDate(props.note.data.date)}</h1>
+      </Fragment>
+
+      <NoteItem note={props.note} />
+
+      <nav class="pager" aria-label="More notes">
+        {neighbors.newer ? (
+          <a class="step" href={`/writing/${neighbors.newer.id}`}>
+            <span class="hud muted">Newer</span>
+            <span class="step-text">{excerpt(plainText(neighbors.newer), 90)}</span>
+          </a>
+        ) : (
+          <span />
+        )}
+        {neighbors.older && (
+          <a class="step older" href={`/writing/${neighbors.older.id}`}>
+            <span class="hud muted">Older</span>
+            <span class="step-text">{excerpt(plainText(neighbors.older), 90)}</span>
+          </a>
+        )}
+      </nav>
+      <a class="btn btn-ghost btn-sm back" href="/writing">
+        <span class="flip"><Icon name="arrow" /></span> All notes
+      </a>
+    </WritingLayout>
+  ) : (
+    <WritingLayout
+      title={`${TOPICS[props.topic].label} notes`}
+      description={TOPICS[props.topic].blurb}
+      months={months}
+    >
+      <Fragment slot="intro">
+        <p class="hud eyebrow">
+          <a href="/writing">Writing</a>
+          <span aria-hidden="true" class="muted">/</span>
+          <TopicLabel topic={props.topic} />
+        </p>
+        <h1>{TOPICS[props.topic].label} notes</h1>
+        <p class="lede">{TOPICS[props.topic].blurb}</p>
+      </Fragment>
+
+      <TopicTabs current={props.topic} total={notes.length} counts={topicCounts(notes)} />
+      {topicNotes.map((note) => <NoteItem note={note} />)}
+      <div class="end">
+        <span class="caption">That's every {TOPICS[props.topic].label.toLowerCase()} note so far.{caseStudy && ' The whole story is in the case study.'}</span>
+        {caseStudy && <CaseStudyCard entry={caseStudy} />}
+      </div>
+    </WritingLayout>
+  )
+}
+
+<style>
+  .pager { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-top: 28px; border-top: 1px solid var(--color-hairline); }
+  .step {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 16px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .step:hover { color: var(--color-ink); border-color: var(--color-ink-muted); }
+  .step:hover .step-text { text-decoration: underline; text-underline-offset: 3px; }
+  .older { text-align: right; grid-column: 2; }
+  .step-text { font-size: 15px; line-height: 22px; }
+  .back { align-self: flex-start; margin-top: 24px; }
+  .flip { display: inline-flex; transform: scaleX(-1); }
+  .end { display: flex; flex-direction: column; gap: 16px; padding-top: 28px; border-top: 1px solid var(--color-hairline); }
+  @media (max-width: 680px) {
+    .pager { grid-template-columns: minmax(0, 1fr); }
+    .older { grid-column: auto; }
+  }
+</style>

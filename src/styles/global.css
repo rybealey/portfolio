@@ -129,6 +129,21 @@
   /* Sized to the cell (a container), so long names fit half-width phone tiles. */
   .tile-name { font-family: var(--font-display); font-weight: 700; font-size: clamp(13px, 9cqi, 17px); line-height: 22px; }
 
+  /* Shiki's css-variables theme, mapped to the site's tokens. */
+  .astro-code {
+    --astro-code-foreground: var(--color-ink);
+    --astro-code-background: var(--color-code-bg);
+    --astro-code-token-keyword: var(--color-accent-fin);
+    --astro-code-token-string: var(--color-accent-billing);
+    --astro-code-token-string-expression: var(--color-accent-billing);
+    --astro-code-token-function: var(--color-link);
+    --astro-code-token-constant: var(--color-warning);
+    --astro-code-token-parameter: var(--color-ink);
+    --astro-code-token-punctuation: var(--color-ink-muted);
+    --astro-code-token-comment: var(--color-ink-muted);
+    --astro-code-token-link: var(--color-link);
+  }
+
   .skip-link {
     position: absolute;
     left: var(--space-16);

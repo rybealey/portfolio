@@ -1,0 +1,64 @@
+---
+import type { GetStaticPaths } from 'astro';
+import WritingLayout from '../../../layouts/Writing.astro';
+import NoteRow from '../../../components/writing/NoteRow.astro';
+import Icon from '../../../components/Icon.astro';
+import { getNotes, groupByMonth, type Month } from '../../../lib/notes';
+
+export const getStaticPaths = (async () => {
+  const months = groupByMonth(await getNotes());
+  return months.map((month, i) => ({
+    params: { year: month.year, month: month.month },
+    props: { month, newer: months[i - 1], older: months[i + 1] },
+  }));
+}) satisfies GetStaticPaths;
+
+interface Props {
+  month: Month;
+  newer?: Month | undefined;
+  older?: Month | undefined;
+}
+
+const { month, newer, older } = Astro.props;
+const months = groupByMonth(await getNotes());
+const count = month.notes.length;
+---
+
+<WritingLayout
+  title={`Notes from ${month.label}`}
+  description={`${count} ${count === 1 ? 'note' : 'notes'} from Ry Bealey, ${month.label}.`}
+  months={months}
+  currentMonth={month.href}
+>
+  <Fragment slot="intro">
+    <p class="hud eyebrow"><a href="/writing">Writing</a><span aria-hidden="true" class="muted">/</span><span>Archive</span></p>
+    <h1>{month.label}</h1>
+    <p class="lede">{count} {count === 1 ? 'note' : 'notes'}, newest first.</p>
+  </Fragment>
+
+  <ol role="list" class="rows">
+    {month.notes.map((note) => <NoteRow note={note} />)}
+  </ol>
+
+  <nav class="months" aria-label="Months">
+    <a class="btn btn-ghost btn-sm" href={newer?.href ?? '/writing'}>
+      <span class="flip"><Icon name="arrow" /></span>
+      {newer ? newer.label : 'Latest notes'}
+    </a>
+    {
+      older ? (
+        <a class="btn btn-ghost btn-sm" href={older.href}>
+          {older.label} <Icon name="arrow" />
+        </a>
+      ) : (
+        <span class="caption">No older notes. This is where it starts.</span>
+      )
+    }
+  </nav>
+</WritingLayout>
+
+<style>
+  .rows { border-bottom: 1px solid var(--color-hairline); }
+  .months { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 20px; padding-top: 28px; }
+  .flip { display: inline-flex; transform: scaleX(-1); }
+</style>

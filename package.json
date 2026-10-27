@@ -8,8 +8,9 @@
   },
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
-    "dev": "npm run tokens && astro dev",
-    "build": "npm run tokens && astro check && astro build",
+    "links": "node scripts/fetch-link-previews.mjs",
+    "dev": "npm run tokens && npm run links && astro dev",
+    "build": "npm run tokens && npm run links && astro check && astro build",
     "preview": "node --env-file-if-exists=.env app.cjs",
     "check": "astro check",
     "spotify:auth": "node --env-file-if-exists=.env scripts/spotify-auth.mjs",
@@ -17,11 +18,17 @@
   },
   "dependencies": {
     "@astrojs/node": "^11.1.9",
+    "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.4.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "@fontsource/atkinson-hyperlegible": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource/unbounded": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.63.2",
     "typescript": "^6.0.0"
   }
 }

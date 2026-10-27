@@ -15,6 +15,7 @@ npm run dev
 | --- | --- |
 | `npm run dev` | Tokens, then the Astro dev server on http://localhost:4321 |
 | `npm run build` | Tokens, `astro check`, then the production build into `dist/` |
+| `npm run links` | Unfurls links shared in notes (runs before `dev` and `build`; add `-- --refresh` to refetch) |
 | `npm run preview` | Runs the built site through `app.cjs`, exactly as Passenger will |
 | `npm run spotify:auth` | One-time Spotify login that prints a refresh token |
 | `npm run package` | Build, then bundle `release/ryanbealey.tar.gz` for cPanel |
@@ -26,6 +27,22 @@ npm run dev
 - `src/components/bento/` is the home grid. Cells marked `movable` can be dragged with a mouse or pen, or moved with the grip button from the keyboard, and swap among themselves; the hero, the three case studies and the contact strip never move. A visitor's order is saved in their browser under `rb:bento`. Touch devices (phones, tablets) can't rearrange and always get the designed order. The logic lives in `src/lib/bento.ts`.
 - `src/pages/api/now-playing.ts` is the only on-demand route. It calls Spotify with a server-side refresh token (`src/lib/spotify.ts`), caches for 30 seconds, and falls back to the last good answer, so the client secret never reaches the browser.
 - Client JavaScript on the home page is about 2.5 KB gzipped, no framework.
+
+## Writing a note
+
+Notes are Markdown files in `src/content/notes/`. The file name is the note's permanent link, so start it with the date: `2026-10-28-short-slug.md`.
+
+```markdown
+---
+date: 2026-10-28
+topic: web            # billing, web, support or build
+link: https://example.com/article   # optional: one attachment per note
+---
+
+The note itself, a few sentences.
+```
+
+Instead of `link`, a note can carry `caseStudy: serverizz-billing` or an `image` (with `imageAlt`). Add `pinned: true` to lead the feed, or `draft: true` to keep it out of production. Shared links are fetched once by `npm run links`, and their preview images are saved to `src/assets/link-previews/`; commit both those images and `src/data/link-previews.json`. Each note also gets a share card at `/writing/<slug>.png` and an entry in `/writing/rss.xml`. Pages read notes only through `src/lib/notes.ts`, so moving notes to a database later changes that one module.
 
 ## Spotify setup
 

@@ -1,0 +1,53 @@
+---
+import WritingLayout from '../../layouts/Writing.astro';
+import NoteItem from '../../components/writing/NoteItem.astro';
+import TopicTabs from '../../components/writing/TopicTabs.astro';
+import Icon from '../../components/Icon.astro';
+import { FEED_SIZE, getNotes, groupByMonth, topicCounts } from '../../lib/notes';
+
+const notes = await getNotes();
+const months = groupByMonth(notes);
+// The pinned note leads the feed; the rest follow newest first.
+const pinned = notes.find((note) => note.data.pinned);
+const rest = notes.filter((note) => note !== pinned);
+const feed = rest.slice(0, FEED_SIZE);
+const older = rest[FEED_SIZE];
+const olderMonth = older && months.find((month) => month.notes.includes(older));
+---
+
+<WritingLayout
+  title="Writing"
+  description="Short, dated notes from Ry Bealey on web infrastructure, design, payments, support and building with AI."
+  months={months}
+>
+  <Fragment slot="intro">
+    <p class="hud eyebrow">Writing</p>
+    <h1>Notes from the build</h1>
+    <p class="lede">Short, dated notes on web infrastructure, design, payments, support and building with AI. When a note outgrows itself, it becomes a case study.</p>
+  </Fragment>
+
+  <TopicTabs current="all" total={notes.length} counts={topicCounts(notes)} />
+  {pinned && <NoteItem note={pinned} pinned />}
+  {feed.map((note) => <NoteItem note={note} />)}
+
+  <div class="more">
+    {
+      olderMonth ? (
+        <>
+          <a class="btn btn-ghost btn-sm" href={olderMonth.href}>
+            Older notes <Icon name="arrow" />
+          </a>
+          <span class="caption">The latest {FEED_SIZE} notes live here. Older ones are filed by month.</span>
+        </>
+      ) : notes.length > 0 ? (
+        <span class="caption">That's every note so far.</span>
+      ) : (
+        <span class="caption">No notes yet. The first one is on its way.</span>
+      )
+    }
+  </div>
+</WritingLayout>
+
+<style>
+  .more { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; padding-top: 28px; border-top: 1px solid var(--color-hairline); }
+</style>
