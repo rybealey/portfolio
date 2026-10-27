@@ -5,6 +5,7 @@ import SiteFooter from '../components/SiteFooter.astro';
 import Spectrum from '../components/Spectrum.astro';
 import CommandPalette from '../components/CommandPalette.astro';
 import { site } from '../data/site';
+import { cardFor, cardPath } from '../lib/og';
 
 interface Props {
   title?: string;
@@ -15,11 +16,16 @@ interface Props {
 }
 
 const { title, description = site.description, image, type = 'website' } = Astro.props;
-const imageUrl = image ? new URL(image, site.url).href : undefined;
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.lane}`;
 // Clean URLs: no .html, no /index, no trailing slash.
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1') || '/';
 const canonical = new URL(cleanPath, site.url);
+// A page without its own image gets a generated card (src/lib/og.ts); error
+// pages and unknown paths get none.
+const status = Astro.response.status ?? 200;
+const card = image || status >= 400 ? undefined : await cardFor(cleanPath);
+const shareImage = image ?? (card && cardPath(cleanPath, card));
+const imageUrl = shareImage ? new URL(shareImage, site.url).href : undefined;
 ---
 
 <!doctype html>
