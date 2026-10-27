@@ -1,6 +1,6 @@
 # Ry Bealey
 
-> Ry Bealey works in AI systems and implementation from Austin, TX. Ry turns billing, payments and support problems into specs, data models and working software, with AI as the build partner. Product and Operations Lead at SERVERIZZ, the infrastructure company Ry started in 2014, with eight years on Apple's front line in sales chat, AppleCare support, knowledge management and community moderation.
+> Ry Bealey works in AI systems and implementation from Austin, TX. Ry turns web, infrastructure and payments problems into specs, data models and working software, with AI as the build partner. Ry's deepest experience is in web infrastructure, agency-style design and development, and payment processing, and Ry is open to roles in any industry. Product and Operations Lead at SERVERIZZ, the infrastructure company Ry started in 2014, with eight years on Apple's front line in sales chat, AppleCare support, knowledge management and community moderation.
 
 ## Case studies
 

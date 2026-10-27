@@ -4,7 +4,7 @@
 export const glance = [
   { label: 'Now', value: 'Product and Operations Lead, SERVERIZZ', strong: true },
   { label: 'Also', value: 'Sales Chat Specialist, Apple' },
-  { label: 'Looking for', value: 'AI systems and implementation roles in fintech' },
+  { label: 'Looking for', value: 'AI systems, implementation and web roles, in any industry' },
   { label: 'Studied', value: 'B.A. Digital Media, University of Central Florida' },
 ];
 

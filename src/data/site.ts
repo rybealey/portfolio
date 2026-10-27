@@ -6,7 +6,7 @@ export const site = {
   timeZone: 'America/Chicago',
   coordinates: '30.27°N 97.74°W',
   description:
-    'Ry Bealey turns billing, payments and support problems into specs, data models and working software, with AI as the build partner.',
+    'Ry Bealey turns web, infrastructure and payments problems into specs, data models and working software, with AI as the build partner.',
   email: 'hello@ryanbealey.com',
   linkedin: 'https://www.linkedin.com/in/ryanbealey',
   // Set once known. Null hides the link rather than shipping a placeholder.
