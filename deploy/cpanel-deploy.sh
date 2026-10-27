@@ -16,6 +16,36 @@ REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 log() { echo "deploy: $*"; }
 
+# Makes sure each package's native binary loads in the folder given first.
+# npm skips an optional dependency it can't install without saying why, so
+# when one is missing this installs its Linux build by name, which either
+# fixes it or makes npm report the real cause, such as the disk quota.
+ensure_native() {
+  local dir="$1" out
+  shift
+  out="$(cd "$dir" && node "$REPO/deploy/check-native.cjs" "$@")"
+  [ -z "$out" ] && return 0
+  local -a builds
+  mapfile -t builds <<<"$out"
+  log "npm skipped native builds in $dir; installing ${builds[*]}"
+  (cd "$dir" && npm install --no-save --omit=dev --no-audit --no-fund --libc=glibc "${builds[@]}")
+  out="$(cd "$dir" && node "$REPO/deploy/check-native.cjs" "$@")"
+  if [ -n "$out" ]; then
+    echo "deploy: still missing after a direct install: $out" >&2
+    exit 1
+  fi
+}
+
+# Empties node_modules. In a folder set up as a Node.js app it is a link into
+# the app's environment, so empty what it points to and keep the link.
+clear_node_modules() {
+  if [ -L "$1/node_modules" ]; then
+    rm -rf "$1/node_modules/"* "$1/node_modules/".[!.]*
+  else
+    rm -rf "$1/node_modules"
+  fi
+}
+
 # Node 24 from Setup Node.js App, so the build uses the app's own runtime.
 if [ "${SKIP_NODE_ENV:-}" != "1" ]; then
   if [ ! -f "$NODE_ENV_ACTIVATE" ]; then
@@ -32,8 +62,12 @@ log "node $(node --version), npm $(npm --version)"
 
 log "building in $REPO"
 cd "$REPO"
+if [ -L "$REPO/node_modules" ]; then
+  log "note: $REPO is also set up as a Node.js app (node_modules links to $(readlink "$REPO/node_modules")). Only $APP_ROOT needs to be one."
+fi
 # The build needs no dev dependencies, which keeps the install small.
 npm ci --omit=dev --no-audit --no-fund
+ensure_native "$REPO" lightningcss
 npm run build
 
 log "copying the build to $APP_ROOT"
@@ -46,13 +80,16 @@ cp "$REPO/src/lib/link-preview.ts" "$REPO/src/lib/link-preview-store.ts" "$APP_R
 
 # The account's disk quota is tight, so drop the build's dependencies once
 # the build is copied; the next deploy reinstalls them.
-rm -rf "$REPO/node_modules" "$REPO/dist"
+clear_node_modules "$REPO"
+rm -rf "$REPO/dist"
 
 log "installing runtime dependencies in $APP_ROOT"
 cd "$APP_ROOT"
 # npm install rather than npm ci: the Node.js selector keeps node_modules as
 # a symlink into its own environment, and npm ci would delete it.
 npm install --omit=dev --no-audit --no-fund
+# Share cards render with resvg, and the About page's photo goes through sharp.
+ensure_native "$APP_ROOT" @resvg/resvg-js sharp
 
 touch "$APP_ROOT/tmp/restart.txt"
 log "restarted Passenger"

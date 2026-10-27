@@ -99,7 +99,7 @@ npm run dev             # http://localhost:4321
 ├── db/
 │   ├── migrations/         Numbered SQL files; add new ones, never edit old ones
 │   └── seed/               The starting content as Markdown, plus cached link previews
-├── deploy/                 Apache rules to add beside cPanel's Passenger block
+├── deploy/                 cPanel deploy script and Apache rules for the Passenger app
 ├── design/tokens/          Ryvanse tokens and the derived work-register tokens
 ├── public/                 Fonts, favicon, robots.txt, llms.txt
 ├── scripts/                Tokens, database, Spotify, banner and release scripts
@@ -161,6 +161,8 @@ The site runs as a Passenger app from **Setup Node.js App**. Don't use cPanel's 
    3. Installs runtime dependencies there.
    4. Restarts Passenger.
    5. Clears the build's own dependencies to save disk space.
+
+   After each install it loads the native modules (lightningcss for the build, resvg and sharp at runtime). npm skips an optional dependency it can't install without saying why, so if one is missing the script installs its Linux build by name. That either fixes it or shows npm's real error in the deploy log.
 4. Over SSH (cPanel's Terminal works), create the tables and import the starting content once. The database values go on the command line because cPanel's app variables don't reach the shell:
 
    ```bash
