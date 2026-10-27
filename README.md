@@ -143,34 +143,50 @@ Without these values the tile shows "Quiet right now" instead of failing.
 
 ## Deploy to cPanel
 
-Astro 7 needs Node.js 22.23.4 or newer. If the server's 22.x is older, pick 24.
+The site runs as a Passenger app from **Setup Node.js App**. Don't use cPanel's container-based application deploy: it needs rootless containers, which this server doesn't allow, and it treats the site as static. Astro 7 needs Node.js 22.23.4 or newer; the app uses 24.
 
-1. Run `npm run package` locally.
-2. In cPanel, open **Setup Node.js App** and create an application:
-   - Node.js version: 24 (or 22.23.4+)
+### First deploy
+
+1. In cPanel, open **Setup Node.js App** and create an application:
+   - Node.js version: 24
    - Application mode: Production
    - Application root: `ryanbealey` (outside `public_html`)
    - Application URL: `ryanbealey.com`
    - Application startup file: `app.cjs`
    - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
-3. Upload `release/ryanbealey.tar.gz` to `~/ryanbealey` and extract it there. Don't upload `node_modules`; the Node.js selector manages that folder.
-4. Back in Setup Node.js App, click **Run NPM Install**.
-5. Over SSH (cPanel's Terminal works), create the tables and import the starting content once. The database values go on the command line here because cPanel's app variables don't reach the shell:
+2. In **Git Version Control**, click **Create** and clone `https://github.com/rybealey/portfolio.git` into `repositories/portfolio`.
+3. Under **Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
+   1. Builds in `repositories/portfolio` with the app's Node 24.
+   2. Copies the built site, `app.cjs`, the package files and the database scripts into `~/ryanbealey`.
+   3. Installs runtime dependencies there.
+   4. Restarts Passenger.
+   5. Clears the build's own dependencies to save disk space.
+4. Over SSH (cPanel's Terminal works), create the tables and import the starting content once. The database values go on the command line because cPanel's app variables don't reach the shell:
 
    ```bash
    source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey
    export DB_HOST=localhost DB_PORT=3306 DB_NAME=… DB_USER=…
    read -s DB_PASSWORD && export DB_PASSWORD
    node scripts/db-migrate.mjs && node scripts/db-seed.mjs
+   touch tmp/restart.txt
    ```
 
-6. Click **Restart**.
-7. Add the rules from `deploy/htaccess.example` above cPanel's Passenger block in the domain's `.htaccess`.
+5. Add the rules from `deploy/htaccess.example` above cPanel's Passenger block in the domain's `.htaccess`.
 
-For later deploys, upload and extract the new archive, then install, apply any new migrations (with the DB variables exported as above) and restart:
+### Later deploys
+
+1. Push to GitHub.
+2. In **Git Version Control → Manage → Pull or Deploy**, click **Update from Remote**, then **Deploy HEAD Commit**.
+3. Migrations stay manual. If the release adds a file to `db/migrations/`, apply it over SSH with the DB variables exported as above: `cd ~/ryanbealey && node scripts/db-migrate.mjs`.
+
+The deploy log is in `~/.cpanel/logs/`.
+
+### Without Git
+
+`npm run package` builds `release/ryanbealey.tar.gz` locally. Upload it to `~/ryanbealey`, extract it, then install and restart:
 
 ```bash
-source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey && npm ci --omit=dev && node scripts/db-migrate.mjs && touch tmp/restart.txt
+source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey && npm install --omit=dev && touch tmp/restart.txt
 ```
 
 ## Status and roadmap
