@@ -22,7 +22,8 @@ const person = {
   name: site.name,
   url: site.url,
   email: `mailto:${site.email}`,
-  jobTitle: 'Founder, SERVERIZZ',
+  jobTitle: 'Product and Operations Lead',
+  worksFor: { '@type': 'Organization', name: 'SERVERIZZ', url: 'https://serverizz.com' },
   description: site.description,
   homeLocation: { '@type': 'Place', name: site.location },
   sameAs: [site.linkedin, ...(site.github ? [site.github] : [])],
@@ -43,7 +44,7 @@ const person = {
       <BentoCell id="spotify" size="small" movable name="Spotify"><SpotifyTile /></BentoCell>
       <BentoCell id="home-base" size="small" movable name="Home base"><ClockTile /></BentoCell>
       <BentoCell id="now" size="small" movable name="Now">
-        <FactTile href="/about" label="Now" title="Founder, SERVERIZZ" caption="Infrastructure, Austin" />
+        <FactTile href="/about" label="Now" title="Product and Operations Lead" caption="SERVERIZZ, Austin" />
       </BentoCell>
       <BentoCell id="updated" size="small" movable name="Updated">
         <FactTile href="/colophon" label="Updated" title={updated} caption="Built from a public spec" />

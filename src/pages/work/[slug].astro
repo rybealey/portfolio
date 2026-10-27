@@ -19,6 +19,7 @@ const { Content } = await render(entry);
 const statusChip = {
   shipped: { label: 'Shipped', tone: 'success' },
   live: { label: 'Live', tone: 'success' },
+  phased: { label: 'Live · phased rollout', tone: 'success' },
   prototype: { label: 'Prototype', tone: 'warning' },
   'in-progress': { label: 'Write-up in progress', tone: 'warning' },
 } as const;

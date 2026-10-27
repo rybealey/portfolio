@@ -12,7 +12,7 @@ const work = defineCollection({
     role: z.string(),
     timeframe: z.string(),
     stack: z.array(z.string()).min(1),
-    status: z.enum(['shipped', 'live', 'prototype', 'in-progress']),
+    status: z.enum(['shipped', 'live', 'phased', 'prototype', 'in-progress']),
     accent: z.enum(['billing', 'web', 'fin']),
     metrics: z.array(z.string()).min(1).max(4),
   }),
