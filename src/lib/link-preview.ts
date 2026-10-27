@@ -1,6 +1,5 @@
 // Reads a page's Open Graph and Twitter card tags into a link preview.
-// Pure fetch-and-parse with no storage, so it can run from the pre-build
-// script today and from a save hook later if notes move to a database.
+// Pure fetch-and-parse; src/lib/link-preview-store.ts saves the result.
 // Erasable TypeScript only: Node runs this file directly.
 
 export type PreviewKind = 'large' | 'summary' | 'video';
@@ -15,11 +14,6 @@ export interface LinkPreview {
   imageUrl: string | null;
   kind: PreviewKind;
 }
-
-/** One entry in src/data/link-previews.json; `image` is a file in src/assets/link-previews. */
-export type CachedPreview =
-  | (LinkPreview & { status: 'ok'; image: string | null; fetchedAt: string })
-  | { status: 'failed'; url: string; host: string; fetchedAt: string };
 
 const USER_AGENT = 'Mozilla/5.0 (compatible; ryanbealey.com link preview; +https://ryanbealey.com)';
 const MAX_HTML_BYTES = 1_000_000;

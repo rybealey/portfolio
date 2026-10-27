@@ -1,9 +1,9 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCaseStudies } from '../lib/work';
 import Icon from './Icon.astro';
 import { site } from '../data/site';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = await getCaseStudies();
 
 type Item = { label: string; meta: string; href?: string; action?: 'theme' | 'reset-layout' };
 

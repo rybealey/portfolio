@@ -1,21 +1,13 @@
 ---
-import type { GetStaticPaths } from 'astro';
-import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import PageIntro from '../../components/PageIntro.astro';
+import { getCaseStudy } from '../../lib/work';
+import { renderMarkdown } from '../../lib/markdown';
 
-export const getStaticPaths = (async () => {
-  const work = await getCollection('work');
-  return work.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
-}) satisfies GetStaticPaths;
-
-interface Props {
-  entry: CollectionEntry<'work'>;
-}
-
-const { entry } = Astro.props;
+const entry = await getCaseStudy(Astro.params.slug ?? '');
+if (!entry) return Astro.rewrite('/404');
 const { order, label, title, summary, status, accent, metrics } = entry.data;
-const { Content } = await render(entry);
+const html = await renderMarkdown(entry.body);
 const statusChip = {
   shipped: { label: 'Shipped', tone: 'success' },
   live: { label: 'Live', tone: 'success' },
@@ -36,7 +28,7 @@ const statusChip = {
     </PageIntro>
     </div>
     <div class="body">
-      <Content />
+      <Fragment set:html={html} />
       <p><a href="/">Back to home</a></p>
     </div>
   </article>

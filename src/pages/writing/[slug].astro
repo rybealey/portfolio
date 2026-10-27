@@ -2,43 +2,36 @@
 // Two kinds of page share /writing/<slug>: a note's permalink
 // (/writing/2026-10-25-hourly-billing) and a topic page (/writing/billing).
 // Note slugs start with a date, so they never collide with a topic.
-import type { GetStaticPaths } from 'astro';
-import { getEntry } from 'astro:content';
 import WritingLayout from '../../layouts/Writing.astro';
 import NoteItem from '../../components/writing/NoteItem.astro';
 import TopicTabs from '../../components/writing/TopicTabs.astro';
 import TopicLabel from '../../components/writing/TopicLabel.astro';
 import CaseStudyCard from '../../components/writing/CaseStudyCard.astro';
 import Icon from '../../components/Icon.astro';
-import { TOPICS, excerpt, formatDate, getNotes, groupByMonth, plainText, shareImage, topicCounts, type Note, type TopicKey } from '../../lib/notes';
+import { TOPICS, excerpt, formatDate, getNotes, groupByMonth, isTopic, plainText, shareImage, topicCounts, type Note, type TopicKey } from '../../lib/notes';
+import { getCaseStudy } from '../../lib/work';
 
-export const getStaticPaths = (async () => {
-  const notes = await getNotes();
-  const counts = topicCounts(notes);
-  return [
-    ...notes.map((note) => ({ params: { slug: note.id }, props: { kind: 'note' as const, note } })),
-    ...(Object.keys(TOPICS) as TopicKey[])
-      .filter((topic) => counts[topic] > 0)
-      .map((topic) => ({ params: { slug: topic }, props: { kind: 'topic' as const, topic } })),
-  ];
-}) satisfies GetStaticPaths;
-
-type Props = { kind: 'note'; note: Note } | { kind: 'topic'; topic: TopicKey };
-
-const props = Astro.props;
+const slug = Astro.params.slug ?? '';
 const notes = await getNotes();
 const months = groupByMonth(notes);
+const counts = topicCounts(notes);
+
+type Page = { kind: 'note'; note: Note } | { kind: 'topic'; topic: TopicKey };
+const found = notes.find((note) => note.id === slug);
+// A topic page exists once the topic has a note.
+const props: Page | undefined = found ? { kind: 'note', note: found } : isTopic(slug) && counts[slug] > 0 ? { kind: 'topic', topic: slug } : undefined;
+if (!props) return Astro.rewrite('/404');
 
 let neighbors: { newer?: Note | undefined; older?: Note | undefined } = {};
 let topicNotes: Note[] = [];
 let caseStudy;
 if (props.kind === 'note') {
-  const index = notes.indexOf(notes.find((note) => note.id === props.note.id)!);
+  const index = notes.indexOf(props.note);
   neighbors = { newer: notes[index - 1], older: notes[index + 1] };
 } else {
   topicNotes = notes.filter((note) => note.data.topic === props.topic);
-  const slug = TOPICS[props.topic].caseStudy;
-  caseStudy = slug ? await getEntry('work', slug) : undefined;
+  const caseSlug = TOPICS[props.topic].caseStudy;
+  caseStudy = caseSlug ? await getCaseStudy(caseSlug) : undefined;
 }
 const noteMonth = props.kind === 'note' ? months.find((month) => month.notes.some((note) => note.id === props.note.id)) : undefined;
 ---

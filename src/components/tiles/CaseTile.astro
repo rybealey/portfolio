@@ -1,9 +1,9 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CaseStudy } from '../../lib/work';
 import Icon from '../Icon.astro';
 
 interface Props {
-  entry: CollectionEntry<'work'>;
+  entry: CaseStudy;
   /** The flagship gets the tall tile, a summary and the read-more line. */
   featured?: boolean;
 }

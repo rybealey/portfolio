@@ -1,30 +1,30 @@
 // @ts-check
 import { defineConfig, envField } from 'astro/config';
 import node from '@astrojs/node';
-import sitemap from '@astrojs/sitemap';
 
-// Pages prerender to static HTML. Only routes that opt out with
-// `export const prerender = false` (the Spotify endpoint) run on the
-// Node server that Passenger starts through app.cjs.
+// Every page renders on request on the Node server that Passenger starts
+// through app.cjs, reading case studies and notes from MariaDB, so content
+// published from the apps shows up without a deploy. Static files in
+// public/ and the built CSS and JS are still served straight from disk.
 export default defineConfig({
   site: 'https://ryanbealey.com',
+  output: 'server',
   trailingSlash: 'never',
-  // 'preserve' mirrors src/pages: about.html, but writing/index.html for a
-  // section that also has child pages, which the Node server resolves cleanly.
-  build: { format: 'preserve' },
   // Case studies live under /work/; the home page is the work index.
   redirects: {
     '/work': { status: 301, destination: '/' },
   },
-  // Code in notes is colored by CSS variables, so it follows the theme.
-  markdown: { shikiConfig: { theme: 'css-variables' } },
   adapter: node({ mode: 'standalone' }),
-  integrations: [sitemap()],
   env: {
     schema: {
       SPOTIFY_CLIENT_ID: envField.string({ context: 'server', access: 'secret', optional: true }),
       SPOTIFY_CLIENT_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
       SPOTIFY_REFRESH_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      DB_HOST: envField.string({ context: 'server', access: 'secret', default: '127.0.0.1' }),
+      DB_PORT: envField.number({ context: 'server', access: 'secret', default: 3306 }),
+      DB_NAME: envField.string({ context: 'server', access: 'secret' }),
+      DB_USER: envField.string({ context: 'server', access: 'secret' }),
+      DB_PASSWORD: envField.string({ context: 'server', access: 'secret' }),
     },
   },
 });

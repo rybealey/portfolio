@@ -1,26 +1,15 @@
 ---
-import type { GetStaticPaths } from 'astro';
 import WritingLayout from '../../../layouts/Writing.astro';
 import NoteRow from '../../../components/writing/NoteRow.astro';
 import Icon from '../../../components/Icon.astro';
-import { getNotes, groupByMonth, type Month } from '../../../lib/notes';
+import { getNotes, groupByMonth } from '../../../lib/notes';
 
-export const getStaticPaths = (async () => {
-  const months = groupByMonth(await getNotes());
-  return months.map((month, i) => ({
-    params: { year: month.year, month: month.month },
-    props: { month, newer: months[i - 1], older: months[i + 1] },
-  }));
-}) satisfies GetStaticPaths;
-
-interface Props {
-  month: Month;
-  newer?: Month | undefined;
-  older?: Month | undefined;
-}
-
-const { month, newer, older } = Astro.props;
 const months = groupByMonth(await getNotes());
+const index = months.findIndex((m) => m.year === Astro.params.year && m.month === Astro.params.month);
+const month = months[index];
+if (!month) return Astro.rewrite('/404');
+const newer = months[index - 1];
+const older = months[index + 1];
 const count = month.notes.length;
 ---
 

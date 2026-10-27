@@ -1,17 +1,15 @@
-// The 1200x630 share card for each note, rendered at build time. This is
-// the image LinkedIn, X and iMessage show when a note's link is posted.
-import type { APIRoute, GetStaticPaths } from 'astro';
+// The 1200x630 share card for each note: the image LinkedIn, X and iMessage
+// show when a note's link is posted. Rendered on first request and kept in
+// memory until the note changes; pages link it with a version query.
+import type { APIRoute } from 'astro';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
 import { TOPICS, excerpt, formatDate, getNotes, plainText, type Note } from '../../lib/notes';
 
-export const getStaticPaths = (async () =>
-  (await getNotes()).map((note) => ({ params: { slug: note.id }, props: { note } }))) satisfies GetStaticPaths;
-
 // Satori reads WOFF but not WOFF2, so the cards use the Fontsource copies
-// of the same faces. Builds run from the project root.
+// of the same faces. The server runs from the app root (Passenger's too).
 const fontFile = (pkg: string, file: string) => readFile(join(process.cwd(), 'node_modules/@fontsource', pkg, 'files', file));
 let fonts: Promise<Parameters<typeof satori>[1]['fonts']> | undefined;
 const loadFonts = () =>
@@ -57,12 +55,20 @@ function card(note: Note) {
   ]);
 }
 
-export const GET: APIRoute = async ({ props }) => {
-  const svg = await satori(card((props as { note: Note }).note) as Parameters<typeof satori>[0], {
-    width: 1200,
-    height: 630,
-    fonts: await loadFonts(),
+const rendered = new Map<string, { version: number; png: Uint8Array<ArrayBuffer> }>();
+
+export const GET: APIRoute = async ({ params }) => {
+  const note = (await getNotes()).find((n) => n.id === params.slug);
+  if (!note) return new Response('Not found', { status: 404 });
+
+  const version = note.updatedAt.getTime();
+  let entry = rendered.get(note.id);
+  if (!entry || entry.version !== version) {
+    const svg = await satori(card(note) as Parameters<typeof satori>[0], { width: 1200, height: 630, fonts: await loadFonts() });
+    entry = { version, png: new Uint8Array(new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng()) };
+    rendered.set(note.id, entry);
+  }
+  return new Response(entry.png, {
+    headers: { 'Content-Type': 'image/png', 'Cache-Control': 'public, max-age=86400' },
   });
-  const png = new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
-  return new Response(new Uint8Array(png), { headers: { 'Content-Type': 'image/png' } });
 };

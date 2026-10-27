@@ -20,7 +20,7 @@ export const GET: APIRoute = async (context) => {
         link: permalink(note),
         pubDate: note.data.date,
         description: text,
-        content: `${note.rendered?.html ?? `<p>${escape(text)}</p>`}${link}`,
+        content: `${note.html}${link}`,
         categories: [TOPICS[note.data.topic].label],
       };
     }),

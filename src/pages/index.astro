@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCaseStudies } from '../lib/work';
 import Base from '../layouts/Base.astro';
 import BentoGrid from '../components/bento/BentoGrid.astro';
 import BentoCell from '../components/bento/BentoCell.astro';
@@ -11,8 +11,8 @@ import FactTile from '../components/tiles/FactTile.astro';
 import ContactTile from '../components/tiles/ContactTile.astro';
 import { site } from '../data/site';
 
-const [billing, web, fin] = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
-if (!billing || !web || !fin) throw new Error('Home expects three case studies in src/content/work');
+const [billing, web, fin] = await getCaseStudies();
+if (!billing || !web || !fin) throw new Error('Home expects three published case studies');
 
 const updated = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: site.timeZone });
 

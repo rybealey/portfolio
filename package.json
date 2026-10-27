@@ -8,27 +8,33 @@
   },
   "scripts": {
     "tokens": "node scripts/build-tokens.mjs",
-    "links": "node scripts/fetch-link-previews.mjs",
-    "dev": "npm run tokens && npm run links && astro dev",
-    "build": "npm run tokens && npm run links && astro check && astro build",
+    "dev": "npm run tokens && astro dev",
+    "build": "npm run tokens && astro check && astro build",
     "preview": "node --env-file-if-exists=.env app.cjs",
     "check": "astro check",
+    "db:up": "docker compose up -d --wait",
+    "db:migrate": "node --env-file-if-exists=.env scripts/db-migrate.mjs",
+    "db:seed": "node --env-file-if-exists=.env scripts/db-seed.mjs",
+    "db:previews": "node --env-file-if-exists=.env scripts/db-previews.mjs",
     "spotify:auth": "node --env-file-if-exists=.env scripts/spotify-auth.mjs",
     "package": "npm run build && node scripts/package-release.mjs"
   },
   "dependencies": {
     "@astrojs/node": "^11.1.9",
     "@astrojs/rss": "^4.0.19",
-    "@astrojs/sitemap": "^3.7.4",
-    "astro": "^7.4.2"
-  },
-  "devDependencies": {
-    "@astrojs/check": "^0.9.12",
     "@fontsource/atkinson-hyperlegible": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@fontsource/unbounded": "^5.3.0",
     "@resvg/resvg-js": "^2.6.2",
+    "astro": "^7.4.2",
+    "marked": "^18.1.2",
+    "mysql2": "^3.24.6",
     "satori": "^0.63.2",
+    "shiki": "^4.5.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
     "typescript": "^6.0.0"
   }
 }

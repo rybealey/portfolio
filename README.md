@@ -1,11 +1,15 @@
 # ryanbealey.com
 
-Portfolio for Ry Bealey. Astro 7, static pages plus one server endpoint (Spotify), served by Passenger on cPanel.
+Portfolio for Ry Bealey. Astro 7 rendering on request, with case studies and Writing notes in MariaDB, served by Passenger on cPanel.
 
 ## Run it
 
 ```bash
 npm install
+cp .env.example .env    # then fill in the DB_ passwords (any values work locally)
+npm run db:up           # MariaDB 10.11 in Docker, on 127.0.0.1:3307
+npm run db:migrate
+npm run db:seed
 npm run dev
 ```
 
@@ -15,34 +19,29 @@ npm run dev
 | --- | --- |
 | `npm run dev` | Tokens, then the Astro dev server on http://localhost:4321 |
 | `npm run build` | Tokens, `astro check`, then the production build into `dist/` |
-| `npm run links` | Unfurls links shared in notes (runs before `dev` and `build`; add `-- --refresh` to refetch) |
 | `npm run preview` | Runs the built site through `app.cjs`, exactly as Passenger will |
+| `npm run db:up` | Starts the local MariaDB in Docker and waits until it's healthy |
+| `npm run db:migrate` | Applies new files in `db/migrations/`, once each |
+| `npm run db:seed` | Loads `db/seed/` (the original Markdown content and link previews); safe to rerun |
+| `npm run db:previews` | Fetches link previews for notes that don't have one yet (`-- --refresh` refetches all) |
 | `npm run spotify:auth` | One-time Spotify login that prints a refresh token |
 | `npm run package` | Build, then bundle `release/ryanbealey.tar.gz` for cPanel |
 
 ## How it fits together
 
 - `design/tokens/ryvanse.tokens.json` is a copy of the Ryvanse design system's tokens. `ry-bealey.tokens.json` derives the portfolio's work register from it (semantic colors for dark and light, long-form type). `scripts/build-tokens.mjs` turns both into CSS custom properties.
-- `src/content/work/` holds the case studies. The schema in `src/content.config.ts` fails the build on a missing field.
+- Case studies and notes live in MariaDB (schema in `db/migrations/`). Pages read them through `src/lib/work.ts` and `src/lib/notes.ts`, which hold lists in memory for 30 seconds; bodies are Markdown rendered by `src/lib/markdown.ts`. Images (link preview images now, note images later) are stored in the `media` table and served from `/media/<hash>.<ext>`.
 - `src/components/bento/` is the home grid. Cells marked `movable` can be dragged with a mouse or pen, or moved with the grip button from the keyboard, and swap among themselves; the hero, the three case studies and the contact strip never move. A visitor's order is saved in their browser under `rb:bento`. Touch devices (phones, tablets) can't rearrange and always get the designed order. The logic lives in `src/lib/bento.ts`.
-- `src/pages/api/now-playing.ts` is the only on-demand route. It calls Spotify with a server-side refresh token (`src/lib/spotify.ts`), caches for 30 seconds, and falls back to the last good answer, so the client secret never reaches the browser.
+- `src/pages/api/now-playing.ts` calls Spotify with a server-side refresh token (`src/lib/spotify.ts`), caches for 30 seconds, and falls back to the last good answer, so the client secret never reaches the browser.
 - Client JavaScript on the home page is about 2.5 KB gzipped, no framework.
 
-## Writing a note
+## Content
 
-Notes are Markdown files in `src/content/notes/`. The file name is the note's permanent link, so start it with the date: `2026-10-28-short-slug.md`.
+Notes and case studies are published from the iOS and macOS apps (a separate project) through an API this site will expose. Until then, add rows directly. A note's `slug` is its permanent link and starts with its date; it carries at most one attachment (`link_url`, `case_study_id` or `image_media_id`, the database enforces it) and stays out of production while `status` is `draft`. After adding a note with a link, run `npm run db:previews` to unfurl it. New content shows within 30 seconds, without a deploy.
 
-```markdown
----
-date: 2026-10-28
-topic: web            # billing, web, support or build
-link: https://example.com/article   # optional: one attachment per note
----
+`db/seed/` holds the content the site started with, as Markdown. It seeds local databases and the first production import; it is not edited after that.
 
-The note itself, a few sentences.
-```
-
-Instead of `link`, a note can carry `caseStudy: serverizz-billing` or an `image` (with `imageAlt`). Add `pinned: true` to lead the feed, or `draft: true` to keep it out of production. Shared links are fetched once by `npm run links`, and their preview images are saved to `src/assets/link-previews/`; commit both those images and `src/data/link-previews.json`. Each note also gets a share card at `/writing/<slug>.png` and an entry in `/writing/rss.xml`. Pages read notes only through `src/lib/notes.ts`, so moving notes to a database later changes that one module.
+Each note gets a share card at `/writing/<slug>.png`, rendered on first request, and an entry in `/writing/rss.xml`. The sitemap at `/sitemap.xml` is built live too.
 
 ## Spotify setup
 
@@ -63,19 +62,30 @@ Astro 7 needs Node.js 22.23.4 or newer. If the server's 22.x is older, pick 24.
    - Application root: `ryanbealey` (outside `public_html`)
    - Application URL: `ryanbealey.com`
    - Application startup file: `app.cjs`
-   - Environment variables: the three `SPOTIFY_*` values
+   - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
 3. Upload `release/ryanbealey.tar.gz` to `~/ryanbealey` and extract it there. Don't upload `node_modules`; the Node.js selector manages that folder.
-4. Back in Setup Node.js App, click **Run NPM Install**, then **Restart**.
-5. Add the rules from `deploy/htaccess.example` above cPanel's Passenger block in the domain's `.htaccess`.
+4. Back in Setup Node.js App, click **Run NPM Install**.
+5. Over SSH (Terminal in cPanel works), create the tables and import the starting content once. The database values go on the command line here because cPanel's app variables don't reach the shell:
 
-For later deploys over SSH, upload and extract the new archive, then:
+   ```bash
+   source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey
+   export DB_HOST=localhost DB_PORT=3306 DB_NAME=… DB_USER=…
+   read -s DB_PASSWORD && export DB_PASSWORD
+   node scripts/db-migrate.mjs && node scripts/db-seed.mjs
+   ```
+
+6. Click **Restart**.
+7. Add the rules from `deploy/htaccess.example` above cPanel's Passenger block in the domain's `.htaccess`.
+
+For later deploys over SSH, upload and extract the new archive, then install, apply any new migrations (with the DB variables exported as above) and restart:
 
 ```bash
-source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey && npm ci --omit=dev && touch tmp/restart.txt
+source ~/nodevenv/ryanbealey/24/bin/activate && cd ~/ryanbealey && npm ci --omit=dev && node scripts/db-migrate.mjs && touch tmp/restart.txt
 ```
 
 ## Still to fill in
 
 - `src/data/site.ts`: `github`, `resumePdf` and `spotifyProfile` (links are hidden or fall back until set).
-- Case-study copy in `src/content/work/`, plus the About, Resume and Colophon pages.
+- Case-study copy (in the database), plus the Resume and Colophon pages.
+- The publishing API for the iOS and macOS apps.
 - GTM and GA4. Tiles already carry `data-ga-event` attributes for `resume_download` and `contact_click`.

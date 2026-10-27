@@ -1,6 +1,4 @@
 ---
-import { getEntry, render } from 'astro:content';
-import { Image } from 'astro:assets';
 import TopicLabel from './TopicLabel.astro';
 import LinkPreview from './LinkPreview.astro';
 import CaseStudyCard from './CaseStudyCard.astro';
@@ -13,11 +11,10 @@ interface Props {
 }
 
 const { note, pinned = false } = Astro.props;
-const { Content } = await render(note);
-const caseStudy = note.data.caseStudy ? await getEntry(note.data.caseStudy) : undefined;
+const { caseStudy, image } = note.data;
 const dateId = `${note.id}-date`;
 // A short note with nothing attached is set larger, like a pull quote.
-const short = !note.data.link && !caseStudy && !note.data.image && !(note.body ?? '').includes('```') && plainText(note).length < 160;
+const short = !note.data.link && !caseStudy && !image && !note.body.includes('```') && plainText(note).length < 160;
 ---
 
 <article class="note" id={note.id} aria-labelledby={dateId}>
@@ -46,15 +43,15 @@ const short = !note.data.link && !caseStudy && !note.data.image && !(note.body ?
     </button>
   </div>
   <div class:list={['body', { short }]}>
-    <Content />
+    <Fragment set:html={note.html} />
   </div>
-  {note.data.link && <LinkPreview url={note.data.link} />}
+  {note.data.link && <LinkPreview url={note.data.link} preview={note.data.preview} />}
   {caseStudy && <CaseStudyCard entry={caseStudy} />}
   {
-    note.data.image && (
+    image && (
       <figure class="figure">
-        <Image src={note.data.image} alt={note.data.imageAlt!} widths={[720, 1440]} sizes="(max-width: 860px) 100vw, 720px" />
-        {note.data.imageCaption && <figcaption class="caption">{note.data.imageCaption}</figcaption>}
+        <img src={image.src} alt={image.alt} width={image.width ?? undefined} height={image.height ?? undefined} loading="lazy" decoding="async" />
+        {image.caption && <figcaption class="caption">{image.caption}</figcaption>}
       </figure>
     )
   }

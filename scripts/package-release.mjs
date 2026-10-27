@@ -9,7 +9,22 @@ const out = new URL('release/ryanbealey/', root);
 
 await rm(new URL('release/', root), { recursive: true, force: true });
 await mkdir(out, { recursive: true });
-for (const path of ['dist', 'app.cjs', 'package.json', 'package-lock.json']) {
+// The database scripts ship too, so migrations run on the server. The seed
+// script and the preview store it imports come along for the first import.
+const files = [
+  'dist',
+  'app.cjs',
+  'package.json',
+  'package-lock.json',
+  'db',
+  'scripts/db.mjs',
+  'scripts/db-migrate.mjs',
+  'scripts/db-seed.mjs',
+  'scripts/db-previews.mjs',
+  'src/lib/link-preview.ts',
+  'src/lib/link-preview-store.ts',
+];
+for (const path of files) {
   await cp(new URL(path, root), new URL(path, out), { recursive: true });
 }
 
