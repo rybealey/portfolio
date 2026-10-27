@@ -1,13 +1,12 @@
 <!-- Shows what's playing; deliberately not a link, so it opens nothing. -->
 <div class="tile spotify" role="group" data-spotify data-state="loading" aria-label="Loading what Ry is listening to">
-  <div class="art" aria-hidden="true">
-    <img alt="" width="640" height="640" decoding="async" hidden data-sp-art />
-  </div>
+  <div class="art" aria-hidden="true" data-sp-art></div>
   <span class="badge">
     <span class="hud tile-label" data-sp-label>Listening</span>
     <span class="eq" aria-hidden="true"><span></span><span></span><span></span></span>
   </span>
   <span class="plate">
+    <span class="sweep" aria-hidden="true" data-sp-sweep></span>
     <span class="track" data-sp-title>Tuning in</span>
     <span class="caption artist" data-sp-artist-box><span class="marquee" data-sp-artist>One moment</span></span>
   </span>
@@ -55,35 +54,85 @@
     return rtf.format(-Math.round(minutes / (60 * 24)), 'day');
   };
 
-  const render = (el: HTMLElement, data: NowPlaying) => {
-    const $ = <T extends HTMLElement>(sel: string) => el.querySelector<T>(sel)!;
-    const art = $<HTMLImageElement>('[data-sp-art]');
-    el.dataset.state = data.state;
+  // A song change: the old title and artist drift up and out, the new cover
+  // fades in over the old one once it has loaded, the new text rises in, and
+  // a thin spectrum line sweeps across the plate. Only when the track really
+  // changes, never on a poll that finds the same one, and never under
+  // reduced motion.
+  const EASE_OUT = 'cubic-bezier(0.2, 0.8, 0.2, 1)';
+  const animate = () => !reducedMotion.matches;
 
-    if (data.state === 'off') {
-      $('[data-sp-label]').textContent = 'Listening';
-      $('[data-sp-title]').textContent = 'Quiet right now';
-      $('[data-sp-artist]').textContent = 'Nothing on the speakers';
-      fitTitle($('[data-sp-title]'));
-      fitMarquee($('[data-sp-artist-box]'));
-      el.setAttribute('aria-label', 'Nothing playing right now');
-      art.hidden = true;
+  // Shows a cover, fading it in over the one before, then drops the old one.
+  // Resolves once the new cover is ready to show.
+  const showArt = async (box: HTMLElement, src: string | null, fade: boolean) => {
+    const current = box.querySelector<HTMLImageElement>('img:last-child');
+    if (!src) {
+      // No cover (nothing playing, or a track without art): fade the old one out.
+      const clear = () => box.replaceChildren();
+      if (!fade || !current) return clear();
+      current.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 360, easing: 'ease-out', fill: 'forwards' }).finished.then(clear, clear);
       return;
     }
-
-    const label = data.state === 'playing' ? 'Now playing' : `Last played · ${ago(data.at)}`;
-    $('[data-sp-label]').textContent = label;
-    $('[data-sp-title]').textContent = data.title;
-    $('[data-sp-artist]').textContent = data.artist;
-    fitTitle($('[data-sp-title]'));
-    fitMarquee($('[data-sp-artist-box]'));
-    el.setAttribute('aria-label', `${label}: ${data.title} by ${data.artist}`);
-    if (data.art && art.src !== data.art) {
-      art.onload = () => (art.hidden = false);
-      art.src = data.art;
-    } else if (!data.art) {
-      art.hidden = true;
+    if (current?.src === src) return;
+    const img = new Image(640, 640);
+    img.alt = '';
+    img.decoding = 'async';
+    img.src = src;
+    try {
+      await img.decode();
+    } catch {
+      return;
     }
+    box.append(img);
+    const drop = () => [...box.querySelectorAll('img')].filter((other) => other !== img).forEach((other) => other.remove());
+    if (!fade) return drop();
+    img
+      .animate([{ opacity: 0, transform: 'scale(1.06)' }, { opacity: 1, transform: 'none' }], { duration: 560, easing: EASE_OUT })
+      .finished.then(drop, drop);
+  };
+
+  const render = async (el: HTMLElement, data: NowPlaying) => {
+    const $ = <T extends HTMLElement>(sel: string) => el.querySelector<T>(sel)!;
+    const title = $('[data-sp-title]');
+    const artistBox = $('[data-sp-artist-box]');
+    const key = data.state === 'off' ? 'off' : `${data.title}\u0000${data.artist}`;
+    const changed = el.dataset.track !== undefined && el.dataset.track !== key;
+    const firstLoad = el.dataset.track === undefined;
+    el.dataset.track = key;
+    const motion = changed && animate();
+
+    const label = data.state === 'off' ? 'Listening' : data.state === 'playing' ? 'Now playing' : `Last played · ${ago(data.at)}`;
+    const text = data.state === 'off' ? { title: 'Quiet right now', artist: 'Nothing on the speakers' } : data;
+    const art = showArt($('[data-sp-art]'), data.state === 'off' ? null : data.art, motion || (firstLoad && animate()));
+
+    // Old text out while the new cover loads.
+    const parts = [title, artistBox];
+    const outs = motion
+      ? parts.map((part) => part.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: 'translateY(-4px)' }], { duration: 180, easing: 'ease-in', fill: 'forwards' }))
+      : [];
+    await Promise.all([art, ...outs.map((out) => out.finished.catch(() => {}))]);
+
+    el.dataset.state = data.state;
+    $('[data-sp-label]').textContent = label;
+    title.textContent = text.title;
+    $('[data-sp-artist]').textContent = text.artist;
+    fitTitle(title);
+    fitMarquee(artistBox);
+    el.setAttribute('aria-label', data.state === 'off' ? 'Nothing playing right now' : `${label}: ${data.title} by ${data.artist}`);
+
+    if (!motion) return;
+    outs.forEach((out) => out.cancel());
+    parts.forEach((part, i) =>
+      part.animate([{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'none' }], { duration: 320, delay: i * 70, easing: EASE_OUT, fill: 'backwards' }),
+    );
+    $('[data-sp-sweep]').animate(
+      [
+        { transform: 'scaleX(0)', opacity: 1 },
+        { transform: 'scaleX(1)', opacity: 1, offset: 0.55 },
+        { transform: 'scaleX(1)', opacity: 0 },
+      ],
+      { duration: 1100, easing: EASE_OUT },
+    );
   };
 
   const refresh = async () => {
@@ -91,9 +140,9 @@
     try {
       const res = await fetch('/api/now-playing', { headers: { Accept: 'application/json' } });
       if (!res.ok) throw new Error(String(res.status));
-      render(tile, (await res.json()) as NowPlaying);
+      await render(tile, (await res.json()) as NowPlaying);
     } catch {
-      if (tile.dataset.state === 'loading') render(tile, { state: 'off' });
+      if (tile.dataset.state === 'loading') await render(tile, { state: 'off' });
     }
   };
 
@@ -133,8 +182,8 @@
     border-radius: inherit;
     overflow: hidden;
   }
-  .art img { width: 100%; height: 100%; object-fit: cover; animation: art-in 240ms ease-out; }
-  @keyframes art-in { from { opacity: 0; transform: scale(1.04); } }
+  /* Covers stack so a new one can fade in over the old. */
+  .art :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
   .badge {
     position: absolute;
@@ -171,6 +220,17 @@
     padding: 10px 12px;
     background: var(--color-bg);
     border-radius: var(--radius-sm);
+    overflow: hidden;
+  }
+  /* The spectrum line that sweeps across the plate when the song changes. */
+  .sweep {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rv-pink), var(--rv-tangerine), var(--rv-lime), var(--rv-cyan), var(--rv-violet));
+    transform: scaleX(0);
+    transform-origin: left;
+    pointer-events: none;
   }
   :global([data-theme='light']) .plate { background: var(--color-panel); border: 1px solid var(--color-hairline); }
   .track {
