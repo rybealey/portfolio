@@ -104,8 +104,12 @@ const resumeHref = site.resumePdf ?? '/resume';
 </script>
 
 <style>
+  /* The header's view-transition-name makes it a stacking context, so the
+     mobile menu's z-index only counts inside it. The header's own z-index
+     lifts it, and the open menu, above the page. */
   .site-header {
     position: relative;
+    z-index: 30;
     max-width: 1280px;
     margin: 0 auto;
     padding: var(--space-24) 40px;
