@@ -248,3 +248,89 @@ export const education = [
   { credential: 'B.A. Digital Media', detail: 'Web Design specialization', school: 'University of Central Florida', year: 2019 },
   { credential: 'Coding Bootcamp Certificate', school: 'University of Central Florida', year: 2019 },
 ];
+
+/**
+ * The one-page cut that /resume/print lays out for the PDF. The source is
+ * docs/resume-one-page.md; edit that first, then mirror it here. The PDF is
+ * public, so it leaves the phone number off like the page. It must stay one
+ * page and readable by applicant tracking systems: trim here when it
+ * overflows rather than going below 9.5pt type, and keep every job's title,
+ * employer and dates on one line.
+ */
+export const onePage = {
+  summary:
+    "I turn web, infrastructure and payments problems into specs, data models and working software, with AI as the build partner. Nearly twelve years running SERVERIZZ, now leading its rebuild; eight years on Apple's front line.",
+  experience: [
+    {
+      title: 'Product and Operations Lead',
+      org: 'SERVERIZZ',
+      location: 'Austin, TX',
+      dates: 'Dec 2014 – Present',
+      bullets: [
+        'Shipped a self-service customer portal (Laravel, Vue, PostgreSQL) where customers deploy and manage their own Vultr servers, networks, load balancers and firewalls, with a staff admin console.',
+        'Leading the move from ClientExec to usage-based billing: a 42-table data model around an append-only ledger, rerun-safe hourly metering, prepaid balances and card data kept off our servers.',
+        'Launched an AI support agent (Intercom Fin) with guidance, escalation and routing rules, and response targets of one and four business hours.',
+        'Launched Grid Hosting on CloudLinux and cPanel/WHM; migrated and audited 13 accounts and contained malware two of them brought from the previous host.',
+        'Directed the website rebuild: a 35-page Drupal information architecture, a 29-component design system with WCAG AA themes, and GTM and GA4 analytics.',
+        'Host around 15 clients across the United States on shared hosting, clustered DNS and VPC-secured virtual machines, and build WordPress sites for clients such as URChoices.',
+      ],
+    },
+    {
+      org: 'Apple',
+      location: 'Austin, TX',
+      dates: 'Jul 2018 – Present',
+      roles: [
+        {
+          title: 'Sales Chat Specialist, Retail Customer Care',
+          dates: 'Mar 2022 – Present',
+          bullet: "Guide purchase decisions over chat, train new specialists, and lead testing of the team's contact center tools with feedback to developers.",
+        },
+        {
+          title: 'Apple Support Community Moderator, six-month rotation',
+          dates: 'Aug 2023 – Feb 2024',
+          bullet: 'Moderated community content and resolved conflicts.',
+        },
+        { title: 'Product Zone Specialist, Apple Domain Northside', dates: 'Sep 2021 – Mar 2022' },
+        {
+          title: 'Knowledge Management Specialist, AppleCare BPR',
+          dates: 'Mar 2021 – Sep 2021',
+          bullet: 'Rewrote and migrated 300+ knowledge base pages to a new global platform and beta tested it before rollout.',
+        },
+        { title: 'Technical Support Advisor, AppleCare', dates: 'Jul 2018 – Sep 2021' },
+      ],
+    },
+    {
+      title: 'Project Manager',
+      org: 'UCF Center for Entrepreneurial Leadership',
+      location: 'Orlando, FL',
+      dates: 'Aug 2016 – Nov 2017',
+      bullets: ['Led a team of four designers producing digital and print work.'],
+    },
+  ] as { title?: string; org: string; location: string; dates: string; bullets?: string[]; roles?: { title: string; dates: string; bullet?: string }[] }[],
+  projects: [
+    {
+      name: 'ryanbealey.com and Publisher',
+      text: 'A server-rendered Astro site reading MariaDB live, with a token-authenticated publishing API and a native SwiftUI macOS app that posts to it.',
+    },
+    { name: 'PixelRP', text: 'A design system, 15+ game features and implementation-ready specs for a browser-based roleplay game.' },
+    { name: 'Impeccabyte, LLC', text: 'A merchant services agency on Maverick Payments, with TSYS and Fiserv/Clover processing.' },
+    { name: 'Ryvanse', text: 'Brand identity and an animated broadcast package for a gaming and streaming brand.' },
+  ],
+  skills: [
+    { label: 'AI implementation', items: 'Spec-driven development with Claude Code, Intercom Fin setup and routing' },
+    {
+      label: 'Payments and systems',
+      items: 'Ledger and billing design, Authorize.Net, PayPal, Stripe, data modeling, API design and integrations',
+    },
+    { label: 'Product and design', items: 'Information architecture, design systems and tokens, WCAG AA accessibility, pricing' },
+    {
+      label: 'Technology',
+      items:
+        'Laravel, PHP, Vue, React, Astro, TypeScript, Swift, Drupal, WordPress, PostgreSQL, MySQL, Redis, Docker, Linux, cPanel/WHM, Cloudflare, GTM and GA4',
+    },
+  ],
+  education: [
+    { credential: 'B.A. Digital Media, Web Design specialization', school: 'University of Central Florida', year: 2019 },
+    { credential: 'Coding Bootcamp Certificate', school: 'University of Central Florida', year: 2019 },
+  ],
+};

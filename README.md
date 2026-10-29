@@ -300,4 +300,4 @@ The MVP is planned to launch on **Nov 9, 2026**.
 - [ ] Full case-study write-ups, plus the Resume and Colophon pages
 - [ ] GTM and GA4 (tiles already carry `data-ga-event` attributes for `resume_download` and `contact_click`)
 - [x] GitHub profile in `src/data/site.ts`
-- [x] Resume PDF, rendered from `/resume`'s print view by `npm run resume:pdf` (Resume links keep going to the page)
+- [x] Resume PDF: the one-page cut at `/resume/print`, rendered by `npm run resume:pdf` and checked to be one page, laid out for applicant tracking systems (Resume links keep going to the page)

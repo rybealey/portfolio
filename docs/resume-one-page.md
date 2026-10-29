@@ -1,4 +1,4 @@
-<!-- The one-page cut of docs/resume.md, for applications. Edit the full version first, then trim here. -->
+<!-- The one-page cut of docs/resume.md, for applications. Edit the full version first, then trim here, then mirror it in onePage in src/data/resume.ts, which lays out the site's PDF without the phone number. The PDF must stay one page and ATS readable. -->
 
 # Ry Bealey
 
@@ -22,11 +22,12 @@ I turn web, infrastructure and payments problems into specs, data models and wor
 ### Apple · Austin, TX · Jul 2018 – Present
 
 - **Sales Chat Specialist, Retail Customer Care** (Mar 2022 – Present): guide purchase decisions over chat, train new specialists, and lead testing of the team's contact center tools with feedback to developers.
-- **Apple Support Community Moderator** (Aug 2023 – Feb 2024, six-month rotation): moderated community content and resolved conflicts.
-- **Knowledge Management Specialist, AppleCare BPR** (Mar – Sep 2021): rewrote and migrated 300+ knowledge base pages to a new global platform and beta tested it before rollout.
-- **Product Zone Specialist** (2021 – 2022) and **Technical Support Advisor, AppleCare** (2018 – 2021).
+- **Apple Support Community Moderator, six-month rotation** (Aug 2023 – Feb 2024): moderated community content and resolved conflicts.
+- **Product Zone Specialist, Apple Domain Northside** (Sep 2021 – Mar 2022).
+- **Knowledge Management Specialist, AppleCare BPR** (Mar 2021 – Sep 2021): rewrote and migrated 300+ knowledge base pages to a new global platform and beta tested it before rollout.
+- **Technical Support Advisor, AppleCare** (Jul 2018 – Sep 2021).
 
-### Project Manager · UCF Center for Entrepreneurial Leadership · Orlando, FL · 2016 – 2017
+### Project Manager · UCF Center for Entrepreneurial Leadership · Orlando, FL · Aug 2016 – Nov 2017
 
 - Led a team of four designers producing digital and print work.
 
@@ -46,4 +47,5 @@ I turn web, infrastructure and payments problems into specs, data models and wor
 
 ## Education
 
-B.A. Digital Media, Web Design specialization, and Coding Bootcamp Certificate · University of Central Florida · 2019
+- B.A. Digital Media, Web Design specialization · University of Central Florida · 2019
+- Coding Bootcamp Certificate · University of Central Florida · 2019
