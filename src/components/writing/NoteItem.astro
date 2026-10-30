@@ -117,6 +117,48 @@ const short = !note.data.link && !caseStudy && !image && !note.body.includes('``
   .body { display: flex; flex-direction: column; gap: 12px; }
   .body :global(p) { margin: 0; }
   .body.short { font-size: var(--type-lede-size); line-height: var(--type-lede-line); }
+  .body :global(:is(h1, h2)) {
+    font-family: var(--font-display);
+    font-weight: var(--type-title-weight);
+    font-size: var(--type-title-size);
+    line-height: var(--type-title-line);
+    text-wrap: balance;
+  }
+  .body :global(h1) { font-size: var(--type-h2-size); line-height: var(--type-h2-line); }
+  .body :global(:is(h3, h4, h5, h6)) { margin: 0; font-size: var(--type-h3-size); line-height: var(--type-h3-line); }
+  .body :global(* + :is(h1, h2, h3, h4, h5, h6)) { margin-top: 12px; }
+  .body :global(:is(ul, ol)) { padding-left: 1.4em; display: flex; flex-direction: column; gap: 6px; }
+  .body :global(li::marker) { color: var(--color-hud); }
+  .body :global(blockquote) { padding-left: 16px; border-left: 3px solid var(--color-hairline); color: var(--color-ink-muted); }
+  .body :global(hr) { width: 100%; margin: 0; border: 0; border-top: 1px solid var(--color-hairline); }
+
+  /* Tables scroll inside their own box, like a case study's. */
+  .body :global(.table-wrap) {
+    overflow-x: auto;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-panel);
+  }
+  .body :global(table) { width: 100%; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+  .body :global(th) {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: bottom;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-hud);
+    background: var(--color-panel-sunk);
+    border-bottom: 1px solid var(--color-hairline);
+  }
+  .body :global(td) { padding: 10px 14px; vertical-align: top; }
+  .body :global(tbody tr + tr td) { border-top: 1px solid var(--color-hairline); }
+  .body :global(tbody tr:nth-child(even) td) { background: var(--color-table-row-alt); }
+  .body :global(:is(th, td)[align='center']) { text-align: center; }
+  .body :global(:is(th, td)[align='right']) { text-align: right; }
   .body :global(pre) {
     margin: 0;
     padding: 16px;
