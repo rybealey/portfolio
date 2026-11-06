@@ -35,16 +35,20 @@ export interface Token {
   name: string;
 }
 
+/** What a token may do: publish notes and case studies, or use the job tracker's API. */
+export type Scope = 'publish' | 'tracker';
+
 // Tokens are rb_ plus 32 random bytes in base64url (scripts/api-token.mjs).
 // Only their SHA-256 is stored, so the lookup is by hash.
-async function authenticate(request: Request): Promise<Token> {
+async function authenticate(request: Request, scope: Scope): Promise<Token> {
   const presented = request.headers.get('authorization')?.match(/^Bearer (rb_[A-Za-z0-9_-]{43})$/)?.[1];
   if (!presented) throw new ApiError(401, 'unauthorized', 'Send a device token as Authorization: Bearer rb_…');
   const hash = createHash('sha256').update(presented).digest('hex');
-  const [token] = await rows<Token>('SELECT id, name FROM api_tokens WHERE token_hash = ? AND revoked_at IS NULL', [hash]);
+  const [token] = await rows<Token & { scopes: string }>('SELECT id, name, scopes FROM api_tokens WHERE token_hash = ? AND revoked_at IS NULL', [hash]);
   if (!token) throw new ApiError(401, 'unauthorized', 'Unknown or revoked token');
+  if (!token.scopes.split(',').includes(scope)) throw new ApiError(403, 'forbidden', `This token can't use the ${scope} API`);
   await db().query('UPDATE api_tokens SET last_used_at = NOW() WHERE id = ?', [token.id]);
-  return token;
+  return { id: token.id, name: token.name };
 }
 
 function errorResponse(error: unknown): Response {
@@ -63,10 +67,10 @@ function errorResponse(error: unknown): Response {
 
 /** Wraps a route handler with token auth and JSON error responses. */
 export const route =
-  (handler: (context: APIContext, token: Token) => Promise<Response>): APIRoute =>
+  (handler: (context: APIContext, token: Token) => Promise<Response>, scope: Scope = 'publish'): APIRoute =>
   async (context) => {
     try {
-      return await handler(context, await authenticate(context.request));
+      return await handler(context, await authenticate(context.request, scope));
     } catch (error) {
       return errorResponse(error);
     }

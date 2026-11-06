@@ -2,8 +2,8 @@
 // Saves the message, then emails it through SMTP2Go when that's configured.
 // See src/lib/contact.ts.
 import type { APIRoute } from 'astro';
-import { site } from '../../data/site';
 import { ContactMessage, deliver, fieldErrors, hashIp, looksLikeSpam, rateLimited, saveMessage } from '../../lib/contact';
+import { clientIp, sameSite } from '../../lib/request';
 
 export const prerender = false;
 
@@ -12,29 +12,6 @@ const json = (body: unknown, status = 200) =>
     status,
     headers: { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' },
   });
-
-// Behind Passenger the socket address can be missing; the first
-// X-Forwarded-For hop is the visitor when Apache set it.
-function clientIp(request: Request, fallback: () => string): string | undefined {
-  const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim();
-  if (forwarded) return forwarded;
-  try {
-    return fallback() || undefined;
-  } catch {
-    return undefined;
-  }
-}
-
-// The Host the browser asked for, or the site's own domain. Astro's url.host
-// can differ from both behind a proxy, so it isn't used here.
-const sameSite = (origin: string, host: string | null) => {
-  try {
-    const from = new URL(origin).host;
-    return from === host || from === new URL(site.url).host;
-  } catch {
-    return false;
-  }
-};
 
 export const POST: APIRoute = async ({ request, clientAddress }) => {
   // Only this site's own pages may post here.
