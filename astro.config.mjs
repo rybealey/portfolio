@@ -47,6 +47,10 @@ export default defineConfig({
       SMTP2GO_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       CONTACT_TO: envField.string({ context: 'server', access: 'secret', optional: true }),
       CONTACT_FROM: envField.string({ context: 'server', access: 'secret', optional: true }),
+      // The job tracker's passcode lock (src/lib/tracker-auth.ts). Without
+      // both, /tracker stays locked.
+      TRACKER_PASSCODE_HASH: envField.string({ context: 'server', access: 'secret', optional: true }),
+      TRACKER_SESSION_SECRET: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
 });

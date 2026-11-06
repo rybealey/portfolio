@@ -3,11 +3,12 @@
 // lost; when SMTP2GO_API_KEY, CONTACT_TO and CONTACT_FROM are set it's also
 // emailed through SMTP2Go's API, with the sender's address as Reply-To.
 // Ry's address lives only in CONTACT_TO, never in the page.
-import { createHash } from 'node:crypto';
 import type { ResultSetHeader } from 'mysql2/promise';
 import { z } from 'astro/zod';
-import { CONTACT_FROM, CONTACT_TO, DB_PASSWORD, SMTP2GO_API_KEY } from 'astro:env/server';
+import { CONTACT_FROM, CONTACT_TO, SMTP2GO_API_KEY } from 'astro:env/server';
 import { db, rows } from './db';
+
+export { hashIp } from './request';
 
 export const TOPICS = { role: 'Hiring for a role', project: 'A project', other: 'Something else' } as const;
 
@@ -31,10 +32,6 @@ export const fieldErrors = (error: z.ZodError) =>
 
 /** Filled the hidden field, or sent faster than a person can type. */
 export const looksLikeSpam = (input: ContactMessage) => Boolean(input.website?.trim()) || (input.elapsed ?? 10_000) < 2500;
-
-// The IP is only kept hashed, salted with a server secret so the hashes
-// can't be reversed from a list of addresses.
-export const hashIp = (ip: string) => createHash('sha256').update(`${DB_PASSWORD}:${ip}`).digest('hex');
 
 const PER_IP_PER_HOUR = 5;
 const ALL_PER_HOUR = 60;

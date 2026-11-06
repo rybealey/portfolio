@@ -14,9 +14,11 @@ interface Props {
   /** A share image path (1200x630), e.g. a note's generated card. */
   image?: string | undefined;
   type?: 'website' | 'article' | undefined;
+  /** Keep the page out of search engines (and give it no share card). */
+  noindex?: boolean;
 }
 
-const { title, description = site.description, image, type = 'website' } = Astro.props;
+const { title, description = site.description, image, type = 'website', noindex = false } = Astro.props;
 const pageTitle = title ? `${title} · ${site.name}` : `${site.name} · ${site.lane}`;
 // Clean URLs: no .html, no /index, no trailing slash.
 const cleanPath = Astro.url.pathname.replace(/\.html$/, '').replace(/\/index$/, '').replace(/(.)\/$/, '$1') || '/';
@@ -24,7 +26,7 @@ const canonical = new URL(cleanPath, site.url);
 // A page without its own image gets a generated card (src/lib/og.ts); error
 // pages and unknown paths get none.
 const status = Astro.response.status ?? 200;
-const card = image || status >= 400 ? undefined : await cardFor(cleanPath);
+const card = image || noindex || status >= 400 ? undefined : await cardFor(cleanPath);
 const shareImage = image ?? (card && cardPath(cleanPath, card));
 const imageUrl = shareImage ? new URL(shareImage, site.url).href : undefined;
 ---
@@ -36,6 +38,7 @@ const imageUrl = shareImage ? new URL(shareImage, site.url).href : undefined;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
     <meta name="theme-color" content="#f6f4fa" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#140c22" media="(prefers-color-scheme: dark)" />

@@ -30,6 +30,7 @@
 - [Project structure](#project-structure)
 - [Content and the database](#content-and-the-database)
 - [Publishing API](#publishing-api)
+- [Job tracker](#job-tracker)
 - [Contact form](#contact-form)
 - [Design system](#design-system)
 - [Spotify setup](#spotify-setup)
@@ -126,8 +127,11 @@ Case studies and notes are published from companion iOS and macOS apps (a separa
 | `notes` | One row per note. The `slug` is the permalink and starts with the date. At most one attachment (`link_url`, `case_study_id` or `image_media_id`), and an image needs `image_alt`; the database enforces both. Drafts stay out of production. |
 | `link_previews` | The unfurled preview for each shared URL, fetched once. |
 | `media` | Images stored once by SHA-256 and served from `/media/<hash>.<ext>` with a year-long cache. |
-| `api_tokens` | One row per device allowed to use the publishing API. Only a hash of each token is kept. |
+| `api_tokens` | One row per device allowed to use the API. Only a hash of each token is kept; `scopes` says whether it may publish, use the job tracker, or both. |
 | `contact_messages` | Every message sent through the contact form, with its delivery status. The sender's IP is kept only as a salted hash. |
+| `applications` | The [job tracker](#job-tracker): one row per role researched or applied to, with a `version` for edit checks. |
+| `tracker_state` | Small JSON documents the tracker's automations keep, such as the mail check's progress. |
+| `tracker_unlock_attempts` | Passcode tries at `/tracker/unlock`, for rate limiting, with the IP as a salted hash. Kept for a day. |
 
 - **Reading.** Pages read through `src/lib/work.ts` and `src/lib/notes.ts`, which hold lists in memory for 30 seconds.
 - **Previews.** The API unfurls a note's link when it's posted. For a link added straight to the database, run `npm run db:previews`.
@@ -195,6 +199,7 @@ Errors come back as `{ "error": { "code", "message", "details"? } }`:
 | Status | When |
 | --- | --- |
 | `401` | Missing, unknown or revoked token |
+| `403` | The token's scopes don't cover this API |
 | `404` | No note or case study with that slug |
 | `409` | Slug taken, or deleting a case study a note attaches |
 | `412` | `If-Match` version is out of date |
@@ -202,6 +207,24 @@ Errors come back as `{ "error": { "code", "message", "details"? } }`:
 | `422` | Invalid fields; `details` lists each with its path |
 
 Writes clear the site's 30-second content cache in the process that handled them. Passenger can run more than one process, so another may show the old version for up to 30 seconds.
+
+## Job tracker
+
+Ry's job applications live at `/tracker`, a private page behind a passcode. It isn't linked anywhere, isn't in the sitemap, the ⌘K palette or `llms.txt`, and every response is sent `Cache-Control: private, no-store` and `X-Robots-Tag: noindex, nofollow`. The data is in the `applications` table; the code is in `src/lib/tracker.ts`, `src/lib/tracker-auth.ts`, `src/pages/tracker/` and `src/pages/api/v1/applications/`.
+
+- **The page.** Totals per status, a filter form (search, status, tier, location, the platform applied through, the source it was found through, an applied-date range, sort and page size) and pages of 25, 50 or 100 rows. Filters live in the query string, so a filtered view can be bookmarked, and the page works without JavaScript. Each row opens to its details and a form that changes its status or adds a dated note. A save is refused if the row changed since the page loaded.
+- **The lock.** `npm run tracker:passcode` asks for a passcode twice without echoing it and prints only its scrypt hash, `TRACKER_PASSCODE_HASH`; add `-- --with-secret` to also print a new `TRACKER_SESSION_SECRET`. Set both in the environment. A right passcode sets a signed, `HttpOnly`, `Secure`, `SameSite=Strict` cookie scoped to `/tracker` for 30 days. Five wrong tries from one IP in 15 minutes, or 50 from everyone in an hour, block further tries until the window passes. Changing `TRACKER_SESSION_SECRET` locks every browser out. Without both variables the page stays locked.
+- **The API.** Claude sessions and the mail check write through `/api/v1/applications` with a token created with `--scope tracker` (`node scripts/api-token.mjs create "Claude tracker" --scope tracker`). Publishing tokens can't use it, and tracker tokens can't publish.
+
+| Method and path | Does |
+| --- | --- |
+| `GET /api/v1/applications` | Rows, filtered and paged like the page: `q`, `status` (repeatable), `tier`, `ats`, `found`, `location` (`remote`, `austin`, `elsewhere`), `appliedFrom`, `appliedTo`, `since` (updated after an ISO time), `sort`, `page`, `perPage` (up to 1,000) |
+| `POST /api/v1/applications` | Creates a row; `slug`, `company` and `role` are required |
+| `GET` · `PATCH` · `DELETE /api/v1/applications/{slug}` | Reads, edits (only the fields sent; `appendNote` adds a sentence to `notes`) or deletes one row, with `If-Match` as for notes |
+| `POST /api/v1/applications/batch` | Up to 100 `{ slug, version?, fields }` items in one transaction: an existing row is patched, a missing one created; any failure rolls back all of them |
+| `GET` · `PUT /api/v1/tracker-state/{key}` | Reads or replaces a JSON state document, such as `mailcheck` |
+
+`node scripts/tracker-import.mjs <dir> --base <site>` loads an export of the tracker's earlier home (a Claude artifact database: one JSON file per row under `<dir>/applications/`, plus `<dir>/mailcheck/state.json`) through the batch endpoint, then compares the counts per status. Exports hold personal notes, so keep them in `tmp/`, which git ignores.
 
 ## Contact form
 
@@ -254,6 +277,7 @@ The site runs as a Passenger app from **Setup Node.js App**, straight from cPane
    - Passenger log file: `logs/portfolio-passenger.log`, so app errors land somewhere the account can read
    - Environment variables: the three `SPOTIFY_*` values, plus `DB_HOST=localhost`, `DB_PORT=3306`, `DB_NAME`, `DB_USER` and `DB_PASSWORD` for the database from cPanel → MySQL Databases
    - Optional, for the contact form's email: `SMTP2GO_API_KEY`, `CONTACT_TO` and `CONTACT_FROM` (see [Contact form](#contact-form))
+   - Optional, for the job tracker: `TRACKER_PASSCODE_HASH` and `TRACKER_SESSION_SECRET` (see [Job tracker](#job-tracker))
    - Also `MALLOC_ARENA_MAX=2` and `NODE_OPTIONS=--disable-wasm-trap-handler`. CloudLinux caps each process at 4 GB of address space, counting memory that's only reserved, and without these the share cards and image resizing reserve past it and crash the app. The build sets the same limits for itself.
 3. Back in **Git Version Control → Manage → Pull or Deploy**, click **Deploy HEAD Commit**. cPanel runs `.cpanel.yml`, which runs `deploy/cpanel-deploy.sh`. The script:
    1. Installs dependencies into the app's Node.js environment with its Node 24.
@@ -282,7 +306,7 @@ PASSENGER_INSTANCE_REGISTRY_DIR=/var/run/ea-passenger-runtime passenger-config r
 
 1. Push to GitHub.
 2. In **Git Version Control → Manage → Pull or Deploy**, click **Update from Remote**, then **Deploy HEAD Commit**. If cPanel says the repository can't deploy although it's clean, its status is stale; deploy from the command line instead: `uapi --user=ryanblkt VersionControlDeployment create repository_root=/home/ryanblkt/repositories/portfolio`.
-3. Migrations stay manual. If the release adds a file to `db/migrations/`, apply it over SSH with the DB variables exported as above: `cd ~/repositories/portfolio && node scripts/db-migrate.mjs`.
+3. Migrations stay manual. If the release adds a file to `db/migrations/`, apply it over SSH with the DB variables exported as above: `cd ~/repositories/portfolio && node scripts/db-migrate.mjs`. Run it before deploying when the new code reads the new columns: the API checks `api_tokens.scopes` (from `006_token_scopes.sql`), so deploying that code before the migration breaks publishing until it runs. Both migrations only add, so running them first is safe for the code already live.
 
 The deploy log is in `~/.cpanel/logs/`, and the app's own log in `~/logs/portfolio-passenger.log`.
 
