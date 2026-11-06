@@ -4,6 +4,10 @@
 // only the passcode form; unlocked, it lists every role with filters and
 // pages, and each row opens to its details and a small edit form. Data:
 // src/lib/tracker.ts. Lock: src/lib/tracker-auth.ts.
+//
+// The filters are a plain GET form, so everything works without JavaScript.
+// With it, a change re-renders only the results (#results) in place, and the
+// URL follows along, so a filtered view can still be bookmarked.
 import Base from '../../layouts/Base.astro';
 import { PAGE_SIZES, LOCATIONS, SORTS, STATUSES, atsFamily, filterOptions, listApplications, parseFilters, statusCounts, type Status } from '../../lib/tracker';
 import { PRIVATE_HEADERS, isUnlocked, trackerConfigured } from '../../lib/tracker-auth';
@@ -15,7 +19,9 @@ const unlocked = configured && isUnlocked(Astro.cookies);
 const params = Astro.url.searchParams;
 const lockMessage = { wrong: "That passcode didn't match.", limited: 'Too many wrong tries. Wait 15 minutes, then try again.', locked: 'Locked. This browser has forgotten the passcode.' }[params.get('e') ?? ''];
 
-const filters = parseFilters(params, false, { perPage: 50 });
+const DEFAULT_SORT = 'recent';
+const DEFAULT_PER_PAGE = 50;
+const filters = parseFilters(params, false, { perPage: DEFAULT_PER_PAGE });
 const result = unlocked ? await listApplications(filters) : undefined;
 const counts = unlocked ? await statusCounts() : undefined;
 const options = unlocked ? await filterOptions() : undefined;
@@ -23,8 +29,8 @@ const total = counts ? Object.values(counts).reduce((a, b) => a + b, 0) : 0;
 
 // Links keep every other filter and reset the page unless told otherwise.
 const href = (changes: Record<string, string | string[] | undefined>, keepPage = false) => {
-  const next = new URLSearchParams(params);
-  for (const key of ['notice', 'row', 'e']) next.delete(key);
+  const next = new URLSearchParams();
+  for (const [key, value] of params) if (value && !['notice', 'row', 'e'].includes(key)) next.append(key, value);
   if (!keepPage) next.delete('page');
   for (const [key, value] of Object.entries(changes)) {
     next.delete(key);
@@ -34,12 +40,7 @@ const href = (changes: Record<string, string | string[] | undefined>, keepPage =
   return query ? `/tracker?${query}` : '/tracker';
 };
 const pageHref = (page: number) => href({ page: page > 1 ? String(page) : undefined }, true);
-const returnTo = (() => {
-  const next = new URLSearchParams(params);
-  for (const key of ['notice', 'row', 'e']) next.delete(key);
-  const query = next.toString();
-  return query ? `/tracker?${query}` : '/tracker';
-})();
+const returnTo = href({}, true);
 
 // Page numbers: the first, the last, and two either side of the current one.
 const pageList = (() => {
@@ -58,12 +59,14 @@ const pageList = (() => {
 const active: { label: string; remove: string }[] = [];
 if (filters.q) active.push({ label: `“${filters.q}”`, remove: href({ q: undefined }) });
 for (const s of filters.statuses ?? []) active.push({ label: s, remove: href({ status: (filters.statuses ?? []).filter((x) => x !== s) }) });
-if (filters.tier) active.push({ label: `Tier ${filters.tier}`, remove: href({ tier: undefined }) });
-if (filters.ats) active.push({ label: filters.ats, remove: href({ ats: undefined }) });
-if (filters.found) active.push({ label: filters.found, remove: href({ found: undefined }) });
 if (filters.location) active.push({ label: LOCATIONS[filters.location].label, remove: href({ location: undefined }) });
+if (filters.tier) active.push({ label: `Tier ${filters.tier}`, remove: href({ tier: undefined }) });
+if (filters.ats) active.push({ label: `Via ${filters.ats}`, remove: href({ ats: undefined }) });
+if (filters.found) active.push({ label: filters.found, remove: href({ found: undefined }) });
 if (filters.appliedFrom) active.push({ label: `From ${filters.appliedFrom}`, remove: href({ appliedFrom: undefined }) });
 if (filters.appliedTo) active.push({ label: `To ${filters.appliedTo}`, remove: href({ appliedTo: undefined }) });
+// The secondary filters live under "More filters"; it opens when one is set.
+const moreCount = [filters.tier, filters.ats, filters.found, filters.appliedFrom || filters.appliedTo].filter(Boolean).length;
 
 const tone = (status: Status) =>
   ({ Interviewing: 'success', Offer: 'success', 'Needs you': 'warning', Rejected: 'quiet', Withdrawn: 'quiet', Skipped: 'quiet' })[status as string] ?? 'plain';
@@ -74,6 +77,7 @@ const noticeText = { saved: 'Saved.', conflict: 'That row changed since this pag
 const fmt = (n: number) => n.toLocaleString('en-US');
 const first = result && result.total ? (result.page - 1) * result.perPage + 1 : 0;
 const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
+const statusesShown = counts ? STATUSES.filter((s) => counts[s] > 0 || filters.statuses?.includes(s)) : [];
 ---
 
 <Base title="Job tracker" description="Private." noindex>
@@ -115,173 +119,227 @@ const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
             </p>
           )}
 
-          <nav class="statuses" aria-label="Status">
-            <a href={href({ status: undefined })} aria-current={!filters.statuses?.length ? 'true' : undefined}>
-              All <span class="count">{fmt(total)}</span>
-            </a>
-            {STATUSES.filter((s) => counts![s] > 0).map((s) => (
-              <a href={href({ status: s })} aria-current={filters.statuses?.length === 1 && filters.statuses[0] === s ? 'true' : undefined}>
-                {s} <span class="count">{fmt(counts![s])}</span>
-              </a>
-            ))}
-          </nav>
-
           <details class="filter-box" open data-filters={active.length ? 'active' : 'none'}>
-          <summary class="filter-toggle">Filters{active.length ? ` (${active.length} in use)` : ''}</summary>
-          <form method="get" action="/tracker" class="filters" aria-label="Filter roles">
-            <div class="field grow">
-              <label for="f-q">Search</label>
-              <input id="f-q" name="q" type="search" value={filters.q ?? ''} placeholder="Company, role, location or notes" maxlength="200" />
-            </div>
-            <fieldset class="field">
-              <legend>Status</legend>
-              <details class="multi">
-                <summary>{filters.statuses?.length ? filters.statuses.join(', ') : 'Any status'}</summary>
-                <div class="checks">
-                  {STATUSES.map((s) => (
-                    <label class="check">
-                      <input type="checkbox" name="status" value={s} checked={filters.statuses?.includes(s)} /> {s}
+            <summary class="filter-toggle">
+              Filters {active.length > 0 && <span class="hud badge">{active.length} on</span>}
+            </summary>
+            <form method="get" action="/tracker" class="filters" id="filters" role="search" aria-label="Filter roles">
+              <div class="search">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-4-4"></path></svg>
+                <label class="sr-only" for="f-q">Search roles</label>
+                <input id="f-q" name="q" type="search" value={filters.q ?? ''} placeholder="Search company, role, location or notes" maxlength="200" autocomplete="off" enterkeyhint="search" />
+                <span class="hud key" aria-hidden="true">Enter</span>
+              </div>
+
+              <fieldset class="group">
+                <legend class="hud group-label">Status <span class="hint">any of</span></legend>
+                <div class="pills">
+                  {statusesShown.map((s) => (
+                    <label class:list={['pill', tone(s)]}>
+                      <input type="checkbox" name="status" value={s} checked={filters.statuses?.includes(s)} />
+                      <span class="pill-face">
+                        <svg class="tick" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"></path></svg>
+                        {s} <span class="count">{fmt(counts![s])}</span>
+                      </span>
                     </label>
                   ))}
                 </div>
+              </fieldset>
+
+              <fieldset class="group">
+                <legend class="hud group-label">Location</legend>
+                <div class="segmented">
+                  <label class="seg">
+                    <input type="radio" name="location" value="" checked={!filters.location} />
+                    <span>Anywhere</span>
+                  </label>
+                  {Object.entries(LOCATIONS).map(([key, l]) => (
+                    <label class="seg">
+                      <input type="radio" name="location" value={key} checked={filters.location === key} />
+                      <span>{l.label}</span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+
+              <details class="more" open={moreCount > 0}>
+                <summary>
+                  <svg class="chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg>
+                  More filters {moreCount > 0 && <span class="hud badge">{moreCount} on</span>}
+                </summary>
+                <div class="more-grid">
+                  <fieldset class="group">
+                    <legend class="hud group-label">Tier</legend>
+                    <div class="segmented">
+                      <label class="seg">
+                        <input type="radio" name="tier" value="" checked={!filters.tier} />
+                        <span>Any</span>
+                      </label>
+                      {options!.tiers.map((t) => (
+                        <label class="seg" title={`${fmt(t.count)} roles`}>
+                          <input type="radio" name="tier" value={t.value} checked={filters.tier === t.value} aria-label={`Tier ${t.value}, ${fmt(t.count)} roles`} />
+                          <span aria-hidden="true">{t.value}</span>
+                        </label>
+                      ))}
+                    </div>
+                  </fieldset>
+                  <div class="field">
+                    <label class="hud group-label" for="f-ats">Applied through</label>
+                    <div class="select">
+                      <select id="f-ats" name="ats">
+                        <option value="">Any platform</option>
+                        {options!.ats.map((a) => <option value={a.value} selected={filters.ats === a.value}>{a.value} ({fmt(a.count)})</option>)}
+                      </select>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="hud group-label" for="f-found">Found through</label>
+                    <div class="select">
+                      <select id="f-found" name="found">
+                        <option value="">Any source</option>
+                        {options!.found.map((f) => <option value={f.value} selected={filters.found === f.value}>{f.value} ({fmt(f.count)})</option>)}
+                      </select>
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                    </div>
+                  </div>
+                  <fieldset class="group wide">
+                    <legend class="hud group-label">Applied between</legend>
+                    <div class="range">
+                      <label class="sr-only" for="f-from">Applied on or after</label>
+                      <input id="f-from" name="appliedFrom" type="date" value={filters.appliedFrom ?? ''} />
+                      <span class="muted" aria-hidden="true">to</span>
+                      <label class="sr-only" for="f-to">Applied on or before</label>
+                      <input id="f-to" name="appliedTo" type="date" value={filters.appliedTo ?? ''} />
+                    </div>
+                  </fieldset>
+                </div>
               </details>
-            </fieldset>
-            <div class="field">
-              <label for="f-tier">Tier</label>
-              <select id="f-tier" name="tier">
-                <option value="">Any tier</option>
-                {options!.tiers.map((t) => <option value={t.value} selected={filters.tier === t.value}>Tier {t.value} ({fmt(t.count)})</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-location">Location</label>
-              <select id="f-location" name="location">
-                <option value="">Anywhere</option>
-                {Object.entries(LOCATIONS).map(([key, l]) => <option value={key} selected={filters.location === key}>{l.label}</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-ats">Applied through</label>
-              <select id="f-ats" name="ats">
-                <option value="">Any platform</option>
-                {options!.ats.map((a) => <option value={a.value} selected={filters.ats === a.value}>{a.value} ({fmt(a.count)})</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-found">Found through</label>
-              <select id="f-found" name="found">
-                <option value="">Any source</option>
-                {options!.found.map((f) => <option value={f.value} selected={filters.found === f.value}>{f.value} ({fmt(f.count)})</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-from">Applied from</label>
-              <input id="f-from" name="appliedFrom" type="date" value={filters.appliedFrom ?? ''} />
-            </div>
-            <div class="field">
-              <label for="f-to">Applied to</label>
-              <input id="f-to" name="appliedTo" type="date" value={filters.appliedTo ?? ''} />
-            </div>
-            <div class="field">
-              <label for="f-sort">Sort</label>
-              <select id="f-sort" name="sort">
-                {Object.entries(SORTS).map(([key, s]) => <option value={key} selected={(filters.sort ?? 'recent') === key}>{s.label}</option>)}
-              </select>
-            </div>
-            <div class="field">
-              <label for="f-per">Per page</label>
-              <select id="f-per" name="perPage">
-                {PAGE_SIZES.map((n) => <option value={n} selected={result!.perPage === n}>{n}</option>)}
-              </select>
-            </div>
-            <div class="actions">
-              <button class="btn btn-primary btn-sm" type="submit">Apply filters</button>
-              <a class="btn btn-ghost btn-sm" href="/tracker">Clear</a>
-            </div>
-          </form>
+
+              <div class="actions">
+                <button class="btn btn-primary btn-sm" type="submit">Apply filters</button>
+                {active.length > 0 && <a class="btn btn-ghost btn-sm" href="/tracker">Clear all</a>}
+              </div>
+            </form>
           </details>
 
-          <div class="summary">
-            <p role="status">
-              {result!.total ? `Showing ${fmt(first)} to ${fmt(last)} of ${fmt(result!.total)}` : 'No roles match these filters.'}
-            </p>
+          <div id="results" class="results">
+            <div class="toolbar">
+              <p class="summary" role="status" aria-live="polite">
+                {result!.total ? (
+                  <>
+                    <strong>{fmt(first)} to {fmt(last)}</strong> of {fmt(result!.total)} {result!.total === 1 ? 'role' : 'roles'}
+                  </>
+                ) : (
+                  'No roles match these filters.'
+                )}
+              </p>
+              <div class="sorters">
+                <label class="inline">
+                  <span class="hud group-label">Sort</span>
+                  <span class="select compact">
+                    <select name="sort" form="filters">
+                      {Object.entries(SORTS).map(([key, s]) => <option value={key} selected={(filters.sort ?? DEFAULT_SORT) === key}>{s.label}</option>)}
+                    </select>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </span>
+                </label>
+                <label class="inline">
+                  <span class="hud group-label">Show</span>
+                  <span class="select compact">
+                    <select name="perPage" form="filters">
+                      {PAGE_SIZES.map((n) => <option value={n} selected={result!.perPage === n}>{n}</option>)}
+                    </select>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                  </span>
+                </label>
+              </div>
+            </div>
+
             {active.length > 0 && (
-              <ul class="active" aria-label="Filters in use">
-                {active.map((f) => (
-                  <li>
-                    <a class="hud chip" href={f.remove} aria-label={`Remove filter: ${f.label}`}>
-                      {f.label} <span aria-hidden="true">×</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div class="active">
+                <ul aria-label="Filters in use">
+                  {active.map((f) => (
+                    <li>
+                      <a class="hud chip" href={f.remove} data-sync aria-label={`Remove filter: ${f.label}`}>
+                        {f.label}
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="clear" href="/tracker" data-sync>Clear all</a>
+              </div>
+            )}
+
+            <ol class="rows" start={first || undefined}>
+              {result!.applications.map((a) => (
+                <li id={`row-${a.slug}`}>
+                  <details open={noticeRow === a.slug && notice !== 'saved' ? true : undefined}>
+                    <summary>
+                      <span class="who">
+                        <strong>{a.company}</strong>
+                        <span>{a.role}</span>
+                      </span>
+                      <span class:list={['hud', 'chip', 'status', tone(a.status)]}>{a.status}</span>
+                      <span class="meta">{a.appliedOn ?? 'Not applied'}</span>
+                      <span class="meta where">{a.location ?? 'Location not listed'}</span>
+                    </summary>
+                    <div class="detail">
+                      <dl>
+                        {a.why && (<><dt>Why it fits</dt><dd>{a.why}</dd></>)}
+                        {a.experience && (<><dt>What they want</dt><dd>{a.experience}</dd></>)}
+                        {a.pay && (<><dt>Pay</dt><dd>{a.pay}</dd></>)}
+                        <dt>Applied through</dt><dd>{a.ats ?? 'Not recorded'} <span class="muted">({atsFamily(a.ats)})</span></dd>
+                        {a.found && (<><dt>Found through</dt><dd>{a.found}</dd></>)}
+                        {(a.tier || a.rank) && (<><dt>Tier and rank</dt><dd>{a.tier ? `Tier ${a.tier}` : 'No tier'}{a.rank ? ` · rank ${a.rank}` : ''}</dd></>)}
+                        {a.notes && (<><dt>Notes</dt><dd class="notes">{a.notes}</dd></>)}
+                        {a.url && (<><dt>Posting</dt><dd><a href={a.url} rel="noopener noreferrer" target="_blank">{new URL(a.url).host}</a></dd></>)}
+                      </dl>
+                      <form method="post" action={`/tracker/applications/${a.slug}`} class="edit">
+                        <input type="hidden" name="version" value={a.version} />
+                        <input type="hidden" name="current" value={a.status} />
+                        <input type="hidden" name="return" value={returnTo} />
+                        <div class="field">
+                          <label for={`s-${a.slug}`}>Status</label>
+                          <span class="select">
+                            <select id={`s-${a.slug}`} name="status">
+                              {STATUSES.map((s) => <option value={s} selected={a.status === s}>{s}</option>)}
+                            </select>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg>
+                          </span>
+                        </div>
+                        <div class="field grow">
+                          <label for={`n-${a.slug}`}>Add a note</label>
+                          <textarea id={`n-${a.slug}`} name="note" rows="2" maxlength="5000" placeholder="Dated automatically"></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                      </form>
+                      <p class="caption">Updated {new Date(a.updatedAt).toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' })} · version {a.version}</p>
+                    </div>
+                  </details>
+                </li>
+              ))}
+            </ol>
+
+            {result!.pages > 1 && (
+              <nav class="pager" aria-label="Pages">
+                {result!.page > 1 ? <a href={pageHref(result!.page - 1)} rel="prev" data-page>Previous</a> : <span aria-disabled="true">Previous</span>}
+                <ul>
+                  {pageList.map((p) =>
+                    p === 'gap' ? (
+                      <li aria-hidden="true">…</li>
+                    ) : (
+                      <li>
+                        <a href={pageHref(p)} aria-current={p === result!.page ? 'page' : undefined} aria-label={`Page ${p}`} data-page>{p}</a>
+                      </li>
+                    ),
+                  )}
+                </ul>
+                {result!.page < result!.pages ? <a href={pageHref(result!.page + 1)} rel="next" data-page>Next</a> : <span aria-disabled="true">Next</span>}
+              </nav>
             )}
           </div>
-
-          <ol class="rows" start={first || undefined}>
-            {result!.applications.map((a) => (
-              <li id={`row-${a.slug}`}>
-                <details open={noticeRow === a.slug && notice !== 'saved' ? true : undefined}>
-                  <summary>
-                    <span class="who">
-                      <strong>{a.company}</strong>
-                      <span>{a.role}</span>
-                    </span>
-                    <span class:list={['hud', 'chip', 'status', tone(a.status)]}>{a.status}</span>
-                    <span class="meta">{a.appliedOn ?? 'Not applied'}</span>
-                    <span class="meta where">{a.location ?? 'Location not listed'}</span>
-                  </summary>
-                  <div class="detail">
-                    <dl>
-                      {a.why && (<><dt>Why it fits</dt><dd>{a.why}</dd></>)}
-                      {a.experience && (<><dt>What they want</dt><dd>{a.experience}</dd></>)}
-                      {a.pay && (<><dt>Pay</dt><dd>{a.pay}</dd></>)}
-                      <dt>Applied through</dt><dd>{a.ats ?? 'Not recorded'} <span class="muted">({atsFamily(a.ats)})</span></dd>
-                      {a.found && (<><dt>Found through</dt><dd>{a.found}</dd></>)}
-                      {(a.tier || a.rank) && (<><dt>Tier and rank</dt><dd>{a.tier ? `Tier ${a.tier}` : 'No tier'}{a.rank ? ` · rank ${a.rank}` : ''}</dd></>)}
-                      {a.notes && (<><dt>Notes</dt><dd class="notes">{a.notes}</dd></>)}
-                      {a.url && (<><dt>Posting</dt><dd><a href={a.url} rel="noopener noreferrer" target="_blank">{new URL(a.url).host}</a></dd></>)}
-                    </dl>
-                    <form method="post" action={`/tracker/applications/${a.slug}`} class="edit">
-                      <input type="hidden" name="version" value={a.version} />
-                      <input type="hidden" name="current" value={a.status} />
-                      <input type="hidden" name="return" value={returnTo} />
-                      <div class="field">
-                        <label for={`s-${a.slug}`}>Status</label>
-                        <select id={`s-${a.slug}`} name="status">
-                          {STATUSES.map((s) => <option value={s} selected={a.status === s}>{s}</option>)}
-                        </select>
-                      </div>
-                      <div class="field grow">
-                        <label for={`n-${a.slug}`}>Add a note</label>
-                        <textarea id={`n-${a.slug}`} name="note" rows="2" maxlength="5000" placeholder="Dated automatically"></textarea>
-                      </div>
-                      <button class="btn btn-primary btn-sm" type="submit">Save</button>
-                    </form>
-                    <p class="caption">Updated {new Date(a.updatedAt).toLocaleString('en-US', { timeZone: 'America/Chicago', dateStyle: 'medium', timeStyle: 'short' })} · version {a.version}</p>
-                  </div>
-                </details>
-              </li>
-            ))}
-          </ol>
-
-          {result!.pages > 1 && (
-            <nav class="pager" aria-label="Pages">
-              {result!.page > 1 ? <a href={pageHref(result!.page - 1)} rel="prev">Previous</a> : <span aria-disabled="true">Previous</span>}
-              <ul>
-                {pageList.map((p) =>
-                  p === 'gap' ? (
-                    <li aria-hidden="true">…</li>
-                  ) : (
-                    <li>
-                      <a href={pageHref(p)} aria-current={p === result!.page ? 'page' : undefined} aria-label={`Page ${p}`}>{p}</a>
-                    </li>
-                  ),
-                )}
-              </ul>
-              {result!.page < result!.pages ? <a href={pageHref(result!.page + 1)} rel="next">Next</a> : <span aria-disabled="true">Next</span>}
-            </nav>
-          )}
         </>
       )
     }
@@ -289,29 +347,110 @@ const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
 </Base>
 
 <script>
-  // On a phone the filters fold away until wanted, unless some are in use.
+  // Progressive enhancement for the filters: re-render the results in place
+  // as filters change, keep the URL in step, and fold the filters away on a
+  // phone until they're wanted. Without JavaScript the form submits as usual.
   const box = document.querySelector<HTMLDetailsElement>('.filter-box');
   if (box && box.dataset['filters'] === 'none' && matchMedia('(max-width: 760px)').matches) box.open = false;
+
+  const form = document.querySelector<HTMLFormElement>('#filters');
+  const results = document.querySelector<HTMLElement>('#results');
+  if (form && results) {
+    form.classList.add('live');
+    const DEFAULTS: Record<string, string> = { sort: 'recent', perPage: '50' };
+    let timer: number | undefined;
+    let controller: AbortController | undefined;
+
+    const urlFromForm = () => {
+      const next = new URLSearchParams();
+      for (const [key, value] of new FormData(form)) {
+        const v = String(value).trim();
+        if (v && DEFAULTS[key] !== v) next.append(key, v);
+      }
+      const query = next.toString();
+      return query ? `/tracker?${query}` : '/tracker';
+    };
+
+    // syncForm: also replace the form (for chip, pager and clear links, whose
+    // URL the form doesn't know yet). Typing never replaces the form, so the
+    // search box keeps focus.
+    const load = async (url: string, { syncForm = false, scroll = false } = {}) => {
+      controller?.abort();
+      controller = new AbortController();
+      results.setAttribute('aria-busy', 'true');
+      try {
+        const res = await fetch(url, { signal: controller.signal, credentials: 'same-origin' });
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, 'text/html');
+        const next = doc.querySelector('#results');
+        if (!res.ok || !next) return void (location.href = url);
+        results.innerHTML = next.innerHTML;
+        const nextForm = doc.querySelector('#filters');
+        if (syncForm && nextForm) form.innerHTML = nextForm.innerHTML;
+        const toggle = doc.querySelector('.filter-toggle');
+        const here = document.querySelector('.filter-toggle');
+        if (toggle && here) here.innerHTML = toggle.innerHTML;
+        if (!syncForm && nextForm) {
+          const badge = nextForm.querySelector('.more summary');
+          const mine = form.querySelector('.more summary');
+          if (badge && mine) mine.innerHTML = badge.innerHTML;
+        }
+        history.replaceState(null, '', url);
+        if (scroll) results.scrollIntoView({ block: 'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      } catch (error) {
+        if ((error as Error).name !== 'AbortError') location.href = url;
+      } finally {
+        results.removeAttribute('aria-busy');
+      }
+    };
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      window.clearTimeout(timer);
+      load(urlFromForm());
+    });
+    form.addEventListener('change', (event) => {
+      if ((event.target as HTMLInputElement).name === 'q') return;
+      load(urlFromForm());
+    });
+    form.addEventListener('input', (event) => {
+      if ((event.target as HTMLInputElement).name !== 'q') return;
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => load(urlFromForm()), 350);
+    });
+    // Sort and page size sit in the results toolbar but belong to the form.
+    results.addEventListener('change', (event) => {
+      if ((event.target as HTMLSelectElement).form === form) load(urlFromForm());
+    });
+    results.addEventListener('click', (event) => {
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[data-sync], a[data-page]');
+      if (!link || event.metaKey || event.ctrlKey || event.shiftKey) return;
+      event.preventDefault();
+      load(link.href, { syncForm: link.hasAttribute('data-sync'), scroll: link.hasAttribute('data-page') });
+    });
+    form.addEventListener('click', (event) => {
+      const link = (event.target as HTMLElement).closest<HTMLAnchorElement>('a[href="/tracker"]');
+      if (!link) return;
+      event.preventDefault();
+      load('/tracker', { syncForm: true });
+    });
+  }
 </script>
 
 <style>
-  button.btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
-  button.btn-ghost { background: transparent; border: 2px solid var(--color-ink-muted); }
-  .filter-box { display: flex; flex-direction: column; gap: 12px; }
-  .filter-toggle { width: fit-content; min-height: 44px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; cursor: pointer; }
-  .filter-toggle::before { content: '▸'; transition: transform 160ms; }
-  .filter-box[open] > .filter-toggle::before { transform: rotate(90deg); }
-  .filter-toggle::-webkit-details-marker { display: none; }
-  .filter-toggle { list-style: none; }
-  @media (prefers-reduced-motion: reduce) { .filter-toggle::before { transition: none; } }
   .page { max-width: 1280px; min-height: 50vh; margin: 0 auto; padding: 48px 40px 96px; display: flex; flex-direction: column; gap: var(--space-24); }
   .eyebrow { color: var(--color-hud); }
   h1 { font-family: var(--font-display); font-weight: var(--type-display-weight); font-size: clamp(32px, 5vw, var(--type-display-size)); line-height: 1.05; letter-spacing: var(--type-display-tracking); }
+  .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  button.btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+  button.btn-ghost { background: transparent; border: 2px solid var(--color-ink-muted); }
 
   .lock { max-width: 480px; display: flex; flex-direction: column; gap: 16px; }
   .lock-form { display: flex; flex-direction: column; gap: 8px; }
   .lock-form .row { display: flex; gap: 12px; flex-wrap: wrap; }
-  .lock-form input { flex: 1 1 220px; }
+  .lock-form input { flex: 1 1 220px; min-height: 48px; padding: 0 14px; font: inherit; font-size: 16px; color: var(--color-ink); background: var(--color-bg); border: 2px solid var(--color-ink-muted); border-radius: var(--radius-sm); }
+  .lock-form input:focus { outline: none; border-color: var(--color-focus); }
   .message { color: var(--color-warning); font-weight: 700; }
 
   .head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; }
@@ -321,43 +460,140 @@ const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
   .notice.ok { color: var(--color-success); }
   .notice.warn { color: var(--color-warning); }
 
-  .statuses { display: flex; flex-wrap: wrap; gap: 4px 20px; }
-  .statuses a { min-height: 44px; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 15px; color: var(--color-ink-muted); text-decoration: none; border-bottom: 3px solid transparent; }
-  .statuses a:hover { color: var(--color-ink); }
-  .statuses a[aria-current] { color: var(--color-ink); border-bottom-color: var(--rv-pink); }
-  .count { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; }
+  /* Filter panel ------------------------------------------------------------ */
+  .filter-box { display: flex; flex-direction: column; gap: 12px; }
+  .filter-toggle { width: fit-content; min-height: 44px; display: none; align-items: center; gap: 10px; font-weight: 700; cursor: pointer; list-style: none; }
+  .filter-toggle::-webkit-details-marker { display: none; }
+  .badge { padding: 2px 8px; border: 1px solid currentColor; border-radius: var(--radius-sm); color: var(--color-hud); }
 
-  .filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 16px; padding: var(--space-24); background: var(--color-panel); border: 1px solid var(--color-hairline); border-radius: var(--radius-md); }
-  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0; margin: 0; padding: 0; border: 0; }
-  .field.grow { grid-column: 1 / -1; }
-  label, legend { font-weight: 700; font-size: 15px; line-height: 20px; padding: 0; }
-  input:not([type='checkbox']), select, textarea, .multi summary {
-    box-sizing: border-box;
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: var(--space-24);
+    background: var(--color-panel);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-md);
+  }
+  .group { display: flex; flex-direction: column; gap: 10px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .group-label { color: var(--color-ink-muted); padding: 0; }
+  .hint { text-transform: none; letter-spacing: 0; font-family: var(--font-body); font-weight: 400; font-size: 13px; }
+
+  /* Search, in the command palette's style. */
+  .search {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    padding: 0 14px 0 16px;
+    background: var(--color-bg);
+    color: var(--color-ink-muted);
+    border: 2px solid var(--color-ink-muted);
+    border-radius: var(--radius-md);
+    transition: border-color 160ms, box-shadow 160ms;
+  }
+  .search:focus-within { border-color: var(--color-ink); box-shadow: 4px 4px 0 0 var(--color-pop); color: var(--color-ink); }
+  .search input { flex: 1; min-width: 0; height: 48px; padding: 0; font: inherit; font-size: 17px; color: var(--color-ink); background: transparent; border: 0; }
+  .search input:focus { outline: none; }
+  .search input::placeholder { color: var(--color-ink-muted); opacity: 0.85; }
+  .search input::-webkit-search-cancel-button { cursor: pointer; }
+  .key { padding: 2px 6px; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); color: var(--color-ink-muted); }
+  .live .key { display: none; }
+
+  /* Status pills: checkboxes. A tick and a heavier edge mark the chosen ones. */
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; }
+  .pill { position: relative; }
+  .pill input, .seg input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+  .pill-face {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg);
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--color-ink-muted);
+    transition: border-color 160ms, color 160ms, transform 160ms cubic-bezier(0.3, 1.5, 0.6, 1);
+  }
+  .pill:hover .pill-face { border-color: var(--color-ink-muted); color: var(--color-ink); }
+  .pill .tick { display: none; }
+  .pill input:checked + .pill-face { color: var(--color-ink); border: 2px solid var(--color-ink); padding: 0 15px; background: var(--color-panel-sunk); }
+  .pill input:checked + .pill-face .tick { display: inline; }
+  .pill.success input:checked + .pill-face .tick { color: var(--color-success); }
+  .pill.warning input:checked + .pill-face .tick { color: var(--color-warning); }
+  .pill input:focus-visible + .pill-face, .seg input:focus-visible + span { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+  .count { font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; color: var(--color-ink-muted); }
+
+  /* Segmented controls: radio groups. The chosen one fills with ink. */
+  .segmented { display: inline-flex; flex-wrap: wrap; width: fit-content; max-width: 100%; border: 2px solid var(--color-ink-muted); border-radius: var(--radius-sm); overflow: hidden; }
+  .seg { position: relative; }
+  .seg span { display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 16px; font-weight: 700; font-size: 15px; color: var(--color-ink-muted); background: var(--color-bg); cursor: pointer; transition: background 160ms, color 160ms; }
+  .seg + .seg span { border-left: 1px solid var(--color-hairline); }
+  .seg:hover span { color: var(--color-ink); }
+  .seg input:checked + span { background: var(--color-ink); color: var(--color-bg); }
+  .seg input:checked + span .count { color: var(--color-bg); opacity: 0.8; }
+  .seg input:focus-visible + span { outline-offset: -4px; }
+
+  /* More filters */
+  .more { border-top: 1px solid var(--color-hairline); padding-top: 16px; }
+  .more > summary { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-weight: 700; cursor: pointer; list-style: none; }
+  .more > summary::-webkit-details-marker { display: none; }
+  .more .chev { transition: transform 160ms; }
+  .more[open] .chev { transform: rotate(90deg); }
+  .more-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); gap: 20px 24px; padding-top: 12px; }
+  @media (min-width: 1000px) {
+    .more-grid { grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.5fr); }
+  }
+  .seg[title] span { min-width: 44px; justify-content: center; }
+  .field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+
+  /* Selects with a drawn chevron, and dates, sized like the other controls. */
+  .select { position: relative; display: block; min-width: 0; }
+  .select select {
+    appearance: none;
     width: 100%;
     min-height: 44px;
-    padding: 0 12px;
+    padding: 0 40px 0 14px;
     font: inherit;
     font-size: 16px;
     color: var(--color-ink);
     background: var(--color-bg);
     border: 2px solid var(--color-ink-muted);
     border-radius: var(--radius-sm);
+    cursor: pointer;
+    text-overflow: ellipsis;
   }
-  textarea { padding: 10px 12px; line-height: 24px; resize: vertical; }
-  input:focus, select:focus, textarea:focus, .multi summary:focus-visible { outline: none; border-color: var(--color-focus); }
-  .multi { position: relative; }
-  .multi summary { display: flex; align-items: center; cursor: pointer; list-style: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .multi summary::-webkit-details-marker { display: none; }
-  .checks { display: flex; flex-direction: column; gap: 4px; padding: 8px 4px 0; }
-  .check { display: flex; align-items: center; gap: 8px; min-height: 36px; font-weight: 400; }
-  .check input { width: 20px; height: 20px; accent-color: var(--rv-pink); }
-  .actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 12px; }
+  .select svg { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--color-ink-muted); }
+  .select select:hover { border-color: var(--color-ink); }
+  .select.compact select { min-height: 40px; font-size: 15px; font-weight: 700; padding-right: 34px; }
+  .select.compact svg { right: 12px; }
+  .range { display: flex; align-items: center; gap: 8px; }
+  .range input { flex: 1 1 0; min-width: 0; min-height: 44px; padding: 0 12px; font: inherit; font-size: 16px; color: var(--color-ink); background: var(--color-bg); border: 2px solid var(--color-ink-muted); border-radius: var(--radius-sm); }
+  :global([data-theme='dark']) .range input { color-scheme: dark; }
+  :global([data-theme='light']) .range input { color-scheme: light; }
+  select:focus-visible, .range input:focus-visible, textarea:focus-visible { outline: none; border-color: var(--color-focus); box-shadow: 0 0 0 2px var(--color-focus); }
 
-  .summary { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
-  .summary p { font-weight: 700; }
-  .active { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
-  .active a { gap: 6px; color: var(--color-ink); text-decoration: none; min-height: 32px; align-items: center; }
-  .active a:hover { border-color: var(--color-ink); }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  /* With JavaScript the results follow the filters, and Clear all sits beside
+     the chips, so the form's own buttons step aside. */
+  .live .actions { display: none; }
+
+  /* Results ----------------------------------------------------------------- */
+  .results { display: flex; flex-direction: column; gap: 16px; transition: opacity 160ms; }
+  .results[aria-busy='true'] { opacity: 0.55; }
+  .toolbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; }
+  .summary { font-size: 17px; }
+  .sorters { display: flex; flex-wrap: wrap; gap: 12px 20px; }
+  .inline { display: inline-flex; align-items: center; gap: 10px; }
+
+  .active { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .active ul { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+  .active .chip { gap: 8px; align-items: center; min-height: 36px; padding: 4px 10px; color: var(--color-ink); text-decoration: none; border-color: var(--color-ink-muted); }
+  .active .chip:hover { border-color: var(--color-ink); box-shadow: 2px 2px 0 0 var(--color-pop); }
+  .clear { font-weight: 700; color: var(--color-link); }
 
   .rows { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--color-hairline); }
   .rows > li { border-bottom: 1px solid var(--color-hairline); scroll-margin-top: 96px; }
@@ -380,8 +616,10 @@ const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
   dd { margin: 0; overflow-wrap: anywhere; }
   .notes { white-space: pre-line; }
   .edit { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px 16px; max-width: 960px; }
-  .edit .field { flex: 0 1 200px; }
+  .edit .field { flex: 0 1 220px; gap: 6px; }
   .edit .field.grow { flex: 1 1 320px; }
+  .edit label { font-weight: 700; font-size: 15px; }
+  .edit textarea { box-sizing: border-box; width: 100%; min-height: 44px; padding: 10px 12px; font: inherit; font-size: 16px; line-height: 24px; color: var(--color-ink); background: var(--color-bg); border: 2px solid var(--color-ink-muted); border-radius: var(--radius-sm); resize: vertical; }
 
   .pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 16px; }
   .pager ul { display: flex; flex-wrap: wrap; gap: 4px; margin: 0; padding: 0; list-style: none; }
@@ -391,8 +629,20 @@ const last = result ? Math.min(result.page * result.perPage, result.total) : 0;
   .pager a[aria-current] { background: var(--rv-pink); color: var(--rv-void); border-color: var(--rv-pink); }
   .pager span[aria-disabled] { color: var(--color-ink-muted); opacity: 0.6; }
 
+  @media (prefers-reduced-motion: reduce) {
+    .search, .pill-face, .seg span, .more .chev, .results { transition: none; }
+  }
+
   @media (max-width: 760px) {
     .page { padding: var(--space-24) var(--space-16) 64px; }
+    .filter-toggle { display: inline-flex; }
+    .filter-toggle::before { content: ''; width: 8px; height: 8px; border-right: 2.5px solid currentColor; border-bottom: 2.5px solid currentColor; transform: rotate(-45deg); transition: transform 160ms; }
+    .filter-box[open] > .filter-toggle::before { transform: rotate(45deg); }
+    .filters { padding: var(--space-16); }
+    .segmented { width: 100%; }
+    .seg { flex: 1 1 auto; }
+    .seg span { justify-content: center; }
+    .toolbar { flex-direction: column; align-items: flex-start; }
     .rows summary { grid-template-columns: minmax(0, 1fr) auto; }
     .rows summary .where { grid-column: 1 / -1; }
     dl { grid-template-columns: minmax(0, 1fr); }
