@@ -46,7 +46,7 @@ const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
               <div><dt class="hud">Framework</dt><dd>Astro 7.4, rendered on request</dd></div>
               <div><dt class="hud">Runtime</dt><dd>Node 24 on Passenger</dd></div>
               <div><dt class="hud">Data</dt><dd>MariaDB 10.11</dd></div>
-              <div><dt class="hud">Client JS</dt><dd>About 5.5 KB gzipped, no framework</dd></div>
+              <div><dt class="hud">Client JS</dt><dd>3 to 8 KB gzipped a page, no framework</dd></div>
               <div><dt class="hud">Tokens</dt><dd>{counts.properties} CSS custom properties</dd></div>
               <div><dt class="hud">Target</dt><dd>WCAG 2.2 AA</dd></div>
               {updatedAt && <div><dt class="hud">Updated</dt><dd><time datetime={updatedAt.toISOString()}>{formatUpdated(updatedAt)}</time></dd></div>}
@@ -63,8 +63,8 @@ const bands = ['pink', 'tangerine', 'lime', 'cyan', 'violet'];
         <h2 id="stack-title">Rendered on request, with very little JavaScript</h2>
         <p>Every page is built on the server when you ask for it, so a note I post shows up within half a minute, with no deploy.</p>
         <p class="muted">
-          The browser gets HTML, one stylesheet and a few small scripts: the theme switch, the ⌘K palette and the rearrangeable tiles on
-          the home page.
+          The browser gets HTML, one stylesheet and a few small scripts: the theme switch, the ⌘K palette, the contact form, and the home
+          page's rearrangeable tiles and Now playing tile.
         </p>
       </div>
       <dl class="spec">

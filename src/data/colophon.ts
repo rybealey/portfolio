@@ -17,7 +17,7 @@ export const stack: { label: string; band: Band; lead: string; body: string }[] 
     label: 'Data',
     band: 'lime',
     lead: 'MariaDB 10.11',
-    body: 'through mysql2. Case studies, notes, link previews and images live there, and lists are cached for 30 seconds.',
+    body: 'through mysql2. Case studies, notes, link previews, images and contact form messages live there, and lists are cached for 30 seconds.',
   },
   { label: 'Markdown', band: 'cyan', lead: 'marked', body: 'renders each body on request, and Shiki colors code with CSS variables, so code blocks follow the theme.' },
   {
@@ -26,13 +26,31 @@ export const stack: { label: string; band: Band; lead: string; body: string }[] 
     lead: 'sharp',
     body: 'makes the About headshot in three WebP sizes, saves link preview images and re-encodes uploads. Stored images are named by their SHA-256 hash and cached for a year.',
   },
-  { label: 'Share cards', band: 'pink', lead: 'satori', body: 'lays out the 1200 by 630 card for each note, and resvg turns it into a PNG on first request.' },
+  { label: 'Share cards', band: 'pink', lead: 'satori', body: 'lays out a 1200 by 630 card for every page and note, and resvg turns it into a PNG on first request.' },
   { label: 'Styling', band: 'tangerine', lead: 'Plain CSS', body: 'in cascade layers, with every color, size and radius coming from generated tokens. No CSS framework.' },
   {
     label: 'Motion',
     band: 'lime',
     lead: 'View Transitions',
     body: 'across pages for page changes and the theme fade, with no JavaScript router. Reduced motion is respected everywhere.',
+  },
+  {
+    label: 'Contact',
+    band: 'cyan',
+    lead: 'SMTP2Go',
+    body: "emails me what the contact form receives. Each message is saved to MariaDB first, so none is lost, and a hidden field, a timing check and a limit of five an hour per visitor keep out spam.",
+  },
+  {
+    label: 'Now playing',
+    band: 'violet',
+    lead: 'Spotify Web API',
+    body: "feeds the home page tile with what I'm listening to, through a server route, so the Spotify keys never reach the browser.",
+  },
+  {
+    label: 'Résumé',
+    band: 'pink',
+    lead: 'Headless Chrome',
+    body: 'prints the résumé PDF from its own one-page print view, and the script refuses to write one that runs onto a second page.',
   },
 ];
 
@@ -45,7 +63,7 @@ export const steps = [
   {
     label: 'Design',
     title: 'Designed before it was coded',
-    body: 'The home page, About and Writing were each laid out on a Claude Design canvas in the Ryvanse system, in both themes, before any markup existed.',
+    body: 'The home page, About, Writing, the Résumé, Contact and this Colophon were each laid out on a Claude Design canvas in the Ryvanse system, in both themes, before any markup existed.',
   },
   {
     label: 'Build',
@@ -69,6 +87,12 @@ export const buildLog: { day: string; time: string; what: string; goal?: boolean
   { day: 'Oct 27', time: '3:11 AM', what: "Deploys from cPanel's Git copy of the repository" },
   { day: 'Oct 27', time: '4:32 AM', what: 'Publishing API for the companion apps' },
   { day: 'Oct 27', time: '4:59 AM', what: 'Publisher for macOS, first commit' },
+  { day: 'Oct 27', time: '7:07 AM', what: 'Résumé page, and a PDF printed from its print view' },
+  { day: 'Oct 27', time: '7:23 AM', what: 'Share cards for every page' },
+  { day: 'Oct 27', time: '4:17 PM', what: 'A contact form in place of mail links' },
+  { day: 'Oct 27', time: '4:56 PM', what: 'Thoughts, a Writing topic for personal notes' },
+  { day: 'Oct 27', time: '5:44 PM', what: 'Search, filters and a movable preview in Publisher' },
+  { day: 'Oct 29', time: '5:48 PM', what: 'The résumé PDF fits one page and reads cleanly in applicant tracking systems' },
   { day: 'Nov 9', time: 'Launch', what: 'MVP launch', goal: true },
 ];
 
@@ -138,6 +162,7 @@ export const publisher: { band: Band; body: string }[] = [
     band: 'lime',
     body: 'Every edit carries a version. If my other device changed the same note first, nothing is overwritten, and Publisher asks whether to apply my changes or reload.',
   },
+  { band: 'tangerine', body: 'Search and filters find any note or case study, and the preview shows the Markdown the way the site will.' },
   { band: 'cyan', body: 'Photos are re-encoded on upload, which strips location data.' },
   { band: 'violet', body: "Its icon is the site's spectrum chevron, one layer per band." },
 ];
@@ -156,12 +181,18 @@ export const credits: { label: string; band: Band; items: { name: string; note?:
   {
     label: 'Open source',
     band: 'tangerine',
-    items: [{ name: 'Astro, Node.js and MariaDB' }, { name: 'Shiki, marked and mysql2' }, { name: 'satori, resvg and sharp' }],
+    items: [{ name: 'Astro, Node.js and MariaDB' }, { name: 'Shiki, marked and mysql2' }, { name: 'satori, resvg and sharp' }, { name: 'Zod', note: 'through Astro, for checking API input' }],
   },
   {
-    label: 'Hosting',
+    label: 'Hosting and services',
     band: 'lime',
-    items: [{ name: 'SERVERIZZ Grid', note: 'my company' }, { name: 'cPanel and WHM' }, { name: 'Phusion Passenger' }, { name: 'CloudLinux' }],
+    items: [
+      { name: 'SERVERIZZ Grid', note: 'my company' },
+      { name: 'cPanel, WHM and CloudLinux' },
+      { name: 'Phusion Passenger' },
+      { name: 'SMTP2Go', note: 'for contact form email' },
+      { name: 'Spotify', note: 'for Now playing' },
+    ],
   },
   {
     label: 'Built with',
